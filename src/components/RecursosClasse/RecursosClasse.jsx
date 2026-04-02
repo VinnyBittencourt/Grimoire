@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useApp } from '../../context/AppContext'
+import { RECURSOS_PADRAO } from '../../services/dnd35Tables'
 
 const ICONES_RECURSO = [
   '⚡','✨','🔥','💜','🌟','💫','🩸','🌊','🌪️','☄️',
@@ -7,27 +8,6 @@ const ICONES_RECURSO = [
   '☀️','🌑','💚','❤️','✝️','🎯','🔮','🧿','⚜️','🪬',
 ]
 
-// Recursos padrão por classe: (nivel) => [{ nome, icone, total }]
-const RECURSOS_PADRAO = {
-  'Bárbaro':        n => [{ nome: 'Fúria', icone: '🔥', total: 1 + Math.floor((n - 1) / 4) }],
-  'Bardo':          n => [{ nome: 'Inspiração Bárdica', icone: '🎵', total: Math.max(1, Math.floor(n / 4) + 1) }],
-  'Clérigo':        n => [{ nome: 'Expulsar Mortos-Vivos', icone: '☀️', total: 3 }],
-  'Druida':         n => [{ nome: 'Forma Selvagem', icone: '🐺', total: n >= 18 ? 6 : n >= 14 ? 5 : n >= 12 ? 4 : n >= 8 ? 3 : n >= 6 ? 2 : 1 }],
-  'Monge':          n => [{ nome: 'Ataque em Turbilhão', icone: '🌀', total: 1 }, { nome: 'Queda Suave (m)', icone: '🌟', total: n * 6 }],
-  'Paladino':       n => [{ nome: 'Expulsar Mortos-Vivos', icone: '✝️', total: 3 }, { nome: 'Imposição de Mãos', icone: '💚', total: 1 }],
-  'Duskblade':      n => [{ nome: 'Arcane Channeling', icone: '⚡', total: n >= 13 ? Math.max(3, Math.floor(n / 2)) : 1 }],
-  'Factotum':       n => [{ nome: 'Inspiração', icone: '✨', total: n }],
-  'Warlock':        n => [{ nome: 'Invocação (à vontade)', icone: '💜', total: 5 }],
-  'Hexblade':       n => [{ nome: 'Maldição do Hexblade', icone: '🪄', total: 1 + Math.floor((n + 2) / 5) }],
-  'Ninja':          n => [{ nome: 'Ki (Invisibilidade)', icone: '🌑', total: Math.max(1, Math.floor(n / 2)) }],
-  'Dragon Shaman':  n => [{ nome: 'Sopro do Dragão', icone: '🐉', total: 3 }],
-  'Crusader':       n => [{ nome: 'Cura Persistente', icone: '❤️', total: Math.ceil(n / 2) }],
-  'Swordsage':      n => [{ nome: 'Recuperar Manobra', icone: '🗡️', total: 1 }],
-  'Warblade':       n => [{ nome: 'Recuperar Manobra', icone: '⚔️', total: 1 }],
-  'Beguiler':       n => [{ nome: 'Magia Espontânea', icone: '🎯', total: 1 }],
-  'Warmage':        n => [{ nome: 'Arma de Guerra', icone: '☄️', total: 1 }],
-  'Scout':          n => [{ nome: 'Ataque em Movimento', icone: '🏹', total: 1 }],
-}
 
 const EMPTY_FORM = { nome: '', classe: '', icone: '✨', total: 3 }
 

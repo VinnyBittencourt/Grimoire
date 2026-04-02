@@ -2,11 +2,17 @@ import { useState } from 'react'
 import { useApp } from '../../context/AppContext'
 import { EscolaIcon, ESCOLA_CORES } from '../../assets/icons/escolaIcons'
 import SpellPrepModal from '../modals/SpellPrepModal'
+import SummonCreatureModal from '../modals/SummonCreatureModal'
+
+function isConvocarMonstro(nome) {
+  return nome?.startsWith('Convocar Monstro')
+}
 
 export default function SpellBoard() {
   const { db, personagemAtivo, usarMagia, novoDia } = useApp()
   const [showPrep, setShowPrep] = useState(false)
   const [confirmNovoDia, setConfirmNovoDia] = useState(false)
+  const [summonModal, setSummonModal] = useState(null)
 
   if (!personagemAtivo) return null
 
@@ -94,7 +100,11 @@ export default function SpellBoard() {
                   key={mp.id}
                   magia={magia}
                   mp={mp}
-                  onUsar={() => usarMagia(mp.id)}
+                  onUsar={
+                    isConvocarMonstro(magia.nome)
+                      ? () => setSummonModal({ mp, magia })
+                      : () => usarMagia(mp.id)
+                  }
                 />
               ))}
             </div>
@@ -104,6 +114,13 @@ export default function SpellBoard() {
 
       {showPrep && (
         <SpellPrepModal onClose={() => setShowPrep(false)} />
+      )}
+      {summonModal && (
+        <SummonCreatureModal
+          mp={summonModal.mp}
+          magia={summonModal.magia}
+          onClose={() => setSummonModal(null)}
+        />
       )}
     </div>
   )

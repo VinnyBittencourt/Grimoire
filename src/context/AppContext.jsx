@@ -171,6 +171,11 @@ export function AppProvider({ children }) {
     return record
   }, [db, persistir])
 
+  const editarPlayer = useCallback(async (id, dados) => {
+    const novoDb = updateRecord(structuredClone(db), 'players', id, dados)
+    await persistir(novoDb)
+  }, [db, persistir])
+
   const excluirPlayer = useCallback(async (id) => {
     const novoDb = deleteRecord(structuredClone(db), 'players', id)
     await persistir(novoDb)
@@ -224,6 +229,12 @@ export function AppProvider({ children }) {
     return record
   }, [db, persistir])
 
+  const editarAnotacao = useCallback(async (id, dados) => {
+    const currentDb = await garantirDb()
+    const novoDb = updateRecord(structuredClone(currentDb), 'anotacoes', id, dados)
+    await persistir(novoDb)
+  }, [garantirDb, persistir])
+
   const excluirAnotacao = useCallback(async (id) => {
     const novoDb = deleteRecord(structuredClone(db), 'anotacoes', id)
     await persistir(novoDb)
@@ -234,6 +245,11 @@ export function AppProvider({ children }) {
     const { db: novoDb, record } = addRecord(db, 'npcs', dados)
     await persistir(novoDb)
     return record
+  }, [db, persistir])
+
+  const editarNpc = useCallback(async (id, dados) => {
+    const novoDb = updateRecord(structuredClone(db), 'npcs', id, dados)
+    await persistir(novoDb)
   }, [db, persistir])
 
   const excluirNpc = useCallback(async (id) => {
@@ -248,6 +264,11 @@ export function AppProvider({ children }) {
     return record
   }, [db, persistir])
 
+  const editarLocal = useCallback(async (id, dados) => {
+    const novoDb = updateRecord(structuredClone(db), 'locais', id, dados)
+    await persistir(novoDb)
+  }, [db, persistir])
+
   const excluirLocal = useCallback(async (id) => {
     const novoDb = deleteRecord(structuredClone(db), 'locais', id)
     await persistir(novoDb)
@@ -260,10 +281,24 @@ export function AppProvider({ children }) {
     return record
   }, [db, persistir])
 
+  const editarQuest = useCallback(async (id, dados) => {
+    const novoDb = updateRecord(structuredClone(db), 'quests', id, dados)
+    await persistir(novoDb)
+  }, [db, persistir])
+
   const excluirQuest = useCallback(async (id) => {
     const novoDb = deleteRecord(structuredClone(db), 'quests', id)
     await persistir(novoDb)
   }, [db, persistir])
+
+  // ── Criatura Invocada ───────────────────────────────────────
+  const salvarCriaturaInvocada = useCallback(async (personagemId, dados) => {
+    const currentDb = await garantirDb()
+    const json = dados ? JSON.stringify(dados) : null
+    const novoDb = updateRecord(structuredClone(currentDb), 'personagens', personagemId, { criatura_invocada_json: json })
+    await persistir(novoDb)
+    setPersonagemAtivo(prev => prev?.id === personagemId ? { ...prev, criatura_invocada_json: json } : prev)
+  }, [garantirDb, persistir])
 
   const value = {
     db, setDb: setDbSync,
@@ -280,16 +315,18 @@ export function AppProvider({ children }) {
     // mochila
     adicionarItemMochila, editarItemMochila, excluirItemMochila,
     // background & players
-    salvarBackground, adicionarPlayer, excluirPlayer,
+    salvarBackground, adicionarPlayer, editarPlayer, excluirPlayer,
     // talentos
     adicionarTalento, editarTalento, excluirTalento,
     // recursos de classe
     adicionarRecurso, editarRecurso, excluirRecurso,
     // sessão
-    adicionarAnotacao, excluirAnotacao,
-    adicionarNpc, excluirNpc,
-    adicionarLocal, excluirLocal,
-    adicionarQuest, excluirQuest,
+    adicionarAnotacao, editarAnotacao, excluirAnotacao,
+    adicionarNpc, editarNpc, excluirNpc,
+    adicionarLocal, editarLocal, excluirLocal,
+    adicionarQuest, editarQuest, excluirQuest,
+    // criatura invocada
+    salvarCriaturaInvocada,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

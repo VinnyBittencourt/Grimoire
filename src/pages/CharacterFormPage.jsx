@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import Header from '../components/Layout/Header'
 import {
-  CLASSES_DND, TENDENCIAS, RACAS, TAMANHOS, GENEROS
+  CLASSES_DND, TENDENCIAS, RACAS, TAMANHOS, GENEROS, RECURSOS_PADRAO
 } from '../services/dnd35Tables'
 
 const CAMPOS_ATRIBUTOS = [
@@ -26,7 +26,8 @@ function fileToBase64(file) {
 export default function CharacterFormPage() {
   const navigate = useNavigate()
   const { id } = useParams()
-  const { db, criarPersonagem, editarPersonagem, setPersonagemAtivo } = useApp()
+  const { db, criarPersonagem, editarPersonagem, setPersonagemAtivo,
+          adicionarRecurso, editarRecurso, excluirRecurso } = useApp()
 
   const isEditing = Boolean(id)
   const personagemExistente = isEditing ? db?.personagens?.find(p => p.id === Number(id)) : null
@@ -103,6 +104,46 @@ export default function CharacterFormPage() {
     try {
       if (isEditing) {
         await editarPersonagem(Number(id), dados)
+
+        {
+          const personagemId = Number(id)
+          const recursosAtuais = (db?.recursos || []).filter(r => r.personagem_id === personagemId)
+          const newMap = Object.fromEntries(classes.map(c => [c.classe, Number(c.nivel) || 1]))
+
+          // 1. Remover recursos cuja classe não está mais na lista atual
+          for (const r of recursosAtuais) {
+            if (r.classe && !(r.classe in newMap)) await excluirRecurso(r.id)
+          }
+
+          const recursosRestantes = recursosAtuais.filter(r => !r.classe || (r.classe in newMap))
+
+          // 2. Para cada classe atual: criar recursos se não existirem, ou atualizar totais se o nível mudou
+          for (const [classe, nivel] of Object.entries(newMap)) {
+            const fn = RECURSOS_PADRAO[classe]
+            if (!fn) continue
+            const templates = fn(nivel)
+            const recursosClasse = recursosRestantes.filter(r => r.classe === classe)
+
+            if (recursosClasse.length === 0) {
+              for (const template of templates) {
+                const usos = Array.from({ length: template.total }, () => ({ usado: false, nota: '' }))
+                await adicionarRecurso({ ...template, classe, personagem_id: personagemId, usos_json: JSON.stringify(usos) })
+              }
+            } else {
+              const defaultByName = Object.fromEntries(templates.map(t => [t.nome, t]))
+              for (const r of recursosClasse) {
+                if (!defaultByName[r.nome]) continue
+                const newTotal = defaultByName[r.nome].total
+                if (newTotal === r.total) continue
+                let usos = []
+                try { usos = JSON.parse(r.usos_json) } catch {}
+                const adjusted = Array.from({ length: newTotal }, (_, i) => usos[i] ?? { usado: false, nota: '' })
+                await editarRecurso(r.id, { ...r, total: newTotal, usos_json: JSON.stringify(adjusted) })
+              }
+            }
+          }
+        }
+
         const atualizado = { ...personagemExistente, ...dados }
         setPersonagemAtivo(atualizado)
         navigate(`/personagem/${id}`)

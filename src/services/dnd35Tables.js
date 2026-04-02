@@ -290,6 +290,7 @@ export const MAGIAS_PADRAO = {
       { nome: 'Remover Medo', escola: 'Abjuração', descricao: '+4 em resistência contra medo por 10 min.' },
       { nome: 'Luz Divina', escola: 'Evocação', descricao: 'Raio de luz sagrada cega criaturas malignas.' },
       { nome: 'Causar Medo', escola: 'Necromancia', descricao: 'Criatura fica abalada por 1 rodada/nível.' },
+      { nome: 'Convocar Monstro I', escola: 'Conjuração', descricao: 'Convoca uma criatura extraplanar de nível 1 para ajudar por 1 rodada/nível.' },
     ],
     2: [
       { nome: 'Curar Ferimentos Moderados', escola: 'Conjuração', descricao: 'Cura 2d8+1/nível de dano (máx +10).' },
@@ -301,6 +302,7 @@ export const MAGIAS_PADRAO = {
       { nome: 'Resistência a Energia', escola: 'Abjuração', descricao: 'Ignora 10 pontos de dano de um tipo de energia.' },
       { nome: 'Oração', escola: 'Encantamento', descricao: '+1 em ataques, dano e resistências dos aliados; -1 para inimigos.' },
       { nome: 'Consagrar', escola: 'Evocação', descricao: 'Preenche área com poder positivo.' },
+      { nome: 'Convocar Monstro II', escola: 'Conjuração', descricao: 'Convoca uma criatura extraplanar de nível 2 ou inferior por 1 rodada/nível.' },
     ],
     3: [
       { nome: 'Curar Ferimentos Sérios', escola: 'Conjuração', descricao: 'Cura 3d8+1/nível de dano (máx +15).' },
@@ -319,6 +321,7 @@ export const MAGIAS_PADRAO = {
       { nome: 'Restauração', escola: 'Conjuração', descricao: 'Restaura dano de nível e habilidade.' },
       { nome: 'Imobilizar Monstro', escola: 'Encantamento', descricao: 'Paralisa qualquer criatura.' },
       { nome: 'Punição Divina', escola: 'Evocação', descricao: 'Raio divino causa dano e aturde o alvo.' },
+      { nome: 'Convocar Monstro IV', escola: 'Conjuração', descricao: 'Convoca uma criatura extraplanar de nível 4 ou inferior por 1 rodada/nível.' },
     ],
     5: [
       { nome: 'Cura em Massa', escola: 'Conjuração', descricao: 'Cura todos aliados em 9 m de 1d8+1/nível (máx +25).' },
@@ -326,25 +329,30 @@ export const MAGIAS_PADRAO = {
       { nome: 'Ressurreição', escola: 'Conjuração', descricao: 'Resgata o morto e restaura 1 nível perdido.' },
       { nome: 'Controle de Mortos-Vivos', escola: 'Necromancia', descricao: 'Controla mortos-vivos como se fossem os seus.' },
       { nome: 'Chama Sagrada', escola: 'Evocação', descricao: '1d8/2 níveis de dano sagrado em criaturas malignas.' },
+      { nome: 'Convocar Monstro V', escola: 'Conjuração', descricao: 'Convoca uma criatura extraplanar de nível 5 ou inferior por 1 rodada/nível.' },
     ],
     6: [
       { nome: 'Cura em Massa Maior', escola: 'Conjuração', descricao: 'Cura 6d8+1/nível (máx +40) em todos aliados na área.' },
       { nome: 'Invocar o Sagrado', escola: 'Evocação', descricao: 'Mata, paralisa ou enfraquece criaturas malignas.' },
       { nome: 'Visão da Verdade', escola: 'Adivinhação', descricao: 'Vê criaturas e objetos em sua forma verdadeira.' },
       { nome: 'Geas/Quest', escola: 'Encantamento', descricao: 'Obriga a criatura a cumprir uma tarefa.' },
+      { nome: 'Convocar Monstro VI', escola: 'Conjuração', descricao: 'Convoca uma criatura extraplanar de nível 6 ou inferior por 1 rodada/nível.' },
     ],
     7: [
       { nome: 'Ressurreição Verdadeira', escola: 'Conjuração', descricao: 'Pode ressuscitar qualquer criatura morta há até 10 anos/nível.' },
       { nome: 'Regeneração', escola: 'Conjuração', descricao: 'O sujeito regenera PV e membros perdidos.' },
       { nome: 'Chuva de Fogo Sagrado', escola: 'Evocação', descricao: 'Chuva de fogo sagrado causa dano maciço.' },
+      { nome: 'Convocar Monstro VII', escola: 'Conjuração', descricao: 'Convoca uma criatura extraplanar de nível 7 ou inferior por 1 rodada/nível.' },
     ],
     8: [
       { nome: 'Energia do Plano Positivo', escola: 'Conjuração', descricao: 'Canaliza energia positiva maciça.' },
       { nome: 'Proteção Divina', escola: 'Abjuração', descricao: 'Escudo divino protege completamente.' },
+      { nome: 'Convocar Monstro VIII', escola: 'Conjuração', descricao: 'Convoca uma criatura extraplanar de nível 8 ou inferior por 1 rodada/nível.' },
     ],
     9: [
       { nome: 'Milagre', escola: 'Universal', descricao: 'Pede uma milagre à sua divindade.' },
       { nome: 'Cura Verdadeira', escola: 'Conjuração', descricao: 'Cura todos ferimentos e condições.' },
+      { nome: 'Convocar Monstro IX', escola: 'Conjuração', descricao: 'Convoca uma criatura extraplanar de nível 9 ou inferior por 1 rodada/nível.' },
     ],
   },
   'Mago': {
@@ -690,3 +698,82 @@ export const SLOTS_EQUIPAMENTO = [
   { id: 'arma_principal', nome: 'Arma Principal' },
   { id: 'arma_secundaria', nome: 'Arma Secundária' },
 ]
+
+export const CRIATURAS_CONVOCAR = {
+  1: [
+    { nome: 'Cão Celestial', tipo: 'Animal (Celestial)', tamanho: 'Pequeno', pv: 6, ca: 13, ataque: '+2 mordida', dano: '1d4+1', deslocamento: '12 m', habilidades: ['Bom, resistência ao mal +2'] },
+    { nome: 'Águia Celestial', tipo: 'Animal (Celestial)', tamanho: 'Pequeno', pv: 6, ca: 14, ataque: '+3 garras (×2)', dano: '1d4', deslocamento: '3 m / voo 24 m', habilidades: ['Ataques mágicos'] },
+    { nome: 'Coruja Celestial', tipo: 'Animal (Celestial)', tamanho: 'Miúdo', pv: 5, ca: 17, ataque: '+5 garras', dano: '1d4', deslocamento: '3 m / voo 18 m', habilidades: ['Visão no escuro, voo silencioso'] },
+    { nome: 'Rato Dire Infernal', tipo: 'Animal (Infernal)', tamanho: 'Pequeno', pv: 5, ca: 15, ataque: '+4 mordida', dano: '1d4', deslocamento: '12 m', habilidades: ['Resistência ao frio/fogo 5'] },
+  ],
+  2: [
+    { nome: 'Lobo Celestial', tipo: 'Animal (Celestial)', tamanho: 'Médio', pv: 13, ca: 14, ataque: '+3 mordida', dano: '1d6+1', deslocamento: '15 m', habilidades: ['Derrubar (For 13), Farejador'] },
+    { nome: 'Coruja Gigante Celestial', tipo: 'Animal (Celestial)', tamanho: 'Grande', pv: 19, ca: 15, ataque: '+5 garras (×2) / +0 mordida', dano: '1d6+1 / 1d8+2', deslocamento: '3 m / voo 18 m', habilidades: ['Visão no escuro aprimorada'] },
+    { nome: 'Morcego Dire Infernal', tipo: 'Animal (Infernal)', tamanho: 'Médio', pv: 22, ca: 13, ataque: '+5 mordida', dano: '1d8+4', deslocamento: '3 m / voo 12 m', habilidades: ['Ecolocalização, Resistência a frio/fogo 5'] },
+    { nome: 'Tubarão Infernal', tipo: 'Animal (Infernal)', tamanho: 'Médio', pv: 22, ca: 15, ataque: '+4 mordida', dano: '1d6+3', deslocamento: 'Nado 18 m', habilidades: ['Farejador (água), Resistência ao mal +2'] },
+  ],
+  3: [
+    { nome: 'Urso Negro Celestial', tipo: 'Animal (Celestial)', tamanho: 'Médio', pv: 19, ca: 13, ataque: '+6 garras (×2) / +1 mordida', dano: '1d4+4 / 1d6+2', deslocamento: '12 m', habilidades: ['Agarrar aprimorado'] },
+    { nome: 'Macaco Infernal', tipo: 'Animal (Infernal)', tamanho: 'Grande', pv: 32, ca: 14, ataque: '+8 garras (×2) / +3 mordida', dano: '1d6+5 / 1d6+2', deslocamento: '9 m / escalar 9 m', habilidades: ['Agarrar aprimorado, Resistência a frio/fogo 5'] },
+    { nome: 'Leão Celestial', tipo: 'Animal (Celestial)', tamanho: 'Grande', pv: 32, ca: 15, ataque: '+7 garras (×2) / +2 mordida', dano: '1d4+5 / 1d8+2', deslocamento: '12 m', habilidades: ['Arranhão traseiro (1d6+2), Salto'] },
+    { nome: 'Cobra Constritora Infernal', tipo: 'Animal (Infernal)', tamanho: 'Grande', pv: 19, ca: 15, ataque: '+5 mordida / +5 constrição', dano: '1d6+4', deslocamento: '9 m / nado 9 m', habilidades: ['Constrição, Agarrar aprimorado, Resistência a frio/fogo 5'] },
+  ],
+  4: [
+    { nome: 'Tigre Celestial', tipo: 'Animal (Celestial)', tamanho: 'Grande', pv: 45, ca: 14, ataque: '+9 garras (×2) / +4 mordida', dano: '1d8+6 / 2d6+3', deslocamento: '12 m', habilidades: ['Arranhão traseiro (1d8+3), Salto, SR 11'] },
+    { nome: 'Urso Pardo Celestial', tipo: 'Animal (Celestial)', tamanho: 'Grande', pv: 51, ca: 15, ataque: '+11 garras (×2) / +6 mordida', dano: '1d8+8 / 2d6+4', deslocamento: '12 m', habilidades: ['Agarrar, Abraço do urso (2d8+8), SR 13'] },
+    { nome: 'Grifo Celestial', tipo: 'Mágica (Celestial)', tamanho: 'Grande', pv: 59, ca: 17, ataque: '+8 mordida / +3 garras (×2)', dano: '2d6+4 / 1d4+2', deslocamento: '9 m / voo 24 m', habilidades: ['Pousar sobre presa, SR 12'] },
+    { nome: 'Escorpião Enorme Infernal', tipo: 'Animal (Infernal)', tamanho: 'Grande', pv: 47, ca: 16, ataque: '+6 pinças (×2) / +1 ferrão', dano: '1d8+4 / 1d6+2+veneno', deslocamento: '15 m', habilidades: ['Veneno CD 14 (1d6/1d6 Con), Agarrar, Resist. frio/fogo 10'] },
+  ],
+  5: [
+    { nome: 'Elemental de Ar (Grande)', tipo: 'Elemental', tamanho: 'Grande', pv: 52, ca: 18, ataque: '+7 slam (×2)', dano: '1d8+4', deslocamento: 'Voo 30 m (perfeito)', habilidades: ['Remoinho (2d6+7, CD 19), Imune a veneno/sono/paralisia'] },
+    { nome: 'Elemental de Terra (Grande)', tipo: 'Elemental', tamanho: 'Grande', pv: 68, ca: 18, ataque: '+12 slam (×2)', dano: '2d8+7', deslocamento: '6 m / escavar 6 m', habilidades: ['Esmagar criaturas pequenas, Imune a veneno/sono/paralisia'] },
+    { nome: 'Elemental de Fogo (Grande)', tipo: 'Elemental', tamanho: 'Grande', pv: 60, ca: 16, ataque: '+7 slam (×2)', dano: '2d6+4+2d6 fogo', deslocamento: '12 m', habilidades: ['Dano de fogo extra, Imune a fogo, Vulnerável a frio'] },
+    { nome: 'Elemental de Água (Grande)', tipo: 'Elemental', tamanho: 'Grande', pv: 68, ca: 19, ataque: '+8 slam (×2)', dano: '2d6+5', deslocamento: '6 m / nado 24 m', habilidades: ['Redemoinho (2d6+7, CD 18), Imune a veneno/sono/paralisia'] },
+    { nome: 'Leão Dire Infernal', tipo: 'Animal (Infernal)', tamanho: 'Grande', pv: 60, ca: 15, ataque: '+12 garras (×2) / +7 mordida', dano: '1d6+9 / 1d8+4', deslocamento: '12 m', habilidades: ['Arranhão traseiro (1d6+4), Agarrar, Salto, SR 14, Resist. frio/fogo 10'] },
+  ],
+  6: [
+    { nome: 'Elemental de Ar (Enorme)', tipo: 'Elemental', tamanho: 'Enorme', pv: 88, ca: 20, ataque: '+11 slam (×2)', dano: '2d8+7', deslocamento: 'Voo 30 m (perfeito)', habilidades: ['Remoinho (2d8+12, CD 23), Imune a veneno/sono/paralisia'] },
+    { nome: 'Elemental de Terra (Enorme)', tipo: 'Elemental', tamanho: 'Enorme', pv: 104, ca: 20, ataque: '+17 slam (×2)', dano: '2d10+11', deslocamento: '6 m / escavar 6 m', habilidades: ['Esmagar, Imune a veneno/sono/paralisia'] },
+    { nome: 'Urso Dire Celestial', tipo: 'Animal (Celestial)', tamanho: 'Grande', pv: 105, ca: 17, ataque: '+19 garras (×2) / +14 mordida', dano: '2d4+10 / 2d8+5', deslocamento: '12 m', habilidades: ['Agarrar, Abraço do urso (2d4+15), SR 16'] },
+    { nome: 'Tiranossauro Infernal', tipo: 'Animal (Infernal)', tamanho: 'Enorme', pv: 99, ca: 14, ataque: '+20 mordida', dano: '3d6+13', deslocamento: '9 m', habilidades: ['Engolir inteiro (2d8+8, CD 27), SR 15, Resist. frio/fogo 10'] },
+  ],
+  7: [
+    { nome: 'Elemental de Ar (Elder)', tipo: 'Elemental', tamanho: 'Enorme', pv: 204, ca: 26, ataque: '+18 slam (×2)', dano: '2d10+10', deslocamento: 'Voo 30 m (perfeito)', habilidades: ['Remoinho (2d10+16, CD 28), Imune, SR 23'] },
+    { nome: 'Elemental de Terra (Elder)', tipo: 'Elemental', tamanho: 'Enorme', pv: 228, ca: 26, ataque: '+24 slam (×2)', dano: '3d8+13', deslocamento: '6 m / escavar 6 m', habilidades: ['Esmagar, Imune, SR 23'] },
+    { nome: 'Tigre Dire Celestial', tipo: 'Animal (Celestial)', tamanho: 'Grande', pv: 95, ca: 17, ataque: '+16 garras (×2) / +11 mordida', dano: '2d4+8 / 2d6+4', deslocamento: '12 m', habilidades: ['Arranhão traseiro (2d4+4), Agarrar, Salto, SR 17'] },
+    { nome: 'Salamandra Infernal (Nobre)', tipo: 'Extraplanar (Infernal)', tamanho: 'Grande', pv: 76, ca: 18, ataque: '+13 lança / +8 cauda (×2)', dano: '2d6+7+1d6 fogo / 2d6+3+1d6 fogo', deslocamento: '9 m', habilidades: ['Calor intenso (2d6 fogo, CD 19), Vulnerável a frio, SR 20'] },
+  ],
+  8: [
+    { nome: 'Elemental de Fogo (Elder)', tipo: 'Elemental', tamanho: 'Enorme', pv: 204, ca: 26, ataque: '+18 slam (×2)', dano: '4d6+11+4d6 fogo', deslocamento: '12 m', habilidades: ['Dano de fogo, Imune a fogo, Vulnerável a frio, SR 23'] },
+    { nome: 'Elemental de Água (Elder)', tipo: 'Elemental', tamanho: 'Enorme', pv: 228, ca: 27, ataque: '+21 slam (×2)', dano: '3d6+13', deslocamento: '6 m / nado 24 m', habilidades: ['Redemoinho (3d6+16), Imune, SR 23'] },
+    { nome: 'Tojanida Ancião', tipo: 'Extraplanar', tamanho: 'Grande', pv: 147, ca: 22, ataque: '+14 mordida / +12 garras (×2)', dano: '4d6+7 / 2d8+3', deslocamento: '3 m / nado 24 m', habilidades: ['Puxar para dentro, Imune a fogo/frio, SR 25'] },
+    { nome: 'Roc Celestial', tipo: 'Animal (Celestial)', tamanho: 'Colossal', pv: 184, ca: 17, ataque: '+18 garras (×2) / +13 mordida', dano: '2d6+12 / 2d8+6', deslocamento: '6 m / voo 24 m', habilidades: ['Agarrar (2d6+12), SR 19'] },
+  ],
+  9: [
+    { nome: 'Guardinal Leonal', tipo: 'Celestial', tamanho: 'Médio', pv: 110, ca: 30, ataque: '+19 garras (×2) / +14 mordida', dano: '2d6+9 / 1d8+4', deslocamento: '15 m', habilidades: ['Rugido (3d6 sônico, CD 22), SR 30, Imune a eletricidade/veneno'] },
+    { nome: 'Rainha Formiana', tipo: 'Extraplanar (Lawful)', tamanho: 'Grande', pv: 212, ca: 23, ataque: '+17 ferroada', dano: '2d6+8+veneno', deslocamento: '9 m', habilidades: ['Veneno (CD 23, 2d6/2d6 Con), Conjurador 17º, SR 30'] },
+    { nome: 'Ghaele Eladrin', tipo: 'Celestial', tamanho: 'Médio', pv: 123, ca: 30, ataque: '+20 espada longa / +14 arco', dano: '1d8+8+2d6 sagrado / 1d6+4', deslocamento: '15 m / voo 18 m', habilidades: ['Olhar (2d8 fogo, CD 19), SR 31, Imune a eletricidade/frio/veneno'] },
+    { nome: 'Elemental de Ar (Maior)', tipo: 'Elemental', tamanho: 'Enorme', pv: 178, ca: 24, ataque: '+15 slam (×2)', dano: '2d8+8', deslocamento: 'Voo 30 m (perfeito)', habilidades: ['Remoinho (2d8+13, CD 26), Imune, SR 21'] },
+  ],
+}
+
+export const RECURSOS_PADRAO = {
+  'Bárbaro':       n => [{ nome: 'Fúria', icone: '🔥', total: 1 + Math.floor((n - 1) / 4) }],
+  'Bardo':         n => [{ nome: 'Inspiração Bárdica', icone: '🎵', total: Math.max(1, Math.floor(n / 4) + 1) }],
+  'Clérigo':       n => [{ nome: 'Expulsar Mortos-Vivos', icone: '☀️', total: 3 }],
+  'Druida':        n => [{ nome: 'Forma Selvagem', icone: '🐺', total: n >= 18 ? 6 : n >= 14 ? 5 : n >= 12 ? 4 : n >= 8 ? 3 : n >= 6 ? 2 : 1 }],
+  'Monge':         n => [{ nome: 'Ataque em Turbilhão', icone: '🌀', total: 1 }, { nome: 'Queda Suave (m)', icone: '🌟', total: n * 6 }],
+  'Paladino':      n => [{ nome: 'Expulsar Mortos-Vivos', icone: '✝️', total: 3 }, { nome: 'Imposição de Mãos', icone: '💚', total: 1 }],
+  'Duskblade':     n => [{ nome: 'Arcane Channeling', icone: '⚡', total: n >= 13 ? Math.max(3, Math.floor(n / 2)) : 1 }],
+  'Factotum':      n => [{ nome: 'Inspiração', icone: '✨', total: n }],
+  'Warlock':       n => [{ nome: 'Invocação (à vontade)', icone: '💜', total: 5 }],
+  'Hexblade':      n => [{ nome: 'Maldição do Hexblade', icone: '🪄', total: 1 + Math.floor((n + 2) / 5) }],
+  'Ninja':         n => [{ nome: 'Ki (Invisibilidade)', icone: '🌑', total: Math.max(1, Math.floor(n / 2)) }],
+  'Dragon Shaman': n => [{ nome: 'Sopro do Dragão', icone: '🐉', total: 3 }],
+  'Crusader':      n => [{ nome: 'Cura Persistente', icone: '❤️', total: Math.ceil(n / 2) }],
+  'Swordsage':     n => [{ nome: 'Recuperar Manobra', icone: '🗡️', total: 1 }],
+  'Warblade':      n => [{ nome: 'Recuperar Manobra', icone: '⚔️', total: 1 }],
+  'Beguiler':      n => [{ nome: 'Magia Espontânea', icone: '🎯', total: 1 }],
+  'Warmage':       n => [{ nome: 'Arma de Guerra', icone: '☄️', total: 1 }],
+  'Scout':         n => [{ nome: 'Ataque em Movimento', icone: '🏹', total: 1 }],
+}

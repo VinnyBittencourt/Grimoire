@@ -9,6 +9,7 @@ import SectionNotes from '../components/SectionNotes/SectionNotes'
 import Mochila from '../components/Mochila/Mochila'
 import Talentos from '../components/Talentos/Talentos'
 import RecursosClasse from '../components/RecursosClasse/RecursosClasse'
+import CriaturaInvocada from '../components/CriaturaInvocada/CriaturaInvocada'
 
 export default function DashboardPage() {
   const { id } = useParams()
@@ -41,6 +42,7 @@ export default function DashboardPage() {
           <div className="flex-1 min-h-0">
             <SpellBoard />
           </div>
+          <CriaturaInvocada />
           <RecursosClasse />
           <Talentos />
         </div>
