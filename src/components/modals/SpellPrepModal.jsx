@@ -2,22 +2,47 @@ import { useState, useMemo } from 'react'
 import { useApp } from '../../context/AppContext'
 import { EscolaIcon, ESCOLA_CORES } from '../../assets/icons/escolaIcons'
 import { calcularSlots, ATRIBUTO_MAGICO, CLASSES_COM_MAGIA, ESCOLAS_MAGIA, MAGIAS_PADRAO } from '../../services/dnd35Tables'
+import { useEfeitosDoPersonagem } from '../../hooks/useEfeitosDoPersonagem'
 
 export default function SpellPrepModal({ onClose }) {
-  const { db, personagemAtivo, salvarPreparacao, adicionarMagia, excluirMagia } = useApp()
+  const { db, personagemAtivo, salvarPreparacao, adicionarMagia, excluirMagia, editarPersonagem } = useApp()
   const [nivelSelecionado, setNivelSelecionado] = useState(null)
   const [preparadas, setPreparadas] = useState({})
   const [showNovasMagia, setShowNovasMagia] = useState(false)
   const [magiaHover, setMagiaHover] = useState(null)
   const [formMagia, setFormMagia] = useState({ nome: '', nivel: 1, escola: 'Evocação', descricao: '' })
+  const [showBonusEditor, setShowBonusEditor] = useState(false)
 
+  const efeitos = useEfeitosDoPersonagem()
   const p = personagemAtivo
 
-  const slots = useMemo(() => {
+  // Bônus manuais por nível (sobrescreve por nível, acumula com efeitos de talentos)
+  const bonusManuais = useMemo(() => {
+    try {
+      return p?.bonus_slots_json ? JSON.parse(p.bonus_slots_json) : Array(10).fill(0)
+    } catch {
+      return Array(10).fill(0)
+    }
+  }, [p?.bonus_slots_json])
+
+  // Bônus total = manuais + talentos
+  const bonusTotal = useMemo(() =>
+    Array.from({ length: 10 }, (_, i) => (bonusManuais[i] || 0) + (efeitos.bonus_slots[i] || 0)),
+    [bonusManuais, efeitos.bonus_slots]
+  )
+
+  // Slots base (sem bônus)
+  const slotsBase = useMemo(() => {
     const atribKey = ATRIBUTO_MAGICO[p?.classe]
     const atribVal = atribKey ? (Number(p[atribKey]) || 10) : 10
     return calcularSlots(p?.classe, Number(p?.level), atribVal)
   }, [p])
+
+  // Slots totais com bônus
+  const slots = useMemo(() => {
+    if (!slotsBase) return null
+    return slotsBase.map((s, i) => s + (bonusTotal[i] || 0))
+  }, [slotsBase, bonusTotal])
 
   const temMagia = CLASSES_COM_MAGIA.includes(p?.classe)
   const niveisDisponiveis = slots
@@ -44,6 +69,8 @@ export default function SpellPrepModal({ onClose }) {
   }, [nivelSelecionado, p?.classe])
 
   const slotsDisponivelNivel = nivelSelecionado !== null ? (slots?.[nivelSelecionado] || 0) : 0
+  const slotsBaseNivel = nivelSelecionado !== null ? (slotsBase?.[nivelSelecionado] || 0) : 0
+  const bonusTotalNivel = nivelSelecionado !== null ? (bonusTotal[nivelSelecionado] || 0) : 0
   const preparadasNivel = preparadas[nivelSelecionado] || []
   const usadoNivel = preparadasNivel.length
   const slotsRestantes = slotsDisponivelNivel - usadoNivel
@@ -88,6 +115,10 @@ export default function SpellPrepModal({ onClose }) {
     setShowNovasMagia(false)
   }
 
+  async function salvarBonusManual(novosBonus) {
+    await editarPersonagem(p.id, { bonus_slots_json: JSON.stringify(novosBonus) })
+  }
+
   if (!temMagia) {
     return (
       <div className="modal-overlay" onClick={onClose}>
@@ -103,20 +134,78 @@ export default function SpellPrepModal({ onClose }) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content flex w-full"
-        style={{ maxWidth: 860, maxHeight: '90vh', minHeight: 560 }}
+        style={{ maxWidth: 920, maxHeight: '90vh', minHeight: 560 }}
         onClick={e => e.stopPropagation()}>
 
         {/* ── Coluna esquerda: seletor de nível ── */}
         <div className="flex flex-col"
-          style={{ width: 180, minWidth: 180, borderRight: '2px solid #6b4a1a', padding: '24px 0' }}>
-          <h3 className="font-medieval text-base px-5 mb-5" style={{ color: '#c9a84c' }}>
-            Preparar Magias
-          </h3>
+          style={{ width: 200, minWidth: 200, borderRight: '2px solid #6b4a1a', padding: '24px 0' }}>
+          <div className="flex items-center justify-between px-5 mb-5">
+            <h3 className="font-medieval text-base" style={{ color: '#c9a84c' }}>
+              Preparar Magias
+            </h3>
+            <button
+              onClick={() => setShowBonusEditor(v => !v)}
+              title="Editar bônus de slots"
+              style={{
+                fontSize: 13, padding: '2px 6px', borderRadius: 3, cursor: 'pointer',
+                background: showBonusEditor ? 'rgba(201,168,76,0.25)' : 'rgba(201,168,76,0.1)',
+                border: '1px solid #6b4a1a', color: '#c9a84c',
+              }}>
+              ✦
+            </button>
+          </div>
+
+          {/* Editor de bônus manuais */}
+          {showBonusEditor && (
+            <div style={{ margin: '0 10px 12px', padding: '8px 10px', borderRadius: 4, background: 'rgba(0,0,0,0.3)', border: '1px solid #6b4a1a' }}>
+              <p className="label-medieval" style={{ fontSize: 9, marginBottom: 6 }}>Bônus Manual por Nível</p>
+              <div className="flex flex-col gap-1">
+                {Array.from({ length: 10 }, (_, i) => {
+                  const baseNv = slotsBase?.[i] ?? 0
+                  const temAcesso = baseNv > 0 || bonusManuais[i] > 0
+                  if (!temAcesso && i > 0) return null
+                  return (
+                    <div key={i} className="flex items-center gap-2">
+                      <span style={{ fontSize: 9, color: '#6b5a3a', width: 36, flexShrink: 0 }}>
+                        {i === 0 ? 'Nv 0' : `Nv ${i}`}
+                      </span>
+                      <span style={{ fontSize: 9, color: '#5a5040', width: 20, textAlign: 'center' }}>
+                        {baseNv}
+                      </span>
+                      <span style={{ fontSize: 9, color: '#6b5a3a' }}>+</span>
+                      <input
+                        type="number" min={0} max={20}
+                        value={bonusManuais[i] || 0}
+                        onChange={e => {
+                          const novos = [...bonusManuais]
+                          novos[i] = Math.max(0, parseInt(e.target.value) || 0)
+                          salvarBonusManual(novos)
+                        }}
+                        style={{
+                          width: 36, textAlign: 'center', fontSize: 10,
+                          background: 'rgba(0,0,0,0.4)', border: '1px solid #6b4a1a',
+                          color: '#c9a84c', borderRadius: 3, padding: '1px 2px',
+                        }}
+                      />
+                      {efeitos.bonus_slots[i] > 0 && (
+                        <span style={{ fontSize: 9, color: '#8a6a2a' }} title="Bônus de talentos">
+                          +{efeitos.bonus_slots[i]}⚔
+                        </span>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
           <p className="label-medieval px-5 mb-3">Nível</p>
           <div className="flex flex-col flex-1 overflow-y-auto">
             {niveisDisponiveis.map(({ nivel, slots: s }) => {
               const usados = (preparadas[nivel] || []).length
               const isAtivo = nivelSelecionado === nivel
+              const temBonus = bonusTotal[nivel] > 0
               return (
                 <button key={nivel}
                   onClick={() => setNivelSelecionado(nivel)}
@@ -127,8 +216,11 @@ export default function SpellPrepModal({ onClose }) {
                     borderRight: 'none', borderTop: 'none', borderBottom: 'none',
                     cursor: 'pointer', transition: 'all 0.15s',
                   }}>
-                  <div className="font-medieval text-sm" style={{ color: isAtivo ? '#f0e6c8' : '#9b8a6a' }}>
+                  <div className="font-medieval text-sm flex items-center gap-1" style={{ color: isAtivo ? '#f0e6c8' : '#9b8a6a' }}>
                     {nivel === 0 ? 'Orações' : `Nível ${nivel}`}
+                    {temBonus && (
+                      <span style={{ fontSize: 9, color: '#c9a84c', opacity: 0.7 }}>✦</span>
+                    )}
                   </div>
                   <div className="text-xs" style={{ color: isAtivo ? '#c9a84c' : '#6b5a3a', marginTop: 2 }}>
                     {usados}/{s} usados
@@ -152,6 +244,7 @@ export default function SpellPrepModal({ onClose }) {
               style={{ color: '#6b5a3a' }}>
               <div style={{ fontSize: 40, opacity: 0.3 }}>📖</div>
               <p className="font-medieval text-sm">Selecione um nível à esquerda</p>
+              <p className="text-xs" style={{ color: '#3a2810' }}>Use ✦ para adicionar bônus de slots</p>
             </div>
           ) : (
             <div className="flex flex-col h-full" style={{ overflow: 'hidden' }}>
@@ -163,15 +256,23 @@ export default function SpellPrepModal({ onClose }) {
                   <h4 className="font-medieval text-base" style={{ color: '#f0e6c8' }}>
                     {nivelSelecionado === 0 ? 'Orações (Nível 0)' : `Magias de Nível ${nivelSelecionado}`}
                   </h4>
-                  <p className="text-xs" style={{ color: '#6b5a3a', marginTop: 2 }}>
-                    {slotsRestantes > 0
-                      ? `${slotsRestantes} slot${slotsRestantes > 1 ? 's' : ''} disponível${slotsRestantes > 1 ? 'is' : ''}`
-                      : 'Todos os slots preenchidos'}
-                  </p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <p className="text-xs" style={{ color: '#6b5a3a' }}>
+                      {slotsRestantes > 0
+                        ? `${slotsRestantes} slot${slotsRestantes > 1 ? 's' : ''} disponível${slotsRestantes > 1 ? 'is' : ''}`
+                        : 'Todos os slots preenchidos'}
+                    </p>
+                    {/* Indicador base + bônus */}
+                    {bonusTotalNivel > 0 && (
+                      <span style={{ fontSize: 9, color: '#c9a84c', padding: '1px 4px', borderRadius: 3, background: 'rgba(201,168,76,0.15)', border: '1px solid #c9a84c33' }}>
+                        {slotsBaseNivel} base + {bonusTotalNivel} bônus = {slotsDisponivelNivel}
+                      </span>
+                    )}
+                  </div>
                 </div>
                 {/* Indicador de slots */}
                 <div className="flex items-center gap-1">
-                  {Array.from({ length: slotsDisponivelNivel }).map((_, i) => (
+                  {Array.from({ length: Math.min(slotsDisponivelNivel, 12) }).map((_, i) => (
                     <div key={i} style={{
                       width: 12, height: 12, borderRadius: '50%',
                       background: i < usadoNivel ? '#c9a84c' : 'transparent',
@@ -179,6 +280,9 @@ export default function SpellPrepModal({ onClose }) {
                       transition: 'all 0.2s',
                     }} />
                   ))}
+                  {slotsDisponivelNivel > 12 && (
+                    <span style={{ fontSize: 9, color: '#6b5a3a' }}>+{slotsDisponivelNivel - 12}</span>
+                  )}
                 </div>
                 <button onClick={onClose}
                   style={{ color: '#6b5a3a', fontSize: 18, background: 'none', cursor: 'pointer', border: 'none', padding: 4 }}>
@@ -296,7 +400,7 @@ export default function SpellPrepModal({ onClose }) {
                     )}
                   </div>
 
-                  {/* Info panel — altura fixa, sem layout shift */}
+                  {/* Info panel */}
                   <div style={{
                     borderTop: '1px solid #6b4a1a44',
                     padding: '12px 16px',

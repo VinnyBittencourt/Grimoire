@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useApp } from '../../context/AppContext'
 import { RECURSOS_PADRAO } from '../../services/dnd35Tables'
+import { useEfeitosDoPersonagem } from '../../hooks/useEfeitosDoPersonagem'
 
 const ICONES_RECURSO = [
   '⚡','✨','🔥','💜','🌟','💫','🩸','🌊','🌪️','☄️',
@@ -29,6 +30,7 @@ function getClassesDoPersonagem(p) {
 
 export default function RecursosClasse() {
   const { db, personagemAtivo, adicionarRecurso, editarRecurso, excluirRecurso } = useApp()
+  const efeitos = useEfeitosDoPersonagem()
   const [modal, setModal] = useState(null)
   const [form, setForm] = useState(EMPTY_FORM)
   const [mostrarIcones, setMostrarIcones] = useState(false)
@@ -111,8 +113,8 @@ export default function RecursosClasse() {
     setNotaAtiva(null)
   }
 
-  async function resetar(recurso) {
-    const usos = Array.from({ length: recurso.total }, () => ({ usado: false, nota: '' }))
+  async function resetar(recurso, totalEfetivo) {
+    const usos = Array.from({ length: totalEfetivo ?? recurso.total }, () => ({ usado: false, nota: '' }))
     await editarRecurso(recurso.id, { ...recurso, usos_json: JSON.stringify(usos) })
   }
 
@@ -140,7 +142,14 @@ export default function RecursosClasse() {
         ) : (
           <div className="flex flex-col" style={{ gap: '10px' }}>
             {recursos.map(r => {
-              const usos = parseUsos(r.usos_json, r.total)
+              // Bônus de talentos: bonus_turning para recursos de Expulsar, bonus_resource para outros
+              const nomeNorm = (r.nome || '').toLowerCase()
+              const ehExpulsar = nomeNorm.includes('expulsar') || nomeNorm.includes('repreender')
+              const bonusTalento = ehExpulsar
+                ? (efeitos.bonus_turning || 0)
+                : (efeitos.bonus_resources?.[r.nome] || 0)
+              const totalEfetivo = (r.total || 0) + bonusTalento
+              const usos = parseUsos(r.usos_json, totalEfetivo)
               const disponiveis = usos.filter(u => !u.usado).length
               return (
                 <div key={r.id} className="rounded-sm"
@@ -157,10 +166,15 @@ export default function RecursosClasse() {
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
+                      {bonusTalento > 0 && (
+                        <span style={{ fontSize: 9, color: '#8a6a2a' }} title={`+${bonusTalento} de talentos`}>
+                          +{bonusTalento}⚔
+                        </span>
+                      )}
                       <span className="font-medieval text-xs" style={{ color: disponiveis > 0 ? '#c9a84c' : '#6b5a3a' }}>
-                        {disponiveis}/{r.total}
+                        {disponiveis}/{totalEfetivo}
                       </span>
-                      <button onClick={() => resetar(r)} title="Resetar usos" className="text-xs rounded-sm"
+                      <button onClick={() => resetar(r, totalEfetivo)} title="Resetar usos" className="text-xs rounded-sm"
                         style={{ padding: '1px 6px', background: 'rgba(201,168,76,0.1)', border: '1px solid #6b4a1a', color: '#9b8a6a' }}>
                         ↺
                       </button>

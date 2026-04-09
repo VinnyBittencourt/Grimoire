@@ -244,7 +244,8 @@ export function getBonusMagias(modificador) {
 }
 
 // Calcula slots disponíveis para um personagem
-export function calcularSlots(classe, nivel, atributo) {
+// bonusSlots: array opcional de 10 números [nv0..nv9] com bônus adicionais (ex: de talentos)
+export function calcularSlots(classe, nivel, atributo, bonusSlots = null) {
   const tabela = SPELL_SLOTS[classe]
   if (!tabela || nivel < 1 || nivel > 20) return null
 
@@ -257,6 +258,13 @@ export function calcularSlots(classe, nivel, atributo) {
       if (slots[i + 1] !== undefined && slots[i + 1] > 0) {
         slots[i + 1] += bonus[i]
       }
+    }
+  }
+
+  // Aplicar bônus adicionais (ex: de talentos como Arcane Disciple, Slot Extra etc.)
+  if (bonusSlots) {
+    for (let i = 0; i < bonusSlots.length && i < slots.length; i++) {
+      if (bonusSlots[i]) slots[i] += bonusSlots[i]
     }
   }
 

@@ -22,15 +22,16 @@ function fileToBase64(file) {
 export default function SessionNotesModal({ abaInicial = 'anotacoes', onClose }) {
   const [aba, setAba] = useState(abaInicial)
 
+  {/* -------- Modal -------- */}
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content w-full max-w-5xl flex flex-col" style={{ height: '88vh' }}
+      <div className="modal-content w-full  flex flex-col" style={{ height: '88vh', width: '80vw' }}
         onClick={e => e.stopPropagation()}>
         {/* Header com tabs */}
         <div className="flex items-center justify-between px-6 pt-5 pb-0 shrink-0">
           <div className="flex gap-1">
             {TABS.map(t => (
-              <button key={t.key} className={`tab-btn ${aba === t.key ? 'active' : ''}`}
+              <button key={t.key} className={`tab-btn  ${aba === t.key ? 'active' : ''}`}
                 onClick={() => setAba(t.key)}>
                 {t.label}
               </button>
@@ -117,7 +118,7 @@ function AbaPlayers() {
   return (
     <div className="flex gap-4 h-full pt-2" style={{ minHeight: 0 }}>
       {/* Lista */}
-      <div className="flex flex-col gap-2 shrink-0" style={{ width: 240, minHeight: 0 }}>
+      <div className="flex flex-col gap-2 shrink-0" style={{ maxWidth: 300, minHeight: 0 }}>
         <div className="flex gap-2">
           <input
             className="input-medieval flex-1 text-xs"
@@ -140,9 +141,9 @@ function AbaPlayers() {
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0 flex-1">
-                  <p className="font-medieval text-xs truncate" style={{ color: '#f0e6c8' }}>{p.nome}</p>
+                  <p className="font-medieval text-sm truncate" style={{ color: '#f0e6c8' }}>{p.nome}</p>
                   {(p.classe || p.raca) && (
-                    <p className="text-xs mt-0.5 truncate" style={{ color: '#6b5a3a' }}>
+                    <p className="text-xs mt-0.5 truncate" style={{ color: '#917d58' }}>
                       {[p.raca, p.classe].filter(Boolean).join(' • ')}
                     </p>
                   )}
@@ -206,7 +207,7 @@ function FormPlayer({ player, onSalvar, onCancelar }) {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 h-full">
-      <h4 className="font-medieval text-sm shrink-0" style={{ color: '#c9a84c' }}>
+      <h4 className="font-medieval text-md font-semibold shrink-0" style={{ color: '#c9a84c' }}>
         {player ? 'Editar Player' : 'Novo Player'}
       </h4>
       <div className="flex-1 flex flex-col gap-3 overflow-y-auto">
@@ -279,7 +280,7 @@ function AbaAnotacoes() {
     <div className="flex gap-4 h-full pt-2" style={{ minHeight: 0 }}>
 
       {/* ── Coluna esquerda: lista ── */}
-      <div className="flex flex-col gap-2 shrink-0" style={{ width: 230, minHeight: 0 }}>
+      <div className="flex flex-col gap-2 shrink-0" style={{ maxWidth: 300, minHeight: 0 }}>
         <div className="flex gap-2">
           <input
             className="input-medieval flex-1 text-xs"
@@ -306,8 +307,8 @@ function AbaAnotacoes() {
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0 flex-1">
-                  <p className="font-medieval text-xs truncate" style={{ color: '#f0e6c8' }}>{a.titulo}</p>
-                  <p className="text-xs mt-0.5" style={{ color: '#6b5a3a' }}>{a.data}</p>
+                  <p className="font-medieval text-sm truncate" style={{ color: '#f0e6c8' }}>{a.titulo}</p>
+                  <p className="text-xs mt-0.5" style={{ color: '#917d58' }}>{a.data}</p>
                   <p className="text-xs mt-1 line-clamp-2" style={{ color: '#6b5a3a' }}>{stripHtml(a.notas)}</p>
                 </div>
                 <button
@@ -378,7 +379,7 @@ function AbaNpcs() {
   return (
     <div className="flex gap-4 h-full pt-2" style={{ minHeight: 0 }}>
       {/* Lista */}
-      <div className="flex flex-col gap-2 shrink-0" style={{ width: 240, minHeight: 0 }}>
+      <div className="flex flex-col gap-2 shrink-0" style={{ maxWidth: 300, minHeight: 0 }}>
         <div className="flex gap-2">
           <input
             className="input-medieval flex-1 text-xs"
@@ -407,7 +408,7 @@ function AbaNpcs() {
                   }
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medieval text-xs truncate" style={{ color: '#f0e6c8' }}>{n.nome}</p>
+                  <p className="font-medieval text-sm truncate" style={{ color: '#f0e6c8' }}>{n.nome}</p>
                   <p className="text-xs mt-0.5 truncate" style={{ color: '#6b5a3a' }}>
                     {[n.genero, n.ocupacao].filter(Boolean).join(' • ')}
                   </p>
@@ -558,7 +559,7 @@ function AbaLocais() {
   return (
     <div className="flex gap-4 h-full pt-2" style={{ minHeight: 0 }}>
       {/* Lista */}
-      <div className="flex flex-col gap-2 shrink-0" style={{ width: 240, minHeight: 0 }}>
+      <div className="flex flex-col gap-2 shrink-0" style={{ maxWidth: 300, minHeight: 0 }}>
         <div className="flex gap-2">
           <input
             className="input-medieval flex-1 text-xs"
@@ -581,7 +582,7 @@ function AbaLocais() {
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0 flex-1">
-                  <p className="font-medieval text-xs truncate" style={{ color: '#f0e6c8' }}>🗺 {l.nome}</p>
+                  <p className="font-medieval text-md truncate" style={{ color: '#f0e6c8' }}>🗺 {l.nome}</p>
                   {l.notas && <p className="text-xs mt-1 line-clamp-2" style={{ color: '#6b5a3a' }}>{l.notas}</p>}
                 </div>
                 <button
@@ -701,7 +702,7 @@ function AbaQuests() {
   return (
     <div className="flex gap-4 h-full pt-2" style={{ minHeight: 0 }}>
       {/* Lista */}
-      <div className="flex flex-col gap-2 shrink-0" style={{ width: 240, minHeight: 0 }}>
+      <div className="flex flex-col gap-2 shrink-0" style={{ maxWidth: 300, minHeight: 0 }}>
         <div className="flex gap-2">
           <input
             className="input-medieval flex-1 text-xs"
@@ -724,7 +725,7 @@ function AbaQuests() {
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0 flex-1">
-                  <p className="font-medieval text-xs truncate" style={{ color: '#f0e6c8' }}>{q.nome}</p>
+                  <p className="font-medieval text-sm truncate" style={{ color: '#f0e6c8' }}>{q.nome}</p>
                   <p className="text-xs mt-0.5" style={{ color: q.tipo === 'Principal' ? '#c9a84c' : '#6b5a3a' }}>
                     {q.tipo}{q.local_id ? ` • ${getLocalNome(q.local_id)}` : ''}
                   </p>

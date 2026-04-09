@@ -50,13 +50,12 @@ body {
 .character-card {
   background: linear-gradient(135deg, #2e1c08 0%, #241508 100%);
   border: 1px solid #6b4a1a;
-  transition: all 0.2s ease;
+  /* transition: all 0.1s ease-out !important; */
 }
 
 .character-card:hover {
-  border-color: #c9a84c;
-  box-shadow: 0 0 15px rgba(201, 168, 76, 0.2);
-  transform: translateY(-2px);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid #8b6a37 !important;
 }
 
 /* Botão dourado medieval */
@@ -219,7 +218,8 @@ select.input-medieval option {
 /* Tabs */
 .tab-btn {
   font-family: 'Cinzel', serif;
-  font-size: 11px;
+  font-size: 14px;
+  font-weight: 600;
   padding: 6px 12px;
   border: 1px solid transparent;
   cursor: pointer;
