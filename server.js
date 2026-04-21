@@ -1,101 +1,123 @@
 import express from 'express'
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs'
+import Database from 'better-sqlite3'
+import { existsSync, mkdirSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
-import * as XLSX from 'xlsx'
+import { initSchema, TABLES, EMPTY_DB } from './src/db/schema.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const DATA_DIR = join(__dirname, 'data')
-const DATA_FILE = join(DATA_DIR, 'grimoire_data.xlsx')
-const FOTOS_FILE = join(DATA_DIR, 'fotos.json')
+const DB_FILE = join(DATA_DIR, 'grimoire.db')
 
 if (!existsSync(DATA_DIR)) mkdirSync(DATA_DIR)
 
-const EMPTY_DB = {
-  personagens: [],
-  magias: [],
-  magias_preparadas: [],
-  equipamentos: [],
-  mochila: [],
-  backgrounds: [],
-  players: [],
-  talentos: [],
-  recursos: [],
-  anotacoes: [],
-  npcs: [],
-  locais: [],
-  quests: [],
-}
+const db = new Database(DB_FILE)
+db.pragma('journal_mode = WAL')
+db.pragma('foreign_keys = ON')
+initSchema(db)
 
 const app = express()
 app.use(express.json({ limit: '100mb' }))
 
-function loadFotos() {
-  if (!existsSync(FOTOS_FILE)) return {}
-  try { return JSON.parse(readFileSync(FOTOS_FILE, 'utf8')) } catch { return {} }
-}
-
-function saveFotos(fotos) {
-  writeFileSync(FOTOS_FILE, JSON.stringify(fotos), 'utf8')
-}
-
+// Lê todas as tabelas e retorna o objeto completo (mesma forma do Excel)
 app.get('/api/data', (req, res) => {
-  if (!existsSync(DATA_FILE)) {
-    return res.json(EMPTY_DB)
-  }
   try {
-    const buf = readFileSync(DATA_FILE)
-    const wb = XLSX.read(buf, { type: 'buffer' })
-    // Começa com os defaults do EMPTY_DB e sobrescreve com o que está no Excel
-    const db = { ...EMPTY_DB }
-    for (const sheet of wb.SheetNames) {
-      db[sheet] = XLSX.utils.sheet_to_json(wb.Sheets[sheet])
+    const result = { ...EMPTY_DB }
+    for (const table of TABLES) {
+      result[table] = db.prepare(`SELECT * FROM "${table}"`).all()
     }
-    // Merge fotos de volta nos personagens
-    const fotos = loadFotos()
-    db.personagens = db.personagens.map(p => ({
-      ...p,
-      foto_base64: fotos[p.id] || '',
-    }))
-    res.json(db)
+    res.json(result)
   } catch (e) {
-    console.error('Erro ao ler Excel:', e)
+    console.error('Erro ao ler dados:', e)
     res.status(500).json({ error: 'Erro ao ler dados' })
   }
 })
 
+// Salva o DB completo (substitui tudo em transação — mesma semântica do Excel)
 app.post('/api/data', (req, res) => {
   try {
-    const db = req.body
-
-    // Extrair fotos antes de gravar no Excel
-    const fotos = {}
-    const personagensSemFoto = (db.personagens || []).map(p => {
-      if (p.foto_base64) fotos[p.id] = p.foto_base64
-      const { foto_base64, ...resto } = p
-      return resto
-    })
-    saveFotos(fotos)
-
-    const dbParaExcel = { ...db, personagens: personagensSemFoto }
-    const wb = XLSX.utils.book_new()
-    for (const [sheet, rows] of Object.entries(dbParaExcel)) {
-      const ws = Array.isArray(rows) && rows.length > 0
-        ? XLSX.utils.json_to_sheet(rows)
-        : XLSX.utils.aoa_to_sheet([])
-      XLSX.utils.book_append_sheet(wb, ws, sheet)
-    }
-    const buf = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' })
-    writeFileSync(DATA_FILE, buf)
+    const data = req.body
+    db.transaction(() => {
+      for (const table of TABLES) {
+        db.prepare(`DELETE FROM "${table}"`).run()
+        const rows = data[table]
+        if (!Array.isArray(rows) || rows.length === 0) continue
+        const cols = Object.keys(rows[0])
+        const placeholders = cols.map(() => '?').join(', ')
+        const stmt = db.prepare(
+          `INSERT INTO "${table}" (${cols.map(c => `"${c}"`).join(', ')}) VALUES (${placeholders})`
+        )
+        for (const row of rows) {
+          stmt.run(cols.map(c => row[c] ?? null))
+        }
+      }
+    })()
     res.json({ ok: true })
   } catch (e) {
-    console.error('Erro ao salvar Excel:', e)
+    console.error('Erro ao salvar dados:', e)
     res.status(500).json({ error: 'Erro ao salvar dados' })
+  }
+})
+
+// Exporta um personagem e todos os seus dados relacionados como JSON
+app.get('/api/personagem/:id/export', (req, res) => {
+  const id = Number(req.params.id)
+  const personagem = db.prepare('SELECT * FROM personagens WHERE id = ?').get(id)
+  if (!personagem) return res.status(404).json({ error: 'Personagem não encontrado' })
+
+  const exportData = { personagem }
+  const tabelas = TABLES.filter(t => t !== 'personagens')
+  for (const table of tabelas) {
+    exportData[table] = db.prepare(`SELECT * FROM "${table}" WHERE personagem_id = ?`).all(id)
+  }
+
+  const nome = personagem.nome?.replace(/[^a-z0-9]/gi, '_') || 'personagem'
+  res.setHeader('Content-Disposition', `attachment; filename="${nome}_export.json"`)
+  res.json(exportData)
+})
+
+// Importa um personagem exportado (remapeia IDs para evitar conflitos)
+app.post('/api/personagem/import', (req, res) => {
+  try {
+    const { personagem, ...tabelas } = req.body
+    if (!personagem) return res.status(400).json({ error: 'Dados inválidos' })
+
+    db.transaction(() => {
+      // Gera novo ID para o personagem
+      const maxId = db.prepare('SELECT MAX(id) as m FROM personagens').get()?.m || 0
+      const novoId = maxId + 1
+      const idAntigo = personagem.id
+
+      const cols = Object.keys(personagem)
+      const stmt = db.prepare(
+        `INSERT INTO personagens (${cols.map(c => `"${c}"`).join(', ')}) VALUES (${cols.map(() => '?').join(', ')})`
+      )
+      stmt.run(cols.map(c => c === 'id' ? novoId : (personagem[c] ?? null)))
+
+      // Insere registros relacionados com personagem_id remapeado
+      for (const [table, rows] of Object.entries(tabelas)) {
+        if (!Array.isArray(rows) || rows.length === 0) continue
+        const maxRowId = db.prepare(`SELECT MAX(id) as m FROM "${table}"`).get()?.m || 0
+        let idCounter = maxRowId + 1
+        for (const row of rows) {
+          const newRow = { ...row, id: idCounter++, personagem_id: novoId }
+          const c = Object.keys(newRow)
+          db.prepare(
+            `INSERT INTO "${table}" (${c.map(x => `"${x}"`).join(', ')}) VALUES (${c.map(() => '?').join(', ')})`
+          ).run(c.map(x => newRow[x] ?? null))
+        }
+      }
+    })()
+
+    res.json({ ok: true })
+  } catch (e) {
+    console.error('Erro ao importar personagem:', e)
+    res.status(500).json({ error: 'Erro ao importar personagem' })
   }
 })
 
 const PORT = 3001
 app.listen(PORT, () => {
   console.log(`Grimoire API rodando em http://localhost:${PORT}`)
-  console.log(`Dados salvos em: ${DATA_FILE}`)
+  console.log(`Banco de dados: ${DB_FILE}`)
 })

@@ -9,10 +9,12 @@
     "dev:all": "concurrently \"npm run dev\" \"npm run dev:api\"",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "migrate": "node scripts/migrate-excel-to-sqlite.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",
+    "better-sqlite3": "^12.9.0",
     "concurrently": "^9.2.1",
     "express": "^5.2.1",
     "grimoire-design-system": "github:VinnyBittencourt/grimoire-design-system",
