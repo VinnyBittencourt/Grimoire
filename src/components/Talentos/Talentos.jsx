@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useApp } from '../../context/AppContext'
-import { TALENTOS_DND35, LIVROS_TALENTO, getTalentoPorId, formatarEfeito } from '../../services/dnd35Feats'
+import { useLang } from '../../context/LangContext'
+import { formatarEfeito } from '../../services/dnd35Feats'
 
 const EMPTY_FORM = { nome: '', descricao: '' }
 
@@ -29,7 +30,9 @@ function corEfeito(tipo) {
 }
 
 export default function Talentos() {
-  const { db, personagemAtivo, adicionarTalento, editarTalento, excluirTalento } = useApp()
+  const { db, personagemAtivo, adicionarTalento, editarTalento, excluirTalento, refData } = useApp()
+  const { t } = useLang()
+  const livrosDisponiveis = useMemo(() => [...new Set(refData.talentos.map(f => f.livro))].sort(), [refData.talentos])
   const [modal, setModal] = useState(null)
   const [form, setForm] = useState(EMPTY_FORM)
 
@@ -43,16 +46,24 @@ export default function Talentos() {
 
   const talentos = (db?.talentos || []).filter(t => t.personagem_id === personagemAtivo.id)
 
-  // Filtro do picker
+  // Filtro do picker — busca em PT e EN simultaneamente
   const featsFiltradas = useMemo(() => {
     const q = busca.toLowerCase().trim()
-    return TALENTOS_DND35.filter(f => {
-      if (filtroCategoria && !f.categoria.includes(filtroCategoria)) return false
+    return refData.talentos.filter(f => {
+      if (filtroCategoria && !(Array.isArray(f.categoria) ? f.categoria.includes(filtroCategoria) : f.categoria === filtroCategoria)) return false
       if (filtroLivro && f.livro !== filtroLivro) return false
-      if (q && !f.nome.toLowerCase().includes(q) && !f.descricao.toLowerCase().includes(q) && !f.prerequisitos.toLowerCase().includes(q)) return false
+      if (q) {
+        // deriva nome EN do ID: "phb_power_attack" → "power attack"
+        const nomeEn = f.id.replace(/^[a-z]+_/, '').replace(/_/g, ' ')
+        const match = f.nome.toLowerCase().includes(q)
+          || nomeEn.includes(q)
+          || (f.descricao || '').toLowerCase().includes(q)
+          || (f.prerequisitos || '').toLowerCase().includes(q)
+        if (!match) return false
+      }
       return true
     })
-  }, [busca, filtroCategoria, filtroLivro])
+  }, [busca, filtroCategoria, filtroLivro, refData.talentos])
 
   function abrirPicker() {
     setBusca('')
@@ -117,21 +128,21 @@ export default function Talentos() {
       {/* Header */}
       <div className="px-4 pt-2 pb-2 shrink-0 flex items-center justify-between"
         style={{ borderBottom: '1px solid #6b4a1a' }}>
-        <h3 className="font-medieval text-sm font-semibold" style={{ color: '#c9a84c', letterSpacing: '0.05em' }}>Talentos</h3>
+        <h3 className="font-medieval text-sm font-semibold" style={{ color: '#c9a84c', letterSpacing: '0.05em' }}>{t('talentos', 'title')}</h3>
         <div className="flex gap-1">
           <button
             onClick={abrirPicker}
             className="font-medieval text-xs px-2 py-0.5 rounded-sm transition-colors"
             style={{ background: 'rgba(201,168,76,0.2)', border: '1px solid #c9a84c55', color: '#c9a84c' }}
             title="Adicionar talento do banco D&D 3.5">
-            + D&D 3.5
+            {t('talentos', 'addDnd')}
           </button>
           <button
             onClick={abrirNovo}
             className="font-medieval text-xs px-2 py-0.5 rounded-sm transition-colors"
             style={{ background: 'rgba(201,168,76,0.1)', border: '1px solid #6b4a1a', color: '#9b8a6a' }}
             title="Adicionar talento customizado">
-            + Custom
+            {t('talentos', 'addCustom')}
           </button>
         </div>
       </div>
@@ -140,17 +151,17 @@ export default function Talentos() {
       <div className="overflow-y-auto p-3" style={{ maxHeight: '280px' }}>
         {talentos.length === 0 ? (
           <div className="flex flex-col items-center gap-2 py-6">
-            <p className="text-center text-xs" style={{ color: '#3a2810' }}>Nenhum talento adicionado</p>
+            <p className="text-center text-xs" style={{ color: '#3a2810' }}>{t('talentos', 'none')}</p>
             <button onClick={abrirPicker}
               className="text-xs font-medieval"
               style={{ color: '#6b5a3a', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer' }}>
-              Explorar banco D&D 3.5 →
+              {t('talentos', 'explore')}
             </button>
           </div>
         ) : (
           <div className="flex flex-col gap-2">
             {talentos.map(t => {
-              const featData = t.feat_id ? getTalentoPorId(t.feat_id) : null
+              const featData = t.feat_id ? refData.talentos.find(f => f.id === t.feat_id) : null
               const efeitos = featData?.efeitos?.filter(e => e.tipo !== 'especial') || []
               const especiais = featData?.efeitos?.filter(e => e.tipo === 'especial') || []
               return (
@@ -211,8 +222,8 @@ export default function Talentos() {
             <div className="flex items-center justify-between shrink-0"
               style={{ padding: '14px 20px', borderBottom: '1px solid #6b4a1a' }}>
               <div>
-                <h4 className="font-medieval text-base" style={{ color: '#c9a84c' }}>⚔️ Banco de Talentos D&D 3.5</h4>
-                <p style={{ fontSize: 10, color: '#6b5a3a', marginTop: 2 }}>{TALENTOS_DND35.length} talentos disponíveis · PHB, Complete Warrior, Arcane, Divine e mais</p>
+                <h4 className="font-medieval text-base" style={{ color: '#c9a84c' }}>{t('talentos', 'bankTitle')}</h4>
+                <p style={{ fontSize: 10, color: '#6b5a3a', marginTop: 2 }}>{t('talentos', 'available')(refData.talentos.length)}</p>
               </div>
               <button onClick={() => setModal(null)}
                 style={{ color: '#6b5a3a', background: 'none', border: 'none', fontSize: 20, cursor: 'pointer', lineHeight: 1, padding: 4 }}>✕</button>
@@ -228,7 +239,7 @@ export default function Talentos() {
                 <input
                   className="input-medieval w-full"
                   style={{ paddingLeft: 30 }}
-                  placeholder="Buscar por nome, descrição ou pré-requisito..."
+                  placeholder={t('talentos', 'searchPlaceholder')}
                   value={busca}
                   onChange={e => { setBusca(e.target.value); setFeatSelecionada(null) }}
                   autoFocus
@@ -256,18 +267,18 @@ export default function Talentos() {
               <div className="flex items-center justify-between">
                 <select className="input-medieval" style={{ fontSize: 10, padding: '3px 8px', minWidth: 150 }}
                   value={filtroLivro} onChange={e => { setFiltroLivro(e.target.value); setFeatSelecionada(null) }}>
-                  <option value="">Todos os livros</option>
-                  {LIVROS_TALENTO.filter(l => l !== 'Outro').map(l => <option key={l} value={l}>{l}</option>)}
+                  <option value="">{t('talentos', 'allBooks')}</option>
+                  {livrosDisponiveis.map(l => <option key={l} value={l}>{l}</option>)}
                 </select>
                 {(busca || filtroCategoria || filtroLivro) && (
                   <button
                     onClick={() => { setBusca(''); setFiltroCategoria(''); setFiltroLivro(''); setFeatSelecionada(null) }}
                     style={{ fontSize: 10, color: '#6b5a3a', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>
-                    Limpar filtros
+                    {t('talentos', 'clearFilters')}
                   </button>
                 )}
                 <span style={{ fontSize: 10, color: '#3a2810', marginLeft: 'auto' }}>
-                  {featsFiltradas.length} resultado{featsFiltradas.length !== 1 ? 's' : ''}
+                  {t('talentos', 'results')(featsFiltradas.length)}
                 </span>
               </div>
             </div>
@@ -281,10 +292,10 @@ export default function Talentos() {
                 {featsFiltradas.length === 0 ? (
                   <div className="flex flex-col items-center justify-center gap-2" style={{ padding: 32, color: '#6b5a3a' }}>
                     <span style={{ fontSize: 28, opacity: 0.4 }}>🔍</span>
-                    <p style={{ fontSize: 12, textAlign: 'center' }}>Nenhum talento encontrado</p>
+                    <p style={{ fontSize: 12, textAlign: 'center' }}>{t('talentos', 'noneFound')}</p>
                     <button onClick={() => { setBusca(''); setFiltroCategoria(''); setFiltroLivro('') }}
                       style={{ fontSize: 11, color: '#9b8a6a', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>
-                      Limpar filtros
+                      {t('talentos', 'clearFiltersLink')}
                     </button>
                   </div>
                 ) : (
@@ -360,19 +371,19 @@ export default function Talentos() {
                     <div className="flex-1 overflow-y-auto" style={{ padding: '12px 16px' }}>
                       {featSelecionada.prerequisitos && (
                         <div style={{ marginBottom: 12, padding: '8px 10px', borderRadius: 4, background: 'rgba(180,120,40,0.08)', border: '1px solid #6b4a1a44' }}>
-                          <p style={{ fontSize: 9, color: '#8a6a2a', marginBottom: 3, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Pré-requisitos</p>
+                          <p style={{ fontSize: 9, color: '#8a6a2a', marginBottom: 3, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{t('talentos', 'prerequisites')}</p>
                           <p style={{ fontSize: 11, color: '#c0a060', lineHeight: 1.4 }}>{featSelecionada.prerequisitos}</p>
                         </div>
                       )}
 
                       <div style={{ marginBottom: 12 }}>
-                        <p style={{ fontSize: 9, color: '#6b5a3a', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Benefício</p>
+                        <p style={{ fontSize: 9, color: '#6b5a3a', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{t('talentos', 'benefit')}</p>
                         <p style={{ fontSize: 11, color: '#c0a882', lineHeight: 1.6 }}>{featSelecionada.descricao}</p>
                       </div>
 
                       {featSelecionada.efeitos.length > 0 && (
                         <div>
-                          <p style={{ fontSize: 9, color: '#6b5a3a', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Efeitos Mecânicos</p>
+                          <p style={{ fontSize: 9, color: '#6b5a3a', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{t('talentos', 'mechanics')}</p>
                           <div className="flex flex-col gap-1.5">
                             {featSelecionada.efeitos.map((ef, i) => {
                               const c = corEfeito(ef.tipo)
@@ -394,7 +405,7 @@ export default function Talentos() {
                     {/* Botão de adicionar */}
                     <div style={{ padding: '12px 16px', borderTop: '1px solid #6b4a1a33', flexShrink: 0 }}>
                       <button className="btn-gold w-full" style={{ fontSize: 12 }} onClick={adicionarFeatDoDatabase}>
-                        + Adicionar ao Personagem
+                        {t('talentos', 'addToChar')}
                       </button>
                     </div>
                   </div>
@@ -402,11 +413,11 @@ export default function Talentos() {
                   <div className="flex-1 flex flex-col items-center justify-center gap-3" style={{ padding: 20 }}>
                     <span style={{ fontSize: 32, opacity: 0.2 }}>📜</span>
                     <p style={{ fontSize: 11, color: '#3a2810', textAlign: 'center', lineHeight: 1.5 }}>
-                      Clique em um talento para ver os detalhes
+                      {t('talentos', 'clickDetail')}
                     </p>
                     <div style={{ fontSize: 10, color: '#3a2810', textAlign: 'center', lineHeight: 1.6, marginTop: 4 }}>
-                      <p>Use os chips de categoria</p>
-                      <p>ou a busca para filtrar</p>
+                      <p>{t('talentos', 'categories')}</p>
+                      <p>{t('talentos', 'orSearch')}</p>
                     </div>
                   </div>
                 )}
@@ -416,7 +427,7 @@ export default function Talentos() {
             {/* Footer */}
             <div style={{ padding: '10px 20px', borderTop: '1px solid #6b4a1a22', flexShrink: 0, background: 'rgba(0,0,0,0.1)' }}>
               <button className="btn-ghost text-xs" onClick={abrirNovo} style={{ fontSize: 11 }}>
-                Não encontrou? Adicionar talento customizado →
+                {t('talentos', 'notFound')}
               </button>
             </div>
           </div>
@@ -428,30 +439,30 @@ export default function Talentos() {
         <div className="modal-overlay" onClick={() => setModal(null)}>
           <div className="modal-content p-6 w-80" onClick={e => e.stopPropagation()}>
             <h4 className="font-medieval text-base mb-4 text-center" style={{ color: '#c9a84c' }}>
-              ⚔️ {modal.mode === 'novo' ? 'Talento Customizado' : 'Editar Talento'}
+              ⚔️ {modal.mode === 'novo' ? t('talentos', 'customTitle') : t('talentos', 'editTitle')}
             </h4>
 
             <div className="flex flex-col gap-3">
               <div>
-                <label className="label-medieval">Nome do Talento</label>
-                <input className="input-medieval" placeholder="Ex: Ataque Poderoso, Esquiva..."
+                <label className="label-medieval">{t('talentos', 'featName')}</label>
+                <input className="input-medieval" placeholder={t('talentos', 'featPlaceholder')}
                   value={form.nome} onChange={e => set('nome', e.target.value)} />
               </div>
               <div>
-                <label className="label-medieval">Descrição</label>
+                <label className="label-medieval">{t('talentos', 'featDesc')}</label>
                 <textarea className="input-medieval resize-none" rows={4}
-                  placeholder="Descreva os efeitos do talento..."
+                  placeholder={t('talentos', 'descPlaceholder')}
                   value={form.descricao} onChange={e => set('descricao', e.target.value)} />
               </div>
             </div>
 
             <div className="flex gap-3 mt-5">
               {modal.mode === 'editar' && (
-                <button className="btn-danger text-xs" onClick={excluir}>Remover</button>
+                <button className="btn-danger text-xs" onClick={excluir}>{t('talentos', 'remove')}</button>
               )}
               <div className="flex gap-2 ml-auto">
-                <button className="btn-ghost text-xs" onClick={() => setModal(null)}>Cancelar</button>
-                <button className="btn-gold text-xs" onClick={salvar}>Salvar</button>
+                <button className="btn-ghost text-xs" onClick={() => setModal(null)}>{t('talentos', 'cancel')}</button>
+                <button className="btn-gold text-xs" onClick={salvar}>{t('talentos', 'save')}</button>
               </div>
             </div>
           </div>

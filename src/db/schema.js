@@ -92,5 +92,39 @@ export function initSchema(db) {
       id INTEGER PRIMARY KEY,
       personagem_id INTEGER, nome TEXT, descricao TEXT, status TEXT, recompensa TEXT
     );
+    CREATE TABLE IF NOT EXISTS ref_talentos (
+      id TEXT PRIMARY KEY,
+      nome TEXT, livro TEXT, categoria TEXT,
+      prerequisitos TEXT, descricao TEXT, efeitos TEXT
+    );
+
+    CREATE TABLE IF NOT EXISTS ref_falhas (
+      id TEXT PRIMARY KEY,
+      nome TEXT, livro TEXT, descricao TEXT, efeitos TEXT
+    );
+
+    CREATE TABLE IF NOT EXISTS ref_racas (
+      id TEXT PRIMARY KEY,
+      nome TEXT, livro TEXT, descricao TEXT,
+      atributos TEXT, tamanho TEXT, deslocamento INTEGER,
+      visao TEXT, habilidades TEXT
+    );
+
+    CREATE TABLE IF NOT EXISTS ref_classes (
+      id TEXT PRIMARY KEY,
+      nome TEXT, livro TEXT, tipo TEXT,
+      descricao TEXT, dado_vida INTEGER,
+      bab TEXT, saves TEXT, habilidades TEXT
+    );
+
+    CREATE TABLE IF NOT EXISTS ref_criaturas (
+      id TEXT PRIMARY KEY,
+      nome TEXT, livro TEXT, nivel_sm INTEGER,
+      tamanho TEXT, tipo TEXT, alinhamento TEXT,
+      pv TEXT, ca INTEGER,
+      "for" INTEGER, des INTEGER, con INTEGER,
+      int_val INTEGER, sab INTEGER, car INTEGER,
+      ataque TEXT, habilidades TEXT
+    );
   `)
 }

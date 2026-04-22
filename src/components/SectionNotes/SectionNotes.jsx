@@ -1,23 +1,25 @@
 import { useState } from 'react'
 import SessionNotesModal from '../modals/SessionNotesModal'
-
-const TABS = [
-  { key: 'background', label: 'Background' },
-  { key: 'players', label: 'Players' },
-  { key: 'npcs', label: 'NPCs' },
-  { key: 'locais', label: 'Locais' },
-  { key: 'quests', label: 'Quests' },
-  { key: 'anotacoes', label: 'Anotações' },
-]
+import { useLang } from '../../context/LangContext'
 
 export default function SectionNotes() {
   const [modalAberto, setModalAberto] = useState(null)
+  const { t } = useLang()
+
+  const TABS = [
+    { key: 'background', label: t('notes', 'background') },
+    { key: 'players', label: t('notes', 'players') },
+    { key: 'npcs', label: t('notes', 'npcs') },
+    { key: 'locais', label: t('notes', 'locations') },
+    { key: 'quests', label: t('notes', 'quests') },
+    { key: 'anotacoes', label: t('notes', 'notes') },
+  ]
 
   return (
     <>
       <div className="panel flex flex-col" style={{ minWidth: 0 }}>
         <div className="px-4 pt-2 pb-2 shrink-0" style={{ borderBottom: '1px solid #6b4a1a' }}>
-          <h3 className="font-medieval font-semibold text-sm" style={{ color: '#c9a84c' }}>Anotações da Sessão</h3>
+          <h3 className="font-medieval font-semibold text-sm" style={{ color: '#c9a84c' }}>{t('notes', 'title')}</h3>
         </div>
 
         <div className="flex flex-wrap gap-1 p-2">

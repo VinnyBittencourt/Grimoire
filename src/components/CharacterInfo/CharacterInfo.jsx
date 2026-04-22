@@ -1,4 +1,5 @@
 import { useApp } from '../../context/AppContext'
+import { useLang } from '../../context/LangContext'
 import { getModificador } from '../../services/dnd35Tables'
 
 const ATRIBUTOS = ['for','des','con','int','sab','car']
@@ -6,6 +7,7 @@ const LABEL = { for:'FOR', des:'DES', con:'CON', int:'INT', sab:'SAB', car:'CAR'
 
 export default function CharacterInfo() {
   const { personagemAtivo } = useApp()
+  const { t } = useLang()
   if (!personagemAtivo) return null
   const p = personagemAtivo
 
@@ -91,7 +93,7 @@ export default function CharacterInfo() {
           {/* Brilho sutil */}
           <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 30%, rgba(204,68,68,0.08) 0%, transparent 70%)' }} />
           {/* Conteúdo */}
-          <span className="relative mb-1 z-10" style={{ fontSize: 9, color: '#c36464', letterSpacing: '0.12em' }}>PONTOS DE VIDA (PV)</span>
+          <span className="relative mb-1 z-10" style={{ fontSize: 9, color: '#c36464', letterSpacing: '0.12em' }}>{t('charInfo', 'hp')}</span>
           <span className="font-medieval font-bold relative z-10" style={{ fontSize: 28, color: '#e8d0d0', lineHeight: 1.15, textShadow: '0 0 8px rgba(204,68,68,0.3)' }}>{p.pv}</span>
         </div>
 
@@ -109,7 +111,7 @@ export default function CharacterInfo() {
           {/* Brilho sutil */}
           <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 30%, rgba(74,144,217,0.08) 0%, transparent 70%)' }} />
           {/* Conteúdo */}
-          <span className="font-semibold mb-1 relative z-10" style={{ fontSize: 9, color: '#5a82a9', letterSpacing: '0.12em' }}>CLASSE DE ARMADURA (CA)</span>
+          <span className="font-semibold mb-1 relative z-10" style={{ fontSize: 9, color: '#5a82a9', letterSpacing: '0.12em' }}>{t('charInfo', 'ac')}</span>
           <span className="font-medieval font-bold relative z-10" style={{ fontSize: 28, color: '#ccdff0', lineHeight: 1.15, textShadow: '0 0 8px rgba(74,144,217,0.3)' }}>{p.ca}</span>
         </div>
 
@@ -120,20 +122,20 @@ export default function CharacterInfo() {
       {/* Info básica */}
       <div className="px-4 py-2 flex flex-col gap-2 text-xs">
         <div className="flex gap-2 w-full">
-          {p.raca && <Row label="Raça" className="w-full" val={p.raca} />}
-          {p.level && <Row label="Nível" className="w-full" val={p.level} />}
+          {p.raca && <Row label={t('charInfo', 'race')} className="w-full" val={p.raca} />}
+          {p.level && <Row label={t('charInfo', 'level')} className="w-full" val={p.level} />}
         </div>
         <div className="flex gap-2 w-full">
-          {p.divindade && <Row label="Divindade" className="w-full" val={p.divindade} />}
-          {p.idade && <Row label="Idade" className="w-full" val={p.idade} />}
+          {p.divindade && <Row label={t('charInfo', 'deity')} className="w-full" val={p.divindade} />}
+          {p.idade && <Row label={t('charInfo', 'age')} className="w-full" val={p.idade} />}
         </div>
         <div className="flex gap-2 w-full">
-          {p.tamanho && <Row label="Tamanho" className="w-full" val={p.tamanho} />}
-          {p.deslocamento && <Row label="Desloc." className="w-full" val={`${p.deslocamento}m`} />}
+          {p.tamanho && <Row label={t('charInfo', 'size')} className="w-full" val={p.tamanho} />}
+          {p.deslocamento && <Row label={t('charInfo', 'speed')} className="w-full" val={`${p.deslocamento}m`} />}
         </div>
         <div className="flex gap-2 w-full">
-          {p.tendencia && <Row label="Tendência" className="w-full" val={p.tendencia} />}
-          {p.falha && <Row label="Falha" className="w-full" val={p.falha} />}
+          {p.tendencia && <Row label={t('charInfo', 'alignment')} className="w-full" val={p.tendencia} />}
+          {p.falha && <Row label={t('charInfo', 'flaw')} className="w-full" val={p.falha} />}
         </div>
       </div>
 
@@ -143,7 +145,7 @@ export default function CharacterInfo() {
       <div className="px-4 py-2 flex flex-col gap-2 text-xs pb-4">
         {p.personalidade && (
           <div>
-            <span className="label-medieval block mb-1">Personalidade</span>
+            <span className="label-medieval block mb-1">{t('charInfo', 'personality')}</span>
             <p style={{ color: '#9b8a6a', lineHeight: '1.5' }}>{p.personalidade}</p>
           </div>
         )}

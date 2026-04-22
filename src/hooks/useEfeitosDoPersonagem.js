@@ -1,13 +1,12 @@
 import { useMemo } from 'react'
 import { useApp } from '../context/AppContext'
-import { getTalentoPorId } from '../services/dnd35Feats'
 
 /**
  * Agrega todos os efeitos mecânicos dos talentos do personagem ativo.
  * Retorna um objeto com os bônus totais por tipo.
  */
 export function useEfeitosDoPersonagem() {
-  const { db, personagemAtivo } = useApp()
+  const { db, personagemAtivo, refData } = useApp()
 
   return useMemo(() => {
     const resultado = {
@@ -33,7 +32,7 @@ export function useEfeitosDoPersonagem() {
       // Talentos customizados sem feat_id não têm efeitos estruturados
       if (!talento.feat_id) continue
 
-      const featData = getTalentoPorId(talento.feat_id)
+      const featData = refData.talentos.find(f => f.id === talento.feat_id)
       if (!featData?.efeitos) continue
 
       for (const efeito of featData.efeitos) {
@@ -80,5 +79,5 @@ export function useEfeitosDoPersonagem() {
     }
 
     return resultado
-  }, [db?.talentos, personagemAtivo?.id])
+  }, [db?.talentos, personagemAtivo?.id, refData.talentos])
 }

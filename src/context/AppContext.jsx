@@ -1,5 +1,23 @@
-import { createContext, useContext, useState, useCallback, useRef } from 'react'
+import { createContext, useContext, useState, useCallback, useRef, useEffect } from 'react'
 import { loadData, saveDb, addRecord, updateRecord, deleteRecord } from '../services/excelService'
+
+async function fetchRef(table) {
+  try {
+    const r = await fetch(`/api/ref/${table}`)
+    const rows = await r.json()
+    return rows.map(row => {
+      const parsed = { ...row }
+      for (const key of ['categoria', 'efeitos', 'atributos', 'habilidades', 'saves']) {
+        if (typeof parsed[key] === 'string') {
+          try { parsed[key] = JSON.parse(parsed[key]) } catch { /* keep as string */ }
+        }
+      }
+      return parsed
+    })
+  } catch {
+    return []
+  }
+}
 
 const AppContext = createContext(null)
 
@@ -8,6 +26,21 @@ export function AppProvider({ children }) {
   const dbRef = useRef(null)
   const [personagemAtivo, setPersonagemAtivo] = useState(null)
   const [salvando, setSalvando] = useState(false)
+  const [refData, setRefData] = useState({
+    talentos: [], falhas: [], racas: [], classes: [], criaturas: []
+  })
+
+  useEffect(() => {
+    Promise.all([
+      fetchRef('ref_talentos'),
+      fetchRef('ref_falhas'),
+      fetchRef('ref_racas'),
+      fetchRef('ref_classes'),
+      fetchRef('ref_criaturas'),
+    ]).then(([talentos, falhas, racas, classes, criaturas]) => {
+      setRefData({ talentos, falhas, racas, classes, criaturas })
+    })
+  }, [])
 
   // Mantém ref sincronizada para acesso em callbacks sem stale closure
   const setDbSync = useCallback((novoDb) => {
@@ -304,6 +337,7 @@ export function AppProvider({ children }) {
     db, setDb: setDbSync,
     personagemAtivo, setPersonagemAtivo,
     salvando,
+    refData,
     // personagens
     criarPersonagem, editarPersonagem, excluirPersonagem,
     // magias

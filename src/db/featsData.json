@@ -1,0 +1,4611 @@
+{
+  "talentos": [
+    {
+      "id": "phb_acrobatic",
+      "nome": "Acrobático",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Você tem talento inato para saltar e acrobacia.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Saltar",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Acrobacia",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_agile",
+      "nome": "Ágil",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Você tem talento para equilíbrio e escapismo.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Equilíbrio",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Escapar da Prisão",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_alertness",
+      "nome": "Alerta",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Você está mais atento ao ambiente ao seu redor.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Ouvir",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Observar",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_animal_affinity",
+      "nome": "Afinidade com Animais",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Você tem um jeito especial com animais.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Lidar com Animais",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Montar",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_armor_light",
+      "nome": "Proficiência com Armaduras Leves",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Use armaduras leves sem penalidade.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_armor_medium",
+      "nome": "Proficiência com Armaduras Médias",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Proficiência com Armaduras Leves",
+      "descricao": "Use armaduras médias sem penalidade.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_armor_heavy",
+      "nome": "Proficiência com Armaduras Pesadas",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Proficiência com Armaduras Médias",
+      "descricao": "Use armaduras pesadas sem penalidade.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_athletic",
+      "nome": "Atlético",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Você tem talento para escalar e nadar.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Escalar",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Nadar",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_augment_summoning",
+      "nome": "Convocar Melhorado",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Conjurar em Combate",
+      "descricao": "Cada criatura que você conjura recebe +4 FOR e +4 CON.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Criaturas convocadas ganham +4 FOR e +4 CON"
+        }
+      ]
+    },
+    {
+      "id": "phb_blind_fight",
+      "nome": "Cega-Luta",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Você pode lutar com eficácia mesmo sem enxergar o oponente.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Rerola o dado de acerto em combate cego; o oponente não tem vantagem por invisibilidade"
+        }
+      ]
+    },
+    {
+      "id": "phb_scribe_scroll",
+      "nome": "Elaborar Pergaminho",
+      "livro": "PHB",
+      "categoria": [
+        "Criação de Item"
+      ],
+      "prerequisitos": "Conjurador nível 1",
+      "descricao": "Você pode criar pergaminhos mágicos com magias que conhece.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_brew_potion",
+      "nome": "Elaborar Poções",
+      "livro": "PHB",
+      "categoria": [
+        "Criação de Item"
+      ],
+      "prerequisitos": "Conjurador nível 3",
+      "descricao": "Você pode criar poções mágicas.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_cleave",
+      "nome": "Abater",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "FOR 13, Ataque Poderoso",
+      "descricao": "Se você derrubar um oponente, pode fazer um ataque extra imediatamente.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_combat_casting",
+      "nome": "Conjurar em Combate",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+4 em testes de Concentração quando conjura na defensiva ou preso.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Concentração (em combate)",
+          "valor": 4
+        }
+      ]
+    },
+    {
+      "id": "phb_combat_expertise",
+      "nome": "Perícia em Combate",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "INT 13",
+      "descricao": "Você pode trocar bônus de ataque por bônus de CA.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Troca até -5 em ataque por +5 na CA por 1 rodada"
+        }
+      ]
+    },
+    {
+      "id": "phb_combat_reflexes",
+      "nome": "Reflexos em Combate",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "",
+      "descricao": "Você pode realizar ataques de oportunidade adicionais por rodada.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Pode realizar ataques de oportunidade extras = mod DEX; pode atacar durante surpreendido"
+        }
+      ]
+    },
+    {
+      "id": "phb_craft_magic_arms",
+      "nome": "Elaborar Armas e Armaduras Mágicas",
+      "livro": "PHB",
+      "categoria": [
+        "Criação de Item"
+      ],
+      "prerequisitos": "Conjurador nível 5",
+      "descricao": "Você pode criar armas e armaduras mágicas.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_craft_rod",
+      "nome": "Elaborar Bastão",
+      "livro": "PHB",
+      "categoria": [
+        "Criação de Item"
+      ],
+      "prerequisitos": "Conjurador nível 9",
+      "descricao": "Você pode criar bastões mágicos.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_craft_staff",
+      "nome": "Elaborar Cajado",
+      "livro": "PHB",
+      "categoria": [
+        "Criação de Item"
+      ],
+      "prerequisitos": "Conjurador nível 12",
+      "descricao": "Você pode criar cajados mágicos.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_craft_wand",
+      "nome": "Elaborar Varinha",
+      "livro": "PHB",
+      "categoria": [
+        "Criação de Item"
+      ],
+      "prerequisitos": "Conjurador nível 5",
+      "descricao": "Você pode criar varinhas mágicas.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_craft_wondrous",
+      "nome": "Elaborar Item Maravilhoso",
+      "livro": "PHB",
+      "categoria": [
+        "Criação de Item"
+      ],
+      "prerequisitos": "Conjurador nível 3",
+      "descricao": "Você pode criar itens mágicos maravilhosos.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_deceitful",
+      "nome": "Enganoso",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Você tem talento para fingimento e disfarce.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Falsificação",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Disfarce",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_deft_hands",
+      "nome": "Mãos Habilidosas",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Você tem talento para ladinagem e desarmamento de armadilhas.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Ladinagem",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Desviar Dispositivos",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_diehard",
+      "nome": "Resistente",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Resistência",
+      "descricao": "Você continua lutando mesmo com PV negativos.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ao chegar a -1 a -9 PV, fica incapacitado mas não inconsciente e pode agir normalmente"
+        }
+      ]
+    },
+    {
+      "id": "phb_diligent",
+      "nome": "Diligente",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Você tem talento para avaliação e escrita.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Avaliação",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Decifrar Escritas",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_dodge",
+      "nome": "Esquiva",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 13",
+      "descricao": "+1 de CA contra um oponente designado.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+1 CA contra um alvo designado por rodada"
+        }
+      ]
+    },
+    {
+      "id": "phb_empower_spell",
+      "nome": "Ampliar Magia",
+      "livro": "PHB",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Variáveis numéricas da magia aumentam em 50%.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa um slot 2 níveis acima; variáveis numéricas da magia +50%"
+        }
+      ]
+    },
+    {
+      "id": "phb_endurance",
+      "nome": "Resistência",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+4 em testes de resistência e perícias relacionadas à fadiga e condições ambientais.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+4 em Fortitude contra fadiga, calor, frio e afogamento; pode dormir de armadura"
+        }
+      ]
+    },
+    {
+      "id": "phb_enlarge_spell",
+      "nome": "Expandir Magia",
+      "livro": "PHB",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Dobra o alcance da magia.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa um slot 1 nível acima; dobra o alcance da magia"
+        }
+      ]
+    },
+    {
+      "id": "phb_eschew_materials",
+      "nome": "Dispensar Materiais",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Conjure magias sem componentes materiais baratos.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_exotic_weapon_prof",
+      "nome": "Proficiência com Arma Exótica",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "BAB +1",
+      "descricao": "Use uma arma exótica específica sem penalidade.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_extend_spell",
+      "nome": "Estender Magia",
+      "livro": "PHB",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Dobra a duração da magia.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa um slot 1 nível acima; dobra a duração da magia"
+        }
+      ]
+    },
+    {
+      "id": "phb_extra_turning",
+      "nome": "Expulsar Extra",
+      "livro": "PHB",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Habilidade de Expulsar ou Repreender Mortos-Vivos",
+      "descricao": "Você pode usar sua habilidade de expulsar mortos-vivos 4 vezes a mais por dia.",
+      "efeitos": [
+        {
+          "tipo": "bonus_turning",
+          "alvo": "",
+          "valor": 4
+        }
+      ]
+    },
+    {
+      "id": "phb_far_shot",
+      "nome": "Tiro Distante",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Tiro em Ponto Branco",
+      "descricao": "Aumenta o incremento de alcance de armas de projétil ou arremesso.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Armas de projétil: incremento de alcance x1,5; armas de arremesso: dobra o incremento"
+        }
+      ]
+    },
+    {
+      "id": "phb_forge_ring",
+      "nome": "Forjar Anel",
+      "livro": "PHB",
+      "categoria": [
+        "Criação de Item"
+      ],
+      "prerequisitos": "Conjurador nível 12",
+      "descricao": "Você pode criar anéis mágicos.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_great_cleave",
+      "nome": "Abate Amplo",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "FOR 13, Ataque Poderoso, Abater, BAB +4",
+      "descricao": "Sem limite de ataques extras de Abater por rodada.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_great_fortitude",
+      "nome": "Fortitude Elevada",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+2 em todos os testes de Fortitude.",
+      "efeitos": [
+        {
+          "tipo": "bonus_save",
+          "alvo": "fortitude",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_greater_spell_focus",
+      "nome": "Foco em Magia Aprimorado",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Foco em Magia (escola escolhida)",
+      "descricao": "+1 adicional na CD das magias da escola escolhida.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+1 na CD das magias de uma escola específica (cumulativo com Foco em Magia)"
+        }
+      ]
+    },
+    {
+      "id": "phb_greater_spell_pen",
+      "nome": "Penetração de Magia Aprimorada",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Penetração de Magia",
+      "descricao": "+2 adicional em testes de penetração de resistência mágica.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+4 total em testes de penetração de RM"
+        }
+      ]
+    },
+    {
+      "id": "phb_greater_twf",
+      "nome": "Luta com Duas Armas Aprimorada",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 19, Luta com Duas Armas Melhorada, Luta com Duas Armas, BAB +11",
+      "descricao": "Você pode fazer um terceiro ataque com a arma secundária.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_greater_weapon_focus",
+      "nome": "Foco em Arma Aprimorado",
+      "livro": "PHB",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "Foco em Arma (arma escolhida), BAB +8, Guerreiro nível 8",
+      "descricao": "+1 adicional em jogadas de ataque com a arma escolhida.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_greater_weapon_spec",
+      "nome": "Especialização em Arma Aprimorada",
+      "livro": "PHB",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "Foco em Arma, Especialização em Arma, Foco em Arma Aprimorado, Guerreiro nível 12",
+      "descricao": "+2 adicional em jogadas de dano com a arma escolhida.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_heighten_spell",
+      "nome": "Aumentar Magia",
+      "livro": "PHB",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Conjure uma magia em um slot de nível superior, aumentando sua CD.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "A magia é tratada como sendo do nível do slot utilizado para sua CD"
+        }
+      ]
+    },
+    {
+      "id": "phb_improved_bull_rush",
+      "nome": "Investida Aprimorada",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "FOR 13, Ataque Poderoso",
+      "descricao": "+4 em testes de investida; não provoca ataque de oportunidade ao investir.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Não provoca AoO ao iniciar investida; +4 no teste de investida"
+        }
+      ]
+    },
+    {
+      "id": "phb_improved_counterspell",
+      "nome": "Contradizer Magia Aprimorado",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Contradiga magias usando qualquer magia da mesma escola.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_improved_critical",
+      "nome": "Crítico Aprimorado",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Proficiência com a arma, BAB +8",
+      "descricao": "Dobra o margem de ameaça crítica da arma escolhida.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Dobra a margem de ameaça crítica de uma arma específica"
+        }
+      ]
+    },
+    {
+      "id": "phb_improved_disarm",
+      "nome": "Desarmar Aprimorado",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "INT 13, Perícia em Combate",
+      "descricao": "+4 em tentativas de desarme; não provoca ataque de oportunidade.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Não provoca AoO ao tentar desarmar; +4 no teste de desarme"
+        }
+      ]
+    },
+    {
+      "id": "phb_improved_familiar",
+      "nome": "Familiar Aprimorado",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Habilidade de Familiar",
+      "descricao": "Você pode obter um familiar de um tipo mais poderoso.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_improved_feint",
+      "nome": "Fingimento Aprimorado",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "INT 13, Perícia em Combate",
+      "descricao": "Pode usar Blefar para fintar como ação de movimento.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_improved_grapple",
+      "nome": "Agarrar Aprimorado",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 13, Luta Desarmada Aprimorada",
+      "descricao": "+4 em testes de agarrar; não provoca ataque de oportunidade.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Não provoca AoO ao iniciar agarrão; +4 no teste de agarrar"
+        }
+      ]
+    },
+    {
+      "id": "phb_improved_initiative",
+      "nome": "Iniciativa Aprimorada",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "",
+      "descricao": "+4 em testes de iniciativa.",
+      "efeitos": [
+        {
+          "tipo": "bonus_initiative",
+          "alvo": "",
+          "valor": 4
+        }
+      ]
+    },
+    {
+      "id": "phb_improved_overrun",
+      "nome": "Atropelamento Aprimorado",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "FOR 13, Ataque Poderoso",
+      "descricao": "+4 em testes de atropelamento; o alvo não pode desviar.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_improved_precise_shot",
+      "nome": "Tiro Preciso Aprimorado",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 19, Tiro em Ponto Branco, Tiro Preciso, BAB +11",
+      "descricao": "Ignore a cobertura parcial e atire entre personagens sem penalidade.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_improved_shield_bash",
+      "nome": "Golpe de Escudo Aprimorado",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Proficiência com Escudo",
+      "descricao": "Mantenha o bônus de CA do escudo ao atacar com ele.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_improved_sunder",
+      "nome": "Destruir Aprimorado",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "FOR 13, Ataque Poderoso",
+      "descricao": "+4 em tentativas de destruir; não provoca ataque de oportunidade.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_improved_trip",
+      "nome": "Viagem Aprimorada",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "INT 13, Perícia em Combate",
+      "descricao": "+4 em tentativas de viagem; não provoca ataque de oportunidade. Se vencer, pode atacar imediatamente.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_improved_twf",
+      "nome": "Luta com Duas Armas Melhorada",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 17, Luta com Duas Armas, BAB +6",
+      "descricao": "Você pode fazer um segundo ataque com a arma secundária.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_improved_unarmed",
+      "nome": "Luta Desarmada Aprimorada",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "",
+      "descricao": "Não provoca ataque de oportunidade ao atacar desarmado; causa dano letal.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_investigator",
+      "nome": "Investigador",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+2 em Reunir Informações e Procurar.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Reunir Informações",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Procurar",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_iron_will",
+      "nome": "Vontade de Ferro",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+2 em todos os testes de Vontade.",
+      "efeitos": [
+        {
+          "tipo": "bonus_save",
+          "alvo": "will",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_leadership",
+      "nome": "Liderança",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Nível 6",
+      "descricao": "Você pode atrair seguidores e um companheiro.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_lightning_reflexes",
+      "nome": "Reflexos Rápidos",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+2 em todos os testes de Reflexos.",
+      "efeitos": [
+        {
+          "tipo": "bonus_save",
+          "alvo": "reflex",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_magical_aptitude",
+      "nome": "Aptidão Mágica",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+2 em Uso de Dispositivo Mágico e Identificar.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Uso de Dispositivo Mágico",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Identificar",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_manyshot",
+      "nome": "Flechada Múltipla",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 17, Tiro em Ponto Branco, Tiro Rápido, BAB +6",
+      "descricao": "Dispare duas ou mais flechas com um ataque.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_martial_weapon",
+      "nome": "Proficiência com Armas Marciais",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Use todas as armas marciais sem penalidade.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_maximize_spell",
+      "nome": "Maximizar Magia",
+      "livro": "PHB",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Todas as variáveis numéricas da magia são máximas.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa um slot 3 níveis acima; todas as variáveis numéricas são maximizadas"
+        }
+      ]
+    },
+    {
+      "id": "phb_mobility",
+      "nome": "Mobilidade",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 13, Esquiva",
+      "descricao": "+4 de CA contra ataques de oportunidade.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+4 CA contra ataques de oportunidade provocados por movimento"
+        }
+      ]
+    },
+    {
+      "id": "phb_mounted_archery",
+      "nome": "Arqueria Montada",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Combate Montado",
+      "descricao": "Reduz à metade a penalidade de atirar enquanto montado.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_mounted_combat",
+      "nome": "Combate Montado",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Montar 1 posto",
+      "descricao": "Use Montar para proteger sua montaria de ataques.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_multiattack",
+      "nome": "Ataque Múltiplo",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "3 ou mais ataques naturais",
+      "descricao": "Reduz a penalidade dos ataques naturais secundários.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_natural_spell",
+      "nome": "Magia Natural",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "SAB 13, Forma Selvagem",
+      "descricao": "Conjure magias enquanto estiver em Forma Selvagem.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_negotiator",
+      "nome": "Negociador",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+2 em Diplomacia e Sentido de Rua.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Diplomacia",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Sentido de Rua",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_nimble_fingers",
+      "nome": "Dedos Ágeis",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+2 em Abrir Fechadura e Prestidigitação.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Abrir Fechadura",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Prestidigitação",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_persuasive",
+      "nome": "Persuasivo",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+2 em Blefar e Intimidar.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Blefar",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Intimidar",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_point_blank_shot",
+      "nome": "Tiro em Ponto Branco",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "",
+      "descricao": "+1 em jogadas de ataque e dano com arcos e bestas a até 9m.",
+      "efeitos": [
+        {
+          "tipo": "bonus_attack",
+          "alvo": "ranged_close",
+          "valor": 1
+        },
+        {
+          "tipo": "bonus_damage",
+          "alvo": "ranged_close",
+          "valor": 1
+        }
+      ]
+    },
+    {
+      "id": "phb_power_attack",
+      "nome": "Ataque Poderoso",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "FOR 13",
+      "descricao": "Troque bônus de ataque por bônus de dano.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Troca até -5 em ataque por +5 no dano (ou +10 com arma de duas mãos)"
+        }
+      ]
+    },
+    {
+      "id": "phb_precise_shot",
+      "nome": "Tiro Preciso",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Tiro em Ponto Branco",
+      "descricao": "Ataque com arco ou besta sem penalidade de tiro em combate próximo.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_quick_draw",
+      "nome": "Saque Rápido",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "BAB +1",
+      "descricao": "Saque qualquer arma como ação livre.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_quicken_spell",
+      "nome": "Conjuração Rápida",
+      "livro": "PHB",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Conjure uma magia como ação livre.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa um slot 4 níveis acima; a magia é conjurada como ação livre"
+        }
+      ]
+    },
+    {
+      "id": "phb_rapid_reload",
+      "nome": "Recarga Rápida",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Proficiência com besta escolhida",
+      "descricao": "Recarregue a besta escolhida mais rápido.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_rapid_shot",
+      "nome": "Tiro Rápido",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 13, Tiro em Ponto Branco",
+      "descricao": "Um ataque adicional a -2 com armas de projétil.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_ride_by_attack",
+      "nome": "Atacar Enquanto Monta",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Combate Montado",
+      "descricao": "Quando carregando enquanto montado, pode se mover antes e depois do ataque.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_run",
+      "nome": "Correr",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Você corre 5x seu deslocamento (em vez de 4x) e mantém a CA de Destreza.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Velocidade de corrida x5; +4 em Saltar com impulso"
+        }
+      ]
+    },
+    {
+      "id": "phb_self_sufficient",
+      "nome": "Autossuficiente",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+2 em Cura e Sobrevivência.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Cura",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Sobrevivência",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_shield_prof",
+      "nome": "Proficiência com Escudo",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Use escudos sem penalidade de conjuração.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_shot_on_the_run",
+      "nome": "Atirar e Recuar",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 13, Tiro em Ponto Branco, Mobilidade, Esquiva",
+      "descricao": "Ataque com arma de projétil e mova-se antes e depois do ataque.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_silent_spell",
+      "nome": "Magia Silenciosa",
+      "livro": "PHB",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Conjure a magia sem componente verbal.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa um slot 1 nível acima; sem componente verbal"
+        }
+      ]
+    },
+    {
+      "id": "phb_simple_weapon",
+      "nome": "Proficiência com Armas Simples",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Use todas as armas simples sem penalidade.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_skill_focus",
+      "nome": "Foco em Perícia",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+3 em uma perícia escolhida.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "(perícia escolhida)",
+          "valor": 3
+        }
+      ]
+    },
+    {
+      "id": "phb_spell_focus",
+      "nome": "Foco em Magia",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+1 na CD das magias da escola escolhida.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+1 na CD das magias de uma escola específica"
+        }
+      ]
+    },
+    {
+      "id": "phb_spell_mastery",
+      "nome": "Domínio de Magia",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Mago nível 1",
+      "descricao": "Prepare um número de magias sem seu grimório.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_spell_penetration",
+      "nome": "Penetração de Magia",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+2 em testes de penetração de resistência mágica.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+2 em testes de penetração de RM"
+        }
+      ]
+    },
+    {
+      "id": "phb_spirited_charge",
+      "nome": "Cavalaria Espirituosa",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Combate Montado, Atacar Enquanto Monta",
+      "descricao": "Dobra o dano ao carregar enquanto montado (triplo com lança).",
+      "efeitos": []
+    },
+    {
+      "id": "phb_spring_attack",
+      "nome": "Ataque em Movimento",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 13, Esquiva, Mobilidade, BAB +4",
+      "descricao": "Mova-se antes e depois de um ataque único sem provocar AoO.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_stealthy",
+      "nome": "Furtivo",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+2 em Esconder e Mover em Silêncio.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Esconder",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Mover em Silêncio",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb_still_spell",
+      "nome": "Magia Imóvel",
+      "livro": "PHB",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Conjure a magia sem componentes somáticos.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa um slot 1 nível acima; sem componente somático"
+        }
+      ]
+    },
+    {
+      "id": "phb_stunning_fist",
+      "nome": "Soco Atordoante",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 13, SAB 13, Luta Desarmada Aprimorada, BAB +8",
+      "descricao": "Aturdoa o alvo com um ataque desarmado bem-sucedido.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_toughness",
+      "nome": "Resistência Física",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "+3 em pontos de vida.",
+      "efeitos": [
+        {
+          "tipo": "bonus_hp",
+          "alvo": "",
+          "valor": 3
+        }
+      ]
+    },
+    {
+      "id": "phb_tower_shield",
+      "nome": "Proficiência com Torre de Escudo",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Proficiência com Escudo",
+      "descricao": "Use escudos-torre sem penalidades adicionais.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_track",
+      "nome": "Rastrear",
+      "livro": "PHB",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Use Sobrevivência para rastrear criaturas.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_trample",
+      "nome": "Atropelar",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Combate Montado",
+      "descricao": "Enquanto montado, atropele oponentes de tamanho menor.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_two_weapon_defense",
+      "nome": "Defesa com Duas Armas",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 15, Luta com Duas Armas",
+      "descricao": "+1 de escudo para CA com duas armas; +2 na posição defensiva.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_two_weapon_fighting",
+      "nome": "Luta com Duas Armas",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 15",
+      "descricao": "Reduz as penalidades de lutar com duas armas.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_weapon_finesse",
+      "nome": "Fineza com Arma",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "BAB +1",
+      "descricao": "Use DES em vez de FOR para ataques com armas leves.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_weapon_focus",
+      "nome": "Foco em Arma",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Proficiência com a arma, BAB +1",
+      "descricao": "+1 em jogadas de ataque com a arma escolhida.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+1 em ataques com uma arma específica"
+        }
+      ]
+    },
+    {
+      "id": "phb_weapon_spec",
+      "nome": "Especialização em Arma",
+      "livro": "PHB",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "Foco em Arma (arma escolhida), Guerreiro nível 4",
+      "descricao": "+2 em jogadas de dano com a arma escolhida.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_whirlwind_attack",
+      "nome": "Ataque em Torbilhão",
+      "livro": "PHB",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 13, INT 13, Esquiva, Mobilidade, Ataque em Movimento, Perícia em Combate, BAB +4",
+      "descricao": "Ataque todos os oponentes adjacentes com ação de ataque completa.",
+      "efeitos": []
+    },
+    {
+      "id": "phb_widen_spell",
+      "nome": "Ampliar Área da Magia",
+      "livro": "PHB",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Dobra a área de efeito da magia.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa um slot 3 níveis acima; dobra o raio/área de efeito da magia"
+        }
+      ]
+    },
+    {
+      "id": "cw_battle_casting",
+      "nome": "Conjuração em Batalha",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Conjurar em Combate",
+      "descricao": "+4 em Concentração quando conjura enquanto faz ataque completo.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Concentração (ataque completo)",
+          "valor": 4
+        }
+      ]
+    },
+    {
+      "id": "cw_blindsight",
+      "nome": "Sentido às Cegas",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Cega-luta, Percepção Aguçada ou habilidade de percepção especial",
+      "descricao": "Você pode detectar a presença de criaturas dentro de 1,5m sem enxergar.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_combat_brute",
+      "nome": "Brutalidade em Combate",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "FOR 15, Ataque Poderoso, Abater, BAB +6",
+      "descricao": "Cada vez que derruba um oponente com Abater, ganha +2 em ataques até o fim do turno.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_deft_opportunist",
+      "nome": "Oportunista Habilidoso",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Reflexos em Combate, Foco em Arma, DES 15, BAB +6",
+      "descricao": "+4 em ataques de oportunidade.",
+      "efeitos": [
+        {
+          "tipo": "bonus_attack",
+          "alvo": "aoo",
+          "valor": 4
+        }
+      ]
+    },
+    {
+      "id": "cw_exotic_shield",
+      "nome": "Proficiência com Escudo Exótico",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Proficiência com Escudo",
+      "descricao": "Use um tipo específico de escudo exótico sem penalidade.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_extra_rage",
+      "nome": "Fúria Extra",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Habilidade de Fúria",
+      "descricao": "Você pode usar Fúria 2 vezes adicionais por dia.",
+      "efeitos": [
+        {
+          "tipo": "bonus_resource",
+          "alvo": "Fúria",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "cw_extra_smite",
+      "nome": "Golpe Sagrado Extra",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Habilidade de Golpe Sagrado",
+      "descricao": "Você pode usar Golpe Sagrado 2 vezes adicionais por dia.",
+      "efeitos": [
+        {
+          "tipo": "bonus_resource",
+          "alvo": "Golpe Sagrado",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "cw_focused_shield",
+      "nome": "Escudo Focado",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "Proficiência com Escudo, Golpe de Escudo Aprimorado, BAB +6",
+      "descricao": "+1 adicional de CA por usar escudo ao lutar defensivamente.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_greater_resiliency",
+      "nome": "Resiliência Elevada",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Resistência Física",
+      "descricao": "+3 adicionais em pontos de vida (cumulativo com Resistência Física).",
+      "efeitos": [
+        {
+          "tipo": "bonus_hp",
+          "alvo": "",
+          "valor": 3
+        }
+      ]
+    },
+    {
+      "id": "cw_ground_fighting",
+      "nome": "Luta no Chão",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Agarrar Aprimorado",
+      "descricao": "-2 em vez de -4 em ataques enquanto no chão; sem penalidade de CA.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_hammer_blow",
+      "nome": "Golpe de Martelo",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "FOR 13, Ataque Poderoso, Abater, BAB +8",
+      "descricao": "Troca todos os ataques em uma rodada por um único golpe que derruba automaticamente.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_improved_overland_flight",
+      "nome": "Voo em Terra Aprimorado",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Voo",
+      "descricao": "Sua velocidade de voo aumenta 50%.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_melee_evasion",
+      "nome": "Evasão em Combate Corpo-a-Corpo",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 15, Esquiva, Mobilidade, BAB +6",
+      "descricao": "+1 CA contra oponentes que você designou com Esquiva.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_phalanx_fighting",
+      "nome": "Luta em Falange",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Proficiência com Escudo, BAB +1",
+      "descricao": "+2 em ataque e CA quando adjacente a aliado usando o mesmo talento.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_power_lunge",
+      "nome": "Impulso Poderoso",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "FOR 13, Ataque Poderoso",
+      "descricao": "Ao carregar, aplique Ataque Poderoso dobrado no dano.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_quick_reconnoiter",
+      "nome": "Reconhecimento Rápido",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "DES 13, Alerta",
+      "descricao": "Faça testes de Ouvir, Observar e Procurar uma vez por rodada como ação livre.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_roundabout_kick",
+      "nome": "Chute Giratório",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "DES 13, Luta Desarmada Aprimorada, Soco Atordoante, BAB +12",
+      "descricao": "Após derrubar um oponente, pode atacar outro adjacente imediatamente.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_shield_charge",
+      "nome": "Carga com Escudo",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "Proficiência com Escudo",
+      "descricao": "Ao carregar, pode usar o escudo para atordoar o oponente.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_shieldmate",
+      "nome": "Companheiro de Escudo",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Proficiência com Escudo, BAB +3",
+      "descricao": "Aliados adjacentes recebem +1 de escudo em CA.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_street_fighting",
+      "nome": "Luta de Rua",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Luta Desarmada Aprimorada, BAB +2",
+      "descricao": "+1d4 de dano em ataques de oportunidade de ataque desarmado.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_superior_expertise",
+      "nome": "Perícia Superior em Combate",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "INT 13, Perícia em Combate, BAB +6",
+      "descricao": "Troque ataques por CA em incrementos maiores.",
+      "efeitos": []
+    },
+    {
+      "id": "cw_tactical_optimizer",
+      "nome": "Otimizador Tático",
+      "livro": "Complete Warrior",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "INT 13, Perícia em Combate, BAB +6",
+      "descricao": "Ganha um bônus adicional de +1 ao usar ataques com Perícia em Combate.",
+      "efeitos": []
+    },
+    {
+      "id": "ca_arcane_disciple",
+      "nome": "Discípulo Arcano",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "SAB 13, habilidade de conjurar magias divinas",
+      "descricao": "Adiciona as magias de domínio de uma divindade à sua lista de magias e ganha um slot adicional por nível.",
+      "efeitos": [
+        {
+          "tipo": "bonus_slot",
+          "alvo": "1",
+          "valor": 1
+        },
+        {
+          "tipo": "bonus_slot",
+          "alvo": "2",
+          "valor": 1
+        },
+        {
+          "tipo": "bonus_slot",
+          "alvo": "3",
+          "valor": 1
+        },
+        {
+          "tipo": "bonus_slot",
+          "alvo": "4",
+          "valor": 1
+        },
+        {
+          "tipo": "bonus_slot",
+          "alvo": "5",
+          "valor": 1
+        },
+        {
+          "tipo": "bonus_slot",
+          "alvo": "6",
+          "valor": 1
+        },
+        {
+          "tipo": "bonus_slot",
+          "alvo": "7",
+          "valor": 1
+        },
+        {
+          "tipo": "bonus_slot",
+          "alvo": "8",
+          "valor": 1
+        },
+        {
+          "tipo": "bonus_slot",
+          "alvo": "9",
+          "valor": 1
+        }
+      ]
+    },
+    {
+      "id": "ca_chain_spell",
+      "nome": "Magia em Corrente",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "A magia salta para alvos adicionais.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa um slot 3 níveis acima; afeta até 1d6 alvos adicionais com metade do efeito"
+        }
+      ]
+    },
+    {
+      "id": "ca_energy_admixture",
+      "nome": "Mistura de Energia",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "Substituição de Energia",
+      "descricao": "Adicione um segundo tipo de energia à magia.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa um slot 4 níveis acima; adiciona outro tipo de energia ao efeito"
+        }
+      ]
+    },
+    {
+      "id": "ca_energy_substitution",
+      "nome": "Substituição de Energia",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "Qualquer outro talento metamágico",
+      "descricao": "Substitua o tipo de energia da magia por outro.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Sem custo adicional de slot; muda o tipo de energia da magia"
+        }
+      ]
+    },
+    {
+      "id": "ca_extra_slot",
+      "nome": "Slot Extra de Magia",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Habilidade de conjurar magias",
+      "descricao": "Você recebe um slot extra de magia de até o 6º nível.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+1 slot de um nível de magia à sua escolha (até nível 6)"
+        }
+      ]
+    },
+    {
+      "id": "ca_fiery_burst",
+      "nome": "Explosão de Fogo",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Habilidade de conjurar magias de fogo",
+      "descricao": "Pode usar uma magia de fogo extra por dia que causa 1d6 por nível do conjurador.",
+      "efeitos": []
+    },
+    {
+      "id": "ca_innate_spell",
+      "nome": "Magia Inata",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Qualquer talento metamágico",
+      "descricao": "Converta slots de magia em usos de uma magia específica como habilidade de uso à vontade.",
+      "efeitos": []
+    },
+    {
+      "id": "ca_know_imbalance",
+      "nome": "Conhecer o Desequilíbrio",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Conjurar em Combate",
+      "descricao": "Quando lança uma magia, +1 de CA e resistência mágica temporários.",
+      "efeitos": []
+    },
+    {
+      "id": "ca_metamagic_school",
+      "nome": "Escola Metamágica",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "Qualquer talento metamágico",
+      "descricao": "Aplique um efeito metamágico à sua escola especializada sem aumentar o slot.",
+      "efeitos": []
+    },
+    {
+      "id": "ca_obtain_familiar",
+      "nome": "Obter Familiar",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Nível 3",
+      "descricao": "Obtenha um familiar como se fosse um mago de nível equivalente ao seu.",
+      "efeitos": []
+    },
+    {
+      "id": "ca_practiced_spellcaster",
+      "nome": "Conjurador Experiente",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Concentração 4 postos",
+      "descricao": "Seu nível efetivo de conjurador aumenta em até 4 para determinação de efeitos de magia (não para slots).",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+4 no nível efetivo de conjurador para efeitos de magias (não afeta slots)"
+        }
+      ]
+    },
+    {
+      "id": "ca_repeat_spell",
+      "nome": "Magia Repetida",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "A magia se repete na sua próxima rodada automaticamente.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa um slot 2 níveis acima; a magia se repete na rodada seguinte"
+        }
+      ]
+    },
+    {
+      "id": "ca_sculpt_spell",
+      "nome": "Esculpir Magia",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Modifique a área de efeito da magia.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa um slot 1 nível acima; muda a forma da área de efeito"
+        }
+      ]
+    },
+    {
+      "id": "ca_sudden_empower",
+      "nome": "Ampliar Repentino",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Uma vez por dia, amplie uma magia sem aumentar o slot.",
+      "efeitos": []
+    },
+    {
+      "id": "ca_sudden_extend",
+      "nome": "Estender Repentino",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Uma vez por dia, estenda uma magia sem aumentar o slot.",
+      "efeitos": []
+    },
+    {
+      "id": "ca_sudden_maximize",
+      "nome": "Maximizar Repentino",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Uma vez por dia, maximize uma magia sem aumentar o slot.",
+      "efeitos": []
+    },
+    {
+      "id": "ca_sudden_silent",
+      "nome": "Silenciar Repentino",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Uma vez por dia, silencie uma magia sem aumentar o slot.",
+      "efeitos": []
+    },
+    {
+      "id": "ca_sudden_still",
+      "nome": "Imobilizar Repentino",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Uma vez por dia, imobilize uma magia sem aumentar o slot.",
+      "efeitos": []
+    },
+    {
+      "id": "ca_twin_spell",
+      "nome": "Magia Gêmea",
+      "livro": "Complete Arcane",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Conjure a magia duas vezes com um único slot.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa um slot 4 níveis acima; a magia é conjurada duas vezes simultaneamente"
+        }
+      ]
+    },
+    {
+      "id": "cd_domain_devotion",
+      "nome": "Devoção ao Domínio",
+      "livro": "Complete Divine",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Conjurar magias divinas com domínio",
+      "descricao": "Melhora os poderes de seus domínios.",
+      "efeitos": []
+    },
+    {
+      "id": "cd_extra_domain_spell",
+      "nome": "Magia de Domínio Extra",
+      "livro": "Complete Divine",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Habilidade de conjurar magias de domínio",
+      "descricao": "+1 slot de magia de domínio de qualquer nível acessível.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+1 slot de magia de domínio de um nível à sua escolha"
+        }
+      ]
+    },
+    {
+      "id": "cd_extra_turning_cd",
+      "nome": "Expulsão Extra Aprimorada",
+      "livro": "Complete Divine",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Habilidade de Expulsar ou Repreender Mortos-Vivos, Expulsar Extra",
+      "descricao": "Mais 4 usos de Expulsar além do talento base.",
+      "efeitos": [
+        {
+          "tipo": "bonus_turning",
+          "alvo": "",
+          "valor": 4
+        }
+      ]
+    },
+    {
+      "id": "cd_holy_radiance",
+      "nome": "Radiância Sagrada",
+      "livro": "Complete Divine",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Expulsar Mortos-Vivos, Clérigo ou Paladino nível 5",
+      "descricao": "Gaste dois usos de Expulsar para emitir uma aura de luz sagrada.",
+      "efeitos": []
+    },
+    {
+      "id": "cd_improved_turning",
+      "nome": "Expulsar Aprimorado",
+      "livro": "Complete Divine",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Habilidade de Expulsar ou Repreender Mortos-Vivos",
+      "descricao": "+2 em testes de Expulsar Mortos-Vivos.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+2 em testes de nível de clérigo para determinar o resultado de Expulsar"
+        }
+      ]
+    },
+    {
+      "id": "cd_sacred_healing",
+      "nome": "Cura Sagrada",
+      "livro": "Complete Divine",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "SAB 13, Expulsar Mortos-Vivos",
+      "descricao": "Gaste um uso de Expulsar para curar 1d6 PV por nível de clérigo nos aliados adjacentes.",
+      "efeitos": []
+    },
+    {
+      "id": "cd_sanctify_ki_strike",
+      "nome": "Santificar Golpe Ki",
+      "livro": "Complete Divine",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Monge nível 10",
+      "descricao": "Seu golpe ki é considerado bom-alinhado para superar redução de dano.",
+      "efeitos": []
+    },
+    {
+      "id": "cd_spontaneous_healer",
+      "nome": "Curador Espontâneo",
+      "livro": "Complete Divine",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Clérigo com acesso a magias de cura",
+      "descricao": "Troque qualquer slot preparado por uma magia de cura espontaneamente.",
+      "efeitos": []
+    },
+    {
+      "id": "cd_true_believer",
+      "nome": "Crente Verdadeiro",
+      "livro": "Complete Divine",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Adorar uma divindade",
+      "descricao": "Uma vez por dia, role novamente um d20 quando estiver perto de um símbolo sagrado da sua divindade.",
+      "efeitos": []
+    },
+    {
+      "id": "cadv_acrobatic_strike",
+      "nome": "Golpe Acrobático",
+      "livro": "Complete Adventurer",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Acrobacia 12 postos, Ataque em Movimento",
+      "descricao": "+4 em ataques após usar Acrobacia para mover pelo espaço de um oponente.",
+      "efeitos": []
+    },
+    {
+      "id": "cadv_brachiation",
+      "nome": "Locomoção por Braços",
+      "livro": "Complete Adventurer",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "DES 15, Escalar 8 postos",
+      "descricao": "Mova-se pela copa das árvores à velocidade normal.",
+      "efeitos": []
+    },
+    {
+      "id": "cadv_city_strider",
+      "nome": "Andador Urbano",
+      "livro": "Complete Adventurer",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "DES 13, Mobilidade",
+      "descricao": "Mova-se sem penalidade por terreno difícil urbano.",
+      "efeitos": []
+    },
+    {
+      "id": "cadv_combat_intuition",
+      "nome": "Intuição de Combate",
+      "livro": "Complete Adventurer",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Sentido de Rua 5 postos",
+      "descricao": "+1 em iniciativa e +1 em ataques por conhecer o terreno (área urbana familiar).",
+      "efeitos": []
+    },
+    {
+      "id": "cadv_cunning_dodge",
+      "nome": "Esquiva Astuta",
+      "livro": "Complete Adventurer",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "DES 13, INT 13, Esquiva",
+      "descricao": "Use INT em vez de DES para bônus de Esquiva.",
+      "efeitos": []
+    },
+    {
+      "id": "cadv_daring_outlaw",
+      "nome": "Fora-da-Lei Audacioso",
+      "livro": "Complete Adventurer",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Ladino nível 3, Swashbuckler nível 3",
+      "descricao": "Os níveis de Ladino e Swashbuckler se combinam para determinar ataque furtivo.",
+      "efeitos": []
+    },
+    {
+      "id": "cadv_escape_artist_feint",
+      "nome": "Fingimento por Escapismo",
+      "livro": "Complete Adventurer",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Escapar da Prisão 8 postos",
+      "descricao": "Use Escapar da Prisão para fintar em combate.",
+      "efeitos": []
+    },
+    {
+      "id": "cadv_extra_wild_shape",
+      "nome": "Forma Selvagem Extra",
+      "livro": "Complete Adventurer",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Forma Selvagem",
+      "descricao": "Você pode usar Forma Selvagem 2 vezes adicionais por dia.",
+      "efeitos": [
+        {
+          "tipo": "bonus_resource",
+          "alvo": "Forma Selvagem",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "cadv_extraordinary_concentration",
+      "nome": "Concentração Extraordinária",
+      "livro": "Complete Adventurer",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Concentração 15 postos, Conjurar em Combate",
+      "descricao": "Mantenha magias de concentração como ação livre.",
+      "efeitos": []
+    },
+    {
+      "id": "cadv_fast_healing",
+      "nome": "Cura Acelerada",
+      "livro": "Complete Adventurer",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "CON 13, Resistência",
+      "descricao": "Uma vez por dia, cure 3 PV como ação padrão.",
+      "efeitos": []
+    },
+    {
+      "id": "cadv_improved_skirmish",
+      "nome": "Escaramuça Melhorada",
+      "livro": "Complete Adventurer",
+      "categoria": [
+        "Habilidade de Classe"
+      ],
+      "prerequisitos": "Scout nível 11",
+      "descricao": "Melhora os bônus de Escaramuça do Scout.",
+      "efeitos": []
+    },
+    {
+      "id": "cadv_quick_change",
+      "nome": "Troca Rápida",
+      "livro": "Complete Adventurer",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Disfarce 9 postos",
+      "descricao": "Aplique ou remova um disfarce em uma ação de rodada completa.",
+      "efeitos": []
+    },
+    {
+      "id": "cadv_shadowstriking",
+      "nome": "Ataque nas Sombras",
+      "livro": "Complete Adventurer",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Ladino nível 3, Esconder 6 postos",
+      "descricao": "Faça um ataque furtivo contra um alvo com quem você não tenha linha de visão clara.",
+      "efeitos": []
+    },
+    {
+      "id": "cadv_swift_ambusher",
+      "nome": "Emboscador Veloz",
+      "livro": "Complete Adventurer",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Scout nível 4, Ladino nível 4",
+      "descricao": "Combine escaramuça e ataque furtivo em certas condições.",
+      "efeitos": []
+    },
+    {
+      "id": "cadv_trap_finding",
+      "nome": "Encontrar Armadilhas Avançado",
+      "livro": "Complete Adventurer",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Procurar 4 postos, Desviar Dispositivos 4 postos",
+      "descricao": "+2 em Procurar e Desviar Dispositivos armadilhas.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Procurar (armadilhas)",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Desviar Dispositivos (armadilhas)",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "phb2_brutal_strike",
+      "nome": "Golpe Brutal",
+      "livro": "PHB II",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "FOR 13, Ataque Poderoso, BAB +6",
+      "descricao": "Causa dano extra e pode enjoar o alvo ao usar Ataque Poderoso.",
+      "efeitos": []
+    },
+    {
+      "id": "phb2_cover_magic",
+      "nome": "Magia Encoberta",
+      "livro": "PHB II",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Blefar 8 postos, Conjurar em Combate",
+      "descricao": "Disfarce a conjuração como ação mundana com teste de Blefar.",
+      "efeitos": []
+    },
+    {
+      "id": "phb2_defensive_sweep",
+      "nome": "Varredura Defensiva",
+      "livro": "PHB II",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "FOR 13, Reflexos em Combate, BAB +6",
+      "descricao": "Ataques de oportunidade extras contra oponentes que entram na sua área.",
+      "efeitos": []
+    },
+    {
+      "id": "phb2_elusive_target",
+      "nome": "Alvo Elusivo",
+      "livro": "PHB II",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 15, Esquiva, Mobilidade, BAB +6",
+      "descricao": "Dificulta que oponentes se beneficiem de flanquear você.",
+      "efeitos": []
+    },
+    {
+      "id": "phb2_extra_music",
+      "nome": "Música Extra",
+      "livro": "PHB II",
+      "categoria": [
+        "Habilidade de Classe"
+      ],
+      "prerequisitos": "Música de Bardo",
+      "descricao": "Você pode usar Música de Bardo 4 vezes adicionais por dia.",
+      "efeitos": [
+        {
+          "tipo": "bonus_resource",
+          "alvo": "Inspiração Bárdica",
+          "valor": 4
+        }
+      ]
+    },
+    {
+      "id": "phb2_fade_into_violence",
+      "nome": "Desvanecer na Violência",
+      "livro": "PHB II",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Esconder 10 postos",
+      "descricao": "Após fazer um ataque, tente se esconder como ação livre.",
+      "efeitos": []
+    },
+    {
+      "id": "phb2_lunging_strike",
+      "nome": "Ataque Lunático",
+      "livro": "PHB II",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "BAB +4",
+      "descricao": "Aumente seu alcance em 1,5m para um ataque ao custo de -2 CA.",
+      "efeitos": []
+    },
+    {
+      "id": "phb2_oversized_twf",
+      "nome": "Luta com Armas Grandes",
+      "livro": "PHB II",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 13, Luta com Duas Armas",
+      "descricao": "Use armas de uma mão na mão secundária sem penalidade adicional.",
+      "efeitos": []
+    },
+    {
+      "id": "phb2_tactical_advantage",
+      "nome": "Vantagem Tática",
+      "livro": "PHB II",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "INT 13, Perícia em Combate, BAB +4",
+      "descricao": "+2 em ataque contra oponentes flanqueados.",
+      "efeitos": []
+    },
+    {
+      "id": "tob_adaptive_style",
+      "nome": "Estilo Adaptável",
+      "livro": "Tome of Battle",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "1 manobra conhecida",
+      "descricao": "Recupere todas as manobras gastas como ação padrão.",
+      "efeitos": []
+    },
+    {
+      "id": "tob_blade_meditation",
+      "nome": "Meditação da Lâmina",
+      "livro": "Tome of Battle",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "1 manobra de uma das 9 disciplinas",
+      "descricao": "Ganha bônus em uma disciplina de manobras ao meditar.",
+      "efeitos": []
+    },
+    {
+      "id": "tob_combat_vigor",
+      "nome": "Vigor em Combate",
+      "livro": "Tome of Battle",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "1 manobra de postura",
+      "descricao": "Recupere PV ao usar uma postura de combate.",
+      "efeitos": []
+    },
+    {
+      "id": "tob_crusader_devotion",
+      "nome": "Devoção do Cruzado",
+      "livro": "Tome of Battle",
+      "categoria": [
+        "Habilidade de Classe"
+      ],
+      "prerequisitos": "Crusader nível 3",
+      "descricao": "+2 em testes de Vontade e bônus em manobras Devoted Spirit.",
+      "efeitos": [
+        {
+          "tipo": "bonus_save",
+          "alvo": "will",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "tob_martial_study",
+      "nome": "Estudo Marcial",
+      "livro": "Tome of Battle",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Aprenda uma manobra de uma das 9 disciplinas.",
+      "efeitos": []
+    },
+    {
+      "id": "tob_martial_stance",
+      "nome": "Postura Marcial",
+      "livro": "Tome of Battle",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "1 manobra conhecida",
+      "descricao": "Aprenda uma postura de combate.",
+      "efeitos": []
+    },
+    {
+      "id": "mh_improved_rapid_shot",
+      "nome": "Tiro Rápido Aprimorado",
+      "livro": "Miniatures Handbook",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "DES 13, Tiro em Ponto Branco, Tiro Rápido, BAB +6",
+      "descricao": "Remova a penalidade de -2 do Tiro Rápido.",
+      "efeitos": []
+    },
+    {
+      "id": "mh_leader_of_men",
+      "nome": "Líder de Homens",
+      "livro": "Miniatures Handbook",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Carisma 13",
+      "descricao": "+2 em Diplomacia e um bônus para aliados em combate.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Diplomacia",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "ds_cunning_knowledge",
+      "nome": "Conhecimento Perspicaz",
+      "livro": "Dungeonscape",
+      "categoria": [
+        "Habilidade de Classe"
+      ],
+      "prerequisitos": "Factotum nível 3",
+      "descricao": "Gaste 2 pontos de inspiração para adicionar INT a qualquer jogada.",
+      "efeitos": []
+    },
+    {
+      "id": "ds_font_of_inspiration",
+      "nome": "Fonte de Inspiração",
+      "livro": "Dungeonscape",
+      "categoria": [
+        "Habilidade de Classe"
+      ],
+      "prerequisitos": "Factotum nível 1, Inspiração",
+      "descricao": "+2 pontos de inspiração por dia por vez que você tiver este talento.",
+      "efeitos": [
+        {
+          "tipo": "bonus_resource",
+          "alvo": "Inspiração",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "rod_dragonfire_adept",
+      "nome": "Adepto do Fogo Dracônico",
+      "livro": "Races of the Dragon",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Herança Dracônica",
+      "descricao": "Você pode usar o sopro dracônico mais vezes por dia.",
+      "efeitos": [
+        {
+          "tipo": "bonus_resource",
+          "alvo": "Sopro do Dragão",
+          "valor": 1
+        }
+      ]
+    },
+    {
+      "id": "rod_draconic_heritage",
+      "nome": "Herança Dracônica",
+      "livro": "Races of the Dragon",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Feiticeiro nível 1 ou descendência de dragão",
+      "descricao": "Você tem sangue dracônico e acesso a poderes dracônicos.",
+      "efeitos": []
+    },
+    {
+      "id": "rod_draconic_power",
+      "nome": "Poder Dracônico",
+      "livro": "Races of the Dragon",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Herança Dracônica",
+      "descricao": "+2 em ataque e dano quando usa habilidades dracônicas.",
+      "efeitos": []
+    },
+    {
+      "id": "ecb_action_surge",
+      "nome": "Surto de Ação",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Gaste um ponto de ação para obter uma ação padrão adicional.",
+      "efeitos": []
+    },
+    {
+      "id": "ecb_dragonmark",
+      "nome": "Marca do Dragão",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Membro de uma das casas dracônicas",
+      "descricao": "Você possui uma Marca do Dragão com poderes mágicos.",
+      "efeitos": []
+    },
+    {
+      "id": "ecb_least_dragonmark",
+      "nome": "Marca do Dragão Menor",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Raça elegível para a marca",
+      "descricao": "Você manifesta a menor versão de uma Marca do Dragão, ganhando uma habilidade mágica de uso à vontade.",
+      "efeitos": []
+    },
+    {
+      "id": "ecb_lesser_dragonmark",
+      "nome": "Marca do Dragão Intermediária",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Marca do Dragão Menor, nível 6",
+      "descricao": "Você aprimora sua Marca do Dragão, ganhando poderes adicionais.",
+      "efeitos": []
+    },
+    {
+      "id": "ecb_greater_dragonmark",
+      "nome": "Marca do Dragão Maior",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Marca do Dragão Intermediária, nível 12",
+      "descricao": "Você manifesta a forma mais poderosa de sua Marca do Dragão.",
+      "efeitos": []
+    },
+    {
+      "id": "ecb_heroic_spirit",
+      "nome": "Espírito Heroico",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Você possui 3 pontos de ação adicionais por nível.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+3 pontos de ação por nível de personagem"
+        }
+      ]
+    },
+    {
+      "id": "ecb_action_boost",
+      "nome": "Impulso de Ação",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "",
+      "descricao": "Ao gastar um ponto de ação em um d20, role 2d6 e use o melhor resultado.",
+      "efeitos": []
+    },
+    {
+      "id": "ecb_urban_tracking",
+      "nome": "Rastrear em Cidade",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Reunir Informações 4 postos",
+      "descricao": "Use Reunir Informações para rastrear personagens em ambientes urbanos.",
+      "efeitos": []
+    },
+    {
+      "id": "ecb_mithral_body",
+      "nome": "Corpo de Mithral",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Warforged",
+      "descricao": "Seu corpo é reforçado com mithral. Trate sua armadura natural como armadura leve de mithral (+3 CA).",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+3 CA; tratado como armadura leve; reduz penalidade de armadura para 0"
+        }
+      ]
+    },
+    {
+      "id": "ecb_adamantine_body",
+      "nome": "Corpo de Adamantino",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Warforged",
+      "descricao": "Seu corpo é reforçado com adamantino. +8 CA mas restringe conjuração e mobilidade como armadura pesada.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+8 CA; redução de dano 2/-; tratado como armadura pesada"
+        }
+      ]
+    },
+    {
+      "id": "ecb_warforged_resolve",
+      "nome": "Resolução Warforged",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Warforged",
+      "descricao": "+2 em testes de Fortitude e Vontade contra panico e medo.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+2 Fort e Vontade vs. medo e efeitos que causam estabilização"
+        }
+      ]
+    },
+    {
+      "id": "ecb_beasthide_elite",
+      "nome": "Elite da Pele Fera",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Shifter Beasthide",
+      "descricao": "Quando em forma shifter de Beasthide, receba +2 PV adicionais por nível.",
+      "efeitos": []
+    },
+    {
+      "id": "ecb_cliffwalk_elite",
+      "nome": "Elite do Caminhante de Penhasco",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Shifter Cliffwalk",
+      "descricao": "Quando em forma shifter, sua velocidade de escalar aumenta para igual à de deslocamento.",
+      "efeitos": []
+    },
+    {
+      "id": "ecb_wildhunt_elite",
+      "nome": "Elite da Caçada Selvagem",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Shifter Wildhunt",
+      "descricao": "Quando em forma shifter, você pode farejar como um animal e não pode ser surpreendido.",
+      "efeitos": []
+    },
+    {
+      "id": "ecb_razorclaw_elite",
+      "nome": "Elite da Garra Afiada",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Shifter Razorclaw",
+      "descricao": "Quando em forma shifter, suas garras causam dano adicional e têm margem de crítico 19-20.",
+      "efeitos": []
+    },
+    {
+      "id": "ecb_shifter_ferocity",
+      "nome": "Ferocidade Shifter",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Qualquer talento de elite shifter",
+      "descricao": "Quando em forma shifter com menos de metade dos PV, ganha +2 em ataque e dano.",
+      "efeitos": []
+    },
+    {
+      "id": "ecb_racial_emulation",
+      "nome": "Emulação Racial",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Changelings",
+      "descricao": "Use sua habilidade de transformação para imitar traços raciais de outras raças.",
+      "efeitos": []
+    },
+    {
+      "id": "ecb_gatekeeper_initiate",
+      "nome": "Iniciado dos Guardiões",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Druida ou Ranger, Natureza 4 postos",
+      "descricao": "Acesse as magias da tradição dos Guardiões e ganhe bônus contra aberrações.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+2 em ataques e dano contra aberrações; acesso a magias da tradição dos Guardiões"
+        }
+      ]
+    },
+    {
+      "id": "ecb_favored_in_house",
+      "nome": "Favorecido pela Casa",
+      "livro": "Eberron Campaign Setting",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Membro de uma casa dracônica",
+      "descricao": "Você é bem visto por sua casa dracônica e recebe benefícios especiais de reputação e recursos.",
+      "efeitos": []
+    },
+    {
+      "id": "dl_solamnic_knight",
+      "nome": "Cavaleiro Solamnico",
+      "livro": "Dragonlance Campaign Setting",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Alinhamento Legal Bom, FOR 13, DES 11, CON 13",
+      "descricao": "Você é membro de uma das ordens dos Cavaleiros de Solamnia e segue o Código e a Medida.",
+      "efeitos": [
+        {
+          "tipo": "bonus_save",
+          "alvo": "will",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "dl_knight_of_the_crown",
+      "nome": "Cavaleiro da Coroa",
+      "livro": "Dragonlance Campaign Setting",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "Cavaleiro Solamnico, BAB +3",
+      "descricao": "+2 em jogadas de ataque e dano quando protegendo um aliado adjacente.",
+      "efeitos": []
+    },
+    {
+      "id": "dl_knight_of_the_sword",
+      "nome": "Cavaleiro da Espada",
+      "livro": "Dragonlance Campaign Setting",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "Cavaleiro da Coroa, SAB 13",
+      "descricao": "Seus ataques são considerados sagrados contra criaturas do mal. +1d6 dano sagrado.",
+      "efeitos": []
+    },
+    {
+      "id": "dl_knight_of_the_rose",
+      "nome": "Cavaleiro da Rosa",
+      "livro": "Dragonlance Campaign Setting",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "Cavaleiro da Espada, CAR 13, BAB +6",
+      "descricao": "Aliados em 9m ganham +2 em jogadas de ataque e testes de Vontade quando você estiver visível.",
+      "efeitos": []
+    },
+    {
+      "id": "dl_dark_knight",
+      "nome": "Cavaleiro das Trevas",
+      "livro": "Dragonlance Campaign Setting",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "Alinhamento Legal Mau, FOR 13, INT 13",
+      "descricao": "Você é membro dos Cavaleiros de Neraka. +2 em Intimidar e nos saves de Vontade.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Intimidar",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_save",
+          "alvo": "will",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "dl_white_robe",
+      "nome": "Robe Branco",
+      "livro": "Legends of the Twins",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Mago de Alta Feitiçaria (Ordem Branca)",
+      "descricao": "Você é dedicado à ordem branca. +1 na CD de magias de ilusão e encantamento benevolentes.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+1 CD em magias com descritor boa; bônus de +2 vs. magias de magia das trevas"
+        }
+      ]
+    },
+    {
+      "id": "dl_red_robe",
+      "nome": "Robe Vermelho",
+      "livro": "Legends of the Twins",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Mago de Alta Feitiçaria (Ordem Vermelha)",
+      "descricao": "Você é dedicado à ordem vermelha. +1 no nível de conjurador efetivo para magias de transmutação.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+1 nível efetivo de conjurador para magias de Transmutação"
+        }
+      ]
+    },
+    {
+      "id": "dl_black_robe",
+      "nome": "Robe Negro",
+      "livro": "Legends of the Twins",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Mago de Alta Feitiçaria (Ordem Negra)",
+      "descricao": "Você é dedicado à ordem negra. +1 na CD de magias de necromancia e conjuração do mal.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+1 CD em magias com descritor mal; +2 em testes de penetração de RM"
+        }
+      ]
+    },
+    {
+      "id": "dl_wild_sorcery",
+      "nome": "Magia Selvagem",
+      "livro": "Legends of the Twins",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Habilidade de conjurar magias arcanas sem grimório",
+      "descricao": "Suas magias podem ter efeitos imprevisíveis mas mais poderosos. Role 1d20 ao conjurar: em 1, efeito caótico; em 20, magia maximizada.",
+      "efeitos": []
+    },
+    {
+      "id": "dl_kender_fearlessness",
+      "nome": "Destemor Kender",
+      "livro": "Dragonlance Campaign Setting",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Kender",
+      "descricao": "Kenders são imunes a efeitos de medo mundano. +4 em saves contra medo mágico.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Imune a medo não mágico; +4 em saves contra medo mágico"
+        }
+      ]
+    },
+    {
+      "id": "dl_taunt",
+      "nome": "Provocar",
+      "livro": "Dragonlance Campaign Setting",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "CAR 13, Blefar 4 postos",
+      "descricao": "Provoque um oponente com uma ação padrão. O alvo deve atacar você na próxima rodada (Vontade CD 10 + metade nível + mod Car nega).",
+      "efeitos": []
+    },
+    {
+      "id": "dl_dragon_rider",
+      "nome": "Cavaleiro de Dragão",
+      "livro": "Dragonlance Campaign Setting",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Combate Montado, Montar 8 postos, Aprovação do dragão",
+      "descricao": "Você forma um vínculo especial com um dragão montaria, melhorando seu combate montado.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+2 em ataque e CA quando montado em seu dragão vinculado"
+        }
+      ]
+    },
+    {
+      "id": "dl_battle_cry",
+      "nome": "Grito de Batalha",
+      "livro": "Legends of the Twins",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "CAR 13",
+      "descricao": "Uma vez por batalha, inspire aliados em 9m com um grito. Aliados ganham +1 em ataque por 3 rodadas.",
+      "efeitos": []
+    },
+    {
+      "id": "dl_tactician",
+      "nome": "Estrategista",
+      "livro": "Legends of the Twins",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "INT 13, Liderança",
+      "descricao": "Seus aliados que você comanda ganham +2 em Iniciativa no primeiro turno de cada combate.",
+      "efeitos": []
+    },
+    {
+      "id": "rotw_elven_accuracy",
+      "nome": "Precisão Élfica",
+      "livro": "Races of the Wild",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Elfo ou Meio-Elfo",
+      "descricao": "Você pode rerrolar uma jogada de ataque com arco ou espada élfica uma vez por rodada.",
+      "efeitos": []
+    },
+    {
+      "id": "rotw_elven_spell_lore",
+      "nome": "Conhecimento Mágico Élfico",
+      "livro": "Races of the Wild",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Elfo, INT 13",
+      "descricao": "+2 em testes de Identificar e nos saves contra magias de encantamento.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Identificar",
+          "valor": 2
+        },
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+2 saves contra encantamentos"
+        }
+      ]
+    },
+    {
+      "id": "rotw_wild_elf_ferocity",
+      "nome": "Ferocidade do Elfo Selvagem",
+      "livro": "Races of the Wild",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Elfo Selvagem",
+      "descricao": "Você luta com ferocidade primitiva. +2 em ataque quando com menos de metade dos PV.",
+      "efeitos": []
+    },
+    {
+      "id": "rotw_halfling_thrown_weapons",
+      "nome": "Especialista em Arremesso Halfling",
+      "livro": "Races of the Wild",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Halfling",
+      "descricao": "+1 em ataque e dano com armas de arremesso. Incremento de alcance +3m.",
+      "efeitos": [
+        {
+          "tipo": "bonus_attack",
+          "alvo": "thrown",
+          "valor": 1
+        },
+        {
+          "tipo": "bonus_damage",
+          "alvo": "thrown",
+          "valor": 1
+        }
+      ]
+    },
+    {
+      "id": "rotw_raptorian_dive",
+      "nome": "Mergulho Raptoriano",
+      "livro": "Races of the Wild",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Raptorian, Voo",
+      "descricao": "Ao mergulhar mais de 9m para atacar, +2 ataque e dano dobrado.",
+      "efeitos": []
+    },
+    {
+      "id": "rotw_swift_hunter",
+      "nome": "Caçador Veloz",
+      "livro": "Races of the Wild",
+      "categoria": [
+        "Habilidade de Classe"
+      ],
+      "prerequisitos": "Ranger nível 1, Scout nível 1",
+      "descricao": "Combine os níveis de Ranger e Scout para favored enemy e skirmish.",
+      "efeitos": []
+    },
+    {
+      "id": "rotw_woodland_archer",
+      "nome": "Arqueiro Florestal",
+      "livro": "Races of the Wild",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "DES 13, Tiro em Ponto Branco, Tiro Preciso",
+      "descricao": "Ignore penalidade de cobertura por árvores e vegetação ao atirar.",
+      "efeitos": []
+    },
+    {
+      "id": "rotw_improved_skirmish",
+      "nome": "Escaramuça Aprimorada",
+      "livro": "Races of the Wild",
+      "categoria": [
+        "Habilidade de Classe"
+      ],
+      "prerequisitos": "Scout nível 1",
+      "descricao": "+1d6 dano e +1 CA adicionais à habilidade Escaramuça do Scout.",
+      "efeitos": []
+    },
+    {
+      "id": "ros_dwarven_toughness",
+      "nome": "Resistência Anã",
+      "livro": "Races of Stone",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Anão",
+      "descricao": "+2 em saves de Fortitude contra veneno e magia. Adicional ao bônus racial.",
+      "efeitos": [
+        {
+          "tipo": "bonus_save",
+          "alvo": "fortitude",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "ros_gnome_illusionist",
+      "nome": "Ilusionista Gnomo",
+      "livro": "Races of Stone",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Gnomo, habilidade de conjurar magias de ilusão",
+      "descricao": "Suas magias de ilusão têm CD +1 e duração dobrada.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+1 na CD das ilusões; duração das ilusões dobrada"
+        }
+      ]
+    },
+    {
+      "id": "ros_goliath_natural_athlete",
+      "nome": "Atleta Natural Goliath",
+      "livro": "Races of Stone",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Goliath",
+      "descricao": "+4 em todos os testes de Escalar, Saltar e Nadar.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Escalar",
+          "valor": 4
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Saltar",
+          "valor": 4
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Nadar",
+          "valor": 4
+        }
+      ]
+    },
+    {
+      "id": "ros_goliath_powerful_build",
+      "nome": "Constituição Poderosa",
+      "livro": "Races of Stone",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Goliath",
+      "descricao": "Trate-se como uma categoria de tamanho maior para agarrar, empurrar e carregar peso.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Tratado como Grande para agarrar, investida e capacidade de carga"
+        }
+      ]
+    },
+    {
+      "id": "ros_stone_power",
+      "nome": "Poder da Pedra",
+      "livro": "Races of Stone",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "FOR 13, CON 13",
+      "descricao": "Troque bônus de ataque por redução de dano 1/- por ponto trocado (máx 5).",
+      "efeitos": []
+    },
+    {
+      "id": "ros_dwarven_armor_training",
+      "nome": "Treinamento em Armadura Anã",
+      "livro": "Races of Stone",
+      "categoria": [
+        "Raça",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Anão, Prof. Armadura Pesada",
+      "descricao": "Reduza a penalidade de armadura em 1 e aumente a chance de conjuração em 5% ao usar armadura anã.",
+      "efeitos": []
+    },
+    {
+      "id": "lm_corpse_crafter",
+      "nome": "Criador de Cadáveres",
+      "livro": "Libris Mortis",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Habilidade de criar mortos-vivos",
+      "descricao": "Mortos-vivos que você cria ganham +4 FOR e +2 PV por DV.",
+      "efeitos": []
+    },
+    {
+      "id": "lm_fell_animate",
+      "nome": "Animar Queda",
+      "livro": "Libris Mortis",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Criaturas mortas pelo efeito de uma magia com este talento se levantam como zumbis.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa 1 slot acima; mortos pela magia levantam como zumbis"
+        }
+      ]
+    },
+    {
+      "id": "lm_fell_drain",
+      "nome": "Drenar Queda",
+      "livro": "Libris Mortis",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Criaturas vivas atingidas pela magia ganham um nível negativo.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa 2 slots acima; alvos vivos ganham 1 nível negativo"
+        }
+      ]
+    },
+    {
+      "id": "lm_fell_frighten",
+      "nome": "Assustar Queda",
+      "livro": "Libris Mortis",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Criaturas atingidas pela magia ficam abaladas por 1 rodada.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa 1 slot acima; alvos ficam abalados por 1 rodada"
+        }
+      ]
+    },
+    {
+      "id": "lm_fell_weaken",
+      "nome": "Enfraquecer Queda",
+      "livro": "Libris Mortis",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Criaturas atingidas sofrem -2 em FOR por 1 minuto.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa 1 slot acima; -2 FOR por 1 minuto nos alvos"
+        }
+      ]
+    },
+    {
+      "id": "lm_undead_leadership",
+      "nome": "Liderança de Mortos-Vivos",
+      "livro": "Libris Mortis",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Liderança, Controle de Mortos-Vivos",
+      "descricao": "Você pode atrair mortos-vivos seguidores em vez de criaturas vivas.",
+      "efeitos": []
+    },
+    {
+      "id": "lm_stitched_flesh_familiar",
+      "nome": "Familiar de Carne Costurada",
+      "livro": "Libris Mortis",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Habilidade de criar mortos-vivos, Familiar Aprimorado",
+      "descricao": "Seu familiar é um morto-vivo costurado de partes de criaturas.",
+      "efeitos": []
+    },
+    {
+      "id": "lm_tomb_tainted_soul",
+      "nome": "Alma Corrompida pela Tumba",
+      "livro": "Libris Mortis",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Alinhamento mau ou neutro",
+      "descricao": "Você é curado por energia negativa e prejudicado por energia positiva como se fosse morto-vivo.",
+      "efeitos": []
+    },
+    {
+      "id": "lm_destruction_retribution",
+      "nome": "Retribuição Destrutiva",
+      "livro": "Libris Mortis",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Domínio da Destruição, Expulsar Mortos-Vivos",
+      "descricao": "Ao ser destruído, seu morto-vivo explode causando 1d6 por DV em área de 3m.",
+      "efeitos": []
+    },
+    {
+      "id": "hoh_fearsome_gaze",
+      "nome": "Olhar Aterrorizante",
+      "livro": "Heroes of Horror",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "CAR 15, Intimidar 8 postos",
+      "descricao": "Uma vez por dia, force todos que puderem te ver a fazerem teste de Vontade ou ficarem abalados por 1 rodada.",
+      "efeitos": []
+    },
+    {
+      "id": "hoh_willing_deformity",
+      "nome": "Deformidade Voluntária",
+      "livro": "Heroes of Horror",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Alinhamento mau",
+      "descricao": "Você se mutila voluntariamente para ganhar poderes. +2 em Intimidar, -2 em Diplomacia.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Intimidar",
+          "valor": 2
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Diplomacia",
+          "valor": -2
+        }
+      ]
+    },
+    {
+      "id": "hoh_dreadful_wrath",
+      "nome": "Ira Temível",
+      "livro": "Heroes of Horror",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "CAR 13, Deformidade Voluntária",
+      "descricao": "Ao entrar em fúria ou estado similar, todos em 3m devem salvar contra Vontade ou ficar abalados.",
+      "efeitos": []
+    },
+    {
+      "id": "hoh_touch_of_nerull",
+      "nome": "Toque de Nerull",
+      "livro": "Heroes of Horror",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Domínio da Morte, Clérigo nível 3",
+      "descricao": "Seus toques de morte causam 1d6 dano adicional e têm CD +2.",
+      "efeitos": []
+    },
+    {
+      "id": "hoh_tainted_scholar",
+      "nome": "Erudito Corrompido",
+      "livro": "Heroes of Horror",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "INT 15, Corrupção 1+",
+      "descricao": "Use seu nível de Corrupção como bônus em CD de magias. Cada ponto de corrupção = +1 CD.",
+      "efeitos": []
+    },
+    {
+      "id": "cc_devoted_tracker",
+      "nome": "Rastreador Devoto",
+      "livro": "Complete Champion",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Ranger ou Paladino nível 1, Rastrear",
+      "descricao": "Seu companheiro animal e montaria sagrada compartilham o mesmo slot de habilidade.",
+      "efeitos": []
+    },
+    {
+      "id": "cc_holy_subdual",
+      "nome": "Subjugação Sagrada",
+      "livro": "Complete Champion",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Paladino nível 1, FOR 13",
+      "descricao": "Seu Golpe Sagrado pode ser usado para causar dano não letal sem penalidade.",
+      "efeitos": []
+    },
+    {
+      "id": "cc_divine_ward",
+      "nome": "Proteção Divina",
+      "livro": "Complete Champion",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Clérigo nível 1, Expulsar Mortos-Vivos",
+      "descricao": "Gaste um uso de Expulsar para conceder +2 em CA e saves a um aliado adjacente por 1 rodada.",
+      "efeitos": []
+    },
+    {
+      "id": "cc_sacred_purification",
+      "nome": "Purificação Sagrada",
+      "livro": "Complete Champion",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "SAB 13, Expulsar Mortos-Vivos",
+      "descricao": "Gaste usos de Expulsar para remover efeitos negativos de aliados.",
+      "efeitos": []
+    },
+    {
+      "id": "cc_initiate_of_pelor",
+      "nome": "Iniciado de Pelor",
+      "livro": "Complete Champion",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Adorar Pelor, Clérigo nível 1",
+      "descricao": "Adicione magias de luz e cura à sua lista. +1 nível efetivo de conjurador para curas.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+1 nível efetivo para magias de cura; acesso a magias de luz de domínio"
+        }
+      ]
+    },
+    {
+      "id": "cc_initiate_of_heironeous",
+      "nome": "Iniciado de Hierônio",
+      "livro": "Complete Champion",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Adorar Hierônio, Clérigo nível 1",
+      "descricao": "Proficiência com armadura pesada sem penalidade de conjuração divina. +1 em CA sagrada.",
+      "efeitos": []
+    },
+    {
+      "id": "cc_divine_metamagic",
+      "nome": "Metamagia Divina",
+      "livro": "Complete Champion",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Habilidade de Expulsar, qualquer talento metamágico",
+      "descricao": "Gaste usos de Expulsar para aplicar um talento metamágico sem aumentar o slot da magia.",
+      "efeitos": []
+    },
+    {
+      "id": "cm_arcane_thesis",
+      "nome": "Tese Arcana",
+      "livro": "Complete Mage",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Habilidade de conjurar a magia escolhida",
+      "descricao": "Escolha uma magia. Seu nível efetivo de conjurador +2 para ela, e talentos metamágicos custam 1 nível a menos.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+2 nível efetivo para uma magia específica; metamágico custa -1 slot para essa magia"
+        }
+      ]
+    },
+    {
+      "id": "cm_spell_distortion",
+      "nome": "Distorção de Magia",
+      "livro": "Complete Mage",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "Qualquer outro talento metamágico",
+      "descricao": "Altere a forma do efeito de área da magia (cone, linha, burst) sem custo de slot adicional.",
+      "efeitos": []
+    },
+    {
+      "id": "cm_draconic_heritage",
+      "nome": "Herança Dracônica (Feiticeiro)",
+      "livro": "Complete Mage",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Feiticeiro nível 1",
+      "descricao": "Escolha um tipo de dragão. Ganhe resistência a energia correspondente 5 e +1 nas CDs de magias desse tipo.",
+      "efeitos": []
+    },
+    {
+      "id": "cm_arcane_mastery",
+      "nome": "Maestria Arcana",
+      "livro": "Complete Mage",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Habilidade de conjurar magias arcanas, nível 5",
+      "descricao": "Você pode sempre escolher o resultado de um dado de dano de suas magias.",
+      "efeitos": []
+    },
+    {
+      "id": "cm_residual_magic",
+      "nome": "Magia Residual",
+      "livro": "Complete Mage",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Qualquer talento metamágico",
+      "descricao": "Ao usar uma magia metamágica, a próxima magia do mesmo dia custa 1 slot a menos.",
+      "efeitos": []
+    },
+    {
+      "id": "cm_invisible_spell",
+      "nome": "Magia Invisível",
+      "livro": "Complete Mage",
+      "categoria": [
+        "Metamágico"
+      ],
+      "prerequisitos": "",
+      "descricao": "A magia não tem manifestações visíveis. Ocupa um slot 1 nível acima.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ocupa 1 slot acima; sem manifestações visíveis — difícil de identificar"
+        }
+      ]
+    },
+    {
+      "id": "cm_imbue_summoning",
+      "nome": "Imbuir Convocação",
+      "livro": "Complete Mage",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Convocar Melhorado",
+      "descricao": "Aplique o efeito de um pergaminho ou item de uso único à criatura convocada.",
+      "efeitos": []
+    },
+    {
+      "id": "cs_never_outnumbered",
+      "nome": "Nunca Superado",
+      "livro": "Complete Scoundrel",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Intimidar 8 postos",
+      "descricao": "Use Intimidar em todos os oponentes adjacentes simultaneamente como ação padrão.",
+      "efeitos": []
+    },
+    {
+      "id": "cs_acrobatic_charge",
+      "nome": "Carga Acrobática",
+      "livro": "Complete Scoundrel",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "DES 13, Acrobacia 6 postos",
+      "descricao": "Você pode carregar em trajetórias curvilíneas, ignorando obstáculos menores.",
+      "efeitos": []
+    },
+    {
+      "id": "cs_cometary_collision",
+      "nome": "Colisão Cometária",
+      "livro": "Complete Scoundrel",
+      "categoria": [
+        "Guerreiro"
+      ],
+      "prerequisitos": "FOR 15, Ataque Poderoso, Abater, BAB +10",
+      "descricao": "Ao carregar, cause dano extra igual ao seu bônus de Ataque Poderoso e empurre o alvo 1,5m.",
+      "efeitos": []
+    },
+    {
+      "id": "cs_cunning_evasion",
+      "nome": "Evasão Astuta",
+      "livro": "Complete Scoundrel",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "DES 13, Evasão, Ladino nível 3",
+      "descricao": "Quando usa Evasão com sucesso, pode se mover até 1,5m imediatamente como ação livre.",
+      "efeitos": []
+    },
+    {
+      "id": "cs_expeditious_dodge",
+      "nome": "Esquiva Expedita",
+      "livro": "Complete Scoundrel",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "DES 13, Velocidade de deslocamento 9m+",
+      "descricao": "+2 CA enquanto você se moveu pelo menos 9m naquele turno.",
+      "efeitos": []
+    },
+    {
+      "id": "cs_leap_of_the_heavens",
+      "nome": "Salto dos Céus",
+      "livro": "Complete Scoundrel",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Saltar 10 postos",
+      "descricao": "Ao saltar para atacar, cause +2d6 dano adicional se cair ao menos 3m de altura.",
+      "efeitos": []
+    },
+    {
+      "id": "dm_draconic_aura",
+      "nome": "Aura Dracônica",
+      "livro": "Dragon Magic",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Herança Dracônica ou descendência dracônica",
+      "descricao": "Emita uma aura dracônica que afeta aliados e inimigos em 9m.",
+      "efeitos": []
+    },
+    {
+      "id": "dm_draconic_breath",
+      "nome": "Sopro Dracônico",
+      "livro": "Dragon Magic",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Herança Dracônica, nível 3",
+      "descricao": "Use o sopro do seu tipo dracônico uma vez por dia. Dano: 2d8 (Ref CD 10 + metade nível + mod Con).",
+      "efeitos": [
+        {
+          "tipo": "bonus_resource",
+          "alvo": "Sopro Dracônico",
+          "valor": 1
+        }
+      ]
+    },
+    {
+      "id": "dm_draconic_senses",
+      "nome": "Sentidos Dracônicos",
+      "livro": "Dragon Magic",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Herança Dracônica",
+      "descricao": "+4 em Observar e Ouvir. Você também tem visão no escuro de 18m.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Observar",
+          "valor": 4
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Ouvir",
+          "valor": 4
+        }
+      ]
+    },
+    {
+      "id": "dm_draconic_toughness",
+      "nome": "Resistência Dracônica",
+      "livro": "Dragon Magic",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Herança Dracônica",
+      "descricao": "+2 PV por nível de Feiticeiro.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+2 PV por nível de Feiticeiro (retroativo)"
+        }
+      ]
+    },
+    {
+      "id": "dm_draconic_reservoir",
+      "nome": "Reservatório Dracônico",
+      "livro": "Dragon Magic",
+      "categoria": [
+        "Raça"
+      ],
+      "prerequisitos": "Sopro Dracônico",
+      "descricao": "Você pode usar seu Sopro Dracônico uma vez adicional por dia por talento.",
+      "efeitos": [
+        {
+          "tipo": "bonus_resource",
+          "alvo": "Sopro Dracônico",
+          "valor": 1
+        }
+      ]
+    },
+    {
+      "id": "tom_binder_knowledge",
+      "nome": "Conhecimento do Vinculador",
+      "livro": "Tome of Magic",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Habilidade de vincular vestígios",
+      "descricao": "Você pode tentar vincular vestígios de nível superior ao seu normal.",
+      "efeitos": []
+    },
+    {
+      "id": "tom_improved_bind",
+      "nome": "Vínculo Aprimorado",
+      "livro": "Tome of Magic",
+      "categoria": [
+        "Habilidade de Classe"
+      ],
+      "prerequisitos": "Binder nível 5",
+      "descricao": "+2 em testes de vínculo e reduce a penalidade de influência do vestígio em 1.",
+      "efeitos": []
+    },
+    {
+      "id": "tom_shadow_familiar",
+      "nome": "Familiar das Sombras",
+      "livro": "Tome of Magic",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Shadowcaster nível 1",
+      "descricao": "Seu familiar existe nas sombras e concede visão nas trevas ao mestre.",
+      "efeitos": []
+    },
+    {
+      "id": "tom_truename_research",
+      "nome": "Pesquisa do Nome Verdadeiro",
+      "livro": "Tome of Magic",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "INT 15, Conhecimento (Arcanismo) 8 postos",
+      "descricao": "Você pode pesquisar o nome verdadeiro de criaturas, ganhando +4 em testes de truename contra elas.",
+      "efeitos": []
+    },
+    {
+      "id": "tom_shadowcasting",
+      "nome": "Conjuração das Sombras",
+      "livro": "Tome of Magic",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Shadowcaster nível 1",
+      "descricao": "Suas magias das sombras têm CD +1 e contam como 1 nível a mais para penetração de RM.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "+1 CD das magias de sombra; +1 nível efetivo para RM"
+        }
+      ]
+    },
+    {
+      "id": "ss_dune_strider",
+      "nome": "Caminhante das Dunas",
+      "livro": "Sandstorm",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Sobrevivência 6 postos",
+      "descricao": "Você não sofre penalidade de deslocamento em areia solta ou terreno desértico difícil.",
+      "efeitos": []
+    },
+    {
+      "id": "ss_scorpion_heritor",
+      "nome": "Herdeiro do Escorpião",
+      "livro": "Sandstorm",
+      "categoria": [
+        "Regional"
+      ],
+      "prerequisitos": "Nativo do deserto",
+      "descricao": "+2 em saves de Fortitude contra veneno. Você é resistente ao calor extremo.",
+      "efeitos": [
+        {
+          "tipo": "bonus_save",
+          "alvo": "fortitude",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "ss_desert_wind_dodge",
+      "nome": "Esquiva do Vento do Deserto",
+      "livro": "Sandstorm",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "DES 13, Esquiva, Mobilidade",
+      "descricao": "Em terreno aberto ou desértico, +2 CA adicional quando você se moveu neste turno.",
+      "efeitos": []
+    },
+    {
+      "id": "fb_cold_endurance",
+      "nome": "Resistência ao Frio",
+      "livro": "Frostburn",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "CON 13",
+      "descricao": "Você ignora condições climáticas frias normais e tem resistência ao frio 5.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Resistência ao frio 5; imune a dano ambiental de frio moderado"
+        }
+      ]
+    },
+    {
+      "id": "fb_frozen_berserker",
+      "nome": "Berserker Congelado",
+      "livro": "Frostburn",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Habilidade de Fúria, CON 13",
+      "descricao": "Durante a Fúria, você recebe resistência ao frio 10 e +1d6 dano de frio em ataques corpo-a-corpo.",
+      "efeitos": []
+    },
+    {
+      "id": "fb_snow_strider",
+      "nome": "Caminhante da Neve",
+      "livro": "Frostburn",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Sobrevivência 6 postos",
+      "descricao": "Ignore penalidade de deslocamento em neve e gelo. +2 em Sobrevivência em ambientes frios.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Sobrevivência (frio)",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "sw_sea_legs",
+      "nome": "Pernas do Mar",
+      "livro": "Stormwrack",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Equilíbrio 4 postos",
+      "descricao": "Você não perde a DES na CA e não sofre penalidade em embarcações em movimento. +2 em Equilíbrio.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Equilíbrio",
+          "valor": 2
+        }
+      ]
+    },
+    {
+      "id": "sw_cold_water_survival",
+      "nome": "Sobrevivência em Água Gelada",
+      "livro": "Stormwrack",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "CON 13, Nadar 4 postos",
+      "descricao": "Você pode tolerar água fria sem dano. Nadar em água gelada por até 1 hora por nível.",
+      "efeitos": []
+    },
+    {
+      "id": "sw_aquatic_combatant",
+      "nome": "Combatente Aquático",
+      "livro": "Stormwrack",
+      "categoria": [
+        "Geral",
+        "Guerreiro"
+      ],
+      "prerequisitos": "Nadar 4 postos",
+      "descricao": "Sem penalidade em ataques corpo-a-corpo submerso. +4 em Nadar durante o combate.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Nadar",
+          "valor": 4
+        }
+      ]
+    },
+    {
+      "id": "xph_psionic_meditation",
+      "nome": "Meditação Psiônica",
+      "livro": "Expanded Psionics",
+      "categoria": [
+        "Psiônico"
+      ],
+      "prerequisitos": "Foco Psiônico",
+      "descricao": "Você pode recuperar seu Foco Psiônico como ação de movimento em vez de ação de rodada completa.",
+      "efeitos": []
+    },
+    {
+      "id": "xph_up_the_walls",
+      "nome": "Pelas Paredes",
+      "livro": "Expanded Psionics",
+      "categoria": [
+        "Psiônico"
+      ],
+      "prerequisitos": "DES 13, Foco Psiônico, Acrobacia 9 postos",
+      "descricao": "Você pode correr por paredes verticais como parte do seu movimento.",
+      "efeitos": []
+    },
+    {
+      "id": "xph_overchannel",
+      "nome": "Sobrecanalizar",
+      "livro": "Expanded Psionics",
+      "categoria": [
+        "Psiônico"
+      ],
+      "prerequisitos": "",
+      "descricao": "Aumente o nível manifesto de um poder em 2 ao custo de 1d8 (2d8 em +4, 4d8 em +6) de dano para si mesmo.",
+      "efeitos": []
+    },
+    {
+      "id": "xph_mental_leap",
+      "nome": "Salto Mental",
+      "livro": "Expanded Psionics",
+      "categoria": [
+        "Psiônico"
+      ],
+      "prerequisitos": "FOR 13, Foco Psiônico",
+      "descricao": "Gaste Foco Psiônico para adicionar +10 no seu próximo teste de Saltar.",
+      "efeitos": []
+    },
+    {
+      "id": "xph_psionic_charge",
+      "nome": "Carga Psiônica",
+      "livro": "Expanded Psionics",
+      "categoria": [
+        "Psiônico"
+      ],
+      "prerequisitos": "DES 13, Foco Psiônico, BAB +1",
+      "descricao": "Ao carregar gastando Foco Psiônico, pode mudar de direção uma vez durante o movimento.",
+      "efeitos": []
+    },
+    {
+      "id": "dl_dynamic_priest",
+      "nome": "Sacerdote Dinâmico",
+      "livro": "Legends of the Twins",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Clérigo nível 1, Sab 13",
+      "descricao": "Você pode converter espontaneamente qualquer magia divina preparada em outra magia clérigo do mesmo nível uma vez por dia. Representa uma conexão dinâmica com a divindade.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "nota": "Conversão espontânea de 1 magia preparada/dia para qualquer magia clérigo do mesmo nível"
+        }
+      ]
+    },
+    {
+      "id": "dl_empower_turning",
+      "nome": "Expulsar Potencializado",
+      "livro": "Legends of the Twins",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Habilidade de Expulsar/Repreender mortos-vivos",
+      "descricao": "Seus testes de expulsar são tratados como se você fosse 4 níveis mais alto para determinar quais criaturas são afetadas.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "nota": "+4 níveis efetivos ao expulsar para determinar HD afetado"
+        }
+      ]
+    },
+    {
+      "id": "dl_touched_by_gods",
+      "nome": "Tocado pelos Deuses",
+      "livro": "Legends of the Twins",
+      "categoria": [
+        "Divino"
+      ],
+      "prerequisitos": "Clérigo nível 1",
+      "descricao": "Uma vez por dia você pode lançar uma magia divina de 1º nível como ação livre, sem gastar um espaço de magia.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "nota": "1 magia divina de nível 1 como ação livre 1/dia sem gastar espaço"
+        }
+      ]
+    },
+    {
+      "id": "dl_war_mage",
+      "nome": "Mago de Guerra",
+      "livro": "Legends of the Twins",
+      "categoria": [
+        "Guerreiro",
+        "Geral"
+      ],
+      "prerequisitos": "Lançador de magias arcanas, For 13",
+      "descricao": "Você pode lançar magias arcanas usando armaduras leves e médias sem chance de falha arcana.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "nota": "Sem chance de falha arcana em armaduras leves e médias"
+        }
+      ]
+    },
+    {
+      "id": "dl_martyrs_blood",
+      "nome": "Sangue do Mártir",
+      "livro": "Legends of the Twins",
+      "categoria": [
+        "Geral"
+      ],
+      "prerequisitos": "Con 13",
+      "descricao": "Quando você está abaixo de 25% dos seus PV máximos, você recebe +2 em jogadas de ataque e testes de resistência.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "nota": "+2 ataques e saves quando abaixo de 25% PV"
+        }
+      ]
+    }
+  ],
+  "falhas": [
+    {
+      "id": "flaw_frail",
+      "nome": "Frágil",
+      "livro": "Unearthed Arcana",
+      "descricao": "Você é fisicamente fraco e tem menos pontos de vida que o normal.",
+      "efeitos": [
+        {
+          "tipo": "bonus_hp",
+          "alvo": "",
+          "valor": -1,
+          "nota": "-1 PV por nível de personagem"
+        }
+      ]
+    },
+    {
+      "id": "flaw_vulnerable",
+      "nome": "Vulnerável",
+      "livro": "Unearthed Arcana",
+      "descricao": "Você não se defende bem em combate, sofrendo -1 na CA.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "-1 na CA (não pode ser reduzido abaixo de 1)"
+        }
+      ]
+    },
+    {
+      "id": "flaw_reckless",
+      "nome": "Imprudente",
+      "livro": "Unearthed Arcana",
+      "descricao": "Você ataca furiosamente mas sem se proteger. -1 CA, +1 dano.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "-1 CA em combate; +1 em jogadas de dano corpo-a-corpo"
+        }
+      ]
+    },
+    {
+      "id": "flaw_shaky",
+      "nome": "Trêmulo",
+      "livro": "Unearthed Arcana",
+      "descricao": "Suas mãos tremem, prejudicando seus ataques à distância.",
+      "efeitos": [
+        {
+          "tipo": "bonus_attack",
+          "alvo": "ranged",
+          "valor": -2
+        }
+      ]
+    },
+    {
+      "id": "flaw_noncombatant",
+      "nome": "Não Combatente",
+      "livro": "Unearthed Arcana",
+      "descricao": "Você não tem jeito para combate corpo-a-corpo.",
+      "efeitos": [
+        {
+          "tipo": "bonus_attack",
+          "alvo": "melee",
+          "valor": -2
+        }
+      ]
+    },
+    {
+      "id": "flaw_slow",
+      "nome": "Lento",
+      "livro": "Unearthed Arcana",
+      "descricao": "Seu deslocamento é 3m (10 ft) menor que o normal.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "-3m (10 ft) no deslocamento base"
+        }
+      ]
+    },
+    {
+      "id": "flaw_unreactive",
+      "nome": "Sem Reação",
+      "livro": "Unearthed Arcana",
+      "descricao": "Você reage lentamente a situações de perigo. -6 em Iniciativa.",
+      "efeitos": [
+        {
+          "tipo": "bonus_initiative",
+          "alvo": "",
+          "valor": -6
+        }
+      ]
+    },
+    {
+      "id": "flaw_meager_fortitude",
+      "nome": "Fortitude Fraca",
+      "livro": "Unearthed Arcana",
+      "descricao": "Seu corpo resiste mal a doenças e venenos. -3 em Fortitude.",
+      "efeitos": [
+        {
+          "tipo": "bonus_save",
+          "alvo": "fortitude",
+          "valor": -3
+        }
+      ]
+    },
+    {
+      "id": "flaw_weak_will",
+      "nome": "Vontade Fraca",
+      "livro": "Unearthed Arcana",
+      "descricao": "Sua mente cede facilmente a influências externas. -3 em Vontade.",
+      "efeitos": [
+        {
+          "tipo": "bonus_save",
+          "alvo": "will",
+          "valor": -3
+        }
+      ]
+    },
+    {
+      "id": "flaw_murky_eyed",
+      "nome": "Visão Turva",
+      "livro": "Unearthed Arcana",
+      "descricao": "Você tem dificuldade para enxergar claramente em combate.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "20% de chance de errar automaticamente em todos os ataques corpo-a-corpo e à distância"
+        }
+      ]
+    },
+    {
+      "id": "flaw_pathetic",
+      "nome": "Patético",
+      "livro": "Unearthed Arcana",
+      "descricao": "Um de seus atributos é excepcionalmente baixo. -3 em um atributo à escolha.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "-3 em um atributo escolhido durante a criação do personagem"
+        }
+      ]
+    },
+    {
+      "id": "flaw_inattentive",
+      "nome": "Desatento",
+      "livro": "Unearthed Arcana",
+      "descricao": "Você não percebe detalhes ao redor. -4 em Observar e Ouvir.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Observar",
+          "valor": -4
+        },
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Ouvir",
+          "valor": -4
+        }
+      ]
+    },
+    {
+      "id": "flaw_aggressive",
+      "nome": "Agressivo",
+      "livro": "Unearthed Arcana",
+      "descricao": "Você sempre parte para o ataque sem pensar na defesa.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Deve carregar sempre que um inimigo estiver ao alcance e você puder fazê-lo; não pode usar Defesa Total"
+        }
+      ]
+    },
+    {
+      "id": "flaw_cowardly",
+      "nome": "Covarde",
+      "livro": "Unearthed Arcana",
+      "descricao": "Você sente medo com facilidade. -2 em testes de Vontade contra medo.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "-2 em testes de Vontade contra efeitos de medo"
+        }
+      ]
+    },
+    {
+      "id": "flaw_dishonest",
+      "nome": "Desonesto",
+      "livro": "Unearthed Arcana",
+      "descricao": "Você mente compulsivamente. -4 em Sentido de Rua para detectar mentiras alheias.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Sentido de Rua",
+          "valor": -4
+        }
+      ]
+    },
+    {
+      "id": "flaw_gullible",
+      "nome": "Ingênuo",
+      "livro": "Unearthed Arcana",
+      "descricao": "Você acredita facilmente no que os outros dizem. -4 em Sentido de Rua.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Sentido de Rua",
+          "valor": -4
+        }
+      ]
+    },
+    {
+      "id": "flaw_sickly",
+      "nome": "Doentio",
+      "livro": "Unearthed Arcana",
+      "descricao": "Seu corpo é fraco e adoece facilmente. -2 em Fortitude.",
+      "efeitos": [
+        {
+          "tipo": "bonus_save",
+          "alvo": "fortitude",
+          "valor": -2
+        }
+      ]
+    },
+    {
+      "id": "flaw_feeble",
+      "nome": "Débil",
+      "livro": "Unearthed Arcana",
+      "descricao": "Você é fisicamente débil. -2 em testes de habilidade de FOR e CON.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "-2 em testes de habilidade e perícias baseadas em FOR e CON"
+        }
+      ]
+    },
+    {
+      "id": "flaw_absent_minded",
+      "nome": "Distraído",
+      "livro": "Unearthed Arcana",
+      "descricao": "Você se perde facilmente nos próprios pensamentos. -4 em Concentração.",
+      "efeitos": [
+        {
+          "tipo": "bonus_skill",
+          "alvo": "Concentração",
+          "valor": -4
+        }
+      ]
+    },
+    {
+      "id": "flaw_bleeder",
+      "nome": "Sangrador",
+      "livro": "Unearthed Arcana",
+      "descricao": "Seus ferimentos sangram excessivamente.",
+      "efeitos": [
+        {
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Ao sofrer um crítico, perde 1 PV adicional por rodada até receber cura ou um teste de Cura (CD 15)"
+        }
+      ]
+    }
+  ]
+}

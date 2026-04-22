@@ -116,6 +116,20 @@ app.post('/api/personagem/import', (req, res) => {
   }
 })
 
+// Lê uma tabela de referência (ref_talentos, ref_falhas, ref_racas, ref_classes, ref_criaturas)
+const REF_TABLES = new Set(['ref_talentos', 'ref_falhas', 'ref_racas', 'ref_classes', 'ref_criaturas'])
+app.get('/api/ref/:table', (req, res) => {
+  const table = req.params.table
+  if (!REF_TABLES.has(table)) return res.status(404).json({ error: 'Tabela não encontrada' })
+  try {
+    const rows = db.prepare(`SELECT * FROM "${table}"`).all()
+    res.json(rows)
+  } catch (e) {
+    console.error(`Erro ao ler ${table}:`, e)
+    res.status(500).json({ error: 'Erro ao ler dados' })
+  }
+})
+
 const PORT = 3001
 app.listen(PORT, () => {
   console.log(`Grimoire API rodando em http://localhost:${PORT}`)

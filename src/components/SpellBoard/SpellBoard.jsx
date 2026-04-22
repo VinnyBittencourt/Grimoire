@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useApp } from '../../context/AppContext'
+import { useLang } from '../../context/LangContext'
 import { EscolaIcon, ESCOLA_CORES } from '../../assets/icons/escolaIcons'
 import SpellPrepModal from '../modals/SpellPrepModal'
 import SummonCreatureModal from '../modals/SummonCreatureModal'
@@ -10,6 +11,7 @@ function isConvocarMonstro(nome) {
 
 export default function SpellBoard() {
   const { db, personagemAtivo, usarMagia, novoDia } = useApp()
+  const { t } = useLang()
   const [showPrep, setShowPrep] = useState(false)
   const [confirmNovoDia, setConfirmNovoDia] = useState(false)
   const [summonModal, setSummonModal] = useState(null)
@@ -48,17 +50,17 @@ export default function SpellBoard() {
       <div className="flex items-center justify-between px-4 py-2 shrink-0"
         style={{ borderBottom: '1px solid #6b4a1a' }}>
         <h3 className="font-medieval text-base font-semibold" style={{ color: '#c9a84c', letterSpacing: '0.03em' }}>
-          Ataques / Magias Preparadas
+          {t('spells', 'title')}
         </h3>
         <div className="flex gap-2">
           <button className="btn-ghost text-xs" onClick={() => { setShowPrep(true); setConfirmNovoDia(false) }}>
-            + Preparar Magias
+            {t('spells', 'prepare')}
           </button>
           <button
             className={confirmNovoDia ? 'btn-danger' : 'btn-ghost text-xs'}
             onClick={handleNovoDia}
             onBlur={() => setConfirmNovoDia(false)}>
-            {confirmNovoDia ? '⚠ Confirmar Novo Dia' : 'Novo Dia'}
+            {confirmNovoDia ? t('spells', 'confirmNewDay') : t('spells', 'newDay')}
           </button>
         </div>
       </div>
@@ -68,7 +70,7 @@ export default function SpellBoard() {
         {/* Ataques Normais */}
         {normais.length > 0 && (
           <div>
-            <p className="label-medieval mb-3" style={{ letterSpacing: '0.08em', fontSize: 11 }}>Ataques Normais</p>
+            <p className="label-medieval mb-3" style={{ letterSpacing: '0.08em', fontSize: 11 }}>{t('spells', 'normalAttacks')}</p>
             <div className="flex flex-wrap gap-2">
               {normais.map(magia => (
                 <SpellCard key={magia.id} magia={magia} mp={null} onUsar={null} />
@@ -81,10 +83,10 @@ export default function SpellBoard() {
         {niveisOrdenados.length === 0 && normais.length === 0 && (
           <div className="flex-1 flex flex-col items-center justify-center gap-3 opacity-50">
             <p className="font-medieval text-sm" style={{ color: '#6b5a3a' }}>
-              Nenhuma magia preparada
+              {t('spells', 'none')}
             </p>
             <p className="text-xs" style={{ color: '#6b5a3a' }}>
-              Clique em "Preparar Magias" para começar
+              {t('spells', 'noneHint')}
             </p>
           </div>
         )}
@@ -92,7 +94,7 @@ export default function SpellBoard() {
         {niveisOrdenados.map(nivel => (
           <div key={nivel}>
             <p className="label-medieval mb-3" style={{ letterSpacing: '0.08em', fontSize: 11 }}>
-              {nivel === '0' ? 'Nível 0 (Orações)' : `Nível ${nivel}`}
+              {nivel === '0' ? t('spells', 'levelOrisons') : `${t('spells', 'level')} ${nivel}`}
             </p>
             <div className="flex flex-wrap gap-2">
               {porNivel[nivel].map(({ mp, magia }) => (

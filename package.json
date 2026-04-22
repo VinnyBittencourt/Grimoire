@@ -10,7 +10,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "migrate": "node scripts/migrate-excel-to-sqlite.js"
+    "migrate": "node scripts/migrate-excel-to-sqlite.js",
+    "seed": "node scripts/seed-reference.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",

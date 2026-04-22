@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useApp } from '../../context/AppContext'
+import { useLang } from '../../context/LangContext'
 import { RECURSOS_PADRAO } from '../../services/dnd35Tables'
 import { useEfeitosDoPersonagem } from '../../hooks/useEfeitosDoPersonagem'
 
@@ -30,6 +31,7 @@ function getClassesDoPersonagem(p) {
 
 export default function RecursosClasse() {
   const { db, personagemAtivo, adicionarRecurso, editarRecurso, excluirRecurso } = useApp()
+  const { t } = useLang()
   const efeitos = useEfeitosDoPersonagem()
   const [modal, setModal] = useState(null)
   const [form, setForm] = useState(EMPTY_FORM)
@@ -125,11 +127,11 @@ export default function RecursosClasse() {
       {/* Header */}
       <div className="flex items-center justify-between shrink-0"
         style={{ padding: '10px 14px', borderBottom: '1px solid #6b4a1a' }}>
-        <h3 className="font-medieval text-sm font-semibold" style={{ color: '#c9a84c', letterSpacing: '0.05em' }}>Recursos de Classe</h3>
+        <h3 className="font-medieval text-sm font-semibold" style={{ color: '#c9a84c', letterSpacing: '0.05em' }}>{t('recursos', 'title')}</h3>
         <button onClick={abrirNovo}
           className="font-medieval text-xs rounded-sm"
           style={{ padding: '2px 8px', background: 'rgba(201,168,76,0.15)', border: '1px solid #6b4a1a', color: '#c9a84c' }}>
-          + Adicionar
+          {t('recursos', 'add')}
         </button>
       </div>
 
@@ -137,7 +139,7 @@ export default function RecursosClasse() {
       <div style={{ padding: '10px 14px' }}>
         {recursos.length === 0 ? (
           <p className="text-center text-xs" style={{ color: '#3a2810', padding: '12px 0' }}>
-            Nenhum recurso de classe
+            {t('recursos', 'none')}
           </p>
         ) : (
           <div className="flex flex-col" style={{ gap: '10px' }}>
@@ -236,17 +238,17 @@ export default function RecursosClasse() {
         <div className="modal-overlay" onClick={() => setModal(null)}>
           <div className="modal-content p-6 w-72" onClick={e => e.stopPropagation()}>
             <h4 className="font-medieval text-base mb-4 text-center" style={{ color: '#c9a84c' }}>
-              {form.icone} {modal.mode === 'novo' ? 'Novo Recurso' : 'Editar Recurso'}
+              {form.icone} {modal.mode === 'novo' ? t('recursos', 'newResource') : t('recursos', 'editResource')}
             </h4>
 
             <div className="flex flex-col gap-3">
               <div>
-                <label className="label-medieval">Ícone</label>
+                <label className="label-medieval">{t('recursos', 'icon')}</label>
                 <button type="button" onClick={() => setMostrarIcones(v => !v)}
                   className="flex items-center gap-2 w-full rounded-sm"
                   style={{ padding: '8px 12px', background: 'rgba(0,0,0,0.4)', border: '1px solid #6b4a1a', color: '#f0e6c8' }}>
                   <span style={{ fontSize: '20px' }}>{form.icone}</span>
-                  <span className="text-xs" style={{ color: '#9b8a6a' }}>{mostrarIcones ? 'Fechar' : 'Escolher'}</span>
+                  <span className="text-xs" style={{ color: '#9b8a6a' }}>{mostrarIcones ? t('recursos', 'close') : t('recursos', 'choose')}</span>
                 </button>
                 {mostrarIcones && (
                   <div className="mt-1 p-2 rounded-sm" style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid #6b4a1a' }}>
@@ -267,19 +269,19 @@ export default function RecursosClasse() {
               </div>
 
               <div>
-                <label className="label-medieval">Nome do Recurso</label>
+                <label className="label-medieval">{t('recursos', 'name')}</label>
                 <input className="input-medieval" placeholder="Ex: Fúria, Inspiração..."
                   value={form.nome} onChange={e => set('nome', e.target.value)} />
               </div>
 
               <div>
-                <label className="label-medieval">Classe</label>
+                <label className="label-medieval">{t('recursos', 'class')}</label>
                 <input className="input-medieval" placeholder="Ex: Duskblade, Bárbaro..."
                   value={form.classe} onChange={e => set('classe', e.target.value)} />
               </div>
 
               <div>
-                <label className="label-medieval">Total de Usos</label>
+                <label className="label-medieval">{t('recursos', 'totalUses')}</label>
                 <input className="input-medieval text-center" type="number" min={1} max={20}
                   value={form.total} onChange={e => set('total', e.target.value)} />
               </div>
@@ -287,11 +289,11 @@ export default function RecursosClasse() {
 
             <div className="flex gap-3 mt-5">
               {modal.mode === 'editar' && (
-                <button className="btn-danger text-xs" onClick={excluir}>Remover</button>
+                <button className="btn-danger text-xs" onClick={excluir}>{t('recursos', 'remove')}</button>
               )}
               <div className="flex gap-2 ml-auto">
-                <button className="btn-ghost text-xs" onClick={() => setModal(null)}>Cancelar</button>
-                <button className="btn-gold text-xs" onClick={salvar}>Salvar</button>
+                <button className="btn-ghost text-xs" onClick={() => setModal(null)}>{t('recursos', 'cancel')}</button>
+                <button className="btn-gold text-xs" onClick={salvar}>{t('recursos', 'save')}</button>
               </div>
             </div>
           </div>
