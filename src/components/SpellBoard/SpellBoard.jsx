@@ -2,16 +2,21 @@ import { useState } from 'react'
 import { useApp } from '../../context/AppContext'
 import { useLang } from '../../context/LangContext'
 import { EscolaIcon, ESCOLA_CORES } from '../../assets/icons/escolaIcons'
+import { MAGIAS_EN } from '../../services/dnd35Tables'
 import SpellPrepModal from '../modals/SpellPrepModal'
 import SummonCreatureModal from '../modals/SummonCreatureModal'
 
 function isConvocarMonstro(nome) {
-  return nome?.startsWith('Convocar Monstro')
+  return nome?.startsWith('Convocar Monstro') || nome?.startsWith('Summon Monster')
+}
+
+function spellName(nome, lang) {
+  return lang === 'en' ? (MAGIAS_EN[nome] || nome) : nome
 }
 
 export default function SpellBoard() {
   const { db, personagemAtivo, usarMagia, novoDia } = useApp()
-  const { t } = useLang()
+  const { lang, t } = useLang()
   const [showPrep, setShowPrep] = useState(false)
   const [confirmNovoDia, setConfirmNovoDia] = useState(false)
   const [summonModal, setSummonModal] = useState(null)
@@ -102,6 +107,7 @@ export default function SpellBoard() {
                   key={mp.id}
                   magia={magia}
                   mp={mp}
+                  lang={lang}
                   onUsar={
                     isConvocarMonstro(magia.nome)
                       ? () => setSummonModal({ mp, magia })
@@ -128,7 +134,7 @@ export default function SpellBoard() {
   )
 }
 
-function SpellCard({ magia, mp, onUsar }) {
+function SpellCard({ magia, mp, lang, onUsar }) {
   const esgotada = mp && mp.usos_restantes <= 0
   const cor = ESCOLA_CORES[magia.escola] || '#c9a84c'
 
@@ -137,7 +143,7 @@ function SpellCard({ magia, mp, onUsar }) {
       className={`spell-card ${esgotada ? 'depleted' : ''}`}
       style={{ width: 80, border: `1px solid ${esgotada ? '#3a2810' : cor + '66'}` }}
       onClick={onUsar && !esgotada ? onUsar : undefined}
-      title={magia.descricao || magia.nome}
+      title={magia.descricao || spellName(magia.nome, lang)}
     >
       {/* Ícone */}
       <div className="flex items-center justify-center" style={{ filter: esgotada ? 'grayscale(1)' : 'none' }}>
@@ -146,7 +152,7 @@ function SpellCard({ magia, mp, onUsar }) {
 
       {/* Nome */}
       <p className="text-center leading-tight" style={{ fontSize: 11, color: '#c9a84c', fontFamily: 'Cinzel, serif' }}>
-        {magia.nome}
+        {spellName(magia.nome, lang)}
       </p>
 
       {/* Contador */}

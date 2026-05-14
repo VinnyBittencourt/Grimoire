@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import { useLang } from '../context/LangContext'
 import Header from '../components/Layout/Header'
 
 export default function CharacterListPage() {
   const navigate = useNavigate()
   const { db, setPersonagemAtivo, excluirPersonagem } = useApp()
+  const { t } = useLang()
   const personagens = db?.personagens || []
 
   function handleSelecionar(p) {
@@ -14,7 +16,7 @@ export default function CharacterListPage() {
 
   async function handleExcluir(e, id) {
     e.stopPropagation()
-    if (confirm('Excluir este personagem permanentemente?')) {
+    if (confirm(t('charList', 'deleteConfirm'))) {
       await excluirPersonagem(id)
     }
   }
@@ -27,14 +29,14 @@ export default function CharacterListPage() {
         {/* Painel principal */}
         <div className="panel w-full max-w-2xl p-8">
           <h2 className="font-medieval text-3xl text-center mb-8" style={{ color: '#c9a84c' }}>
-            Personagens
+            {t('charList', 'title')}
           </h2>
 
           {/* Lista */}
           <div className="flex flex-col gap-4 mb-8">
             {personagens.length === 0 ? (
               <p className="text-center text-sm" style={{ color: '#6b5a3a' }}>
-                Nenhum personagem criado ainda.
+                {t('charList', 'empty')}
               </p>
             ) : (
               personagens.map(p => (
@@ -56,7 +58,7 @@ export default function CharacterListPage() {
                       {p.nome}
                     </p>
                     <p className="font-medieval text-xs mt-1" style={{ color: '#c9a84c' }}>
-                      Nível {p.level}
+                      {t('charList', 'level')(p.level)}
                     </p>
                     <p className="text-xs mt-1 truncate" style={{ color: '#9b8a6a' }}>
                       {(() => {
@@ -74,7 +76,7 @@ export default function CharacterListPage() {
                   <button
                     className="btn-danger shrink-0 text-lg px-2"
                     onClick={(e) => handleExcluir(e, p.id)}
-                    title="Excluir personagem">
+                    title={t('charList', 'deleteTitle')}>
                     🗑
                   </button>
                 </div>
@@ -85,7 +87,7 @@ export default function CharacterListPage() {
           {/* Botão criar */}
           <div className="flex justify-center">
             <button className="btn-gold" onClick={() => navigate('/personagem/novo')}>
-              + Criar Novo Personagem
+              {t('charList', 'create')}
             </button>
           </div>
         </div>
@@ -93,7 +95,7 @@ export default function CharacterListPage() {
 
       <footer className="pb-4 text-center">
         <p className="font-medieval text-s tracking-widest" style={{ color: '#6b5a3a' }}>
-          Criado por Vinny Bittencourt
+          {t('charList', 'footer')}
         </p>
       </footer>
     </div>

@@ -31,7 +31,7 @@ function corEfeito(tipo) {
 
 export default function Talentos() {
   const { db, personagemAtivo, adicionarTalento, editarTalento, excluirTalento, refData } = useApp()
-  const { t } = useLang()
+  const { t, lang } = useLang()
   const livrosDisponiveis = useMemo(() => [...new Set(refData.talentos.map(f => f.livro))].sort(), [refData.talentos])
   const [modal, setModal] = useState(null)
   const [form, setForm] = useState(EMPTY_FORM)
@@ -53,11 +53,10 @@ export default function Talentos() {
       if (filtroCategoria && !(Array.isArray(f.categoria) ? f.categoria.includes(filtroCategoria) : f.categoria === filtroCategoria)) return false
       if (filtroLivro && f.livro !== filtroLivro) return false
       if (q) {
-        // deriva nome EN do ID: "phb_power_attack" → "power attack"
-        const nomeEn = f.id.replace(/^[a-z]+_/, '').replace(/_/g, ' ')
         const match = f.nome.toLowerCase().includes(q)
-          || nomeEn.includes(q)
+          || (f.nome_en || '').toLowerCase().includes(q)
           || (f.descricao || '').toLowerCase().includes(q)
+          || (f.descricao_en || '').toLowerCase().includes(q)
           || (f.prerequisitos || '').toLowerCase().includes(q)
         if (!match) return false
       }
@@ -175,9 +174,9 @@ export default function Talentos() {
                     padding: '10px 14px',
                   }}>
                   <div className="flex items-start justify-between gap-2">
-                    <div className="font-medieval" style={{ color: '#c9a84c', fontSize: 12 }}>{t.nome}</div>
+                    <div className="font-medieval" style={{ color: '#c9a84c', fontSize: 14 }}>{t.nome}</div>
                     {featData && (
-                      <span style={{ fontSize: 9, color: '#6b5a3a', flexShrink: 0, marginTop: 1 }}>{featData.livro}</span>
+                      <span style={{ fontSize: 12, color: '#6b5a3a', flexShrink: 0, marginTop: 2 }}>{featData.livro}</span>
                     )}
                   </div>
                   {efeitos.length > 0 && (
@@ -186,7 +185,7 @@ export default function Talentos() {
                         const c = corEfeito(ef.tipo)
                         return (
                           <span key={i} style={{
-                            fontSize: 9, padding: '1px 5px', borderRadius: 3,
+                            fontSize: 13, padding: '1px 5px', borderRadius: 3,
                             background: c.bg, border: `1px solid ${c.border}`,
                             color: c.color, fontFamily: 'Cinzel, serif',
                           }}>
@@ -197,12 +196,12 @@ export default function Talentos() {
                     </div>
                   )}
                   {especiais.length > 0 && (
-                    <div className="mt-1" style={{ fontSize: 10, color: '#7a6a4a', lineHeight: 1.4 }}>
+                    <div className="mt-1" style={{ fontSize: 13, color: '#7a6a4a', lineHeight: 1.4 }}>
                       {especiais[0]?.nota?.split(';')[0]?.trim()}
                     </div>
                   )}
                   {!featData && t.descricao && (
-                    <div className="mt-1 line-clamp-1" style={{ color: '#9b8a6a', fontSize: 11 }}>{t.descricao}</div>
+                    <div className="mt-1 line-clamp-1" style={{ color: '#9b8a6a', fontSize: 13 }}>{t.descricao}</div>
                   )}
                 </button>
               )
@@ -222,8 +221,8 @@ export default function Talentos() {
             <div className="flex items-center justify-between shrink-0"
               style={{ padding: '14px 20px', borderBottom: '1px solid #6b4a1a' }}>
               <div>
-                <h4 className="font-medieval text-base" style={{ color: '#c9a84c' }}>{t('talentos', 'bankTitle')}</h4>
-                <p style={{ fontSize: 10, color: '#6b5a3a', marginTop: 2 }}>{t('talentos', 'available')(refData.talentos.length)}</p>
+                <h4 className="font-medieval text-base" style={{ color: '#c9a84c', fontSize: 18, fontWeight: 'bold' }}>{t('talentos', 'bankTitle')}</h4>
+                <p style={{ fontSize: 13, color: '#6b5a3a', marginTop: 2 }}>{t('talentos', 'available')(refData.talentos.length)}</p>
               </div>
               <button onClick={() => setModal(null)}
                 style={{ color: '#6b5a3a', background: 'none', border: 'none', fontSize: 20, cursor: 'pointer', lineHeight: 1, padding: 4 }}>✕</button>
@@ -234,11 +233,11 @@ export default function Talentos() {
               <div style={{ position: 'relative' }}>
                 <span style={{
                   position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)',
-                  fontSize: 13, color: '#6b5a3a', pointerEvents: 'none',
+                  fontSize: 13, color: '#6b5a3a', pointerEvents: 'none', 
                 }}>🔍</span>
                 <input
                   className="input-medieval w-full"
-                  style={{ paddingLeft: 30 }}
+                  style={{ paddingLeft: 30, borderRadius: 4, }}
                   placeholder={t('talentos', 'searchPlaceholder')}
                   value={busca}
                   onChange={e => { setBusca(e.target.value); setFeatSelecionada(null) }}
@@ -254,8 +253,8 @@ export default function Talentos() {
                   <button key={cat.id}
                     onClick={() => { setFiltroCategoria(cat.id); setFeatSelecionada(null) }}
                     style={{
-                      fontSize: 10, padding: '3px 9px', borderRadius: 20, cursor: 'pointer',
-                      transition: 'all 0.15s', fontFamily: 'Cinzel, serif',
+                      fontSize: 12, padding: '3px 9px', borderRadius: 20, cursor: 'pointer',
+                      transition: 'all 0.15s', fontFamily: 'inter, san-serif',
                       background: filtroCategoria === cat.id ? 'rgba(201,168,76,0.3)' : 'rgba(201,168,76,0.06)',
                       border: filtroCategoria === cat.id ? '1px solid #c9a84c' : '1px solid #6b4a1a',
                       color: filtroCategoria === cat.id ? '#f0e6c8' : '#9b8a6a',
@@ -265,7 +264,7 @@ export default function Talentos() {
                 ))}
               </div>
               <div className="flex items-center justify-between">
-                <select className="input-medieval" style={{ fontSize: 10, padding: '3px 8px', minWidth: 150 }}
+                <select className="input-medieval" style={{ fontSize: 13, padding: '8px 8px', minWidth: 150, marginTop: 4, width: '66%'}}
                   value={filtroLivro} onChange={e => { setFiltroLivro(e.target.value); setFeatSelecionada(null) }}>
                   <option value="">{t('talentos', 'allBooks')}</option>
                   {livrosDisponiveis.map(l => <option key={l} value={l}>{l}</option>)}
@@ -292,9 +291,9 @@ export default function Talentos() {
                 {featsFiltradas.length === 0 ? (
                   <div className="flex flex-col items-center justify-center gap-2" style={{ padding: 32, color: '#6b5a3a' }}>
                     <span style={{ fontSize: 28, opacity: 0.4 }}>🔍</span>
-                    <p style={{ fontSize: 12, textAlign: 'center' }}>{t('talentos', 'noneFound')}</p>
+                    <p style={{ fontSize: 14, textAlign: 'center' }}>{t('talentos', 'noneFound')}</p>
                     <button onClick={() => { setBusca(''); setFiltroCategoria(''); setFiltroLivro('') }}
-                      style={{ fontSize: 11, color: '#9b8a6a', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>
+                      style={{ fontSize: 14, color: '#9b8a6a', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>
                       {t('talentos', 'clearFiltersLink')}
                     </button>
                   </div>
@@ -315,10 +314,10 @@ export default function Talentos() {
                           cursor: 'pointer', transition: 'all 0.1s',
                         }}>
                         <div className="flex items-baseline justify-between gap-2">
-                          <span className="font-medieval text-xs" style={{ color: isAtivo ? '#f0e6c8' : '#c9a84c' }}>
-                            {feat.nome}
+                          <span className="font-medieval text-sm" style={{ color: isAtivo ? '#f0e6c8' : '#c9a84c' }}>
+                            {lang === 'en' ? (feat.nome_en || feat.nome) : feat.nome}
                           </span>
-                          <span style={{ fontSize: 9, color: '#4a3820', flexShrink: 0 }}>{feat.livro}</span>
+                          <span style={{ fontSize: 13, color: '#4a3820', flexShrink: 0 }}>{feat.livro}</span>
                         </div>
                         {efeitosPreview.length > 0 ? (
                           <div className="flex flex-wrap gap-1 mt-1">
@@ -326,7 +325,7 @@ export default function Talentos() {
                               const c = corEfeito(ef.tipo)
                               return (
                                 <span key={i} style={{
-                                  fontSize: 8, padding: '1px 5px', borderRadius: 10,
+                                  fontSize: 10, padding: '1px 5px', borderRadius: 10,
                                   background: c.bg, border: `1px solid ${c.border}`,
                                   color: c.color,
                                 }}>
@@ -336,7 +335,7 @@ export default function Talentos() {
                             })}
                           </div>
                         ) : (
-                          <div style={{ fontSize: 9, color: '#4a3820', marginTop: 2 }}>
+                          <div style={{ fontSize: 11, color: '#81633c', marginTop: 2 }}>
                             {feat.categoria.join(' · ')}
                           </div>
                         )}
@@ -353,14 +352,14 @@ export default function Talentos() {
                     {/* Nome e badges */}
                     <div style={{ padding: '16px 16px 12px', borderBottom: '1px solid #6b4a1a22' }}>
                       <p className="font-medieval" style={{ color: '#f0e6c8', fontSize: 14, lineHeight: 1.3, marginBottom: 6 }}>
-                        {featSelecionada.nome}
+                        {lang === 'en' ? (featSelecionada.nome_en || featSelecionada.nome) : featSelecionada.nome}
                       </p>
                       <div className="flex flex-wrap gap-1">
-                        <span style={{ fontSize: 9, padding: '2px 6px', borderRadius: 3, background: 'rgba(201,168,76,0.15)', border: '1px solid #c9a84c33', color: '#c9a84c' }}>
+                        <span style={{ fontSize: 13, padding: '2px 6px', borderRadius: 3, background: 'rgba(201,168,76,0.15)', border: '1px solid #c9a84c33', color: '#c9a84c' }}>
                           {featSelecionada.livro}
                         </span>
                         {featSelecionada.categoria.map(c => (
-                          <span key={c} style={{ fontSize: 9, padding: '2px 6px', borderRadius: 3, background: 'rgba(100,100,100,0.15)', border: '1px solid #6b4a1a', color: '#9b8a6a' }}>
+                          <span key={c} style={{ fontSize: 13, padding: '2px 6px', borderRadius: 3, background: 'rgba(100,100,100,0.15)', border: '1px solid #6b4a1a', color: '#9b8a6a' }}>
                             {c}
                           </span>
                         ))}
@@ -371,14 +370,14 @@ export default function Talentos() {
                     <div className="flex-1 overflow-y-auto" style={{ padding: '12px 16px' }}>
                       {featSelecionada.prerequisitos && (
                         <div style={{ marginBottom: 12, padding: '8px 10px', borderRadius: 4, background: 'rgba(180,120,40,0.08)', border: '1px solid #6b4a1a44' }}>
-                          <p style={{ fontSize: 9, color: '#8a6a2a', marginBottom: 3, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{t('talentos', 'prerequisites')}</p>
-                          <p style={{ fontSize: 11, color: '#c0a060', lineHeight: 1.4 }}>{featSelecionada.prerequisitos}</p>
+                          <p style={{ fontSize: 13, color: '#8a6a2a', marginBottom: 3, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{t('talentos', 'prerequisites')}</p>
+                          <p style={{ fontSize: 13, color: '#c0a060', lineHeight: 1.4 }}>{featSelecionada.prerequisitos}</p>
                         </div>
                       )}
 
                       <div style={{ marginBottom: 12 }}>
-                        <p style={{ fontSize: 9, color: '#6b5a3a', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{t('talentos', 'benefit')}</p>
-                        <p style={{ fontSize: 11, color: '#c0a882', lineHeight: 1.6 }}>{featSelecionada.descricao}</p>
+                        <p style={{ fontSize: 13, color: '#6b5a3a', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{t('talentos', 'benefit')}</p>
+                        <p style={{ fontSize: 13, color: '#c0a882', lineHeight: 1.6 }}>{lang === 'en' ? (featSelecionada.descricao_en || featSelecionada.descricao) : featSelecionada.descricao}</p>
                       </div>
 
                       {featSelecionada.efeitos.length > 0 && (
@@ -412,10 +411,10 @@ export default function Talentos() {
                 ) : (
                   <div className="flex-1 flex flex-col items-center justify-center gap-3" style={{ padding: 20 }}>
                     <span style={{ fontSize: 32, opacity: 0.2 }}>📜</span>
-                    <p style={{ fontSize: 11, color: '#3a2810', textAlign: 'center', lineHeight: 1.5 }}>
+                    <p style={{ fontSize: 13, color: '#3a2810', textAlign: 'center', lineHeight: 1.5 }}>
                       {t('talentos', 'clickDetail')}
                     </p>
-                    <div style={{ fontSize: 10, color: '#3a2810', textAlign: 'center', lineHeight: 1.6, marginTop: 4 }}>
+                    <div style={{ fontSize: 13, color: '#3a2810', textAlign: 'center', lineHeight: 1.6, marginTop: 4 }}>
                       <p>{t('talentos', 'categories')}</p>
                       <p>{t('talentos', 'orSearch')}</p>
                     </div>
@@ -426,7 +425,7 @@ export default function Talentos() {
 
             {/* Footer */}
             <div style={{ padding: '10px 20px', borderTop: '1px solid #6b4a1a22', flexShrink: 0, background: 'rgba(0,0,0,0.1)' }}>
-              <button className="btn-ghost text-xs" onClick={abrirNovo} style={{ fontSize: 11 }}>
+              <button className="btn-ghost text-xs" onClick={abrirNovo} style={{ fontSize: 13 }}>
                 {t('talentos', 'notFound')}
               </button>
             </div>

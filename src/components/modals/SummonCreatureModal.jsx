@@ -23,24 +23,36 @@ function corDoTipo(tipo = '') {
   return '#9b8a6a'
 }
 
+const CUSTOM_EMPTY = { nome: '', pv: '', ca: '', ataque: '', dano: '', deslocamento: '' }
+
 export default function SummonCreatureModal({ mp, magia, onClose }) {
   const { personagemAtivo, usarMagia, salvarCriaturaInvocada } = useApp()
   const nivelMax = nivelDaSpell(magia.nome)
   const [nivelTab, setNivelTab] = useState(nivelMax)
   const [selecionada, setSelecionada] = useState(null)
+  const [customMode, setCustomMode] = useState(false)
+  const [customForm, setCustomForm] = useState(CUSTOM_EMPTY)
 
   const criaturas = CRIATURAS_CONVOCAR[nivelTab] || []
 
+  const customValida = customForm.nome.trim() && customForm.pv
+
   async function convocar() {
-    if (!selecionada) return
-    await usarMagia(mp.id)
-    await salvarCriaturaInvocada(personagemAtivo.id, {
-      criatura: selecionada,
-      pv_atual: selecionada.pv,
-      pv_max: selecionada.pv,
-      nivel_sm: nivelTab,
-    })
-    onClose()
+    const criatura = customMode
+      ? { ...customForm, pv: Number(customForm.pv), ca: Number(customForm.ca), tipo: 'Customizado', habilidades: [] }
+      : selecionada
+    if (!criatura) return
+    try { await usarMagia(mp.id) } catch (_) {}
+    try {
+      await salvarCriaturaInvocada(personagemAtivo.id, {
+        criatura,
+        pv_atual: Number(criatura.pv),
+        pv_max: Number(criatura.pv),
+        nivel_sm: nivelTab,
+      })
+    } finally {
+      onClose()
+    }
   }
 
   return (
@@ -68,15 +80,15 @@ export default function SummonCreatureModal({ mp, magia, onClose }) {
           {Array.from({ length: nivelMax }, (_, i) => i + 1).map(n => (
             <button
               key={n}
-              onClick={() => { setNivelTab(n); setSelecionada(null) }}
+              onClick={() => { setNivelTab(n); setSelecionada(null); setCustomMode(false) }}
               className="font-medieval text-xs"
               style={{
                 padding: '4px 10px',
                 borderRadius: '4px 4px 0 0',
                 border: '1px solid #6b4a1a',
-                borderBottom: nivelTab === n ? '1px solid #0d0902' : '1px solid #6b4a1a',
-                background: nivelTab === n ? 'rgba(201,168,76,0.18)' : 'rgba(0,0,0,0.3)',
-                color: nivelTab === n ? '#c9a84c' : '#6b5a3a',
+                borderBottom: nivelTab === n && !customMode ? '1px solid #0d0902' : '1px solid #6b4a1a',
+                background: nivelTab === n && !customMode ? 'rgba(201,168,76,0.18)' : 'rgba(0,0,0,0.3)',
+                color: nivelTab === n && !customMode ? '#c9a84c' : '#6b5a3a',
                 marginBottom: -1,
                 cursor: 'pointer',
               }}
@@ -84,11 +96,50 @@ export default function SummonCreatureModal({ mp, magia, onClose }) {
               SM {['I','II','III','IV','V','VI','VII','VIII','IX'][n - 1]}
             </button>
           ))}
+          <button
+            onClick={() => { setCustomMode(true); setSelecionada(null) }}
+            className="font-medieval text-xs"
+            style={{
+              padding: '4px 10px',
+              borderRadius: '4px 4px 0 0',
+              border: '1px solid #6b4a1a',
+              borderBottom: customMode ? '1px solid #0d0902' : '1px solid #6b4a1a',
+              background: customMode ? 'rgba(201,168,76,0.18)' : 'rgba(0,0,0,0.3)',
+              color: customMode ? '#c9a84c' : '#6b5a3a',
+              marginBottom: -1,
+              cursor: 'pointer',
+            }}
+          >
+            ✦ Custom
+          </button>
         </div>
 
-        {/* Lista de criaturas */}
+        {/* Lista de criaturas / formulário custom */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '12px 20px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {criaturas.map((c, idx) => {
+          {customMode && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {[
+                { label: 'Nome', key: 'nome', type: 'text', required: true },
+                { label: 'PV Total', key: 'pv', type: 'number' },
+                { label: 'CA', key: 'ca', type: 'number' },
+                { label: 'Ataque', key: 'ataque', type: 'text' },
+                { label: 'Dano', key: 'dano', type: 'text' },
+                { label: 'Movimento', key: 'deslocamento', type: 'text' },
+              ].map(({ label, key, type }) => (
+                <div key={key}>
+                  <label className="label-medieval" style={{ fontSize: 10 }}>{label}</label>
+                  <input
+                    className="input-medieval"
+                    type={type}
+                    value={customForm[key]}
+                    onChange={e => setCustomForm(f => ({ ...f, [key]: e.target.value }))}
+                    style={{ marginTop: 2 }}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+          {!customMode && criaturas.map((c, idx) => {
             const sel = selecionada?.nome === c.nome
             const cor = corDoTipo(c.tipo)
             return (
@@ -140,6 +191,7 @@ export default function SummonCreatureModal({ mp, magia, onClose }) {
         </div>
 
         {/* Footer */}
+
         <div
           className="flex justify-end gap-3"
           style={{ padding: '12px 20px', borderTop: '1px solid #6b4a1a', flexShrink: 0 }}
@@ -148,8 +200,8 @@ export default function SummonCreatureModal({ mp, magia, onClose }) {
           <button
             className="btn-gold text-xs"
             onClick={convocar}
-            disabled={!selecionada}
-            style={{ opacity: selecionada ? 1 : 0.4, cursor: selecionada ? 'pointer' : 'not-allowed' }}
+            disabled={customMode ? !customValida : !selecionada}
+            style={{ opacity: (customMode ? customValida : selecionada) ? 1 : 0.4, cursor: (customMode ? customValida : selecionada) ? 'pointer' : 'not-allowed' }}
           >
             ✦ Convocar
           </button>

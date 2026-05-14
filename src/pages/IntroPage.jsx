@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import { useLang } from '../context/LangContext'
 import { loadData } from '../services/excelService'
 import logo from '../assets/logo.svg'
 
 export default function IntroPage() {
   const navigate = useNavigate()
   const { setDb } = useApp()
+  const { t } = useLang()
   const [carregando, setCarregando] = useState(false)
   const [erro, setErro] = useState(null)
 
@@ -22,7 +24,7 @@ export default function IntroPage() {
         navigate('/personagem/novo')
       }
     } catch (e) {
-      setErro('Não foi possível conectar ao servidor. Certifique-se de que o app foi iniciado com "npm run dev:all".')
+      setErro(t('intro', 'error'))
     } finally {
       setCarregando(false)
     }
@@ -43,7 +45,9 @@ export default function IntroPage() {
         <div className="flex flex-col items-center gap-3">
           <h1 className="font-medieval text-4xl md:text-5xl leading-tight"
             style={{ color: '#f0e6c8', textShadow: '0 2px 20px rgba(201,168,76,0.3)' }}>
-            Sua campanha,<br />seu grimório,<br />sua história.
+            {t('intro', 'tagline').split('\n').map((line, i) => (
+              <span key={i}>{line}{i < 2 && <br />}</span>
+            ))}
           </h1>
           <p className="font-medieval text-sm tracking-widest" style={{ color: '#c9a84c' }}>
             D&D 3.5
@@ -55,7 +59,7 @@ export default function IntroPage() {
             className="btn-gold text-base px-10 py-3"
             onClick={handleEntrar}
             disabled={carregando}>
-            {carregando ? 'Carregando...' : 'Entrar'}
+            {carregando ? t('intro', 'loading') : t('intro', 'enter')}
           </button>
 
           {erro && (
@@ -70,7 +74,7 @@ export default function IntroPage() {
       <div className="w-full shrink-0">
         <footer className="text-center ">
           <p className="font-medieval text-s tracking-widest" style={{ color: '#6b5a3a', marginBottom: '1.5rem' }}>
-            Criado por Vinny Bittencourt
+            {t('intro', 'footer')}
           </p>
         </footer>
         <div className="w-full h-1" style={{ background: 'linear-gradient(90deg, transparent, #c9a84c, transparent)' }} />

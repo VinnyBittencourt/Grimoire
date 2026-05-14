@@ -23,20 +23,23 @@ db.pragma('journal_mode = WAL')
 initSchema(db)
 
 function j(v) { return v == null ? null : JSON.stringify(v) }
+function toTitleCase(s) { return s.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) }
+function idToNameEn(id) { return toTitleCase(id.replace(/^[^_]+_/, '')) }
 
 db.transaction(() => {
   // ── ref_talentos ──────────────────────────────────────────────────────────
   db.prepare('DELETE FROM ref_talentos').run()
   const stmtTalento = db.prepare(`
-    INSERT INTO ref_talentos (id, nome, livro, categoria, prerequisitos, descricao, efeitos)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO ref_talentos (id, nome, nome_en, livro, categoria, prerequisitos, descricao, descricao_en, efeitos)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
   `)
   for (const t of TALENTOS_DND35) {
     stmtTalento.run(
-      t.id, t.nome, t.livro,
+      t.id, t.nome, t.nome_en ?? idToNameEn(t.id), t.livro,
       j(t.categoria),
       t.prerequisitos ?? '',
       t.descricao ?? '',
+      t.descricao_en ?? null,
       j(t.efeitos ?? [])
     )
   }

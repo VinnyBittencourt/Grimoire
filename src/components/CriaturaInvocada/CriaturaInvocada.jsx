@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useApp } from '../../context/AppContext'
+import { useLang } from '../../context/LangContext'
 
 const TIPO_COR = {
   'Celestial': '#c9a84c',
@@ -17,6 +18,7 @@ function corDoTipo(tipo = '') {
 
 export default function CriaturaInvocada() {
   const { personagemAtivo, salvarCriaturaInvocada } = useApp()
+  const { t } = useLang()
 
   let estado = null
   try {
@@ -58,7 +60,7 @@ export default function CriaturaInvocada() {
       >
         <div className="flex items-center gap-2">
           <h3 className="font-medieval text-sm font-semibold" style={{ color: '#c9a84c', letterSpacing: '0.05em' }}>
-            Criatura Invocada
+            {t('creature', 'title')}
           </h3>
           {nivel_sm && (
             <span style={{ fontSize: 10, color: '#6b5a3a', background: 'rgba(0,0,0,0.3)', padding: '1px 6px', borderRadius: 3 }}>
@@ -71,7 +73,7 @@ export default function CriaturaInvocada() {
           className="font-medieval text-xs rounded-sm"
           style={{ padding: '2px 8px', background: 'rgba(180,60,60,0.15)', border: '1px solid #7a2020', color: '#e07070' }}
         >
-          Dispensar
+          {t('creature', 'dismiss')}
         </button>
       </div>
 
@@ -93,7 +95,7 @@ export default function CriaturaInvocada() {
         {/* Barra de PV */}
         <div>
           <div className="flex items-center justify-between" style={{ marginBottom: 4 }}>
-            <span className="font-medieval text-xs" style={{ color: '#9b8a6a' }}>Pontos de Vida</span>
+            <span className="font-medieval text-xs" style={{ color: '#9b8a6a' }}>{t('creature', 'hp')}</span>
             <span className="font-medieval text-xs" style={{ color: pv_atual <= 0 ? '#e07070' : '#c9a84c' }}>
               {pv_atual}/{pv_max}
             </span>
@@ -139,9 +141,9 @@ export default function CriaturaInvocada() {
         {/* Stats */}
         <div className="flex flex-wrap" style={{ gap: '6px 16px', fontSize: 11 }}>
           <span style={{ color: '#9b8a6a' }}><span style={{ color: '#c9a84c' }}>CA</span> {criatura.ca}</span>
-          <span style={{ color: '#9b8a6a' }}><span style={{ color: '#c9a84c' }}>Atq</span> {criatura.ataque}</span>
-          <span style={{ color: '#9b8a6a' }}><span style={{ color: '#c9a84c' }}>Dano</span> {criatura.dano}</span>
-          <span style={{ color: '#9b8a6a' }}><span style={{ color: '#c9a84c' }}>Mov</span> {criatura.deslocamento}</span>
+          <span style={{ color: '#9b8a6a' }}><span style={{ color: '#c9a84c' }}>{t('creature', 'atk')}</span> {criatura.ataque}</span>
+          <span style={{ color: '#9b8a6a' }}><span style={{ color: '#c9a84c' }}>{t('creature', 'dmg')}</span> {criatura.dano}</span>
+          <span style={{ color: '#9b8a6a' }}><span style={{ color: '#c9a84c' }}>{t('creature', 'mov')}</span> {criatura.deslocamento}</span>
         </div>
 
         {/* Habilidades */}

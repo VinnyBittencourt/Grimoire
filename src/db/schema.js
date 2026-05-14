@@ -27,7 +27,7 @@ export function initSchema(db) {
       tendencia TEXT, falha TEXT, personalidade TEXT,
       moeda_cobre INTEGER DEFAULT 0, moeda_prata INTEGER DEFAULT 0,
       moeda_ouro INTEGER DEFAULT 0, moeda_platina INTEGER DEFAULT 0,
-      criatura_invocada_json TEXT, foto_base64 TEXT
+      criatura_invocada_json TEXT, foto_base64 TEXT, bonus_slots_json TEXT
     );
 
     CREATE TABLE IF NOT EXISTS magias (
@@ -59,7 +59,7 @@ export function initSchema(db) {
 
     CREATE TABLE IF NOT EXISTS players (
       id INTEGER PRIMARY KEY,
-      personagem_id INTEGER, nome TEXT, contato TEXT
+      personagem_id INTEGER, nome TEXT, classe TEXT, raca TEXT, notas TEXT
     );
 
     CREATE TABLE IF NOT EXISTS talentos (
@@ -80,22 +80,22 @@ export function initSchema(db) {
 
     CREATE TABLE IF NOT EXISTS npcs (
       id INTEGER PRIMARY KEY,
-      personagem_id INTEGER, nome TEXT, descricao TEXT, relacionamento TEXT
+      personagem_id INTEGER, nome TEXT, genero TEXT, ocupacao TEXT, notas TEXT, foto_base64 TEXT
     );
 
     CREATE TABLE IF NOT EXISTS locais (
       id INTEGER PRIMARY KEY,
-      personagem_id INTEGER, nome TEXT, descricao TEXT, coordenadas TEXT
+      personagem_id INTEGER, nome TEXT, notas TEXT
     );
 
     CREATE TABLE IF NOT EXISTS quests (
       id INTEGER PRIMARY KEY,
-      personagem_id INTEGER, nome TEXT, descricao TEXT, status TEXT, recompensa TEXT
+      personagem_id INTEGER, nome TEXT, local_id INTEGER, tipo TEXT, notas TEXT, npc_ids TEXT
     );
     CREATE TABLE IF NOT EXISTS ref_talentos (
       id TEXT PRIMARY KEY,
-      nome TEXT, livro TEXT, categoria TEXT,
-      prerequisitos TEXT, descricao TEXT, efeitos TEXT
+      nome TEXT, nome_en TEXT, livro TEXT, categoria TEXT,
+      prerequisitos TEXT, descricao TEXT, descricao_en TEXT, efeitos TEXT
     );
 
     CREATE TABLE IF NOT EXISTS ref_falhas (
@@ -127,4 +127,24 @@ export function initSchema(db) {
       ataque TEXT, habilidades TEXT
     );
   `)
+
+  // Migrações para bancos existentes — colunas adicionadas após o redesign dos componentes
+  const migrations = [
+    'ALTER TABLE personagens ADD COLUMN bonus_slots_json TEXT',
+    'ALTER TABLE players ADD COLUMN classe TEXT',
+    'ALTER TABLE players ADD COLUMN raca TEXT',
+    'ALTER TABLE players ADD COLUMN notas TEXT',
+    'ALTER TABLE npcs ADD COLUMN genero TEXT',
+    'ALTER TABLE npcs ADD COLUMN ocupacao TEXT',
+    'ALTER TABLE npcs ADD COLUMN notas TEXT',
+    'ALTER TABLE npcs ADD COLUMN foto_base64 TEXT',
+    'ALTER TABLE locais ADD COLUMN notas TEXT',
+    'ALTER TABLE quests ADD COLUMN local_id INTEGER',
+    'ALTER TABLE quests ADD COLUMN tipo TEXT',
+    'ALTER TABLE quests ADD COLUMN notas TEXT',
+    'ALTER TABLE quests ADD COLUMN npc_ids TEXT',
+  ]
+  for (const sql of migrations) {
+    try { db.exec(sql) } catch (_) { /* coluna já existe */ }
+  }
 }

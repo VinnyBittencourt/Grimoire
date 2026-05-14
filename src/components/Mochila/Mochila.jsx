@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useApp } from '../../context/AppContext'
+import { useLang } from '../../context/LangContext'
 
 const ICONES = [
   '🎒','🧪','⚗️','🗡️','🏹','🛡️','🪄','📜','🗝️','🔑',
@@ -16,6 +17,7 @@ const EMPTY_FORM = { nome: '', quantidade: 1, peso: 0, info: '', icone: '🎒' }
 
 export default function Mochila() {
   const { db, personagemAtivo, adicionarItemMochila, editarItemMochila, excluirItemMochila, editarPersonagem } = useApp()
+  const { t } = useLang()
   const [modal, setModal] = useState(null)
   const [form, setForm] = useState(EMPTY_FORM)
   const [mostrarIcones, setMostrarIcones] = useState(false)
@@ -88,20 +90,19 @@ export default function Mochila() {
       {/* Header */}
       <div className="px-4 pt-3 pb-2 shrink-0 flex items-center justify-between"
         style={{ borderBottom: '1px solid #6b4a1a' }}>
-        <h3 className="font-medieval text-sm" style={{ color: '#c9a84c' }}>Mochila</h3>
+        <h3 className="font-medieval text-sm" style={{ color: '#c9a84c' }}>{t('mochila', 'title')}</h3>
         <button
           onClick={abrirNovo}
           className="font-medieval text-xs px-2 py-0.5 rounded-sm transition-colors"
-          style={{ background: 'rgba(201,168,76,0.15)', border: '1px solid #6b4a1a', color: '#c9a84c' }}
-          title="Adicionar item">
-          + Adicionar
+          style={{ background: 'rgba(201,168,76,0.15)', border: '1px solid #6b4a1a', color: '#c9a84c' }}>
+          {t('mochila', 'add')}
         </button>
       </div>
 
       {/* Grade de itens */}
       <div className="flex-1 overflow-y-auto p-2">
         {itens.length === 0 ? (
-          <p className="text-center text-xs py-4" style={{ color: '#3a2810' }}>Mochila vazia</p>
+          <p className="text-center text-xs py-4" style={{ color: '#3a2810' }}>{t('mochila', 'none')}</p>
         ) : (
           <div className="grid grid-cols-3 gap-1.5">
             {itens.map(item => (
@@ -133,7 +134,7 @@ export default function Mochila() {
       {/* Peso total */}
       <div className="px-3 py-1.5 shrink-0 flex justify-between items-center"
         style={{ borderTop: '1px solid #6b4a1a' }}>
-        <span className="label-medieval" style={{ fontSize: 9 }}>Peso Total</span>
+        <span className="label-medieval" style={{ fontSize: 9 }}>{t('mochila', 'totalWeight')}</span>
         <span className="font-medieval text-xs" style={{ color: '#f0e6c8' }}>
           {pesoTotal.toFixed(1)} kg
         </span>
@@ -176,13 +177,13 @@ export default function Mochila() {
         <div className="modal-overlay" onClick={() => setModal(null)}>
           <div className="modal-content p-6" style={{ width: '340px' }} onClick={e => e.stopPropagation()}>
             <h4 className="font-medieval text-base mb-4 text-center" style={{ color: '#c9a84c' }}>
-              {form.icone} {modal.mode === 'novo' ? 'Novo Item' : 'Editar Item'}
+              {form.icone} {modal.mode === 'novo' ? t('mochila', 'newItem') : t('mochila', 'editItem')}
             </h4>
 
             <div className="flex flex-col gap-3">
               {/* Ícone */}
               <div>
-                <label className="label-medieval">Ícone</label>
+                <label className="label-medieval">{t('mochila', 'icon')}</label>
                 <button
                   type="button"
                   onClick={() => setMostrarIcones(v => !v)}
@@ -190,7 +191,7 @@ export default function Mochila() {
                   style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid #6b4a1a', color: '#f0e6c8' }}>
                   <span style={{ fontSize: '20px' }}>{form.icone}</span>
                   <span className="text-xs" style={{ color: '#9b8a6a' }}>
-                    {mostrarIcones ? 'Fechar' : 'Escolher ícone'}
+                    {mostrarIcones ? t('mochila', 'close') : t('mochila', 'choose')}
                   </span>
                 </button>
                 {mostrarIcones && (
@@ -218,39 +219,39 @@ export default function Mochila() {
               </div>
 
               <div>
-                <label className="label-medieval">Nome do Item</label>
-                <input className="input-medieval" placeholder="Ex: Corda, Tocha, Poção..."
+                <label className="label-medieval">{t('mochila', 'itemName')}</label>
+                <input className="input-medieval" placeholder={t('mochila', 'itemPlaceholder')}
                   value={form.nome} onChange={e => set('nome', e.target.value)} />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label-medieval">Quantidade</label>
+                  <label className="label-medieval">{t('mochila', 'quantity')}</label>
                   <input className="input-medieval" type="number" min={1}
                     value={form.quantidade} onChange={e => set('quantidade', e.target.value)} />
                 </div>
                 <div>
-                  <label className="label-medieval">Peso (kg)</label>
+                  <label className="label-medieval">{t('mochila', 'weight')}</label>
                   <input className="input-medieval" type="number" min={0} step={0.1}
                     value={form.peso} onChange={e => set('peso', e.target.value)} />
                 </div>
               </div>
 
               <div>
-                <label className="label-medieval">Informações Extras</label>
+                <label className="label-medieval">{t('mochila', 'extraInfo')}</label>
                 <textarea className="input-medieval resize-none" rows={3}
-                  placeholder="Descrição, efeitos, valor..."
+                  placeholder={t('mochila', 'extraPlaceholder')}
                   value={form.info} onChange={e => set('info', e.target.value)} />
               </div>
             </div>
 
             <div className="flex gap-3 mt-5">
               {modal.mode === 'editar' && (
-                <button className="btn-danger text-xs" onClick={excluir}>Remover</button>
+                <button className="btn-danger text-xs" onClick={excluir}>{t('mochila', 'remove')}</button>
               )}
               <div className="flex gap-2 ml-auto">
-                <button className="btn-ghost text-xs" onClick={() => setModal(null)}>Cancelar</button>
-                <button className="btn-gold text-xs" onClick={salvar}>Salvar</button>
+                <button className="btn-ghost text-xs" onClick={() => setModal(null)}>{t('mochila', 'cancel')}</button>
+                <button className="btn-gold text-xs" onClick={salvar}>{t('mochila', 'save')}</button>
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useApp } from '../../context/AppContext'
 import { useLang } from '../../context/LangContext'
-import { RECURSOS_PADRAO } from '../../services/dnd35Tables'
+import { RECURSOS_PADRAO, RECURSOS_NOME_EN } from '../../services/dnd35Tables'
 import { useEfeitosDoPersonagem } from '../../hooks/useEfeitosDoPersonagem'
 
 const ICONES_RECURSO = [
@@ -31,7 +31,7 @@ function getClassesDoPersonagem(p) {
 
 export default function RecursosClasse() {
   const { db, personagemAtivo, adicionarRecurso, editarRecurso, excluirRecurso } = useApp()
-  const { t } = useLang()
+  const { lang, t } = useLang()
   const efeitos = useEfeitosDoPersonagem()
   const [modal, setModal] = useState(null)
   const [form, setForm] = useState(EMPTY_FORM)
@@ -161,7 +161,7 @@ export default function RecursosClasse() {
                     <div className="flex items-center gap-2">
                       <span style={{ fontSize: '16px' }}>{r.icone}</span>
                       <div>
-                        <span className="font-medieval" style={{ color: '#c9a84c', fontSize: 12 }}>{r.nome}</span>
+                        <span className="font-medieval" style={{ color: '#c9a84c', fontSize: 12 }}>{lang === 'en' ? (RECURSOS_NOME_EN[r.nome] || r.nome) : r.nome}</span>
                         {r.classe && (
                           <span style={{ color: '#6b5a3a', fontSize: 11, marginLeft: '6px' }}>({r.classe})</span>
                         )}

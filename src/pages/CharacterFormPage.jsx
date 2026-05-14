@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import { useLang } from '../context/LangContext'
 import Header from '../components/Layout/Header'
 import {
-  CLASSES_DND, TENDENCIAS, RACAS, TAMANHOS, GENEROS, RECURSOS_PADRAO
+  CLASSES_DND, TENDENCIAS, RACAS, TAMANHOS, GENEROS, RECURSOS_PADRAO,
+  RACAS_EN, TAMANHOS_EN, GENEROS_EN, TENDENCIAS_EN, CLASSES_EN,
 } from '../services/dnd35Tables'
 
-const CAMPOS_ATRIBUTOS = [
-  { key: 'for', label: 'For' },
-  { key: 'des', label: 'Des' },
-  { key: 'con', label: 'Con' },
-  { key: 'int', label: 'Int' },
-  { key: 'sab', label: 'Sab' },
-  { key: 'car', label: 'Car' },
+const CAMPOS_ATRIBUTOS_PT = [
+  { key: 'for', pt: 'For', en: 'STR' },
+  { key: 'des', pt: 'Des', en: 'DEX' },
+  { key: 'con', pt: 'Con', en: 'CON' },
+  { key: 'int', pt: 'Int', en: 'INT' },
+  { key: 'sab', pt: 'Sab', en: 'WIS' },
+  { key: 'car', pt: 'Car', en: 'CHA' },
 ]
 
 function fileToBase64(file) {
@@ -28,6 +30,7 @@ export default function CharacterFormPage() {
   const { id } = useParams()
   const { db, criarPersonagem, editarPersonagem, setPersonagemAtivo,
           adicionarRecurso, editarRecurso, excluirRecurso } = useApp()
+  const { lang, t } = useLang()
 
   const isEditing = Boolean(id)
   const personagemExistente = isEditing ? db?.personagens?.find(p => p.id === Number(id)) : null
@@ -154,9 +157,11 @@ export default function CharacterFormPage() {
       }
     } catch (err) {
       console.error('Erro ao salvar personagem:', err)
-      alert('Erro ao salvar. Verifique o servidor e tente novamente.')
+      alert(t('charForm', 'errorSave'))
     }
   }
+
+  const enLabel = (map, val) => lang === 'en' ? (map[val] || val) : val
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: '#0d0902' }}>
@@ -165,7 +170,7 @@ export default function CharacterFormPage() {
       <main className="flex-1 flex flex-col items-center justify-center py-8 px-8">
         <div className="panel w-full max-w-5xl" style={{ padding: '3rem' }}>
           <h2 className="font-medieval text-2xl text-center" style={{ color: '#c9a84c', marginBottom: '2.5rem' }}>
-            {isEditing ? 'Editar Personagem' : 'Criação de Personagem'}
+            {isEditing ? t('charForm', 'titleEdit') : t('charForm', 'titleCreate')}
           </h2>
 
           <form onSubmit={handleSubmit}>
@@ -184,7 +189,7 @@ export default function CharacterFormPage() {
                     }
                   </div>
                   <label className="btn-ghost text-xs cursor-pointer">
-                    Escolher Foto
+                    {t('charForm', 'choosePhoto')}
                     <input type="file" accept="image/*" className="hidden" onChange={handleFoto} />
                   </label>
                 </div>
@@ -194,13 +199,13 @@ export default function CharacterFormPage() {
                 {/* Nome + Raça */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="label-medieval">Nome</label>
+                    <label className="label-medieval">{t('charForm', 'name')}</label>
                     <input className="input-medieval" required value={form.nome} onChange={e => set('nome', e.target.value)} />
                   </div>
                   <div>
-                    <label className="label-medieval">Raça</label>
+                    <label className="label-medieval">{t('charForm', 'race')}</label>
                     <select className="input-medieval" value={form.raca} onChange={e => set('raca', e.target.value)}>
-                      {RACAS.map(r => <option key={r} value={r}>{r}</option>)}
+                      {RACAS.map(r => <option key={r} value={r}>{enLabel(RACAS_EN, r)}</option>)}
                     </select>
                   </div>
                 </div>
@@ -208,15 +213,15 @@ export default function CharacterFormPage() {
                 {/* Classes */}
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between">
-                    <label className="label-medieval">Classe{classes.length > 1 ? 's' : ''}</label>
+                    <label className="label-medieval">{classes.length > 1 ? t('charForm', 'classes') : t('charForm', 'class')}</label>
                     <div className="flex items-center gap-3">
                       <span className="label-medieval" style={{ color: '#9b8a6a' }}>
-                        Nível Total: <span style={{ color: '#c9a84c' }}>{nivelTotal}</span>
+                        {t('charForm', 'totalLevel')}: <span style={{ color: '#c9a84c' }}>{nivelTotal}</span>
                       </span>
                       <button type="button" onClick={adicionarClasse}
                         className="font-medieval text-xs px-2 py-0.5 rounded-sm"
                         style={{ background: 'rgba(201,168,76,0.15)', border: '1px solid #6b4a1a', color: '#c9a84c' }}>
-                        + Multiclasse
+                        {t('charForm', 'multiclass')}
                       </button>
                     </div>
                   </div>
@@ -224,7 +229,7 @@ export default function CharacterFormPage() {
                     <div key={idx} className="flex gap-2 items-center">
                       <select className="input-medieval" style={{ flex: 1, minWidth: 0, width: 'auto' }} value={c.classe}
                         onChange={e => setClasse(idx, 'classe', e.target.value)}>
-                        {CLASSES_DND.map(cl => <option key={cl} value={cl}>{cl}</option>)}
+                        {CLASSES_DND.map(cl => <option key={cl} value={cl}>{enLabel(CLASSES_EN, cl)}</option>)}
                       </select>
                       <input className="input-medieval text-center" style={{ width: '64px', flexShrink: 0 }} type="number" min={1} max={20}
                         value={c.nivel} onChange={e => setClasse(idx, 'nivel', e.target.value)} />
@@ -242,11 +247,11 @@ export default function CharacterFormPage() {
                 {/* Domínio + Divindade */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="label-medieval">Domínio</label>
-                    <input className="input-medieval" placeholder="Ex: Vida, Guerra..." value={form.dominio} onChange={e => set('dominio', e.target.value)} />
+                    <label className="label-medieval">{t('charForm', 'domain')}</label>
+                    <input className="input-medieval" placeholder={t('charForm', 'domainPlaceholder')} value={form.dominio} onChange={e => set('dominio', e.target.value)} />
                   </div>
                   <div>
-                    <label className="label-medieval">Divindade</label>
+                    <label className="label-medieval">{t('charForm', 'deity')}</label>
                     <input className="input-medieval" value={form.divindade} onChange={e => set('divindade', e.target.value)} />
                   </div>
                 </div>
@@ -254,23 +259,23 @@ export default function CharacterFormPage() {
                 {/* Idade + Sexo + Tamanho + Desloc */}
                 <div className="grid grid-cols-4 gap-3">
                   <div>
-                    <label className="label-medieval">Idade</label>
+                    <label className="label-medieval">{t('charForm', 'age')}</label>
                     <input className="input-medieval" type="number" min={0} value={form.idade} onChange={e => set('idade', e.target.value)} />
                   </div>
                   <div>
-                    <label className="label-medieval">Sexo</label>
+                    <label className="label-medieval">{t('charForm', 'gender')}</label>
                     <select className="input-medieval" value={form.sexo} onChange={e => set('sexo', e.target.value)}>
-                      {GENEROS.map(g => <option key={g} value={g}>{g}</option>)}
+                      {GENEROS.map(g => <option key={g} value={g}>{enLabel(GENEROS_EN, g)}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="label-medieval">Tamanho</label>
+                    <label className="label-medieval">{t('charForm', 'size')}</label>
                     <select className="input-medieval" value={form.tamanho} onChange={e => set('tamanho', e.target.value)}>
-                      {TAMANHOS.map(t => <option key={t} value={t}>{t}</option>)}
+                      {TAMANHOS.map(sz => <option key={sz} value={sz}>{enLabel(TAMANHOS_EN, sz)}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="label-medieval">Desloc.</label>
+                    <label className="label-medieval">{t('charForm', 'speed')}</label>
                     <input className="input-medieval" type="number" min={0} value={form.deslocamento} onChange={e => set('deslocamento', e.target.value)} />
                   </div>
                 </div>
@@ -284,11 +289,11 @@ export default function CharacterFormPage() {
 
                 {/* Atributos */}
                 <div>
-                  <label className="label-medieval mb-3 block">Atributos</label>
+                  <label className="label-medieval mb-3 block">{t('charForm', 'attrs')}</label>
                   <div className="grid grid-cols-6 gap-3">
-                    {CAMPOS_ATRIBUTOS.map(({ key, label }) => (
+                    {CAMPOS_ATRIBUTOS_PT.map(({ key, pt, en }) => (
                       <div key={key} className="flex flex-col items-center gap-1">
-                        <span className="label-medieval text-center">{label}</span>
+                        <span className="label-medieval text-center">{lang === 'en' ? en : pt}</span>
                         <input className="input-medieval text-center" type="number" min={1} max={30}
                           value={form[key]} onChange={e => set(key, e.target.value)} />
                         <span className="text-xs" style={{ color: '#9b8a6a' }}>
@@ -303,11 +308,11 @@ export default function CharacterFormPage() {
                 {/* PV + CA */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="label-medieval">PV (Pontos de Vida)</label>
+                    <label className="label-medieval">{t('charForm', 'hp')}</label>
                     <input className="input-medieval" type="number" min={1} value={form.pv} onChange={e => set('pv', e.target.value)} />
                   </div>
                   <div>
-                    <label className="label-medieval">CA (Classe de Armadura)</label>
+                    <label className="label-medieval">{t('charForm', 'ca')}</label>
                     <input className="input-medieval" type="number" min={0} value={form.ca} onChange={e => set('ca', e.target.value)} />
                   </div>
                 </div>
@@ -317,22 +322,22 @@ export default function CharacterFormPage() {
                 {/* Tendência + Falha */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="label-medieval">Tendência</label>
+                    <label className="label-medieval">{t('charForm', 'alignment')}</label>
                     <select className="input-medieval" value={form.tendencia} onChange={e => set('tendencia', e.target.value)}>
-                      {TENDENCIAS.map(t => <option key={t} value={t}>{t}</option>)}
+                      {TENDENCIAS.map(td => <option key={td} value={td}>{enLabel(TENDENCIAS_EN, td)}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="label-medieval">Falha / Fraqueza</label>
-                    <input className="input-medieval" placeholder="Ex: Ganância, Arrogância..." value={form.falha} onChange={e => set('falha', e.target.value)} />
+                    <label className="label-medieval">{t('charForm', 'flaw')}</label>
+                    <input className="input-medieval" placeholder={t('charForm', 'flawPlaceholder')} value={form.falha} onChange={e => set('falha', e.target.value)} />
                   </div>
                 </div>
 
                 {/* Personalidade */}
                 <div className="flex-1 flex flex-col">
-                  <label className="label-medieval">Personalidade</label>
+                  <label className="label-medieval">{t('charForm', 'personality')}</label>
                   <textarea className="input-medieval resize-none flex-1" style={{ minHeight: '120px' }}
-                    placeholder="Descreva a personalidade do personagem..."
+                    placeholder={t('charForm', 'personalityPlaceholder')}
                     value={form.personalidade} onChange={e => set('personalidade', e.target.value)} />
                 </div>
 
@@ -340,10 +345,10 @@ export default function CharacterFormPage() {
                 <div className="flex gap-4 justify-end pt-2">
                   <button type="button" className="btn-ghost"
                     onClick={() => navigate(isEditing ? `/personagem/${id}` : '/personagens')}>
-                    Cancelar
+                    {t('charForm', 'cancel')}
                   </button>
                   <button type="submit" className="btn-gold">
-                    {isEditing ? 'Salvar Alterações' : 'Criar Personagem'}
+                    {isEditing ? t('charForm', 'save') : t('charForm', 'create')}
                   </button>
                 </div>
               </div>

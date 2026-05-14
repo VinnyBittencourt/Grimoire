@@ -1,15 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
 import { useApp } from '../../context/AppContext'
+import { useLang } from '../../context/LangContext'
 import { GENEROS } from '../../services/dnd35Tables'
 
-const TABS = [
-  { key: 'background', label: 'Background' },
-  { key: 'players', label: 'Players' },
-  { key: 'anotacoes', label: 'Anotações' },
-  { key: 'npcs', label: 'NPCs' },
-  { key: 'locais', label: 'Locais' },
-  { key: 'quests', label: 'Quests' },
-]
+const TAB_KEYS = ['background', 'players', 'anotacoes', 'npcs', 'locais', 'quests']
+const TAB_I18N = { background: 'background', players: 'players', anotacoes: 'notes', npcs: 'npcs', locais: 'locations', quests: 'quests' }
 
 function fileToBase64(file) {
   return new Promise(resolve => {
@@ -21,8 +16,8 @@ function fileToBase64(file) {
 
 export default function SessionNotesModal({ abaInicial = 'anotacoes', onClose }) {
   const [aba, setAba] = useState(abaInicial)
+  const { t } = useLang()
 
-  {/* -------- Modal -------- */}
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content w-full  flex flex-col" style={{ height: '88vh', width: '80vw' }}
@@ -30,10 +25,10 @@ export default function SessionNotesModal({ abaInicial = 'anotacoes', onClose })
         {/* Header com tabs */}
         <div className="flex items-center justify-between px-6 pt-5 pb-0 shrink-0">
           <div className="flex gap-1">
-            {TABS.map(t => (
-              <button key={t.key} className={`tab-btn  ${aba === t.key ? 'active' : ''}`}
-                onClick={() => setAba(t.key)}>
-                {t.label}
+            {TAB_KEYS.map(key => (
+              <button key={key} className={`tab-btn  ${aba === key ? 'active' : ''}`}
+                onClick={() => setAba(key)}>
+                {t('notes', TAB_I18N[key])}
               </button>
             ))}
           </div>
@@ -59,6 +54,7 @@ export default function SessionNotesModal({ abaInicial = 'anotacoes', onClose })
 // ── Background ───────────────────────────────────────────────
 function AbaBackground() {
   const { db, personagemAtivo, salvarBackground } = useApp()
+  const { t } = useLang()
   const registro = (db?.backgrounds || []).find(b => b.personagem_id === personagemAtivo?.id)
   const [texto, setTexto] = useState(registro?.texto || '')
   const [salvando, setSalvando] = useState(false)
@@ -73,17 +69,17 @@ function AbaBackground() {
   return (
     <form onSubmit={handleSalvar} className="flex flex-col gap-4 pt-2 h-full">
       <div className="flex-1 flex flex-col">
-        <label className="label-medieval mb-2 block">História e Background do Personagem</label>
+        <label className="label-medieval mb-2 block">{t('notes', 'bgLabel')}</label>
         <textarea
           className="input-medieval resize-none flex-1"
-          placeholder="Descreva a história, origens, motivações e background do seu personagem..."
+          placeholder={t('notes', 'bgPlaceholder')}
           value={texto}
           onChange={e => setTexto(e.target.value)}
         />
       </div>
       <div className="flex justify-end shrink-0">
         <button type="submit" className="btn-gold text-xs" disabled={salvando}>
-          {salvando ? 'Salvando...' : 'Salvar Background'}
+          {salvando ? t('notes', 'saving') : t('notes', 'saveBg')}
         </button>
       </div>
     </form>
@@ -93,6 +89,7 @@ function AbaBackground() {
 // ── Players ───────────────────────────────────────────────────
 function AbaPlayers() {
   const { db, personagemAtivo, adicionarPlayer, editarPlayer, excluirPlayer } = useApp()
+  const { t } = useLang()
   const [busca, setBusca] = useState('')
   const [ativo, setAtivo] = useState(null) // null | player object | { __novo: true }
 
@@ -122,11 +119,11 @@ function AbaPlayers() {
         <div className="flex gap-2">
           <input
             className="input-medieval flex-1 text-xs"
-            placeholder="Buscar..."
+            placeholder={t('notes', 'search')}
             value={busca}
             onChange={e => setBusca(e.target.value)}
           />
-          <button className="btn-gold text-xs shrink-0" onClick={() => setAtivo({ __novo: true })}>+ Novo</button>
+          <button className="btn-gold text-xs shrink-0" onClick={() => setAtivo({ __novo: true })}>{t('notes', 'new')}</button>
         </div>
         <div className="flex-1 overflow-y-auto flex flex-col gap-2" style={{ minHeight: 0 }}>
           {players.map(p => (
@@ -158,7 +155,7 @@ function AbaPlayers() {
             </div>
           ))}
           {players.length === 0 && (
-            <p className="text-xs text-center mt-6" style={{ color: '#3a2810' }}>Nenhum player ainda.</p>
+            <p className="text-xs text-center mt-6" style={{ color: '#3a2810' }}>{t('notes', 'noPlayers')}</p>
           )}
         </div>
       </div>
@@ -180,7 +177,7 @@ function AbaPlayers() {
             style={{ border: '1px dashed #3a2810', borderRadius: 4 }}>
             <span style={{ fontSize: 32, opacity: 0.3 }}>🧙</span>
             <p className="font-medieval text-sm text-center" style={{ color: '#3a2810' }}>
-              Selecione um player ou clique em + Novo
+              {t('notes', 'selectPlayer')}
             </p>
           </div>
         )}
@@ -190,6 +187,7 @@ function AbaPlayers() {
 }
 
 function FormPlayer({ player, onSalvar, onCancelar }) {
+  const { t } = useLang()
   const [form, setForm] = useState({
     nome: player?.nome || '',
     classe: player?.classe || '',
@@ -208,38 +206,38 @@ function FormPlayer({ player, onSalvar, onCancelar }) {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 h-full">
       <h4 className="font-medieval text-md font-semibold shrink-0" style={{ color: '#c9a84c' }}>
-        {player ? 'Editar Player' : 'Novo Player'}
+        {player ? t('notes', 'editPlayer') : t('notes', 'newPlayer')}
       </h4>
       <div className="flex-1 flex flex-col gap-3 overflow-y-auto">
         <div>
-          <label className="label-medieval">Nome do Jogador / Personagem</label>
+          <label className="label-medieval">{t('notes', 'playerName')}</label>
           <input className="input-medieval" required value={form.nome}
             onChange={e => setForm(f => ({ ...f, nome: e.target.value }))} />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="label-medieval">Classe</label>
+            <label className="label-medieval">{t('notes', 'class')}</label>
             <input className="input-medieval" value={form.classe}
               onChange={e => setForm(f => ({ ...f, classe: e.target.value }))} />
           </div>
           <div>
-            <label className="label-medieval">Raça</label>
+            <label className="label-medieval">{t('notes', 'race')}</label>
             <input className="input-medieval" value={form.raca}
               onChange={e => setForm(f => ({ ...f, raca: e.target.value }))} />
           </div>
         </div>
         <div className="flex-1 flex flex-col">
-          <label className="label-medieval">Notas</label>
+          <label className="label-medieval">{t('notes', 'notesLabel')}</label>
           <textarea className="input-medieval resize-none flex-1" style={{ minHeight: 80 }}
-            placeholder="Informações sobre o player ou personagem..."
+            placeholder={t('notes', 'playerPlaceholder')}
             value={form.notas}
             onChange={e => setForm(f => ({ ...f, notas: e.target.value }))} />
         </div>
       </div>
       <div className="flex gap-3 justify-end shrink-0">
-        <button type="button" className="btn-ghost text-xs" onClick={onCancelar}>Cancelar</button>
+        <button type="button" className="btn-ghost text-xs" onClick={onCancelar}>{t('notes', 'cancel')}</button>
         <button type="submit" className="btn-gold text-xs" disabled={salvando}>
-          {salvando ? 'Salvando...' : '✓ Salvar'}
+          {salvando ? t('notes', 'saving') : t('notes', 'save')}
         </button>
       </div>
     </form>
@@ -249,6 +247,7 @@ function FormPlayer({ player, onSalvar, onCancelar }) {
 // ── Anotações ────────────────────────────────────────────────
 function AbaAnotacoes() {
   const { db, personagemAtivo, adicionarAnotacao, editarAnotacao, excluirAnotacao } = useApp()
+  const { t } = useLang()
   const [busca, setBusca] = useState('')
   const [ativa, setAtiva] = useState(null) // null | { id?, titulo, notas, data? }
 
@@ -256,16 +255,20 @@ function AbaAnotacoes() {
     .filter(a => a.personagem_id === personagemAtivo?.id)
     .filter(a => !busca ||
       a.titulo?.toLowerCase().includes(busca.toLowerCase()) ||
-      stripHtml(a.notas)?.toLowerCase().includes(busca.toLowerCase()))
-    .sort((a, b) => (b.data || '').localeCompare(a.data || ''))
+      stripHtml(a.conteudo)?.toLowerCase().includes(busca.toLowerCase()))
+    .sort((a, b) => {
+      const parse = d => { const [dd, mm, yyyy] = (d || '').split('/'); return new Date(yyyy, mm - 1, dd) }
+      const now = Date.now()
+      return Math.abs(parse(a.data) - now) - Math.abs(parse(b.data) - now)
+    })
 
   async function handleSalvar(titulo, notas) {
     const data = new Date().toLocaleDateString('pt-BR')
     const tituloFinal = titulo.trim() || `Anotação — ${data}`
     if (ativa?.id) {
-      await editarAnotacao(ativa.id, { titulo: tituloFinal, notas, data })
+      await editarAnotacao(ativa.id, { titulo: tituloFinal, conteudo: notas, data })
     } else {
-      await adicionarAnotacao({ titulo: tituloFinal, notas, personagem_id: personagemAtivo.id, data })
+      await adicionarAnotacao({ titulo: tituloFinal, conteudo: notas, personagem_id: personagemAtivo.id, data })
     }
     setAtiva(null)
   }
@@ -284,14 +287,14 @@ function AbaAnotacoes() {
         <div className="flex gap-2">
           <input
             className="input-medieval flex-1 text-xs"
-            placeholder="Buscar..."
+            placeholder={t('notes', 'searchNote')}
             value={busca}
             onChange={e => setBusca(e.target.value)}
           />
           <button
             className="btn-gold text-xs shrink-0"
             onClick={() => setAtiva({ titulo: '', notas: '' })}
-          >+ Nova</button>
+          >{t('notes', 'newFem')}</button>
         </div>
 
         <div className="flex-1 overflow-y-auto flex flex-col gap-2" style={{ minHeight: 0 }}>
@@ -309,18 +312,18 @@ function AbaAnotacoes() {
                 <div className="min-w-0 flex-1">
                   <p className="font-medieval text-sm truncate" style={{ color: '#f0e6c8' }}>{a.titulo}</p>
                   <p className="text-xs mt-0.5" style={{ color: '#917d58' }}>{a.data}</p>
-                  <p className="text-xs mt-1 line-clamp-2" style={{ color: '#6b5a3a' }}>{stripHtml(a.notas)}</p>
+                  <p className="text-xs mt-1 line-clamp-2" style={{ color: '#6b5a3a' }}>{stripHtml(a.conteudo)}</p>
                 </div>
                 <button
-                  style={{ color: '#6b5a3a', background: 'none', border: 'none', cursor: 'pointer', fontSize: 15, lineHeight: 1, flexShrink: 0 }}
+                  style={{ color: '#c06060', background: 'rgba(192,96,96,0.12)', border: '1px solid rgba(192,96,96,0.3)', borderRadius: 3, cursor: 'pointer', fontSize: 13, fontWeight: 700, lineHeight: 1, flexShrink: 0, width: 22, height: 22, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                   onClick={e => handleExcluir(e, a.id)}
                   title="Excluir"
-                >🗑</button>
+                >✕</button>
               </div>
             </div>
           ))}
           {anotacoes.length === 0 && (
-            <p className="text-xs text-center mt-6" style={{ color: '#3a2810' }}>Nenhuma anotação ainda.</p>
+            <p className="text-xs text-center mt-6" style={{ color: '#3a2810' }}>{t('notes', 'noNotes')}</p>
           )}
         </div>
       </div>
@@ -342,7 +345,7 @@ function AbaAnotacoes() {
             style={{ border: '1px dashed #3a2810', borderRadius: 4 }}>
             <span style={{ fontSize: 32, opacity: 0.3 }}>📜</span>
             <p className="font-medieval text-sm text-center" style={{ color: '#3a2810' }}>
-              Selecione uma anotação ou clique em + Nova
+              {t('notes', 'selectNote')}
             </p>
           </div>
         )}
@@ -354,6 +357,7 @@ function AbaAnotacoes() {
 // ── NPCs ─────────────────────────────────────────────────────
 function AbaNpcs() {
   const { db, personagemAtivo, adicionarNpc, editarNpc, excluirNpc } = useApp()
+  const { t } = useLang()
   const [busca, setBusca] = useState('')
   const [ativo, setAtivo] = useState(null)
 
@@ -383,11 +387,11 @@ function AbaNpcs() {
         <div className="flex gap-2">
           <input
             className="input-medieval flex-1 text-xs"
-            placeholder="Buscar NPC..."
+            placeholder={t('notes', 'searchNpc')}
             value={busca}
             onChange={e => setBusca(e.target.value)}
           />
-          <button className="btn-gold text-xs shrink-0" onClick={() => setAtivo({ __novo: true })}>+ Novo</button>
+          <button className="btn-gold text-xs shrink-0" onClick={() => setAtivo({ __novo: true })}>{t('notes', 'new')}</button>
         </div>
         <div className="flex-1 overflow-y-auto flex flex-col gap-2" style={{ minHeight: 0 }}>
           {npcs.map(n => (
@@ -422,7 +426,7 @@ function AbaNpcs() {
             </div>
           ))}
           {npcs.length === 0 && (
-            <p className="text-xs text-center mt-6" style={{ color: '#3a2810' }}>Nenhum NPC ainda.</p>
+            <p className="text-xs text-center mt-6" style={{ color: '#3a2810' }}>{t('notes', 'noNpcs')}</p>
           )}
         </div>
       </div>
@@ -444,7 +448,7 @@ function AbaNpcs() {
             style={{ border: '1px dashed #3a2810', borderRadius: 4 }}>
             <span style={{ fontSize: 32, opacity: 0.3 }}>🧝</span>
             <p className="font-medieval text-sm text-center" style={{ color: '#3a2810' }}>
-              Selecione um NPC ou clique em + Novo
+              {t('notes', 'selectNpc')}
             </p>
           </div>
         )}
@@ -454,6 +458,7 @@ function AbaNpcs() {
 }
 
 function FormNpc({ npc, onSalvar, onCancelar }) {
+  const { t } = useLang()
   const [form, setForm] = useState({
     nome: npc?.nome || '',
     genero: npc?.genero || 'Masculino',
@@ -480,7 +485,7 @@ function FormNpc({ npc, onSalvar, onCancelar }) {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 h-full">
       <h4 className="font-medieval text-sm shrink-0" style={{ color: '#c9a84c' }}>
-        {npc ? 'Editar NPC' : 'Novo NPC'}
+        {npc ? t('notes', 'editNpc') : t('notes', 'newNpc')}
       </h4>
       <div className="flex-1 flex flex-col gap-3 overflow-y-auto">
         {/* Foto */}
@@ -492,39 +497,39 @@ function FormNpc({ npc, onSalvar, onCancelar }) {
             }
           </div>
           <label className="btn-ghost text-xs cursor-pointer">
-            Alterar foto<input type="file" accept="image/*" className="hidden" onChange={handleFoto} />
+            {t('notes', 'changePhoto')}<input type="file" accept="image/*" className="hidden" onChange={handleFoto} />
           </label>
         </div>
         <div>
-          <label className="label-medieval">Nome</label>
+          <label className="label-medieval">{t('notes', 'name')}</label>
           <input className="input-medieval" required value={form.nome}
             onChange={e => setForm(f => ({ ...f, nome: e.target.value }))} />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="label-medieval">Gênero</label>
+            <label className="label-medieval">{t('notes', 'gender')}</label>
             <select className="input-medieval" value={form.genero}
               onChange={e => setForm(f => ({ ...f, genero: e.target.value }))}>
               {GENEROS.map(g => <option key={g}>{g}</option>)}
             </select>
           </div>
           <div>
-            <label className="label-medieval">Ocupação</label>
+            <label className="label-medieval">{t('notes', 'occupation')}</label>
             <input className="input-medieval" value={form.ocupacao}
               onChange={e => setForm(f => ({ ...f, ocupacao: e.target.value }))} />
           </div>
         </div>
         <div className="flex-1 flex flex-col">
-          <label className="label-medieval">Notas</label>
+          <label className="label-medieval">{t('notes', 'notesLabel')}</label>
           <textarea className="input-medieval resize-none flex-1" style={{ minHeight: 80 }}
             value={form.notas}
             onChange={e => setForm(f => ({ ...f, notas: e.target.value }))} />
         </div>
       </div>
       <div className="flex gap-3 justify-end shrink-0">
-        <button type="button" className="btn-ghost text-xs" onClick={onCancelar}>Cancelar</button>
+        <button type="button" className="btn-ghost text-xs" onClick={onCancelar}>{t('notes', 'cancel')}</button>
         <button type="submit" className="btn-gold text-xs" disabled={salvando}>
-          {salvando ? 'Salvando...' : '✓ Salvar'}
+          {salvando ? t('notes', 'saving') : t('notes', 'save')}
         </button>
       </div>
     </form>
@@ -534,6 +539,7 @@ function FormNpc({ npc, onSalvar, onCancelar }) {
 // ── Locais ───────────────────────────────────────────────────
 function AbaLocais() {
   const { db, personagemAtivo, adicionarLocal, editarLocal, excluirLocal } = useApp()
+  const { t } = useLang()
   const [busca, setBusca] = useState('')
   const [ativo, setAtivo] = useState(null)
 
@@ -563,11 +569,11 @@ function AbaLocais() {
         <div className="flex gap-2">
           <input
             className="input-medieval flex-1 text-xs"
-            placeholder="Buscar local..."
+            placeholder={t('notes', 'searchLocal')}
             value={busca}
             onChange={e => setBusca(e.target.value)}
           />
-          <button className="btn-gold text-xs shrink-0" onClick={() => setAtivo({ __novo: true })}>+ Novo</button>
+          <button className="btn-gold text-xs shrink-0" onClick={() => setAtivo({ __novo: true })}>{t('notes', 'new')}</button>
         </div>
         <div className="flex-1 overflow-y-auto flex flex-col gap-2" style={{ minHeight: 0 }}>
           {locais.map(l => (
@@ -594,7 +600,7 @@ function AbaLocais() {
             </div>
           ))}
           {locais.length === 0 && (
-            <p className="text-xs text-center mt-6" style={{ color: '#3a2810' }}>Nenhum local ainda.</p>
+            <p className="text-xs text-center mt-6" style={{ color: '#3a2810' }}>{t('notes', 'noLocals')}</p>
           )}
         </div>
       </div>
@@ -616,7 +622,7 @@ function AbaLocais() {
             style={{ border: '1px dashed #3a2810', borderRadius: 4 }}>
             <span style={{ fontSize: 32, opacity: 0.3 }}>🗺</span>
             <p className="font-medieval text-sm text-center" style={{ color: '#3a2810' }}>
-              Selecione um local ou clique em + Novo
+              {t('notes', 'selectLocal')}
             </p>
           </div>
         )}
@@ -626,6 +632,7 @@ function AbaLocais() {
 }
 
 function FormLocal({ local, onSalvar, onCancelar }) {
+  const { t } = useLang()
   const [form, setForm] = useState({
     nome: local?.nome || '',
     notas: local?.notas || '',
@@ -642,25 +649,25 @@ function FormLocal({ local, onSalvar, onCancelar }) {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 h-full">
       <h4 className="font-medieval text-sm shrink-0" style={{ color: '#c9a84c' }}>
-        {local ? 'Editar Local' : 'Novo Local'}
+        {local ? t('notes', 'editLocal') : t('notes', 'newLocal')}
       </h4>
       <div className="flex-1 flex flex-col gap-3 overflow-y-auto">
         <div>
-          <label className="label-medieval">Nome</label>
+          <label className="label-medieval">{t('notes', 'name')}</label>
           <input className="input-medieval" required value={form.nome}
             onChange={e => setForm(f => ({ ...f, nome: e.target.value }))} />
         </div>
         <div className="flex-1 flex flex-col">
-          <label className="label-medieval">Descrição</label>
+          <label className="label-medieval">{t('notes', 'description')}</label>
           <textarea className="input-medieval resize-none flex-1" style={{ minHeight: 100 }}
             value={form.notas}
             onChange={e => setForm(f => ({ ...f, notas: e.target.value }))} />
         </div>
       </div>
       <div className="flex gap-3 justify-end shrink-0">
-        <button type="button" className="btn-ghost text-xs" onClick={onCancelar}>Cancelar</button>
+        <button type="button" className="btn-ghost text-xs" onClick={onCancelar}>{t('notes', 'cancel')}</button>
         <button type="submit" className="btn-gold text-xs" disabled={salvando}>
-          {salvando ? 'Salvando...' : '✓ Salvar'}
+          {salvando ? t('notes', 'saving') : t('notes', 'save')}
         </button>
       </div>
     </form>
@@ -670,6 +677,7 @@ function FormLocal({ local, onSalvar, onCancelar }) {
 // ── Quests ───────────────────────────────────────────────────
 function AbaQuests() {
   const { db, personagemAtivo, adicionarQuest, editarQuest, excluirQuest } = useApp()
+  const { t } = useLang()
   const [busca, setBusca] = useState('')
   const [ativo, setAtivo] = useState(null)
 
@@ -706,11 +714,11 @@ function AbaQuests() {
         <div className="flex gap-2">
           <input
             className="input-medieval flex-1 text-xs"
-            placeholder="Buscar quest..."
+            placeholder={t('notes', 'searchQuest')}
             value={busca}
             onChange={e => setBusca(e.target.value)}
           />
-          <button className="btn-gold text-xs shrink-0" onClick={() => setAtivo({ __novo: true })}>+ Nova</button>
+          <button className="btn-gold text-xs shrink-0" onClick={() => setAtivo({ __novo: true })}>{t('notes', 'newFem')}</button>
         </div>
         <div className="flex-1 overflow-y-auto flex flex-col gap-2" style={{ minHeight: 0 }}>
           {quests.map(q => (
@@ -739,7 +747,7 @@ function AbaQuests() {
             </div>
           ))}
           {quests.length === 0 && (
-            <p className="text-xs text-center mt-6" style={{ color: '#3a2810' }}>Nenhuma quest ainda.</p>
+            <p className="text-xs text-center mt-6" style={{ color: '#3a2810' }}>{t('notes', 'noQuests')}</p>
           )}
         </div>
       </div>
@@ -763,7 +771,7 @@ function AbaQuests() {
             style={{ border: '1px dashed #3a2810', borderRadius: 4 }}>
             <span style={{ fontSize: 32, opacity: 0.3 }}>⚔️</span>
             <p className="font-medieval text-sm text-center" style={{ color: '#3a2810' }}>
-              Selecione uma quest ou clique em + Nova
+              {t('notes', 'selectQuest')}
             </p>
           </div>
         )}
@@ -773,6 +781,7 @@ function AbaQuests() {
 }
 
 function FormQuest({ quest, npcs, locais, onSalvar, onCancelar }) {
+  const { t } = useLang()
   const [form, setForm] = useState({
     nome: quest?.nome || '',
     local_id: quest?.local_id || '',
@@ -797,34 +806,34 @@ function FormQuest({ quest, npcs, locais, onSalvar, onCancelar }) {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 h-full">
       <h4 className="font-medieval text-sm shrink-0" style={{ color: '#c9a84c' }}>
-        {quest ? 'Editar Quest' : 'Nova Quest'}
+        {quest ? t('notes', 'editQuest') : t('notes', 'newQuest')}
       </h4>
       <div className="flex-1 flex flex-col gap-3 overflow-y-auto">
         <div>
-          <label className="label-medieval">Nome da Quest</label>
+          <label className="label-medieval">{t('notes', 'questName')}</label>
           <input className="input-medieval" required value={form.nome}
             onChange={e => setForm(f => ({ ...f, nome: e.target.value }))} />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="label-medieval">Local</label>
+            <label className="label-medieval">{t('notes', 'local')}</label>
             <select className="input-medieval" value={form.local_id}
               onChange={e => setForm(f => ({ ...f, local_id: e.target.value }))}>
-              <option value="">— Selecionar —</option>
+              <option value="">{t('notes', 'selectOption')}</option>
               {locais.map(l => <option key={l.id} value={l.id}>{l.nome}</option>)}
             </select>
           </div>
           <div>
-            <label className="label-medieval">Tipo</label>
+            <label className="label-medieval">{t('notes', 'type')}</label>
             <select className="input-medieval" value={form.tipo}
               onChange={e => setForm(f => ({ ...f, tipo: e.target.value }))}>
-              <option>Principal</option>
-              <option>Secundária</option>
+              <option value={t('notes', 'main')}>{t('notes', 'main')}</option>
+              <option value={t('notes', 'secondary')}>{t('notes', 'secondary')}</option>
             </select>
           </div>
         </div>
         <div>
-          <label className="label-medieval">NPCs Envolvidos</label>
+          <label className="label-medieval">{t('notes', 'involvedNpcs')}</label>
           <select className="input-medieval" multiple size={Math.min(Math.max(npcs.length, 1), 4)}
             value={selectedNpcIds.map(String)}
             onChange={e => {
@@ -833,19 +842,19 @@ function FormQuest({ quest, npcs, locais, onSalvar, onCancelar }) {
             }}>
             {npcs.map(n => <option key={n.id} value={n.id}>{n.nome}</option>)}
           </select>
-          {npcs.length === 0 && <p className="text-xs mt-1" style={{ color: '#6b5a3a' }}>Cadastre NPCs primeiro.</p>}
+          {npcs.length === 0 && <p className="text-xs mt-1" style={{ color: '#6b5a3a' }}>{t('notes', 'registerNpcsFirst')}</p>}
         </div>
         <div className="flex-1 flex flex-col">
-          <label className="label-medieval">Anotações</label>
+          <label className="label-medieval">{t('notes', 'annotations')}</label>
           <textarea className="input-medieval resize-none flex-1" style={{ minHeight: 80 }}
             value={form.notas}
             onChange={e => setForm(f => ({ ...f, notas: e.target.value }))} />
         </div>
       </div>
       <div className="flex gap-3 justify-end shrink-0">
-        <button type="button" className="btn-ghost text-xs" onClick={onCancelar}>Cancelar</button>
+        <button type="button" className="btn-ghost text-xs" onClick={onCancelar}>{t('notes', 'cancel')}</button>
         <button type="submit" className="btn-gold text-xs" disabled={salvando}>
-          {salvando ? 'Salvando...' : '✓ Salvar'}
+          {salvando ? t('notes', 'saving') : t('notes', 'save')}
         </button>
       </div>
     </form>
@@ -854,13 +863,14 @@ function FormQuest({ quest, npcs, locais, onSalvar, onCancelar }) {
 
 // ── Editor de Anotação (Rich Text) ──────────────────────────
 function EditorAnotacao({ anotacao, onSalvar, onCancelar }) {
+  const { t } = useLang()
   const [titulo, setTitulo] = useState(anotacao.titulo || '')
   const [salvando, setSalvando] = useState(false)
   const editorRef = useRef(null)
 
   useEffect(() => {
     if (editorRef.current) {
-      editorRef.current.innerHTML = anotacao.notas || ''
+      editorRef.current.innerHTML = anotacao.conteudo || ''
       editorRef.current.focus()
     }
   }, [])
@@ -903,13 +913,18 @@ function EditorAnotacao({ anotacao, onSalvar, onCancelar }) {
   }
 
   const FONT_SIZES = ['11px', '13px', '15px', '18px', '22px', '28px', '36px']
-  const COLORS = ['#f0e6c8', '#c9a84c', '#6abf6a', '#e07070', '#7ab0d9', '#c07ae0', '#9b8a6a']
+  const COLORS = [
+    '#f0e6c8', '#ffffff', '#c9a84c', '#e0a830',
+    '#6abf6a', '#3dba6e', '#e07070', '#e04040',
+    '#7ab0d9', '#4a90d9', '#c07ae0', '#9b45d9',
+    '#e08060', '#60c0b0', '#9b8a6a', '#555555',
+  ]
 
   return (
     <div className="flex flex-col gap-2 h-full" style={{ minHeight: 0 }}>
       <input
         className="input-medieval"
-        placeholder="Título da anotação..."
+        placeholder={t('notes', 'noteTitlePlaceholder')}
         value={titulo}
         onChange={e => setTitulo(e.target.value)}
       />
@@ -993,6 +1008,7 @@ function EditorAnotacao({ anotacao, onSalvar, onCancelar }) {
             if (e.key === 'b') { e.preventDefault(); applyBold() }
             if (e.key === 'i') { e.preventDefault(); exec('italic') }
             if (e.key === 'u') { e.preventDefault(); exec('underline') }
+            if (e.key === 's') { e.preventDefault(); handleSalvar() }
           }
         }}
       />
@@ -1000,12 +1016,12 @@ function EditorAnotacao({ anotacao, onSalvar, onCancelar }) {
       {/* Rodapé */}
       <div className="flex items-center justify-between shrink-0" style={{ paddingTop: 2 }}>
         {anotacao.data && (
-          <span className="text-xs" style={{ color: '#6b5a3a' }}>Criada em {anotacao.data}</span>
+          <span className="text-xs" style={{ color: '#6b5a3a' }}>{t('notes', 'createdAt')} {anotacao.data}</span>
         )}
         <div className="flex gap-3 ml-auto">
-          <button className="btn-ghost text-xs" onClick={onCancelar}>Cancelar</button>
+          <button className="btn-ghost text-xs" onClick={onCancelar}>{t('notes', 'cancel')}</button>
           <button className="btn-gold text-xs" onClick={handleSalvar} disabled={salvando}>
-            {salvando ? 'Salvando...' : '✓ Salvar'}
+            {salvando ? t('notes', 'saving') : t('notes', 'save')}
           </button>
         </div>
       </div>

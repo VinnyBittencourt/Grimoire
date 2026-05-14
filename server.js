@@ -130,7 +130,7 @@ app.get('/api/ref/:table', (req, res) => {
   }
 })
 
-const PORT = 3001
+const PORT = 3005
 app.listen(PORT, () => {
   console.log(`Grimoire API rodando em http://localhost:${PORT}`)
   console.log(`Banco de dados: ${DB_FILE}`)

@@ -1,15 +1,17 @@
 import { useApp } from '../../context/AppContext'
 import { useLang } from '../../context/LangContext'
-import { getModificador } from '../../services/dnd35Tables'
+import { getModificador, RACAS_EN, TAMANHOS_EN, TENDENCIAS_EN, CLASSES_EN } from '../../services/dnd35Tables'
 
 const ATRIBUTOS = ['for','des','con','int','sab','car']
-const LABEL = { for:'FOR', des:'DES', con:'CON', int:'INT', sab:'SAB', car:'CAR' }
+const LABEL_PT = { for:'FOR', des:'DES', con:'CON', int:'INT', sab:'SAB', car:'CAR' }
+const LABEL_EN = { for:'STR', des:'DEX', con:'CON', int:'INT', sab:'WIS', car:'CHA' }
 
 export default function CharacterInfo() {
   const { personagemAtivo } = useApp()
-  const { t } = useLang()
+  const { lang, t } = useLang()
   if (!personagemAtivo) return null
   const p = personagemAtivo
+  const tr = (map, val) => lang === 'en' ? (map[val] || val) : val
 
   return (
     <div className="panel flex flex-col h-full overflow-y-auto" style={{ minWidth: 0 }}>
@@ -42,9 +44,9 @@ export default function CharacterInfo() {
             {(() => {
               try {
                 const mc = p.multiclasses ? JSON.parse(p.multiclasses) : null
-                if (mc && mc.length > 1) return mc.map(c => `${c.classe} ${c.nivel}`).join(' / ')
+                if (mc && mc.length > 1) return mc.map(c => `${tr(CLASSES_EN, c.classe)} ${c.nivel}`).join(' / ')
               } catch {}
-              return p.classe
+              return tr(CLASSES_EN, p.classe)
             })()}
             {p.dominio ? ` — ${p.dominio}` : ''}
           </p>
@@ -63,7 +65,7 @@ export default function CharacterInfo() {
             return (
               <div key={a} className="flex flex-col items-center py-2 px-1 rounded-sm"
                 style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid #3a2810' }}>
-                <span className="label-medieval text-center" style={{ fontSize: 10, letterSpacing: '0.05em' }}>{LABEL[a]}</span>
+                <span className="label-medieval text-center" style={{ fontSize: 10, letterSpacing: '0.05em' }}>{lang === 'en' ? LABEL_EN[a] : LABEL_PT[a]}</span>
                 <div className="flex items-baseline gap-1">
                   <span className="font-medieval text-xl font-bold" style={{ color: '#f0e6c8', lineHeight: 1.2 }}>{val}</span>
                   <span className="font-medieval text-xs font-semibold" style={{ color: mod >= 0 ? '#c9a84c' : '#cc4444' }}>
@@ -122,7 +124,7 @@ export default function CharacterInfo() {
       {/* Info básica */}
       <div className="px-4 py-2 flex flex-col gap-2 text-xs">
         <div className="flex gap-2 w-full">
-          {p.raca && <Row label={t('charInfo', 'race')} className="w-full" val={p.raca} />}
+          {p.raca && <Row label={t('charInfo', 'race')} className="w-full" val={tr(RACAS_EN, p.raca)} />}
           {p.level && <Row label={t('charInfo', 'level')} className="w-full" val={p.level} />}
         </div>
         <div className="flex gap-2 w-full">
@@ -130,11 +132,11 @@ export default function CharacterInfo() {
           {p.idade && <Row label={t('charInfo', 'age')} className="w-full" val={p.idade} />}
         </div>
         <div className="flex gap-2 w-full">
-          {p.tamanho && <Row label={t('charInfo', 'size')} className="w-full" val={p.tamanho} />}
+          {p.tamanho && <Row label={t('charInfo', 'size')} className="w-full" val={tr(TAMANHOS_EN, p.tamanho)} />}
           {p.deslocamento && <Row label={t('charInfo', 'speed')} className="w-full" val={`${p.deslocamento}m`} />}
         </div>
         <div className="flex gap-2 w-full">
-          {p.tendencia && <Row label={t('charInfo', 'alignment')} className="w-full" val={p.tendencia} />}
+          {p.tendencia && <Row label={t('charInfo', 'alignment')} className="w-full" val={tr(TENDENCIAS_EN, p.tendencia)} />}
           {p.falha && <Row label={t('charInfo', 'flaw')} className="w-full" val={p.falha} />}
         </div>
       </div>

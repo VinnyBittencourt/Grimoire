@@ -1,13 +1,33 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useApp } from '../../context/AppContext'
+import { useLang } from '../../context/LangContext'
 import { EscolaIcon, ESCOLA_CORES } from '../../assets/icons/escolaIcons'
-import { calcularSlots, ATRIBUTO_MAGICO, CLASSES_COM_MAGIA, ESCOLAS_MAGIA, MAGIAS_PADRAO } from '../../services/dnd35Tables'
+import { calcularSlots, ATRIBUTO_MAGICO, CLASSES_COM_MAGIA, ESCOLAS_MAGIA, MAGIAS_PADRAO, MAGIAS_EN, ESCOLAS_MAGIA_EN } from '../../services/dnd35Tables'
 import { useEfeitosDoPersonagem } from '../../hooks/useEfeitosDoPersonagem'
 
 export default function SpellPrepModal({ onClose }) {
   const { db, personagemAtivo, salvarPreparacao, adicionarMagia, excluirMagia, editarPersonagem } = useApp()
+  const { lang, t } = useLang()
+  const sn = (nome) => lang === 'en' ? (MAGIAS_EN[nome] || nome) : nome
+  const se = (escola) => lang === 'en' ? (ESCOLAS_MAGIA_EN[escola] || escola) : escola
   const [nivelSelecionado, setNivelSelecionado] = useState(null)
   const [preparadas, setPreparadas] = useState({})
+
+  useEffect(() => {
+    const mps = (db?.magias_preparadas || []).filter(mp => mp.personagem_id === p?.id)
+    const result = {}
+    for (const mp of mps) {
+      const nivel = Number(mp.nivel)
+      if (!result[nivel]) result[nivel] = []
+      result[nivel].push({
+        magia_id: mp.magia_id,
+        usos_max: mp.usos_max ?? 1,
+        usos_restantes: mp.usos_restantes ?? 1,
+        magia: { id: mp.magia_id, nome: mp.nome, nivel: mp.nivel, escola: mp.escola, descricao: mp.descricao },
+      })
+    }
+    setPreparadas(result)
+  }, [])
   const [showNovasMagia, setShowNovasMagia] = useState(false)
   const [magiaHover, setMagiaHover] = useState(null)
   const [formMagia, setFormMagia] = useState({ nome: '', nivel: 1, escola: 'Evocação', descricao: '' })
@@ -101,11 +121,22 @@ export default function SpellPrepModal({ onClose }) {
     const lista = []
     for (const [nivel, mps] of Object.entries(preparadas)) {
       for (const mp of mps) {
-        lista.push({ magia_id: mp.magia_id, usos_max: mp.usos_max, usos_restantes: mp.usos_restantes })
+        lista.push({
+          magia_id: mp.magia_id,
+          usos_max: mp.usos_max,
+          usos_restantes: mp.usos_restantes,
+          nome: mp.magia?.nome ?? '',
+          nivel: mp.magia?.nivel ?? Number(nivel),
+          escola: mp.magia?.escola ?? '',
+          descricao: mp.magia?.descricao ?? '',
+        })
       }
     }
-    await salvarPreparacao(p.id, lista)
-    onClose()
+    try {
+      await salvarPreparacao(p.id, lista)
+    } finally {
+      onClose()
+    }
   }
 
   async function handleAdicionarMagia(e) {
@@ -123,9 +154,9 @@ export default function SpellPrepModal({ onClose }) {
     return (
       <div className="modal-overlay" onClick={onClose}>
         <div className="modal-content p-8 text-center w-96" onClick={e => e.stopPropagation()}>
-          <h3 className="font-medieval text-xl mb-4" style={{ color: '#c9a84c' }}>Preparação de Magias</h3>
-          <p style={{ color: '#9b8a6a' }}>A classe <strong style={{ color: '#f0e6c8' }}>{p?.classe}</strong> não possui magias em D&D 3.5.</p>
-          <button className="btn-gold mt-6" onClick={onClose}>Fechar</button>
+          <h3 className="font-medieval text-xl mb-4" style={{ color: '#c9a84c' }}>{t('spells', 'prepare')}</h3>
+          <p style={{ color: '#9b8a6a' }}>{t('spells', 'noClass')(p?.classe)}</p>
+          <button className="btn-gold mt-6" onClick={onClose}>{t('spells', 'close')}</button>
         </div>
       </div>
     )
@@ -142,7 +173,7 @@ export default function SpellPrepModal({ onClose }) {
           style={{ width: 200, minWidth: 200, borderRight: '2px solid #6b4a1a', padding: '24px 0' }}>
           <div className="flex items-center justify-between px-5 mb-5">
             <h3 className="font-medieval text-base" style={{ color: '#c9a84c' }}>
-              Preparar Magias
+              {t('spells', 'prepare')}
             </h3>
             <button
               onClick={() => setShowBonusEditor(v => !v)}
@@ -159,7 +190,7 @@ export default function SpellPrepModal({ onClose }) {
           {/* Editor de bônus manuais */}
           {showBonusEditor && (
             <div style={{ margin: '0 10px 12px', padding: '8px 10px', borderRadius: 4, background: 'rgba(0,0,0,0.3)', border: '1px solid #6b4a1a' }}>
-              <p className="label-medieval" style={{ fontSize: 9, marginBottom: 6 }}>Bônus Manual por Nível</p>
+              <p className="label-medieval" style={{ fontSize: 9, marginBottom: 6 }}>{t('spells', 'bonusPerLevel')}</p>
               <div className="flex flex-col gap-1">
                 {Array.from({ length: 10 }, (_, i) => {
                   const baseNv = slotsBase?.[i] ?? 0
@@ -200,7 +231,7 @@ export default function SpellPrepModal({ onClose }) {
             </div>
           )}
 
-          <p className="label-medieval px-5 mb-3">Nível</p>
+          <p className="label-medieval px-5 mb-3">{t('spells', 'level')}</p>
           <div className="flex flex-col flex-1 overflow-y-auto">
             {niveisDisponiveis.map(({ nivel, slots: s }) => {
               const usados = (preparadas[nivel] || []).length
@@ -217,13 +248,13 @@ export default function SpellPrepModal({ onClose }) {
                     cursor: 'pointer', transition: 'all 0.15s',
                   }}>
                   <div className="font-medieval text-sm flex items-center gap-1" style={{ color: isAtivo ? '#f0e6c8' : '#9b8a6a' }}>
-                    {nivel === 0 ? 'Orações' : `Nível ${nivel}`}
+                    {nivel === 0 ? t('spells', 'orisons') : `${t('spells', 'level')} ${nivel}`}
                     {temBonus && (
                       <span style={{ fontSize: 9, color: '#c9a84c', opacity: 0.7 }}>✦</span>
                     )}
                   </div>
                   <div className="text-xs" style={{ color: isAtivo ? '#c9a84c' : '#6b5a3a', marginTop: 2 }}>
-                    {usados}/{s} usados
+                    {usados}/{s} {t('spells', 'used')}
                   </div>
                 </button>
               )
@@ -231,7 +262,7 @@ export default function SpellPrepModal({ onClose }) {
           </div>
           <div style={{ padding: '16px 12px', borderTop: '1px solid #6b4a1a' }}>
             <button className="btn-gold w-full text-sm" onClick={handleSalvar}>
-              Salvar
+              {t('spells', 'save')}
             </button>
           </div>
         </div>
@@ -243,8 +274,8 @@ export default function SpellPrepModal({ onClose }) {
             <div className="flex-1 flex flex-col items-center justify-center gap-3"
               style={{ color: '#6b5a3a' }}>
               <div style={{ fontSize: 40, opacity: 0.3 }}>📖</div>
-              <p className="font-medieval text-sm">Selecione um nível à esquerda</p>
-              <p className="text-xs" style={{ color: '#3a2810' }}>Use ✦ para adicionar bônus de slots</p>
+              <p className="font-medieval text-sm">{t('spells', 'selectLevel')}</p>
+              <p className="text-xs" style={{ color: '#3a2810' }}>{t('spells', 'bonusHint')}</p>
             </div>
           ) : (
             <div className="flex flex-col h-full" style={{ overflow: 'hidden' }}>
@@ -254,13 +285,11 @@ export default function SpellPrepModal({ onClose }) {
                 style={{ padding: '20px 24px 12px', borderBottom: '1px solid #6b4a1a33' }}>
                 <div>
                   <h4 className="font-medieval text-base" style={{ color: '#f0e6c8' }}>
-                    {nivelSelecionado === 0 ? 'Orações (Nível 0)' : `Magias de Nível ${nivelSelecionado}`}
+                    {nivelSelecionado === 0 ? `${t('spells', 'orisons')} (${t('spells', 'level')} 0)` : `${t('spells', 'level')} ${nivelSelecionado}`}
                   </h4>
                   <div className="flex items-center gap-2 mt-1">
                     <p className="text-xs" style={{ color: '#6b5a3a' }}>
-                      {slotsRestantes > 0
-                        ? `${slotsRestantes} slot${slotsRestantes > 1 ? 's' : ''} disponível${slotsRestantes > 1 ? 'is' : ''}`
-                        : 'Todos os slots preenchidos'}
+                      {slotsRestantes > 0 ? t('spells', 'slotsAvail')(slotsRestantes) : t('spells', 'slotsAll')}
                     </p>
                     {/* Indicador base + bônus */}
                     {bonusTotalNivel > 0 && (
@@ -297,16 +326,16 @@ export default function SpellPrepModal({ onClose }) {
                 <div className="flex flex-col" style={{ flex: 1, borderRight: '1px solid #6b4a1a44', overflow: 'hidden' }}>
                   <div className="flex items-center justify-between"
                     style={{ padding: '10px 20px 8px', flexShrink: 0 }}>
-                    <p className="label-medieval text-xs">Grimório</p>
+                    <p className="label-medieval text-xs">{t('spells', 'grimoire')}</p>
                     <button className="btn-ghost" style={{ fontSize: 11, padding: '2px 8px' }}
                       onClick={() => { setShowNovasMagia(true); setFormMagia(f => ({ ...f, nivel: nivelSelecionado })) }}>
-                      + Personalizada
+                      {t('spells', 'addCustom')}
                     </button>
                   </div>
                   <div style={{ overflowY: 'auto', flex: 1, padding: '0 8px 12px' }}>
                     {magiasDisponiveis.length === 0 ? (
                       <p className="text-xs text-center" style={{ color: '#6b5a3a', padding: '20px 0' }}>
-                        Nenhuma magia neste nível.<br />Adicione uma personalizada.
+                        {t('spells', 'noSpellsLevel')}
                       </p>
                     ) : (
                       magiasDisponiveis.map((magia, idx) => {
@@ -330,10 +359,10 @@ export default function SpellPrepModal({ onClose }) {
                             <EscolaIcon escola={magia.escola} size={22} />
                             <div style={{ flex: 1, minWidth: 0 }}>
                               <div style={{ fontFamily: 'Cinzel, serif', fontSize: 12, color: '#e8d5a0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                {magia.nome}
+                                {sn(magia.nome)}
                               </div>
                               <div style={{ fontSize: 10, color: cor + 'bb', marginTop: 1 }}>
-                                {magia.escola}
+                                {se(magia.escola)}
                               </div>
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
@@ -363,13 +392,13 @@ export default function SpellPrepModal({ onClose }) {
                   {/* Preparadas */}
                   <div style={{ padding: '10px 16px 8px', flexShrink: 0 }}>
                     <p className="label-medieval text-xs" style={{ marginBottom: 8 }}>
-                      Preparadas ({usadoNivel}/{slotsDisponivelNivel})
+                      {t('spells', 'prepared')} ({usadoNivel}/{slotsDisponivelNivel})
                     </p>
                   </div>
                   <div style={{ flex: 1, overflowY: 'auto', padding: '0 10px 10px' }}>
                     {preparadasNivel.length === 0 ? (
                       <p className="text-xs text-center" style={{ color: '#3a2810', padding: '10px 0' }}>
-                        Clique nas magias para preparar
+                        {t('spells', 'clickToPrepare')}
                       </p>
                     ) : (
                       preparadasNivel.map((mp, i) => {
@@ -387,10 +416,10 @@ export default function SpellPrepModal({ onClose }) {
                             <EscolaIcon escola={mp.magia.escola} size={18} />
                             <div style={{ flex: 1, minWidth: 0 }}>
                               <div style={{ fontFamily: 'Cinzel, serif', fontSize: 11, color: '#c9a84c', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                {mp.magia.nome}
+                                {sn(mp.magia.nome)}
                               </div>
                               <div style={{ fontSize: 9, color: cor + '99', marginTop: 1 }}>
-                                {mp.magia.escola}
+                                {se(mp.magia.escola)}
                               </div>
                             </div>
                             <span style={{ fontSize: 10, color: '#cc4444', opacity: 0.5 }}>✕</span>
@@ -411,7 +440,7 @@ export default function SpellPrepModal({ onClose }) {
                     {magiaHover ? (
                       <>
                         <p className="font-medieval text-xs" style={{ color: '#c9a84c', marginBottom: 4 }}>
-                          {magiaHover.nome}
+                          {sn(magiaHover.nome)}
                         </p>
                         <p style={{ fontSize: 10, color: '#9b8a6a', lineHeight: 1.5 }}>
                           {magiaHover.descricao || '—'}
@@ -419,7 +448,7 @@ export default function SpellPrepModal({ onClose }) {
                       </>
                     ) : (
                       <p style={{ fontSize: 11, color: '#3a2810', fontStyle: 'italic' }}>
-                        Passe o cursor sobre uma magia para ver a descrição
+                        {t('spells', 'hoverHint')}
                       </p>
                     )}
                   </div>
@@ -434,22 +463,22 @@ export default function SpellPrepModal({ onClose }) {
       {showNovasMagia && (
         <div className="modal-overlay" style={{ zIndex: 60 }} onClick={() => setShowNovasMagia(false)}>
           <div className="modal-content p-6 w-96" onClick={e => e.stopPropagation()}>
-            <h4 className="font-medieval text-base mb-4" style={{ color: '#c9a84c' }}>Magia Personalizada</h4>
+            <h4 className="font-medieval text-base mb-4" style={{ color: '#c9a84c' }}>{t('spells', 'customSpell')}</h4>
             <form onSubmit={handleAdicionarMagia} className="flex flex-col gap-3">
               <div>
-                <label className="label-medieval">Nome</label>
+                <label className="label-medieval">{t('spells', 'name')}</label>
                 <input className="input-medieval" required value={formMagia.nome}
                   onChange={e => setFormMagia(f => ({ ...f, nome: e.target.value }))} />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="label-medieval">Nível</label>
+                  <label className="label-medieval">{t('spells', 'level')}</label>
                   <input className="input-medieval" type="number" min={0} max={9}
                     value={formMagia.nivel}
                     onChange={e => setFormMagia(f => ({ ...f, nivel: e.target.value }))} />
                 </div>
                 <div>
-                  <label className="label-medieval">Escola</label>
+                  <label className="label-medieval">{t('spells', 'school')}</label>
                   <select className="input-medieval" value={formMagia.escola}
                     onChange={e => setFormMagia(f => ({ ...f, escola: e.target.value }))}>
                     {ESCOLAS_MAGIA.map(e => <option key={e} value={e}>{e}</option>)}
@@ -457,14 +486,14 @@ export default function SpellPrepModal({ onClose }) {
                 </div>
               </div>
               <div>
-                <label className="label-medieval">Descrição</label>
+                <label className="label-medieval">{t('spells', 'description')}</label>
                 <textarea className="input-medieval resize-none" rows={3}
                   value={formMagia.descricao}
                   onChange={e => setFormMagia(f => ({ ...f, descricao: e.target.value }))} />
               </div>
               <div className="flex gap-3 justify-end">
-                <button type="button" className="btn-ghost text-xs" onClick={() => setShowNovasMagia(false)}>Cancelar</button>
-                <button type="submit" className="btn-gold text-xs">Adicionar</button>
+                <button type="button" className="btn-ghost text-xs" onClick={() => setShowNovasMagia(false)}>{t('spells', 'cancel')}</button>
+                <button type="submit" className="btn-gold text-xs">{t('spells', 'add')}</button>
               </div>
             </form>
           </div>
