@@ -5,7 +5,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'data', 'docs']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [
@@ -23,7 +23,13 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      // Componentes recebidos por prop (ex.: Detail) contam como usados no JSX
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^[A-Z_]' }],
     },
+  },
+  {
+    // API, migrações, regras compartilhadas, testes e configs rodam no Node
+    files: ['server/**/*.js', 'shared/**/*.js', 'tests/**/*.js', '*.config.js'],
+    languageOptions: { globals: { ...globals.node } },
   },
 ])

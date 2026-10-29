@@ -1,3 +1,4 @@
+// Schema do v1 (antigo src/db/schema.js), mantido só como fixture do teste de migração v1 → v2.
 export const TABLES = [
   'personagens',
   'magias',
@@ -145,6 +146,6 @@ export function initSchema(db) {
     'ALTER TABLE quests ADD COLUMN npc_ids TEXT',
   ]
   for (const sql of migrations) {
-    try { db.exec(sql) } catch (_) { /* coluna já existe */ }
+    try { db.exec(sql) } catch { /* coluna já existe */ }
   }
 }

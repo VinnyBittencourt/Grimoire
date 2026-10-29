@@ -24,3 +24,9 @@ dist-ssr
 *.sw?
 .claude/launch.json
 .claude/
+
+# Dados locais do usuário (banco, fotos, backups) — nunca versionar
+data/
+
+# Livros de referência (PDFs grandes, uso local)
+docs/livros/

@@ -1,0 +1,76 @@
+/*
+ * Tokens do Grimoire. Os nomes base (--color-gold-primary, --space-*, --radius-*, --font-*)
+ * são os mesmos do grimoire-design-system (C:\projects\grimoire-design-system\src\tokens\tokens.css),
+ * para que componentes possam migrar para o DS sem renomear nada.
+ * Componentes NUNCA usam cor hex direto: sempre var(--...).
+ */
+:root {
+  /* ── Base (iguais ao DS) ── */
+  --color-gold-primary: #c9a84c;
+  --color-gold-light: #f0d070;
+  --color-gold-dark: #8a6e2a;
+  --color-wood-darkest: #1a1208;
+  --color-wood-dark: #2a1a0a;
+  --color-wood-medium: #3d2810;
+  --color-wood-border: #6b4a1a;
+  --color-text-light: #f0e6c8;
+  --color-text-muted: #9b8a6a;
+  --color-danger: #c0392b;
+  --color-danger-light: #e74c3c;
+  --color-success: #27ae60;
+  --color-overlay: rgba(0, 0, 0, 0.75);
+
+  --font-heading: 'Cinzel', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* ── Extensões do Grimoire ── */
+  --color-bg: #0d0902;
+  --color-surface: #1e1206;
+  --color-surface-raised: #2a1a0a;
+  --color-surface-sunken: rgba(0, 0, 0, 0.35);
+  --color-border-subtle: #3a2810;
+  --color-gold-faint: rgba(201, 168, 76, 0.12);
+  --color-gold-glow: rgba(201, 168, 76, 0.35);
+  --color-text-dim: #6b5a3a;
+  --color-text-body: #c0a882;
+
+  /* Semânticas de estatística (barra lateral e ficha) */
+  --color-hp: #c94444;
+  --color-hp-bg: #2a0808;
+  --color-hp-border: #6b1515;
+  --color-ac: #5a9ad9;
+  --color-ac-bg: #080d1a;
+  --color-ac-border: #1a3a6a;
+  --color-save: #5fb57a;
+  --color-save-bg: #081a0e;
+  --color-save-border: #1a5a2a;
+  --color-magic: #a07ad9;
+  --color-magic-bg: #120a1e;
+  --color-magic-border: #3a1a6a;
+  --color-warning: #d9a03a;
+
+  --shadow-panel: inset 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(201, 168, 76, 0.27), 0 4px 20px rgba(0, 0, 0, 0.6);
+  --shadow-pop: 0 8px 32px rgba(0, 0, 0, 0.7);
+  --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-gold-primary);
+
+  --sidebar-width: 300px;
+  --header-height: 52px;
+}

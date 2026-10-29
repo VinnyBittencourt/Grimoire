@@ -334,19 +334,19 @@ export const CRIATURAS = [
     pv: '3d8+3', ca: 23, for: 17, des: 10, con: 13, int_val: 10, sab: 11, car: 10,
     ataque: '3 Garras +6 (1d3+3) + Mordida +1 (2d6+1)', habilidades: ['Passagem pela Pedra', 'Detecção de Metais e Pedras Preciosas', 'Resistência a Fogo 10', 'Imunidade a Eletricidade/Frio'] },
 
-  { id: 'elemental_medium_fire', nome: 'Elemental de Fogo (Médio)', livro: 'Monster Manual', nivel_sm: 5, tamanho: 'Médio', tipo: 'Elemental (Fogo)', alinhamento: 'Neutro',
+  { id: 'elemental_medium_fire', nome: 'Elemental de Fogo (Médio)', livro: 'Monster Manual', nivel_sm: 4, tamanho: 'Médio', tipo: 'Elemental (Fogo)', alinhamento: 'Neutro',
     pv: '4d8+8', ca: 16, for: 14, des: 17, con: 14, int_val: 4, sab: 11, car: 11,
     ataque: 'Slam +4 (1d6+2 + 1d4 fogo)', habilidades: ['Imune a fogo', 'Vulnerável a frio', 'Illumination (claridade 3m)', 'Queimar (Fort CD 12 ou continua queimando)'] },
 
-  { id: 'elemental_medium_water', nome: 'Elemental de Água (Médio)', livro: 'Monster Manual', nivel_sm: 5, tamanho: 'Médio', tipo: 'Elemental (Água)', alinhamento: 'Neutro',
+  { id: 'elemental_medium_water', nome: 'Elemental de Água (Médio)', livro: 'Monster Manual', nivel_sm: 4, tamanho: 'Médio', tipo: 'Elemental (Água)', alinhamento: 'Neutro',
     pv: '4d8+12', ca: 17, for: 18, des: 16, con: 17, int_val: 4, sab: 11, car: 11,
     ataque: 'Slam +7 (1d6+4)', habilidades: ['Movimento aquático total (9m)', 'Encharcar (apagar fogo natural)', 'Afogamento (agarrar; Fort CD 13 ou sufoca)'] },
 
-  { id: 'elemental_medium_earth', nome: 'Elemental de Terra (Médio)', livro: 'Monster Manual', nivel_sm: 5, tamanho: 'Médio', tipo: 'Elemental (Terra)', alinhamento: 'Neutro',
+  { id: 'elemental_medium_earth', nome: 'Elemental de Terra (Médio)', livro: 'Monster Manual', nivel_sm: 4, tamanho: 'Médio', tipo: 'Elemental (Terra)', alinhamento: 'Neutro',
     pv: '4d8+12', ca: 18, for: 20, des: 8, con: 17, int_val: 4, sab: 11, car: 11,
     ataque: 'Slam +8 (1d8+7)', habilidades: ['Passagem pela Terra', 'Golpe Arrasador (derruba automaticamente)'] },
 
-  { id: 'elemental_medium_air', nome: 'Elemental de Ar (Médio)', livro: 'Monster Manual', nivel_sm: 5, tamanho: 'Médio', tipo: 'Elemental (Ar)', alinhamento: 'Neutro',
+  { id: 'elemental_medium_air', nome: 'Elemental de Ar (Médio)', livro: 'Monster Manual', nivel_sm: 4, tamanho: 'Médio', tipo: 'Elemental (Ar)', alinhamento: 'Neutro',
     pv: '4d8', ca: 17, for: 14, des: 21, con: 10, int_val: 4, sab: 11, car: 11,
     ataque: 'Slam +5 (1d6+2)', habilidades: ['Voo (9m, perfeita)', 'Vórtice (cilindro 3m de diâmetro, Fort CD 12 ou 2d6)'] },
 

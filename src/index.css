@@ -1,279 +1,144 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
 @import "tailwindcss";
+@import "./styles/tokens.css";
 
-* {
-  box-sizing: border-box;
-  /* margin: 0;
-  padding: 0; */
+/*
+ * Expõe os tokens como utilitários do Tailwind (bg-app, text-gold, border-wood...).
+ * Os nomes daqui são DIFERENTES dos tokens de tokens.css de propósito: `--color-bg: var(--color-bg)`
+ * criaria uma variável que referencia a si mesma (inválida).
+ */
+@theme inline {
+  --color-app: var(--color-bg);
+  --color-panel: var(--color-surface);
+  --color-raised: var(--color-surface-raised);
+  --color-sunken: var(--color-surface-sunken);
+  --color-wood: var(--color-wood-border);
+  --color-subtle: var(--color-border-subtle);
+  --color-gold: var(--color-gold-primary);
+  --color-gold-hi: var(--color-gold-light);
+  --color-gold-lo: var(--color-gold-dark);
+  --color-gold-faint: var(--color-gold-faint);
+  --color-parchment: var(--color-text-light);
+  --color-body: var(--color-text-body);
+  --color-muted: var(--color-text-muted);
+  --color-dim: var(--color-text-dim);
+  --color-bad: var(--color-danger);
+  --color-good: var(--color-success);
+  --color-warn: var(--color-warning);
+  --color-stat-hp: var(--color-hp);
+  --color-stat-ac: var(--color-ac);
+  --color-stat-save: var(--color-save);
+  --color-stat-magic: var(--color-magic);
+  --font-display: var(--font-heading);
+  --font-sans: var(--font-body);
 }
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: #1a1208;
-  min-height: 100vh;
-  color: #f0e6c8;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  background: var(--color-bg);
+  color: var(--color-text-light);
+  -webkit-font-smoothing: antialiased;
 }
 
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+#root { min-height: 100vh; display: flex; flex-direction: column; }
 
-/* ── Editor de rich text ── */
-[contenteditable] ul { list-style: disc; padding-left: 1.5em; }
-[contenteditable] ol { list-style: decimal; padding-left: 1.5em; }
-[contenteditable] li { margin-bottom: 2px; }
+:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: var(--radius-sm); }
 
-/* ── Tema medieval ── */
-.font-medieval {
-  font-family: 'Cinzel', serif;
-}
+::selection { background: var(--color-gold-glow); }
 
-/* Painel com borda de madeira dourada */
+/* Scrollbar discreta no tema */
+* { scrollbar-width: thin; scrollbar-color: var(--color-wood-border) transparent; }
+
+/* Inputs numéricos sem setas nativas (usamos os nossos) */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; appearance: textfield; }
+
+/* ── Superfícies medievais ─────────────────────────────────────────────── */
 .panel {
-  background: linear-gradient(135deg, #2a1a0a 0%, #1e1206 50%, #2a1a0a 100%);
-  border: 2px solid #6b4a1a;
-  box-shadow:
-    inset 0 0 30px rgba(0,0,0,0.5),
-    0 0 0 1px #c9a84c44,
-    0 4px 20px rgba(0,0,0,0.6);
-  border-radius: 4px;
+  background: linear-gradient(135deg, var(--color-wood-dark) 0%, var(--color-surface) 50%, var(--color-wood-dark) 100%);
+  border: 2px solid var(--color-wood-border);
+  box-shadow: var(--shadow-panel);
+  border-radius: var(--radius-sm);
   position: relative;
 }
-
 .panel::before {
   content: '';
   position: absolute;
   inset: 3px;
-  border: 1px solid #c9a84c33;
+  border: 1px solid rgba(201, 168, 76, 0.2);
   border-radius: 2px;
   pointer-events: none;
 }
 
-/* Card de personagem */
-.character-card {
-  background: linear-gradient(135deg, #2e1c08 0%, #241508 100%);
-  border: 1px solid #6b4a1a;
-  /* transition: all 0.1s ease-out !important; */
-}
-
-.character-card:hover {
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-  border: 1px solid #8b6a37 !important;
-}
-
-/* Botão dourado medieval */
-.btn-gold {
-  background: linear-gradient(135deg, #8b6914 0%, #c9a84c 50%, #8b6914 100%);
-  color: #1a0e02;
-  font-family: 'Cinzel', serif;
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 12px;
   font-weight: 600;
-  border: 1px solid #c9a84c;
-  padding: 8px 20px;
-  cursor: pointer;
-  transition: all 0.2s;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-}
-
-.btn-gold:hover {
-  background: linear-gradient(135deg, #c9a84c 0%, #f0d070 50%, #c9a84c 100%);
-  box-shadow: 0 4px 15px rgba(201, 168, 76, 0.4);
-}
-
-.btn-ghost {
-  background: transparent;
-  color: #c9a84c;
-  border: 1px solid #6b4a1a;
-  font-family: 'Cinzel', serif;
-  font-size: 13px;
-  padding: 6px 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-ghost:hover {
-  border-color: #c9a84c;
-  background: rgba(201, 168, 76, 0.1);
-}
-
-.btn-danger {
-  background: transparent;
-  color: #8b2020;
-  border: 1px solid #5a1515;
-  font-size: 13px;
-  padding: 4px 10px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-danger:hover {
-  border-color: #cc3333;
-  color: #cc3333;
-  background: rgba(139, 32, 32, 0.1);
-}
-
-/* Input medieval */
-.input-medieval {
-  background: rgba(0,0,0,0.4);
-  border: 1px solid #6b4a1a;
-  color: #f0e6c8;
-  padding: 8px 12px;
-  width: 100%;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.input-medieval:focus {
-  border-color: #c9a84c;
-  box-shadow: 0 0 8px rgba(201, 168, 76, 0.2);
-}
-
-.input-medieval::placeholder {
-  color: #6b5a3a;
-}
-
-select.input-medieval option {
-  background: #1a1208;
-  color: #f0e6c8;
-}
-
-/* Label */
-.label-medieval {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  color: #c9a84c;
-  letter-spacing: 1px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  display: block;
-  margin-bottom: 4px;
+  color: var(--color-gold-primary);
 }
 
-/* Divisor dourado */
 .divider-gold {
-  border: none;
-  border-top: 1px solid #6b4a1a;
-  margin: 12px 0;
-  position: relative;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold-dark), transparent);
 }
 
-/* Spell card */
-.spell-card {
-  background: linear-gradient(135deg, #2e1c08 0%, #1e1206 100%);
-  border: 1px solid #6b4a1a;
-  cursor: pointer;
-  transition: all 0.15s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 8px 6px;
-  user-select: none;
+/* ── Campos ────────────────────────────────────────────────────────────── */
+.field {
+  background: var(--color-surface-sunken);
+  border: 1px solid var(--color-wood-border);
+  color: var(--color-text-light);
+  padding: 6px 10px;
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  border-radius: 2px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.field:focus { border-color: var(--color-gold-primary); box-shadow: 0 0 8px var(--color-gold-faint); }
+.field::placeholder { color: var(--color-text-dim); }
+.field:disabled { opacity: 0.5; cursor: not-allowed; }
+.field[aria-invalid=true] { border-color: var(--color-danger); }
+select.field option { background: var(--color-wood-darkest); color: var(--color-text-light); }
+.field-sm { padding: 3px 6px; font-size: var(--font-size-xs); }
+
+.label {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  color: var(--color-gold-primary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.spell-card:hover {
-  border-color: #c9a84c;
-  background: rgba(201, 168, 76, 0.1);
+/* ── Editor de notas (TipTap) ──────────────────────────────────────────── */
+.prose-grimoire { color: var(--color-text-body); line-height: 1.6; }
+.prose-grimoire p { margin: 0 0 0.6em; }
+.prose-grimoire ul { list-style: disc; padding-left: 1.5em; margin: 0 0 0.6em; }
+.prose-grimoire ol { list-style: decimal; padding-left: 1.5em; margin: 0 0 0.6em; }
+.prose-grimoire h2 { font-family: var(--font-heading); color: var(--color-gold-primary); font-size: 1.1em; margin: 0.8em 0 0.4em; }
+.prose-grimoire h3 { font-family: var(--font-heading); color: var(--color-gold-light); font-size: 1em; margin: 0.6em 0 0.3em; }
+.prose-grimoire hr { border: 0; height: 1px; background: var(--color-wood-border); margin: 1em 0; }
+.prose-grimoire blockquote { border-left: 2px solid var(--color-gold-dark); padding-left: 0.8em; color: var(--color-text-muted); }
+.prose-grimoire strong { color: var(--color-text-light); }
+.prose-grimoire .ProseMirror { outline: none; min-height: 100%; }
+.prose-grimoire .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder); color: var(--color-text-dim); float: left; height: 0; pointer-events: none;
 }
 
-.spell-card.depleted {
-  opacity: 0.35;
-  filter: grayscale(0.8);
-}
-
-/* Modal overlay */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 50;
-  backdrop-filter: blur(2px);
-}
-
-.modal-content {
-  background: linear-gradient(135deg, #2a1a0a 0%, #1e1206 50%, #2a1a0a 100%);
-  border: 2px solid #6b4a1a;
-  box-shadow: 0 0 0 1px #c9a84c33, 0 20px 60px rgba(0,0,0,0.8);
-  border-radius: 4px;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-/* Scrollbar medieval */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #0d0902;
-}
-::-webkit-scrollbar-thumb {
-  background: #6b4a1a;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #c9a84c;
-}
-
-/* Tabs */
-.tab-btn {
-  font-family: 'Cinzel', serif;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 6px 12px;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: #9b8a6a;
-  background: transparent;
-  letter-spacing: 0.5px;
-}
-
-.tab-btn.active {
-  color: #c9a84c;
-  border-color: #6b4a1a;
-  background: rgba(201, 168, 76, 0.08);
-}
-
-.tab-btn:hover:not(.active) {
-  color: #f0e6c8;
-}
-
-/* Slot de equipamento */
-.equipment-slot {
-  background: rgba(0,0,0,0.3);
-  border: 1px dashed #6b4a1a;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 8px;
-  transition: border-color 0.2s;
-}
-
-.equipment-slot:hover {
-  border-color: #c9a84c;
-}
-
-/* Intro background */
-.intro-bg {
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(201, 168, 76, 0.05) 0%, transparent 70%),
-    linear-gradient(180deg, #0d0902 0%, #1a1208 50%, #0d0902 100%);
-  min-height: 100vh;
-}
-
-/* Textura de ruído sutil */
-.noise-overlay::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  opacity: 0.03;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  z-index: 9999;
+/* ── Animações ─────────────────────────────────────────────────────────── */
+@keyframes fade-in { from { opacity: 0 } to { opacity: 1 } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: none } }
+.animate-fade { animation: fade-in 0.15s ease-out; }
+.animate-rise { animation: rise-in 0.18s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade, .animate-rise { animation: none; }
 }

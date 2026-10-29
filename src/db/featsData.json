@@ -1936,57 +1936,18 @@
     {
       "id": "ca_arcane_disciple",
       "nome": "Discípulo Arcano",
-      "livro": "Complete Arcane",
+      "livro": "Complete Divine",
       "categoria": [
         "Divino"
       ],
       "prerequisitos": "SAB 13, habilidade de conjurar magias divinas",
-      "descricao": "Adiciona as magias de domínio de uma divindade à sua lista de magias e ganha um slot adicional por nível.",
+      "descricao": "Escolha um domínio da sua divindade: as magias desse domínio entram na sua lista de magias arcanas (preparadas como magias arcanas normais, sem slot extra).",
       "efeitos": [
         {
-          "tipo": "bonus_slot",
-          "alvo": "1",
-          "valor": 1
-        },
-        {
-          "tipo": "bonus_slot",
-          "alvo": "2",
-          "valor": 1
-        },
-        {
-          "tipo": "bonus_slot",
-          "alvo": "3",
-          "valor": 1
-        },
-        {
-          "tipo": "bonus_slot",
-          "alvo": "4",
-          "valor": 1
-        },
-        {
-          "tipo": "bonus_slot",
-          "alvo": "5",
-          "valor": 1
-        },
-        {
-          "tipo": "bonus_slot",
-          "alvo": "6",
-          "valor": 1
-        },
-        {
-          "tipo": "bonus_slot",
-          "alvo": "7",
-          "valor": 1
-        },
-        {
-          "tipo": "bonus_slot",
-          "alvo": "8",
-          "valor": 1
-        },
-        {
-          "tipo": "bonus_slot",
-          "alvo": "9",
-          "valor": 1
+          "tipo": "especial",
+          "alvo": "",
+          "valor": 0,
+          "nota": "Magias de um domínio entram na lista arcana; sem slots extras"
         }
       ]
     },
