@@ -14,6 +14,7 @@ export const translations = {
     app: { title: 'Grimoire', tagline: 'Ficha de personagem D&D 3.5', language: 'Idioma', pt: 'Português', en: 'English' },
     errors: {
       loadSheet: 'Não foi possível carregar a ficha', notFound: 'Personagem não encontrado', generic: 'Algo deu errado',
+      imageRead: 'Não foi possível ler a imagem',
     },
     list: {
       title: 'Seus Personagens', new: 'Novo Personagem', import: 'Importar', empty: 'Nenhum personagem ainda',
@@ -27,6 +28,7 @@ export const translations = {
       grimoireHint: 'Arquivo .grimoire.json exportado por este app (inclui fotos e diário).',
       chooseFile: 'Escolher arquivo', imported: '{name} importado', invalidFile: 'Arquivo inválido',
       importReport: 'Observações do import', unknownKept: '{n} campos do Roll20 sem equivalente foram guardados e voltarão no export.',
+      importCounts: '{total} atributos no arquivo: {read} importados, {derived} recalculados pelo Grimoire, {empty} vazios ou fórmulas da ficha, {preserved} guardados sem equivalente.',
       backup: 'Fazer backup agora', backupDone: 'Backup salvo em {file}',
     },
     wizard: {
@@ -52,7 +54,8 @@ export const translations = {
       combat: 'Combate', ac: 'Classe de Armadura', saves: 'Testes de Resistência', attacks: 'Ataques',
       identity: 'Identidade', classes: 'Classes', addAttack: '+ Ataque', addClass: '+ Classe',
       acParts: { armor: 'Armadura', shield: 'Escudo', dex: 'Des', size: 'Tamanho', natural: 'Natural', deflection: 'Deflexão', dodge: 'Esquiva', misc: 'Outros' },
-      acFromItems: 'Itens equipados somam automaticamente', maxDex: 'Des máx. {n} (armadura)',
+      acFromItems: 'Itens equipados entram automaticamente; bônus do mesmo tipo não somam (vale o maior), exceto esquiva e outros', maxDex: 'Des máx. {n} (armadura)',
+      acIgnored: 'Não somam (vale o maior do tipo): {list}', acManualSource: 'campo manual',
       saveBase: 'Base', saveAbility: 'Atrib.', saveMagic: 'Mágico', fromFeats: 'Talentos: {n}',
       babIterative: 'Ataques: {list}', attack: { name: 'Arma', kind: 'Tipo', melee: 'Corpo a corpo', ranged: 'Distância',
         ability: 'Atrib. ataque', enh: 'Melhoria', misc: 'Outros', dice: 'Dano', damageAbility: 'Atrib. dano',
@@ -114,6 +117,7 @@ export const translations = {
       title: 'Invocações', summon: 'Convocar criatura', active: 'Ativas', none: 'Nenhuma criatura invocada', smLevel: 'Convocar Monstro {n}',
       dismiss: 'Dispensar', custom: 'Criatura personalizada', rounds: 'Rodadas', full: 'Curar tudo', hp: 'PV', attack: 'Ataque', abilities: 'Habilidades',
       augment: 'Convocação Aprimorada: +4 For e +4 Con', pick: 'Escolha a criatura',
+      verified: 'Números conferidos no SRD 3.5 (habilidades especiais e modelo celestial/abissal não)', unverified: 'Dados não conferidos com a fonte',
     },
     journal: {
       background: 'História', notes: 'Sessões', players: 'Grupo', npcs: 'NPCs', places: 'Locais', quests: 'Missões',
@@ -166,7 +170,7 @@ export const translations = {
       clearOverride: 'Back to automatic calculation',
     },
     app: { title: 'Grimoire', tagline: 'D&D 3.5 character sheet', language: 'Language', pt: 'Português', en: 'English' },
-    errors: { loadSheet: 'Could not load the sheet', notFound: 'Character not found', generic: 'Something went wrong' },
+    errors: { loadSheet: 'Could not load the sheet', notFound: 'Character not found', generic: 'Something went wrong', imageRead: 'Could not read the image' },
     list: {
       title: 'Your Characters', new: 'New Character', import: 'Import', empty: 'No characters yet',
       emptyHint: 'Create your first hero or import a Roll20 sheet.', level: 'Level {n}',
@@ -179,6 +183,7 @@ export const translations = {
       grimoireHint: '.grimoire.json file exported by this app (includes photos and journal).',
       chooseFile: 'Choose file', imported: '{name} imported', invalidFile: 'Invalid file',
       importReport: 'Import notes', unknownKept: '{n} Roll20 fields without a match were kept and will come back on export.',
+      importCounts: '{total} attributes in the file: {read} imported, {derived} recalculated by Grimoire, {empty} empty or sheet formulas, {preserved} kept without a match.',
       backup: 'Back up now', backupDone: 'Backup saved to {file}',
     },
     wizard: {
@@ -204,7 +209,8 @@ export const translations = {
       combat: 'Combat', ac: 'Armor Class', saves: 'Saving Throws', attacks: 'Attacks',
       identity: 'Identity', classes: 'Classes', addAttack: '+ Attack', addClass: '+ Class',
       acParts: { armor: 'Armor', shield: 'Shield', dex: 'Dex', size: 'Size', natural: 'Natural', deflection: 'Deflection', dodge: 'Dodge', misc: 'Misc' },
-      acFromItems: 'Equipped items add automatically', maxDex: 'Max Dex {n} (armor)',
+      acFromItems: 'Equipped items count automatically; bonuses of the same type don\'t stack (highest applies), except dodge and misc', maxDex: 'Max Dex {n} (armor)',
+      acIgnored: 'Not stacking (highest of the type applies): {list}', acManualSource: 'manual field',
       saveBase: 'Base', saveAbility: 'Abil.', saveMagic: 'Magic', fromFeats: 'Feats: {n}',
       babIterative: 'Attacks: {list}', attack: { name: 'Weapon', kind: 'Kind', melee: 'Melee', ranged: 'Ranged',
         ability: 'Attack abil.', enh: 'Enhance', misc: 'Misc', dice: 'Damage', damageAbility: 'Damage abil.',
@@ -266,6 +272,7 @@ export const translations = {
       title: 'Summons', summon: 'Summon creature', active: 'Active', none: 'No summoned creatures', smLevel: 'Summon Monster {n}',
       dismiss: 'Dismiss', custom: 'Custom creature', rounds: 'Rounds', full: 'Full heal', hp: 'HP', attack: 'Attack', abilities: 'Abilities',
       augment: 'Augment Summoning: +4 Str and +4 Con', pick: 'Choose a creature',
+      verified: 'Numbers checked against the 3.5 SRD (special abilities and celestial/fiendish template are not)', unverified: 'Data not checked against the source',
     },
     journal: {
       background: 'Background', notes: 'Sessions', players: 'Party', npcs: 'NPCs', places: 'Places', quests: 'Quests',

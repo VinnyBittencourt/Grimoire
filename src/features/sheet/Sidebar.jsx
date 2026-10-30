@@ -73,10 +73,9 @@ export function Sidebar({ ch, sheet, actions }) {
       <Modal open={restOpen} onClose={() => setRestOpen(false)} title={t('sheet.newDay')} width={380} closeOnBackdrop
         footer={<>
           <Button variant="subtle" onClick={() => setRestOpen(false)}>{t('common.cancel')}</Button>
-          <Button variant="gold" autoFocus onClick={async () => {
+          <Button variant="gold" data-autofocus onClick={async () => {
             setRestOpen(false)
-            await actions.rest(heal)
-            toast.success(t('sheet.newDayDone'))
+            if (await actions.rest(heal)) toast.success(t('sheet.newDayDone'))
           }}>{t('common.confirm')}</Button>
         </>}>
         <p className="text-body text-sm mt-0">{t('sheet.newDayConfirm')}</p>

@@ -15,6 +15,8 @@ const clean = html => (typeof DOMPurify.sanitize === 'function' ? DOMPurify.sani
  * Salva sozinho 1,5 s após parar de digitar, ao sair do editor e com Ctrl+S.
  * O HTML vindo do banco é sanitizado (DOMPurify) antes de entrar no editor.
  * `docKey` troca o documento editado (ex.: ao selecionar outra nota).
+ * Só salva se houve edição: o getHTML() do TipTap normaliza o HTML, e sem essa checagem um
+ * simples foco/blur regravaria notas antigas (v1) com outro markup.
  */
 export function RichText({ value, onSave, docKey, placeholder, className = '' }) {
   const { t } = useLang()
@@ -22,13 +24,18 @@ export function RichText({ value, onSave, docKey, placeholder, className = '' })
   const timer = useRef(null)
   const onSaveRef = useRef(onSave)
   useEffect(() => { onSaveRef.current = onSave })
+  const dirty = useRef(false)
+  // onSave do documento que foi editado: ao trocar de nota, a edição pendente vai para a nota certa
+  const saveTarget = useRef(null)
 
   const flush = editor => {
     clearTimeout(timer.current)
+    if (!dirty.current) return
+    dirty.current = false
     const html = editor.isEmpty ? '' : editor.getHTML()
     if (html !== last.current) {
       last.current = html
-      onSaveRef.current(html || null)
+      saveTarget.current?.(html || null)
     }
   }
 
@@ -49,6 +56,8 @@ export function RichText({ value, onSave, docKey, placeholder, className = '' })
       },
     },
     onUpdate: ({ editor: ed }) => {
+      dirty.current = true
+      saveTarget.current = onSaveRef.current
       clearTimeout(timer.current)
       timer.current = setTimeout(() => flush(ed), AUTOSAVE_MS)
     },
@@ -57,9 +66,10 @@ export function RichText({ value, onSave, docKey, placeholder, className = '' })
   const editorRef = useRef(null)
   useEffect(() => { editorRef.current = editor }, [editor])
 
-  // Troca de documento: salva o anterior e carrega o novo
+  // Troca de documento: salva o anterior (ainda está no editor) e carrega o novo
   useEffect(() => {
     if (!editor) return
+    flush(editor)
     last.current = value ?? ''
     editor.commands.setContent(clean(value), { emitUpdate: false })
     // eslint-disable-next-line react-hooks/exhaustive-deps

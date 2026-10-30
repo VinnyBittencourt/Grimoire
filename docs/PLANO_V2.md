@@ -201,7 +201,38 @@ No fim roda `PRAGMA foreign_key_check`, compara a contagem de linhas e faz `VACU
 
 ---
 
-## Status (2026-10-28)
+## Status (2026-10-29)
+
+- A v2 está em uso no banco real. A migração v0 → v2 rodou no boot de 2026-10-28 23:17, com backup `grimoire-20261028-2317-pre-migration-v0.db` e relatório em `data/backups/`.
+- Depois da v2, uma auditoria (instruções mestre §16) gerou 7 fases, todas implementadas em 2026-10-29:
+  1. proteção de backups e segurança;
+  2. regras confirmadas;
+  3. confiabilidade do front;
+  4. Roll20 sem perdas;
+  5. empilhamento de CA;
+  6. rastreabilidade de conteúdo (migração 003);
+  7. documentação.
+- Detalhes no `CLAUDE.md` e no `learnings.md`.
+
+### Desvios em relação a este plano
+O que foi implementado diferente do texto acima (o código é a referência):
+- **Migrações:** são arquivos `.js` com `up(db, ctx)` (`server/migrations/NNN_*.js`), não `.sql`.
+- **Estrutura do servidor:** não há `server/routes/` nem `repos/`. Todas as rotas ficam em `server/app.js` e o acesso a dados em `server/repo.js`.
+- **Atributos e saves** são colunas de `characters` (`str_base`…, `fort_magic`…), não tabelas `abilities`/`saves`. Não existem rotas `abilities`, `saves`, `cast` ou `hp`; tudo passa por `PATCH /api/characters/:id` e pelo CRUD genérico.
+- **Não há `ref_skills`:** as perícias são constantes em `shared/constants/skills.js`.
+- **Front:** não há `ConfirmDialog` (exclusão usa `ConfirmButton`, dois cliques) nem debounce (campos salvam no blur/Enter). O `Toast` aceita "Desfazer", mas nenhuma ação usa.
+- **A visão "copiar para o Roll20"** (fase 6) não foi feita: só existem export/import em arquivo.
+
+### Pendências (2026-10-29)
+- Roll20: o import foi conferido com um export real da VTTES (fixture em `tests/roll20/fixtures/`, 2026-10-29). Falta testar o caminho inverso (importar no Roll20 um arquivo do Grimoire).
+- Decidir sobre o `grimoire-design-system`: corrigir o pacote e adotar, ou tirar de `dependencies`.
+- Conferir no livro as fórmulas de recursos e a mecânica das classes de suplemento (`verified: false`).
+- Pesquisa bibliográfica completa (prompt §18) e conferência de talentos, raças e criaturas `_san` (`docs/COBERTURA_CONTEUDO.md`).
+- Reforçar a validação dos imports (zod estrito no Grimoire e no Roll20).
+- Slot do Mago especialista (precisa de uma coluna nova).
+- `npm audit` aponta vulnerabilidades em dependências existentes (body-parser, @babel/core…).
+
+### Status anterior (2026-10-28)
 
 Fases 0–7 implementadas. Pendências:
 - Validar import/export Roll20 com um arquivo real exportado pelo VTTES (`tests/roll20/fixtures/`).

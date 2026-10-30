@@ -53,15 +53,16 @@ export const SKILL_BY_ID = Object.fromEntries(SKILLS.map(s => [s.id, s]))
 
 export const KNOWLEDGE_SKILLS = SKILLS.filter(s => s.knowledge).map(s => s.id)
 
-// Sinergias do PHB (5 graduações na origem → +2 no destino).
-// Só as incondicionais; as situacionais (ex.: Ofício → Avaliação do mesmo tipo) ficam de fora.
+// Sinergias do PHB, tabela 4-5 (5 graduações na origem → +2 no destino).
+// Só as incondicionais. As situacionais ficam de fora do total, por exemplo:
+//   Ofício → Avaliação (do mesmo tipo), Decifrar Escrita/Identificar Magia → UMD (pergaminhos),
+//   Arte da Fuga → Usar Cordas (amarras), Usar Cordas → Escalar (com corda) e → Arte da Fuga (cordas),
+//   Blefar → Disfarce (atuando), Conhecimentos/Procurar → Sobrevivência (em certos ambientes/rastros).
 export const SYNERGIES = [
   ['bluff', 'diplomacy'], ['bluff', 'intimidate'], ['bluff', 'sleightofhand'],
   ['handleanimal', 'ride'], ['jump', 'tumble'], ['knowarcana', 'spellcraft'],
   ['knowlocal', 'gatherinformation'], ['knownobility', 'diplomacy'],
-  ['sensemotive', 'diplomacy'], ['tumble', 'balance'], ['tumble', 'jump'],
-  ['escapeartist', 'userope'], ['userope', 'climb'], ['decipherscript', 'usemagicdevice'],
-  ['spellcraft', 'usemagicdevice'],
+  ['sensemotive', 'diplomacy'], ['survival', 'knownature'], ['tumble', 'balance'], ['tumble', 'jump'],
 ]
 
 // Nomes pt usados nos efeitos de talentos (featsData.json, campo `alvo`) → id

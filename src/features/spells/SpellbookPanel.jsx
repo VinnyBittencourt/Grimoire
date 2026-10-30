@@ -72,10 +72,9 @@ export function SpellbookPanel({ ch, cast, actions, isFirst }) {
             const data = new FormData(form)
             const name = data.get('name')?.toString().trim()
             if (!name) return
-            await actions.create('spells', { name, level, class_row_id: cast.rowId, school: data.get('school') || null })
-            form.reset()
+            if (await actions.create('spells', { name, level, class_row_id: cast.rowId, school: data.get('school') || null })) form.reset()
           }}>
-            <label className="flex-1"><span className="label block mb-1">{t('spells.custom')}</span><input name="name" autoFocus className="field" /></label>
+            <label className="flex-1"><span className="label block mb-1">{t('spells.custom')}</span><input name="name" data-autofocus className="field" /></label>
             <label className="w-40"><span className="label block mb-1">{t('spells.school')}</span>
               <select name="school" className="field" defaultValue="">
                 <option value="">—</option>

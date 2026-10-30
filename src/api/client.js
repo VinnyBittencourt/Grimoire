@@ -66,5 +66,6 @@ export async function resizeImage(file, max = 640, quality = 0.85) {
   canvas.height = Math.round(bitmap.height * scale)
   canvas.getContext('2d').drawImage(bitmap, 0, 0, canvas.width, canvas.height)
   bitmap.close?.()
-  return new Promise(resolve => canvas.toBlob(resolve, 'image/webp', quality))
+  return new Promise((resolve, reject) => canvas.toBlob(
+    blob => (blob ? resolve(blob) : reject(new Error('toBlob falhou'))), 'image/webp', quality))
 }

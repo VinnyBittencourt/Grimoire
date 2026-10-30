@@ -67,6 +67,12 @@ npm run build          # gera dist/
 
 ## Como o Grimoire consome
 
+> **Estado atual (2026-10-29): o Grimoire NÃO importa o DS.** O pacote está em `dependencies`, mas nenhum
+> arquivo faz `import ... from 'grimoire-design-system'`. Os componentes base vivem em `src/ui`, usando os
+> mesmos nomes de token. O pacote tem problemas que impedem a adoção (export do CSS quebrado, Modal sem
+> foco preso nem `aria-modal`, Button sem repassar props): ver `learnings.md`, "grimoire-design-system:
+> problemas do pacote". O texto abaixo descreve o fluxo **planejado**, não o atual.
+
 Instalado via git dependency:
 ```bash
 npm install github:VinnyBittencourt/grimoire-design-system

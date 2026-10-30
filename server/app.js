@@ -4,16 +4,40 @@ import { z } from 'zod'
 import { createRepo, HttpError } from './repo.js'
 import { COLLECTIONS, characterFields, createCharacter, slotPatch, usePatch, restBody, preparedReplace } from './schemas.js'
 import { exportCharacter, importCharacter } from './exchange.js'
-import { IMAGE_TYPES, savePhotoBuffer, deletePhoto } from './photos.js'
+import { IMAGE_TYPES, detectImageExt, savePhotoBuffer, deletePhoto } from './photos.js'
 import { exportRoll20, importRoll20 } from './roll20/index.js'
 
 const REF_TABLES = new Set(['ref_talentos', 'ref_falhas', 'ref_racas', 'ref_classes', 'ref_criaturas'])
-const REF_JSON = ['categoria', 'efeitos', 'atributos', 'habilidades', 'saves']
+const REF_JSON = ['categoria', 'efeitos', 'atributos', 'habilidades', 'saves', 'fonte']
 
 const id = v => {
   const n = Number(v)
   if (!Number.isInteger(n) || n <= 0) throw new HttpError(400, 'invalid_id', `id inválido: ${v}`)
   return n
+}
+
+// A API não tem autenticação; o bind em 127.0.0.1 não impede que uma página aberta no navegador
+// faça requisições para cá. Por isso:
+// - Host precisa ser local (bloqueia DNS rebinding);
+// - escritas com Origin precisam vir de origem local (bloqueia CSRF de outros sites).
+// Requisições sem Origin (curl, testes, GET de mesma origem) passam.
+const LOCAL_HOSTS = new Set(['localhost', '127.0.0.1', '[::1]'])
+const SAFE_METHODS = new Set(['GET', 'HEAD', 'OPTIONS'])
+
+function hostnameOf(value) {
+  try { return new URL(value.includes('://') ? value : `http://${value}`).hostname } catch { return null }
+}
+
+function localOnly(req, res, next) {
+  const fail = message => res.status(403).json({ error: { code: 'forbidden_origin', message } })
+  if (!LOCAL_HOSTS.has(hostnameOf(req.headers.host ?? ''))) return fail('Host não permitido')
+  const origin = req.headers.origin
+  if (!SAFE_METHODS.has(req.method)) {
+    if (origin !== undefined && !LOCAL_HOSTS.has(hostnameOf(origin))) return fail('Origem não permitida')
+    if (req.headers['sec-fetch-site'] === 'cross-site') return fail('Origem não permitida')
+  }
+  res.setHeader('X-Content-Type-Options', 'nosniff')
+  next()
 }
 
 /**
@@ -24,6 +48,7 @@ export function createApp({ db, dataDir, backupper, onWrite = () => {} }) {
   const photosDir = join(dataDir ?? process.cwd(), dataDir ? 'photos' : '.tmp-photos')
   const app = express()
   app.disable('x-powered-by')
+  app.use(localOnly)
   app.use(express.json({ limit: '25mb' })) // import de personagem com fotos embutidas
   const rawImage = express.raw({ type: Object.keys(IMAGE_TYPES), limit: '10mb' })
 
@@ -41,8 +66,10 @@ export function createApp({ db, dataDir, backupper, onWrite = () => {} }) {
   r.get('/characters/:id', (req, res) => res.json(repo.getSheet(id(req.params.id))))
   r.patch('/characters/:id', (req, res) => res.json(repo.updateCharacter(id(req.params.id), characterFields.parse(req.body))))
   r.delete('/characters/:id', (req, res) => {
-    const row = repo.deleteCharacter(id(req.params.id))
-    deletePhoto(photosDir, row.photo)
+    const cid = id(req.params.id)
+    const npcPhotos = repo.listChildren('npcs', cid).map(n => n.photo) // o cascade não apaga arquivos
+    const row = repo.deleteCharacter(cid)
+    for (const file of [row.photo, ...npcPhotos]) deletePhoto(photosDir, file)
     res.status(204).end()
   })
   r.get('/characters/:id/journal', (req, res) => res.json(repo.getJournal(id(req.params.id))))
@@ -50,10 +77,9 @@ export function createApp({ db, dataDir, backupper, onWrite = () => {} }) {
 
   // ── Fotos ─────────────────────────────────────────────────────────────────
   function putPhoto(req, current) {
-    const ext = IMAGE_TYPES[req.headers['content-type']]
-    if (!ext || !Buffer.isBuffer(req.body) || !req.body.length) {
-      throw new HttpError(400, 'invalid_image', 'Envie a imagem como corpo binário (image/jpeg, png, webp ou gif)')
-    }
+    // A extensão sai do conteúdo; o Content-Type só serve para o express.raw aceitar o corpo
+    const ext = detectImageExt(req.body)
+    if (!ext) throw new HttpError(400, 'invalid_image', 'Envie a imagem como corpo binário (image/jpeg, png, webp ou gif)')
     const file = savePhotoBuffer(photosDir, req.body, ext)
     deletePhoto(photosDir, current)
     return file
@@ -98,7 +124,7 @@ export function createApp({ db, dataDir, backupper, onWrite = () => {} }) {
   })
   r.get('/characters/:id/export/roll20', (req, res) => {
     const data = exportRoll20(repo.getSheet(id(req.params.id)), db)
-    const name = (data.name || 'personagem').replace(/[^a-z0-9]+/gi, '_')
+    const name = (data.character.name || 'personagem').replace(/[^a-z0-9]+/gi, '_')
     res.setHeader('Content-Disposition', `attachment; filename="${name}.roll20.json"`)
     res.json(data)
   })
@@ -148,7 +174,15 @@ export function createApp({ db, dataDir, backupper, onWrite = () => {} }) {
   })
 
   app.use('/api', r)
-  if (dataDir) app.use('/photos', express.static(photosDir, { maxAge: '1y', immutable: true }))
+  // sandbox: mesmo que um arquivo não-imagem chegue à pasta, o navegador não executa script dele
+  const PHOTO_EXT = /\.(jpg|png|webp|gif)$/i
+  if (dataDir) {
+    app.use('/photos', (req, res, next) => (PHOTO_EXT.test(req.path) ? next() : res.status(404).end()),
+      express.static(photosDir, {
+        maxAge: '1y', immutable: true,
+        setHeaders: res => res.setHeader('Content-Security-Policy', "default-src 'none'; sandbox"),
+      }))
+  }
 
   app.use('/api', (req, res) => res.status(404).json({ error: { code: 'not_found', message: 'Rota não encontrada' } }))
 

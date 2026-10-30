@@ -74,6 +74,9 @@ export function SummonModal({ open, level, onClose, ch, actions, onSummoned }) {
               <div className="flex flex-col gap-2 text-xs">
                 <h3 className="font-display text-gold text-lg m-0">{current.nome}</h3>
                 <p className="text-dim m-0">{current.tamanho} · {current.tipo} · {current.alinhamento} · {current.livro}</p>
+                <p className={`m-0 text-[10px] ${current.fonte?.verificado ? 'text-dim' : 'text-warn'}`}>
+                  {current.fonte?.verificado ? t('summons.verified') : t('summons.unverified')}
+                </p>
                 <div className="grid grid-cols-3 gap-2 text-body">
                   <span>{t('vitals.hp')}: <b className="text-parchment">{averageHp(current.pv, (current.con ?? 10) + (augment ? 4 : 0))}</b> ({current.pv})</span>
                   <span>{t('vitals.ac')}: <b className="text-parchment">{current.ca}</b></span>

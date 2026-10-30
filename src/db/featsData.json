@@ -20,7 +20,8 @@
           "alvo": "Acrobacia",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_agile",
@@ -42,7 +43,8 @@
           "alvo": "Escapar da Prisão",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_alertness",
@@ -64,7 +66,8 @@
           "alvo": "Observar",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_animal_affinity",
@@ -86,7 +89,8 @@
           "alvo": "Montar",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_armor_light",
@@ -97,7 +101,8 @@
       ],
       "prerequisitos": "",
       "descricao": "Use armaduras leves sem penalidade.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_armor_medium",
@@ -108,7 +113,8 @@
       ],
       "prerequisitos": "Proficiência com Armaduras Leves",
       "descricao": "Use armaduras médias sem penalidade.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_armor_heavy",
@@ -119,7 +125,8 @@
       ],
       "prerequisitos": "Proficiência com Armaduras Médias",
       "descricao": "Use armaduras pesadas sem penalidade.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_athletic",
@@ -141,7 +148,8 @@
           "alvo": "Nadar",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_augment_summoning",
@@ -159,7 +167,8 @@
           "valor": 0,
           "nota": "Criaturas convocadas ganham +4 FOR e +4 CON"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_blind_fight",
@@ -177,7 +186,8 @@
           "valor": 0,
           "nota": "Rerola o dado de acerto em combate cego; o oponente não tem vantagem por invisibilidade"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_scribe_scroll",
@@ -188,7 +198,8 @@
       ],
       "prerequisitos": "Conjurador nível 1",
       "descricao": "Você pode criar pergaminhos mágicos com magias que conhece.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_brew_potion",
@@ -199,7 +210,8 @@
       ],
       "prerequisitos": "Conjurador nível 3",
       "descricao": "Você pode criar poções mágicas.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_cleave",
@@ -211,7 +223,8 @@
       ],
       "prerequisitos": "FOR 13, Ataque Poderoso",
       "descricao": "Se você derrubar um oponente, pode fazer um ataque extra imediatamente.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_combat_casting",
@@ -228,7 +241,8 @@
           "alvo": "Concentração (em combate)",
           "valor": 4
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_combat_expertise",
@@ -247,7 +261,8 @@
           "valor": 0,
           "nota": "Troca até -5 em ataque por +5 na CA por 1 rodada"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_combat_reflexes",
@@ -266,7 +281,8 @@
           "valor": 0,
           "nota": "Pode realizar ataques de oportunidade extras = mod DEX; pode atacar durante surpreendido"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_craft_magic_arms",
@@ -277,7 +293,8 @@
       ],
       "prerequisitos": "Conjurador nível 5",
       "descricao": "Você pode criar armas e armaduras mágicas.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_craft_rod",
@@ -288,7 +305,8 @@
       ],
       "prerequisitos": "Conjurador nível 9",
       "descricao": "Você pode criar bastões mágicos.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_craft_staff",
@@ -299,7 +317,8 @@
       ],
       "prerequisitos": "Conjurador nível 12",
       "descricao": "Você pode criar cajados mágicos.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_craft_wand",
@@ -310,7 +329,8 @@
       ],
       "prerequisitos": "Conjurador nível 5",
       "descricao": "Você pode criar varinhas mágicas.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_craft_wondrous",
@@ -321,7 +341,8 @@
       ],
       "prerequisitos": "Conjurador nível 3",
       "descricao": "Você pode criar itens mágicos maravilhosos.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_deceitful",
@@ -343,7 +364,8 @@
           "alvo": "Disfarce",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_deft_hands",
@@ -353,19 +375,20 @@
         "Geral"
       ],
       "prerequisitos": "",
-      "descricao": "Você tem talento para ladinagem e desarmamento de armadilhas.",
+      "descricao": "+2 em Prestidigitação e Usar Cordas.",
       "efeitos": [
         {
           "tipo": "bonus_skill",
-          "alvo": "Ladinagem",
+          "alvo": "Prestidigitação",
           "valor": 2
         },
         {
           "tipo": "bonus_skill",
-          "alvo": "Desviar Dispositivos",
+          "alvo": "Usar Cordas",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_diehard",
@@ -383,7 +406,8 @@
           "valor": 0,
           "nota": "Ao chegar a -1 a -9 PV, fica incapacitado mas não inconsciente e pode agir normalmente"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_diligent",
@@ -405,7 +429,8 @@
           "alvo": "Decifrar Escritas",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_dodge",
@@ -424,7 +449,8 @@
           "valor": 0,
           "nota": "+1 CA contra um alvo designado por rodada"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_empower_spell",
@@ -442,7 +468,8 @@
           "valor": 0,
           "nota": "Ocupa um slot 2 níveis acima; variáveis numéricas da magia +50%"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_endurance",
@@ -460,7 +487,8 @@
           "valor": 0,
           "nota": "+4 em Fortitude contra fadiga, calor, frio e afogamento; pode dormir de armadura"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_enlarge_spell",
@@ -478,7 +506,8 @@
           "valor": 0,
           "nota": "Ocupa um slot 1 nível acima; dobra o alcance da magia"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_eschew_materials",
@@ -489,7 +518,8 @@
       ],
       "prerequisitos": "",
       "descricao": "Conjure magias sem componentes materiais baratos.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_exotic_weapon_prof",
@@ -501,7 +531,8 @@
       ],
       "prerequisitos": "BAB +1",
       "descricao": "Use uma arma exótica específica sem penalidade.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_extend_spell",
@@ -519,7 +550,8 @@
           "valor": 0,
           "nota": "Ocupa um slot 1 nível acima; dobra a duração da magia"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_extra_turning",
@@ -536,7 +568,8 @@
           "alvo": "",
           "valor": 4
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_far_shot",
@@ -555,7 +588,8 @@
           "valor": 0,
           "nota": "Armas de projétil: incremento de alcance x1,5; armas de arremesso: dobra o incremento"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_forge_ring",
@@ -566,7 +600,8 @@
       ],
       "prerequisitos": "Conjurador nível 12",
       "descricao": "Você pode criar anéis mágicos.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_great_cleave",
@@ -578,7 +613,8 @@
       ],
       "prerequisitos": "FOR 13, Ataque Poderoso, Abater, BAB +4",
       "descricao": "Sem limite de ataques extras de Abater por rodada.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_great_fortitude",
@@ -595,7 +631,8 @@
           "alvo": "fortitude",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_greater_spell_focus",
@@ -613,7 +650,8 @@
           "valor": 0,
           "nota": "+1 na CD das magias de uma escola específica (cumulativo com Foco em Magia)"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_greater_spell_pen",
@@ -631,7 +669,8 @@
           "valor": 0,
           "nota": "+4 total em testes de penetração de RM"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_greater_twf",
@@ -643,7 +682,8 @@
       ],
       "prerequisitos": "DES 19, Luta com Duas Armas Melhorada, Luta com Duas Armas, BAB +11",
       "descricao": "Você pode fazer um terceiro ataque com a arma secundária.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_greater_weapon_focus",
@@ -654,7 +694,8 @@
       ],
       "prerequisitos": "Foco em Arma (arma escolhida), BAB +8, Guerreiro nível 8",
       "descricao": "+1 adicional em jogadas de ataque com a arma escolhida.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_greater_weapon_spec",
@@ -665,7 +706,8 @@
       ],
       "prerequisitos": "Foco em Arma, Especialização em Arma, Foco em Arma Aprimorado, Guerreiro nível 12",
       "descricao": "+2 adicional em jogadas de dano com a arma escolhida.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_heighten_spell",
@@ -683,7 +725,8 @@
           "valor": 0,
           "nota": "A magia é tratada como sendo do nível do slot utilizado para sua CD"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_improved_bull_rush",
@@ -702,7 +745,8 @@
           "valor": 0,
           "nota": "Não provoca AoO ao iniciar investida; +4 no teste de investida"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_improved_counterspell",
@@ -713,7 +757,8 @@
       ],
       "prerequisitos": "",
       "descricao": "Contradiga magias usando qualquer magia da mesma escola.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_improved_critical",
@@ -732,7 +777,8 @@
           "valor": 0,
           "nota": "Dobra a margem de ameaça crítica de uma arma específica"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_improved_disarm",
@@ -751,7 +797,8 @@
           "valor": 0,
           "nota": "Não provoca AoO ao tentar desarmar; +4 no teste de desarme"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_improved_familiar",
@@ -762,7 +809,8 @@
       ],
       "prerequisitos": "Habilidade de Familiar",
       "descricao": "Você pode obter um familiar de um tipo mais poderoso.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_improved_feint",
@@ -774,7 +822,8 @@
       ],
       "prerequisitos": "INT 13, Perícia em Combate",
       "descricao": "Pode usar Blefar para fintar como ação de movimento.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_improved_grapple",
@@ -788,12 +837,18 @@
       "descricao": "+4 em testes de agarrar; não provoca ataque de oportunidade.",
       "efeitos": [
         {
+          "tipo": "bonus_grapple",
+          "alvo": "",
+          "valor": 4
+        },
+        {
           "tipo": "especial",
           "alvo": "",
           "valor": 0,
-          "nota": "Não provoca AoO ao iniciar agarrão; +4 no teste de agarrar"
+          "nota": "Não provoca AdO ao iniciar agarrão"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_improved_initiative",
@@ -811,7 +866,8 @@
           "alvo": "",
           "valor": 4
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_improved_overrun",
@@ -823,7 +879,8 @@
       ],
       "prerequisitos": "FOR 13, Ataque Poderoso",
       "descricao": "+4 em testes de atropelamento; o alvo não pode desviar.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_improved_precise_shot",
@@ -835,7 +892,8 @@
       ],
       "prerequisitos": "DES 19, Tiro em Ponto Branco, Tiro Preciso, BAB +11",
       "descricao": "Ignore a cobertura parcial e atire entre personagens sem penalidade.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_improved_shield_bash",
@@ -847,7 +905,8 @@
       ],
       "prerequisitos": "Proficiência com Escudo",
       "descricao": "Mantenha o bônus de CA do escudo ao atacar com ele.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_improved_sunder",
@@ -859,7 +918,8 @@
       ],
       "prerequisitos": "FOR 13, Ataque Poderoso",
       "descricao": "+4 em tentativas de destruir; não provoca ataque de oportunidade.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_improved_trip",
@@ -871,7 +931,8 @@
       ],
       "prerequisitos": "INT 13, Perícia em Combate",
       "descricao": "+4 em tentativas de viagem; não provoca ataque de oportunidade. Se vencer, pode atacar imediatamente.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_improved_twf",
@@ -883,7 +944,8 @@
       ],
       "prerequisitos": "DES 17, Luta com Duas Armas, BAB +6",
       "descricao": "Você pode fazer um segundo ataque com a arma secundária.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_improved_unarmed",
@@ -895,7 +957,8 @@
       ],
       "prerequisitos": "",
       "descricao": "Não provoca ataque de oportunidade ao atacar desarmado; causa dano letal.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_investigator",
@@ -917,7 +980,8 @@
           "alvo": "Procurar",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_iron_will",
@@ -934,7 +998,8 @@
           "alvo": "will",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_leadership",
@@ -945,7 +1010,8 @@
       ],
       "prerequisitos": "Nível 6",
       "descricao": "Você pode atrair seguidores e um companheiro.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_lightning_reflexes",
@@ -962,7 +1028,8 @@
           "alvo": "reflex",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_magical_aptitude",
@@ -972,19 +1039,20 @@
         "Geral"
       ],
       "prerequisitos": "",
-      "descricao": "+2 em Uso de Dispositivo Mágico e Identificar.",
+      "descricao": "+2 em Identificar Magia e Usar Instrumento Mágico.",
       "efeitos": [
         {
           "tipo": "bonus_skill",
-          "alvo": "Uso de Dispositivo Mágico",
+          "alvo": "Identificar Magia",
           "valor": 2
         },
         {
           "tipo": "bonus_skill",
-          "alvo": "Identificar",
+          "alvo": "Usar Instrumento Mágico",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_manyshot",
@@ -996,7 +1064,8 @@
       ],
       "prerequisitos": "DES 17, Tiro em Ponto Branco, Tiro Rápido, BAB +6",
       "descricao": "Dispare duas ou mais flechas com um ataque.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_martial_weapon",
@@ -1007,7 +1076,8 @@
       ],
       "prerequisitos": "",
       "descricao": "Use todas as armas marciais sem penalidade.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_maximize_spell",
@@ -1025,7 +1095,8 @@
           "valor": 0,
           "nota": "Ocupa um slot 3 níveis acima; todas as variáveis numéricas são maximizadas"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_mobility",
@@ -1044,7 +1115,8 @@
           "valor": 0,
           "nota": "+4 CA contra ataques de oportunidade provocados por movimento"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_mounted_archery",
@@ -1056,7 +1128,8 @@
       ],
       "prerequisitos": "Combate Montado",
       "descricao": "Reduz à metade a penalidade de atirar enquanto montado.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_mounted_combat",
@@ -1068,7 +1141,8 @@
       ],
       "prerequisitos": "Montar 1 posto",
       "descricao": "Use Montar para proteger sua montaria de ataques.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_multiattack",
@@ -1079,7 +1153,8 @@
       ],
       "prerequisitos": "3 ou mais ataques naturais",
       "descricao": "Reduz a penalidade dos ataques naturais secundários.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_natural_spell",
@@ -1090,7 +1165,8 @@
       ],
       "prerequisitos": "SAB 13, Forma Selvagem",
       "descricao": "Conjure magias enquanto estiver em Forma Selvagem.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_negotiator",
@@ -1100,7 +1176,7 @@
         "Geral"
       ],
       "prerequisitos": "",
-      "descricao": "+2 em Diplomacia e Sentido de Rua.",
+      "descricao": "+2 em Diplomacia e Sentir Motivação.",
       "efeitos": [
         {
           "tipo": "bonus_skill",
@@ -1109,10 +1185,11 @@
         },
         {
           "tipo": "bonus_skill",
-          "alvo": "Sentido de Rua",
+          "alvo": "Sentir Motivação",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_nimble_fingers",
@@ -1122,19 +1199,20 @@
         "Geral"
       ],
       "prerequisitos": "",
-      "descricao": "+2 em Abrir Fechadura e Prestidigitação.",
+      "descricao": "+2 em Operar Mecanismo e Abrir Fechaduras.",
       "efeitos": [
         {
           "tipo": "bonus_skill",
-          "alvo": "Abrir Fechadura",
+          "alvo": "Operar Mecanismo",
           "valor": 2
         },
         {
           "tipo": "bonus_skill",
-          "alvo": "Prestidigitação",
+          "alvo": "Abrir Fechaduras",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_persuasive",
@@ -1156,7 +1234,8 @@
           "alvo": "Intimidar",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_point_blank_shot",
@@ -1179,7 +1258,8 @@
           "alvo": "ranged_close",
           "valor": 1
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_power_attack",
@@ -1198,7 +1278,8 @@
           "valor": 0,
           "nota": "Troca até -5 em ataque por +5 no dano (ou +10 com arma de duas mãos)"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_precise_shot",
@@ -1210,7 +1291,8 @@
       ],
       "prerequisitos": "Tiro em Ponto Branco",
       "descricao": "Ataque com arco ou besta sem penalidade de tiro em combate próximo.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_quick_draw",
@@ -1222,7 +1304,8 @@
       ],
       "prerequisitos": "BAB +1",
       "descricao": "Saque qualquer arma como ação livre.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_quicken_spell",
@@ -1240,7 +1323,8 @@
           "valor": 0,
           "nota": "Ocupa um slot 4 níveis acima; a magia é conjurada como ação livre"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_rapid_reload",
@@ -1252,7 +1336,8 @@
       ],
       "prerequisitos": "Proficiência com besta escolhida",
       "descricao": "Recarregue a besta escolhida mais rápido.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_rapid_shot",
@@ -1264,7 +1349,8 @@
       ],
       "prerequisitos": "DES 13, Tiro em Ponto Branco",
       "descricao": "Um ataque adicional a -2 com armas de projétil.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_ride_by_attack",
@@ -1276,7 +1362,8 @@
       ],
       "prerequisitos": "Combate Montado",
       "descricao": "Quando carregando enquanto montado, pode se mover antes e depois do ataque.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_run",
@@ -1294,7 +1381,8 @@
           "valor": 0,
           "nota": "Velocidade de corrida x5; +4 em Saltar com impulso"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_self_sufficient",
@@ -1316,7 +1404,8 @@
           "alvo": "Sobrevivência",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_shield_prof",
@@ -1327,7 +1416,8 @@
       ],
       "prerequisitos": "",
       "descricao": "Use escudos sem penalidade de conjuração.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_shot_on_the_run",
@@ -1339,7 +1429,8 @@
       ],
       "prerequisitos": "DES 13, Tiro em Ponto Branco, Mobilidade, Esquiva",
       "descricao": "Ataque com arma de projétil e mova-se antes e depois do ataque.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_silent_spell",
@@ -1357,7 +1448,8 @@
           "valor": 0,
           "nota": "Ocupa um slot 1 nível acima; sem componente verbal"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_simple_weapon",
@@ -1368,7 +1460,8 @@
       ],
       "prerequisitos": "",
       "descricao": "Use todas as armas simples sem penalidade.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_skill_focus",
@@ -1385,7 +1478,8 @@
           "alvo": "(perícia escolhida)",
           "valor": 3
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_spell_focus",
@@ -1403,7 +1497,8 @@
           "valor": 0,
           "nota": "+1 na CD das magias de uma escola específica"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_spell_mastery",
@@ -1414,7 +1509,8 @@
       ],
       "prerequisitos": "Mago nível 1",
       "descricao": "Prepare um número de magias sem seu grimório.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_spell_penetration",
@@ -1432,7 +1528,8 @@
           "valor": 0,
           "nota": "+2 em testes de penetração de RM"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_spirited_charge",
@@ -1444,7 +1541,8 @@
       ],
       "prerequisitos": "Combate Montado, Atacar Enquanto Monta",
       "descricao": "Dobra o dano ao carregar enquanto montado (triplo com lança).",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_spring_attack",
@@ -1456,7 +1554,8 @@
       ],
       "prerequisitos": "DES 13, Esquiva, Mobilidade, BAB +4",
       "descricao": "Mova-se antes e depois de um ataque único sem provocar AoO.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_stealthy",
@@ -1478,7 +1577,8 @@
           "alvo": "Mover em Silêncio",
           "valor": 2
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_still_spell",
@@ -1496,7 +1596,8 @@
           "valor": 0,
           "nota": "Ocupa um slot 1 nível acima; sem componente somático"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_stunning_fist",
@@ -1508,7 +1609,8 @@
       ],
       "prerequisitos": "DES 13, SAB 13, Luta Desarmada Aprimorada, BAB +8",
       "descricao": "Aturdoa o alvo com um ataque desarmado bem-sucedido.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_toughness",
@@ -1525,7 +1627,8 @@
           "alvo": "",
           "valor": 3
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_tower_shield",
@@ -1536,7 +1639,8 @@
       ],
       "prerequisitos": "Proficiência com Escudo",
       "descricao": "Use escudos-torre sem penalidades adicionais.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_track",
@@ -1547,7 +1651,8 @@
       ],
       "prerequisitos": "",
       "descricao": "Use Sobrevivência para rastrear criaturas.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_trample",
@@ -1559,7 +1664,8 @@
       ],
       "prerequisitos": "Combate Montado",
       "descricao": "Enquanto montado, atropele oponentes de tamanho menor.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_two_weapon_defense",
@@ -1571,7 +1677,8 @@
       ],
       "prerequisitos": "DES 15, Luta com Duas Armas",
       "descricao": "+1 de escudo para CA com duas armas; +2 na posição defensiva.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_two_weapon_fighting",
@@ -1583,7 +1690,8 @@
       ],
       "prerequisitos": "DES 15",
       "descricao": "Reduz as penalidades de lutar com duas armas.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_weapon_finesse",
@@ -1595,7 +1703,8 @@
       ],
       "prerequisitos": "BAB +1",
       "descricao": "Use DES em vez de FOR para ataques com armas leves.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_weapon_focus",
@@ -1614,7 +1723,8 @@
           "valor": 0,
           "nota": "+1 em ataques com uma arma específica"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "phb_weapon_spec",
@@ -1625,7 +1735,8 @@
       ],
       "prerequisitos": "Foco em Arma (arma escolhida), Guerreiro nível 4",
       "descricao": "+2 em jogadas de dano com a arma escolhida.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_whirlwind_attack",
@@ -1637,7 +1748,8 @@
       ],
       "prerequisitos": "DES 13, INT 13, Esquiva, Mobilidade, Ataque em Movimento, Perícia em Combate, BAB +4",
       "descricao": "Ataque todos os oponentes adjacentes com ação de ataque completa.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "phb_widen_spell",
@@ -1655,7 +1767,8 @@
           "valor": 0,
           "nota": "Ocupa um slot 3 níveis acima; dobra o raio/área de efeito da magia"
         }
-      ]
+      ],
+      "srd": true
     },
     {
       "id": "cw_battle_casting",
@@ -3248,11 +3361,11 @@
         "Raça"
       ],
       "prerequisitos": "Elfo, INT 13",
-      "descricao": "+2 em testes de Identificar e nos saves contra magias de encantamento.",
+      "descricao": "+2 em testes de Identificar Magia e nos saves contra magias de encantamento.",
       "efeitos": [
         {
           "tipo": "bonus_skill",
-          "alvo": "Identificar",
+          "alvo": "Identificar Magia",
           "valor": 2
         },
         {
@@ -4164,7 +4277,8 @@
       ],
       "prerequisitos": "Foco Psiônico",
       "descricao": "Você pode recuperar seu Foco Psiônico como ação de movimento em vez de ação de rodada completa.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "xph_up_the_walls",
@@ -4175,7 +4289,8 @@
       ],
       "prerequisitos": "DES 13, Foco Psiônico, Acrobacia 9 postos",
       "descricao": "Você pode correr por paredes verticais como parte do seu movimento.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "xph_overchannel",
@@ -4186,7 +4301,8 @@
       ],
       "prerequisitos": "",
       "descricao": "Aumente o nível manifesto de um poder em 2 ao custo de 1d8 (2d8 em +4, 4d8 em +6) de dano para si mesmo.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "xph_mental_leap",
@@ -4197,7 +4313,8 @@
       ],
       "prerequisitos": "FOR 13, Foco Psiônico",
       "descricao": "Gaste Foco Psiônico para adicionar +10 no seu próximo teste de Saltar.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "xph_psionic_charge",
@@ -4208,7 +4325,8 @@
       ],
       "prerequisitos": "DES 13, Foco Psiônico, BAB +1",
       "descricao": "Ao carregar gastando Foco Psiônico, pode mudar de direção uma vez durante o movimento.",
-      "efeitos": []
+      "efeitos": [],
+      "srd": true
     },
     {
       "id": "dl_dynamic_priest",
@@ -4492,11 +4610,11 @@
       "id": "flaw_dishonest",
       "nome": "Desonesto",
       "livro": "Unearthed Arcana",
-      "descricao": "Você mente compulsivamente. -4 em Sentido de Rua para detectar mentiras alheias.",
+      "descricao": "Você mente compulsivamente. -4 em Sentir Motivação para detectar mentiras alheias.",
       "efeitos": [
         {
           "tipo": "bonus_skill",
-          "alvo": "Sentido de Rua",
+          "alvo": "Sentir Motivação (detectar mentiras)",
           "valor": -4
         }
       ]
@@ -4505,11 +4623,11 @@
       "id": "flaw_gullible",
       "nome": "Ingênuo",
       "livro": "Unearthed Arcana",
-      "descricao": "Você acredita facilmente no que os outros dizem. -4 em Sentido de Rua.",
+      "descricao": "Você acredita facilmente no que os outros dizem. -4 em Sentir Motivação.",
       "efeitos": [
         {
           "tipo": "bonus_skill",
-          "alvo": "Sentido de Rua",
+          "alvo": "Sentir Motivação",
           "valor": -4
         }
       ]

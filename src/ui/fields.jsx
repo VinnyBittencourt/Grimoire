@@ -13,7 +13,9 @@ function useCommitField(value, onCommit, parse = v => v) {
     editing.current = false
     const parsed = parse(draft)
     if (parsed === undefined) { setDraft(value ?? ''); return }
-    if (parsed !== (value ?? (typeof parsed === 'number' ? null : ''))) onCommit(parsed)
+    setDraft(parsed ?? '') // mostra o valor normalizado (ex.: limitado por min/max)
+    // null, undefined e '' são o mesmo "vazio": não manda PATCH só por ter passado pelo campo
+    if (String(parsed ?? '') !== String(value ?? '')) onCommit(parsed)
   }
   const cancel = () => { editing.current = false; setDraft(value ?? '') }
 

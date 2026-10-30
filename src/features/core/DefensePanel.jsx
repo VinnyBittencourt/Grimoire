@@ -30,6 +30,11 @@ export function DefensePanel({ ch, sheet, actions }) {
             {['armor', 'shield', 'dex', 'size', 'natural', 'deflection', 'dodge'].map(p => <span key={p}>{signed(ac.parts[p])}</span>)}
           </div>
           <p className="text-dim text-[10px] mt-2 mb-1">{t('core.acFromItems')}{equipment.maxDex != null ? ` · ${t('core.maxDex', { n: equipment.maxDex })}` : ''}</p>
+          {ac.ignored.length > 0 && (
+            <p className="text-warn text-[10px] mt-0 mb-1">
+              {t('core.acIgnored', { list: ac.ignored.map(x => `${t(`core.acParts.${x.type}`)} ${signed(x.value)} (${x.name ?? t('core.acManualSource')})`).join(' · ') })}
+            </p>
+          )}
           <div className="grid grid-cols-6 gap-1.5">
             {AC_MANUAL.map(p => (
               <NumberField key={p} label={t(`core.acParts.${p}`)} compact inputClassName="!w-full" value={ch[`ac_${p}`]}

@@ -11,6 +11,9 @@ import { KNOWLEDGE_SKILLS } from './skills.js'
 //   type 'prepared' | 'spontaneous'; ability = atributo padrão (pode ser trocado por personagem,
 //   ex.: Dynamic Priest usa Car); table = id da tabela por dia; known = tabela de conhecidas;
 //   domain = ganha 1 slot de domínio por nível de magia; half = nível de conjurador = ⌊n/2⌋
+// verified: false → DV/BBA/saves de suplemento ainda não conferidos no livro. A conferir em especial:
+//   swashbuckler (Ref boa?) e artificer (Fort boa?), que divergiam dos dados antigos de ref_classes.
+// Esta é a ÚNICA fonte de DV/BBA/saves: o seed copia daqui para ref_classes.
 const ALL_KNOWLEDGE = KNOWLEDGE_SKILLS
 
 export const CLASSES = {
@@ -55,27 +58,27 @@ export const CLASSES = {
     caster: { type: 'spontaneous', ability: 'cha', list: 'arcane', table: 'sorcerer', known: 'sorcerer' } },
   wizard: { book: 'PHB', hd: 4, bab: 'poor', saves: { fort: 'poor', ref: 'poor', will: 'good' }, sp: 2,
     skills: ['concentration', 'craft', 'decipherscript', ...ALL_KNOWLEDGE, 'profession', 'spellcraft'],
-    caster: { type: 'prepared', ability: 'int', list: 'arcane', table: 'full' } },
+    caster: { type: 'prepared', ability: 'int', list: 'arcane', table: 'wizard' } },
 
   // ── Suplementos (perícias de classe marcadas na ficha; conjuração manual por enquanto) ──
-  hexblade:     { book: 'Complete Warrior', hd: 10, bab: 'good', saves: { fort: 'good', ref: 'poor', will: 'good' }, sp: 2 },
-  swashbuckler: { book: 'Complete Warrior', hd: 10, bab: 'good', saves: { fort: 'good', ref: 'good', will: 'poor' }, sp: 4 },
-  warlock:      { book: 'Complete Arcane', hd: 6, bab: 'avg', saves: { fort: 'poor', ref: 'poor', will: 'good' }, sp: 2 },
-  warmage:      { book: 'Complete Arcane', hd: 6, bab: 'avg', saves: { fort: 'poor', ref: 'poor', will: 'good' }, sp: 2,
+  hexblade:     { book: 'Complete Warrior', verified: false, hd: 10, bab: 'good', saves: { fort: 'good', ref: 'poor', will: 'good' }, sp: 2 },
+  swashbuckler: { book: 'Complete Warrior', verified: false, hd: 10, bab: 'good', saves: { fort: 'good', ref: 'good', will: 'poor' }, sp: 4 },
+  warlock:      { book: 'Complete Arcane', verified: false, hd: 6, bab: 'avg', saves: { fort: 'poor', ref: 'poor', will: 'good' }, sp: 2 },
+  warmage:      { book: 'Complete Arcane', verified: false, hd: 6, bab: 'avg', saves: { fort: 'poor', ref: 'poor', will: 'good' }, sp: 2,
     caster: { type: 'spontaneous', ability: 'cha', list: 'arcane', table: null } },
-  favored_soul: { book: 'Complete Divine', hd: 8, bab: 'avg', saves: { fort: 'good', ref: 'good', will: 'good' }, sp: 2,
+  favored_soul: { book: 'Complete Divine', verified: false, hd: 8, bab: 'avg', saves: { fort: 'good', ref: 'good', will: 'good' }, sp: 2,
     caster: { type: 'spontaneous', ability: 'cha', list: 'divine', table: null } },
-  ninja:        { book: 'Complete Adventurer', hd: 6, bab: 'avg', saves: { fort: 'poor', ref: 'good', will: 'good' }, sp: 6 },
-  scout:        { book: 'Complete Adventurer', hd: 8, bab: 'avg', saves: { fort: 'poor', ref: 'good', will: 'poor' }, sp: 8 },
-  duskblade:    { book: 'PHB II', hd: 8, bab: 'good', saves: { fort: 'good', ref: 'poor', will: 'good' }, sp: 2,
+  ninja:        { book: 'Complete Adventurer', verified: false, hd: 6, bab: 'avg', saves: { fort: 'poor', ref: 'good', will: 'good' }, sp: 6 },
+  scout:        { book: 'Complete Adventurer', verified: false, hd: 8, bab: 'avg', saves: { fort: 'poor', ref: 'good', will: 'poor' }, sp: 8 },
+  duskblade:    { book: 'PHB II', verified: false, hd: 8, bab: 'good', saves: { fort: 'good', ref: 'poor', will: 'good' }, sp: 2,
     caster: { type: 'spontaneous', ability: 'int', list: 'arcane', table: null } },
-  beguiler:     { book: 'PHB II', hd: 6, bab: 'avg', saves: { fort: 'poor', ref: 'poor', will: 'good' }, sp: 6,
+  beguiler:     { book: 'PHB II', verified: false, hd: 6, bab: 'avg', saves: { fort: 'poor', ref: 'poor', will: 'good' }, sp: 6,
     caster: { type: 'spontaneous', ability: 'int', list: 'arcane', table: null } },
-  knight:       { book: 'PHB II', hd: 12, bab: 'good', saves: { fort: 'good', ref: 'poor', will: 'good' }, sp: 2 },
-  artificer:    { book: 'Eberron', hd: 6, bab: 'avg', saves: { fort: 'good', ref: 'poor', will: 'good' }, sp: 4 },
-  crusader:     { book: 'Tome of Battle', hd: 10, bab: 'good', saves: { fort: 'good', ref: 'poor', will: 'good' }, sp: 4 },
-  swordsage:    { book: 'Tome of Battle', hd: 8, bab: 'avg', saves: { fort: 'poor', ref: 'good', will: 'good' }, sp: 6 },
-  warblade:     { book: 'Tome of Battle', hd: 12, bab: 'good', saves: { fort: 'good', ref: 'poor', will: 'poor' }, sp: 4 },
+  knight:       { book: 'PHB II', verified: false, hd: 12, bab: 'good', saves: { fort: 'good', ref: 'poor', will: 'good' }, sp: 2 },
+  artificer:    { book: 'Eberron Campaign Setting', verified: false, hd: 6, bab: 'avg', saves: { fort: 'good', ref: 'poor', will: 'good' }, sp: 4 },
+  crusader:     { book: 'Tome of Battle', verified: false, hd: 10, bab: 'good', saves: { fort: 'good', ref: 'poor', will: 'good' }, sp: 4 },
+  swordsage:    { book: 'Tome of Battle', verified: false, hd: 8, bab: 'avg', saves: { fort: 'poor', ref: 'good', will: 'good' }, sp: 6 },
+  warblade:     { book: 'Tome of Battle', verified: false, hd: 12, bab: 'good', saves: { fort: 'good', ref: 'poor', will: 'poor' }, sp: 4 },
 
   // ── Prestígio (DMG). A progressão de conjuração é apontada pelo jogador em character_classes ──
   arcane_archer:    { book: 'DMG', prestige: true, hd: 8, bab: 'good', saves: { fort: 'good', ref: 'good', will: 'poor' }, sp: 4 },

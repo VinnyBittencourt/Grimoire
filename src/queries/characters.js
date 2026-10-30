@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import { api, resizeImage } from '../api/client'
 import { useToast } from '../ui/Toast'
+import { useLang } from '../i18n'
 
 export const keys = {
   list: ['characters'],
@@ -73,12 +74,16 @@ export function useImport() {
 }
 
 /**
- * Todas as escritas de uma ficha. Cada função devolve a Promise da mutação.
- * Optimistic update: aplica no cache na hora; se o servidor recusar, restaura e mostra o erro.
+ * Todas as escritas de uma ficha. Optimistic update: aplica no cache na hora; se o servidor
+ * recusar, restaura e mostra o erro num toast.
+ * Cada função resolve com a resposta do servidor (ou `true` se não houver corpo) quando deu
+ * certo, e com `undefined` quando falhou. Nunca rejeita. Antes de fechar modal, limpar
+ * formulário ou mostrar "sucesso", confira o retorno: `if (await actions.x(...)) ...`
  */
 export function useSheetActions(id) {
   const qc = useQueryClient()
   const toast = useToast()
+  const { t } = useLang()
   const sheetKey = keys.sheet(id)
   const journalKey = keys.journal(id)
 
@@ -105,7 +110,7 @@ export function useSheetActions(id) {
       qc.invalidateQueries({ queryKey: keys.list, refetchType: 'none' })
     },
   })
-  const run = vars => mutation.mutateAsync(vars).catch(() => undefined)
+  const run = vars => mutation.mutateAsync(vars).then(data => data ?? true, () => undefined)
 
   const replaceIn = (list, row) => list.map(r => (r.id === row.id ? row : r))
 
@@ -196,7 +201,11 @@ export function useSheetActions(id) {
     }),
 
     uploadPhoto: async (file, npcId = null) => {
-      const blob = await resizeImage(file)
+      let blob
+      try { blob = await resizeImage(file) } catch {
+        toast.error(t('errors.imageRead'))
+        return undefined
+      }
       return run({
         run: () => api.put(npcId ? `/api/characters/${id}/npcs/${npcId}/photo` : `/api/characters/${id}/photo`, blob),
         key: npcId ? journalKey : sheetKey,

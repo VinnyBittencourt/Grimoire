@@ -38,7 +38,7 @@ export function ExchangeModal({ open, onClose, characterId }) {
       const sheet = await importer.mutateAsync({ kind, data })
       toast.success(t('exchange.imported', { name: sheet.name }))
       const notes = sheet._import
-      if (notes && (notes.report.length || notes.extraCount)) {
+      if (notes && (notes.report.length || notes.extraCount || notes.counts)) {
         setReport({ id: sheet.id, ...notes })
       } else {
         onClose()
@@ -54,6 +54,7 @@ export function ExchangeModal({ open, onClose, characterId }) {
         <div className="flex flex-col gap-3">
           <h3 className="section-title m-0">{t('exchange.importReport')}</h3>
           <ul className="text-body text-xs list-disc pl-5 m-0">
+            {report.counts && <li>{t('exchange.importCounts', report.counts)}</li>}
             {report.report.map(line => <li key={line}>{line}</li>)}
             {report.extraCount > 0 && <li>{t('exchange.unknownKept', { n: report.extraCount })}</li>}
           </ul>

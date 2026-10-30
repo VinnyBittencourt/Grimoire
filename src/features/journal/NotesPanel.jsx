@@ -55,7 +55,10 @@ export function NotesPanel({ data, actions }) {
               </label>
               <label className="w-44"><span className="label block mb-1">{t('journal.sessionDate')}</span>
                 <input key={`d${selected.id}`} type="date" className="field" defaultValue={selected.session_date ?? ''}
-                  onChange={e => actions.update('notes', selected.id, { session_date: e.target.value || null })} />
+                  onBlur={e => {
+                    const v = e.target.value || null
+                    if (v !== (selected.session_date ?? null)) actions.update('notes', selected.id, { session_date: v })
+                  }} />
               </label>
               <ConfirmButton label={t('common.delete')} className="text-dim hover:text-bad text-xs px-2 py-2"
                 onConfirm={() => { actions.remove('notes', selected.id); setSelectedId(notes.find(n => n.id !== selected.id)?.id ?? null) }}>

@@ -148,7 +148,8 @@ describe('magias, recursos e descanso', () => {
 describe('fotos', () => {
   it('upload binário vira arquivo e troca remove o antigo', async () => {
     const { body: ch } = await newCleric()
-    const png = Buffer.from('89504e470d0a1a0a', 'hex')
+    // PNG 1×1 real: a API confere a imagem pelo conteúdo
+    const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64')
     const up1 = await api.put(`/api/characters/${ch.id}/photo`).set('Content-Type', 'image/png').send(png)
     expect(up1.status).toBe(200)
     expect(existsSync(join(dataDir, 'photos', up1.body.photo))).toBe(true)

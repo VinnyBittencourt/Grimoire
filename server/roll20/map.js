@@ -12,26 +12,56 @@ export const ALIGNMENT_LABEL = {
   lg: 'Lawful Good', ng: 'Neutral Good', cg: 'Chaotic Good', ln: 'Lawful Neutral', n: 'True Neutral',
   cn: 'Chaotic Neutral', le: 'Lawful Evil', ne: 'Neutral Evil', ce: 'Chaotic Evil',
 }
-const ALIGNMENT_ALIASES = { neutral: 'n', 'neutral neutral': 'n', 'neutro': 'n' }
+// Tendência em texto livre (en ou pt): cada palavra vira um eixo — ordem/caos e bem/mal
+const ALIGNMENT_WORDS = {
+  lawful: 'l', leal: 'l', chaotic: 'c', caotico: 'c', neutral: 'n', neutro: 'n', true: 'n', verdadeiro: 'n',
+  good: 'g', bom: 'g', evil: 'e', mau: 'e', mal: 'e',
+}
+const plain = s => String(s ?? '').trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
 
 export function alignmentFromLabel(label) {
-  const k = String(label ?? '').trim().toLowerCase()
+  const k = plain(label)
   if (!k) return null
   const hit = Object.entries(ALIGNMENT_LABEL).find(([, v]) => v.toLowerCase() === k)
   if (hit) return hit[0]
-  if (ALIGNMENT_ALIASES[k]) return ALIGNMENT_ALIASES[k]
   const short = k.replace(/[^a-z]/g, '')
-  return Object.keys(ALIGNMENT_LABEL).includes(short) ? short : null
+  if (Object.keys(ALIGNMENT_LABEL).includes(short)) return short
+  const axes = k.split(/[^a-z]+/).map(w => ALIGNMENT_WORDS[w]).filter(Boolean).join('')
+  if (axes === 'n' || axes === 'nn') return 'n'
+  return Object.keys(ALIGNMENT_LABEL).includes(axes) ? axes : null
 }
 
 export const classLabel = id => id.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
 
+// Rótulos que aparecem em fichas reais e não são o nome da classe (ex.: "Mage" no export de 2026-10-29)
+const CLASS_ALIASES = { mage: 'wizard' }
+const CLASS_FROM_V1_PLAIN = Object.fromEntries(Object.entries(CLASS_FROM_V1).map(([k, v]) => [plain(k), v]))
+
 export function classFromLabel(label) {
   const raw = String(label ?? '').trim()
   if (!raw) return null
-  if (CLASS_FROM_V1[raw]) return CLASS_FROM_V1[raw]
-  const k = raw.toLowerCase().replace(/\s+/g, '_')
-  return CLASS_IDS.includes(k) ? k : null
+  const k = plain(raw)
+  if (CLASS_FROM_V1_PLAIN[k]) return CLASS_FROM_V1_PLAIN[k]
+  if (CLASS_ALIASES[k]) return CLASS_ALIASES[k]
+  const id = k.replace(/\s+/g, '_')
+  return CLASS_IDS.includes(id) ? id : null
+}
+
+// Aba de magias da ficha: repeating_spells<nível><aba>, 1 = divina, 2 = arcana
+export const SPELL_TAB = { divine: 1, arcane: 2 }
+
+// Unidades da ficha: com lengthunit/weightunit métricos, deslocamento, alcance e pesos ficam no valor
+// mostrado (9 = 9 m). lengthscale/weightscale convertem de pés/libras para essa unidade.
+export function unitScale(v) {
+  const s = parseFloat(String(v ?? '').replace(',', '.'))
+  return Number.isFinite(s) && s > 0 && s <= 10 ? s : 1
+}
+
+// Codificação da bio no export da VTTES (escape(): %3Cp%3E, %E3 = ã)
+export function decodeBio(s) {
+  const text = String(s ?? '')
+  if (!/%[0-9a-f]{2}|%u[0-9a-f]{4}/i.test(text) || /[<>]/.test(text)) return text
+  try { return unescape(text) } catch { return text }
 }
 
 // Valores dos <select> de atributo das armas e da conjuração ("@{str-mod} ")
@@ -58,16 +88,15 @@ export const SIMPLE_FIELDS = {
 
 export const INT_FIELDS = new Set(['speed_ft', 'xp', 'cp', 'sp', 'gp', 'pp', 'hp_temp', 'nonlethal', 'init_misc', 'grapple_misc', 'ac_misc', 'sr'])
 
-// Atributos que o export escreve e o import lê explicitamente (o resto vai para roll20_extra)
-export function isMappedAttr(name) {
-  if (name in SIMPLE_FIELDS) return true
-  if (/^(str|dex|con|int|wis|cha)-(base|equi|misc|temp)$/.test(name)) return true
-  if (/^(class|level|hitdietype)\d+$/.test(name)) return true
-  if (/^(fortitude|reflex|will)(base|magicmod|miscmod|tempmod)$/.test(name)) return true
-  if (/^spells\d$|^spelldc\d$/.test(name)) return true
-  if (/^(acitem|shield)/.test(name) || /^(armorworn|shieldworn)$/.test(name)) return true
-  if (/^(naturalarmor|deflection|dodgebonus)\d(bonus|name|inuse)$/.test(name)) return true
-  if (/(ranks|classskill|miscmod)$/.test(name)) return true
-  if (/^(craft|perform|profession)\dname$/.test(name)) return true
-  return ['hitpoints', 'race', 'alignment', 'size', 'bab', 'casterlevel', 'spellcastingstat', 'feats', 'bio'].includes(name)
+// Atributos que o Grimoire recalcula a partir dos próprios dados: o import não os guarda
+// (o export os escreve de novo com o valor calculado). Todo o resto que o import não lê vai
+// para roll20_extra — ver importRoll20.
+export function isDerivedAttr(name) {
+  if (/^(fortitude|reflex|will)base$/.test(name)) return true // progressão das classes
+  if (/^(arcane|divine)?(spells\d|spelldc\d|casterlevel)$|^casterlevel2$/.test(name)) return true // conjuração
+  if (/^hitdietype\d+$/.test(name)) return true // DV da classe (lido só para classe livre)
+  // Totais que a própria ficha calcula: o export escreve atributos e nível de novo; os outros a ficha refaz
+  if (/^(str|dex|con|int|wis|cha)(-mod)?$|^level$|^encumbrstr$/.test(name)) return true
+  if (/^totSkillPoint\d*$|^unspentSkillPoints$|^total(equipment(weight|cost)|carriedweight)$/.test(name)) return true
+  return /^repeating_equipment_.{20}_equipmenttotal(weight|cost)$/.test(name)
 }

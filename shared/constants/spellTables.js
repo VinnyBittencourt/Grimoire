@@ -8,13 +8,23 @@ const _ = null
 const pad = row => [...row, ...Array(10 - row.length).fill(_)]
 const table = rows => rows.map(pad)
 
-// Clérigo, Druida e Mago (PHB tabelas 3-6, 3-8, 3-18)
+// Clérigo e Druida (PHB tabelas 3-6 e 3-8). O Mago tem tabela própria (máx. 4 por nível).
 const FULL = table([
   [3, 1], [4, 2], [4, 2, 1], [5, 3, 2], [5, 3, 2, 1], [5, 3, 3, 2], [6, 4, 3, 2, 1], [6, 4, 3, 3, 2],
   [6, 4, 4, 3, 2, 1], [6, 4, 4, 3, 3, 2], [6, 5, 4, 4, 3, 2, 1], [6, 5, 4, 4, 3, 3, 2],
   [6, 5, 5, 4, 4, 3, 2, 1], [6, 5, 5, 4, 4, 3, 3, 2], [6, 5, 5, 5, 4, 4, 3, 2, 1],
   [6, 5, 5, 5, 4, 4, 3, 3, 2], [6, 5, 5, 5, 5, 4, 4, 3, 2, 1], [6, 5, 5, 5, 5, 4, 4, 3, 3, 2],
   [6, 5, 5, 5, 5, 5, 4, 4, 3, 3], [6, 5, 5, 5, 5, 5, 4, 4, 4, 4],
+])
+
+// Mago (PHB tabela 3-18). O especialista ganha +1 por nível de magia (inclusive 0),
+// lançado hoje como bônus manual em spell_slots.bonus.
+const WIZARD = table([
+  [3, 1], [4, 2], [4, 2, 1], [4, 3, 2], [4, 3, 2, 1], [4, 3, 3, 2], [4, 4, 3, 2, 1], [4, 4, 3, 3, 2],
+  [4, 4, 4, 3, 2, 1], [4, 4, 4, 3, 3, 2], [4, 4, 4, 4, 3, 2, 1], [4, 4, 4, 4, 3, 3, 2],
+  [4, 4, 4, 4, 4, 3, 2, 1], [4, 4, 4, 4, 4, 3, 3, 2], [4, 4, 4, 4, 4, 4, 3, 2, 1],
+  [4, 4, 4, 4, 4, 4, 3, 3, 2], [4, 4, 4, 4, 4, 4, 4, 3, 2, 1], [4, 4, 4, 4, 4, 4, 4, 3, 3, 2],
+  [4, 4, 4, 4, 4, 4, 4, 4, 3, 3], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
 ])
 
 // Feiticeiro — magias por dia (PHB tabela 3-16)
@@ -58,5 +68,5 @@ const HALF = table([
   [_, 3, 2, 2, 1], [_, 3, 3, 3, 2], [_, 3, 3, 3, 3],
 ])
 
-export const SPELLS_PER_DAY = { full: FULL, sorcerer: SORCERER, bard: BARD, half: HALF }
+export const SPELLS_PER_DAY = { full: FULL, wizard: WIZARD, sorcerer: SORCERER, bard: BARD, half: HALF }
 export const SPELLS_KNOWN = { sorcerer: SORCERER_KNOWN, bard: BARD_KNOWN }

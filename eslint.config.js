@@ -29,7 +29,7 @@ export default defineConfig([
   },
   {
     // API, migrações, regras compartilhadas, testes e configs rodam no Node
-    files: ['server/**/*.js', 'shared/**/*.js', 'tests/**/*.js', '*.config.js'],
+    files: ['server/**/*.js', 'shared/**/*.js', 'tests/**/*.js', 'scripts/**/*.js', '*.config.js'],
     languageOptions: { globals: { ...globals.node } },
   },
 ])

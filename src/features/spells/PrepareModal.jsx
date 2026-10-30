@@ -32,9 +32,9 @@ export function PrepareModal({ open, onClose, ch, cast, actions }) {
 
   async function save() {
     setSaving(true)
-    await actions.replacePrepared(cast.rowId, draft)
+    const ok = await actions.replacePrepared(cast.rowId, draft)
     setSaving(false)
-    onClose()
+    if (ok) onClose() // se falhou, o rascunho fica aberto (o erro já apareceu no toast)
   }
 
   const levels = cast.perDay.map((v, L) => ({ L, v })).filter(x => x.v != null)

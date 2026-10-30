@@ -1,8 +1,6 @@
 // Converte os dados do v1 (tabelas v1_*, renomeadas pela 001) para o schema v2 e apaga as v1_*.
 // Mantém os ids de personagens, magias, NPCs e locais para preservar as referências.
-import { writeFileSync, mkdirSync } from 'fs'
-import { join } from 'path'
-import { randomUUID } from 'crypto'
+import { parseImageDataUrl, savePhotoBuffer } from '../photos.js'
 import { ABILITY_FROM_V1, ALIGNMENT_FROM_V1, GENDER_FROM_V1 } from '../../shared/constants/abilities.js'
 import { SIZE_FROM_V1 } from '../../shared/constants/sizes.js'
 import { CLASS_FROM_V1, CLASSES } from '../../shared/constants/classes.js'
@@ -24,15 +22,11 @@ function isoDate(s) {
   return m ? `${m[3]}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}` : (s || null)
 }
 
-// data URL base64 → arquivo em data/photos; retorna o nome do arquivo
+// data URL base64 → arquivo em data/photos; retorna o nome do arquivo.
+// Só jpg/png/webp/gif conferidos pelo conteúdo; o resto fica de fora (o original continua em pre-v2.db).
 function savePhoto(dataUrl, photosDir) {
-  const m = /^data:image\/(\w+);base64,(.+)$/s.exec(dataUrl ?? '')
-  if (!m) return null
-  const ext = m[1] === 'jpeg' ? 'jpg' : m[1]
-  const file = `${randomUUID()}.${ext}`
-  mkdirSync(photosDir, { recursive: true })
-  writeFileSync(join(photosDir, file), Buffer.from(m[2], 'base64'))
-  return file
+  const img = parseImageDataUrl(dataUrl)
+  return img ? savePhotoBuffer(photosDir, img.buffer, img.ext) : null
 }
 
 // v1 guardava deslocamento em metros (com default '30' que na prática era pés).

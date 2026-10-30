@@ -6,6 +6,8 @@ const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), selec
 
 /**
  * Modal acessível: role=dialog, aria-modal, Esc fecha, foco preso dentro e devolvido ao sair.
+ * Para escolher o campo que recebe o foco ao abrir, use `data-autofocus` (não `autoFocus`:
+ * o React não renderiza o atributo e foca o filho antes de o Modal guardar o foco anterior).
  * Clicar fora NÃO fecha por padrão (no v1 isso jogava fora preparações e notas não salvas);
  * passe closeOnBackdrop para modais só de leitura/seleção.
  */
@@ -22,7 +24,7 @@ export function Modal({ open, onClose, title, children, footer, width = 560, clo
     if (!open) return
     const previous = document.activeElement
     const node = ref.current
-    const first = node?.querySelector('[autofocus]') ?? node?.querySelector(FOCUSABLE)
+    const first = node?.querySelector('[data-autofocus]') ?? node?.querySelector(FOCUSABLE)
     ;(first ?? node)?.focus()
 
     function onKey(e) {

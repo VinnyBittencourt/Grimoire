@@ -51,7 +51,7 @@ export function FeatPicker({ open, kind, onClose, ch, actions }) {
     <Modal open={open} onClose={onClose} title={kind === 'flaw' ? t('feats.addFlaw') : t('feats.picker')} width={960} closeOnBackdrop className="h-[80vh]">
       <div className="flex flex-col gap-3 h-full">
         <div className="flex gap-2">
-          <input autoFocus className="field flex-1" placeholder={t('common.search')} value={query} onChange={e => setQuery(e.target.value)} aria-label={t('common.search')} />
+          <input data-autofocus className="field flex-1" placeholder={t('common.search')} value={query} onChange={e => setQuery(e.target.value)} aria-label={t('common.search')} />
           {books.length > 1 && (
             <select className="field w-56" value={book} onChange={e => setBook(e.target.value)} aria-label={t('feats.allBooks')}>
               <option value="">{t('feats.allBooks')}</option>

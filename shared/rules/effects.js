@@ -1,4 +1,5 @@
 import { SKILL_FROM_PT } from '../constants/skills.js'
+import { RESOURCES } from './resources.js'
 
 // Talentos que podem ser escolhidos mais de uma vez com efeito cumulativo
 export const REPEATABLE_FEATS = new Set([
@@ -14,6 +15,7 @@ export const RESOURCE_FROM_PT = {
 }
 
 const SAVE_FROM_EFFECT = { fortitude: 'fort', reflex: 'ref', will: 'will' }
+const ATTACK_KINDS = new Set(['melee', 'ranged'])
 
 export function emptyEffects() {
   return {
@@ -22,9 +24,10 @@ export function emptyEffects() {
     hp: 0,
     slots: Array(10).fill(0),
     turning: 0,
+    grapple: 0,
     resources: {},
     skills: {},
-    attack: {},
+    attack: {}, // só 'melee' e 'ranged'
     damage: {},
     notes: [], // efeitos 'especial' ou situacionais: { feat, text }
   }
@@ -68,7 +71,9 @@ export function aggregateEffects(feats, refById, level = 1) {
         case 'bonus_turning': fx.turning += v; break
         case 'bonus_resource': {
           const key = RESOURCE_FROM_PT[e.alvo] ?? e.alvo
-          fx.resources[key] = (fx.resources[key] ?? 0) + v
+          // Recurso sem fórmula no app (ex.: Sopro Dracônico): vira nota em vez de sumir
+          if (RESOURCES[key]) fx.resources[key] = (fx.resources[key] ?? 0) + v
+          else fx.notes.push({ feat: ref.id, text: `+${v} ${e.alvo}` })
           break
         }
         case 'bonus_skill': {
@@ -77,8 +82,15 @@ export function aggregateEffects(feats, refById, level = 1) {
           else fx.notes.push({ feat: ref.id, text: `+${v} ${e.alvo}` })
           break
         }
-        case 'bonus_attack': fx.attack[e.alvo] = (fx.attack[e.alvo] ?? 0) + v; break
-        case 'bonus_damage': fx.damage[e.alvo] = (fx.damage[e.alvo] ?? 0) + v; break
+        case 'bonus_grapple': fx.grapple += v; break
+        case 'bonus_attack':
+        case 'bonus_damage': {
+          const bucket = e.tipo === 'bonus_attack' ? fx.attack : fx.damage
+          // Incondicional só corpo a corpo/distância; o resto (ex.: ranged_close, thrown, aoo) vira nota
+          if (ATTACK_KINDS.has(e.alvo)) bucket[e.alvo] = (bucket[e.alvo] ?? 0) + v
+          else fx.notes.push({ feat: ref.id, text: e.nota ?? `${v >= 0 ? '+' : ''}${v} ${e.tipo === 'bonus_attack' ? 'ataque' : 'dano'} (${e.alvo})` })
+          break
+        }
         default:
           if (e.nota) fx.notes.push({ feat: ref.id, text: e.nota })
       }

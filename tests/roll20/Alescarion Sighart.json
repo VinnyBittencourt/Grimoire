@@ -1,0 +1,1896 @@
+{
+    "schema_version": 3,
+    "type": "character",
+    "character": {
+        "oldId": "-P3TCA91nPj7Vlx7QG41",
+        "name": "Alescarion Sighart",
+        "avatar": "https://files.d20.io/images/503611487/DK1aqcVkELrfQNOsHdVUxg/med.png?1791513728",
+        "bio": "%3Cp%3EAlescarion%20Sighart%20nasceu%20em%20uma%20pequena%20vila%20em%20ascens%E3o%2C%20filho%20do%20estrategista%20respons%E1vel%20por%20guiar%20seu%20crescimento.%20Foi%20criado%3Cbr%3Edesde%20cedo%20para%20um%20dia%20ocupar%20esse%20papel%20%u2014%20o%20c%E9rebro%20por%20tr%E1s%20das%20decis%F5es%20da%20comunidade%20%u2014%20absorvendo%20t%E1ticas%2C%20hist%F3ria%20e%3Cbr%3Econhecimento%20arcano%20com%20uma%20facilidade%20que%20impressionava%20at%E9%20os%20mais%20velhos.%3Cbr%3EAos%2018%20anos%2C%20tudo%20mudou.%20Uma%20aldeia%20vizinha%2C%20temendo%20o%20crescimento%20da%20sua%20vila%2C%20a%20destruiu%20por%20completo.%20Alescarion%20perdeu%20seu%20povo%2C%3Cbr%3Esua%20casa%20e%20o%20futuro%20que%20vinha%20sendo%20constru%EDdo%20pra%20ele.%20Ele%20sobreviveu%2C%20mas%20carregando%20todo%20o%20conhecimento%20de%20um%20grande%20estrategista%3Cbr%3Esem%20nunca%20ter%20exercido%20esse%20papel%20de%20verdade%20%u2014%20um%20c%E9rebro%20afiado%20sem%20um%20povo%20pra%20servir.%3Cbr%3EDepois%20da%20trag%E9dia%2C%20encontrou%20em%20Melvaunt%20algo%20parecido%20com%20uma%20segunda%20fam%EDlia%3A%20um%20bar%E3o%20da%20cidade%2C%20figur%E3o%20influente%2C%20que%20o%3Cbr%3Eacolheu%20e%20passou%20a%20financiar%20suas%20pesquisas%20e%20experimentos%20arcanos.%20Com%20o%20tempo%2C%20essa%20rela%E7%E3o%20deixou%20de%20ser%20apenas%20financeira%20%u2014%3Cbr%3EAlescarion%20passou%20a%20considerar%20o%20bar%E3o%20e%20seu%20filho%20como%20fam%EDlia%2C%20o%20mais%20pr%F3ximo%20que%20teve%20de%20um%20lar%20desde%20que%20perdeu%20o%20seu.%3Cbr%3EFoi%20essa%20proximidade%20que%20o%20trouxe%20pra%20aventura.%20Depois%20de%20enviar%20uma%20carta%20e%20nunca%20receber%20resposta%2C%20Alescarion%20foi%20at%E9%20a%20resid%EAncia%20do%3Cbr%3Ebar%E3o%20e%20descobriu%20a%20verdade%3A%20o%20filho%20dele%20%u2014%20que%20ele%20conhecia%20bem%20%u2014%20havia%20sido%20sequestrado.%20Rumores%20pela%20cidade%20apontavam%20para%20orcs%3Cbr%3Eem%20ascens%E3o%20nos%20arredores%20de%20Melvaunt%2C%20e%20j%E1%20havia%20uma%20recompensa%20oferecida%2C%20al%E9m%20de%20um%20grupo%20de%20aventureiros%20enviado%20cinco%20dias%3Cbr%3Eantes%20atr%E1s%20das%20crian%E7as%20desaparecidas.%3Cbr%3EMovido%20pelo%20medo%20pela%20vida%20de%20quem%20considera%20fam%EDlia%20e%20pela%20amea%E7a%20crescente%20que%20os%20orcs%20representavam%20pra%20cidade%20que%20o%20acolheu%2C%3Cbr%3EAlescarion%20come%E7ou%20a%20investigar%20por%20conta%20pr%F3pria.%20Suas%20pesquisas%20o%20levaram%20a%20Gruumsh%2C%20a%20divindade%20simples%20e%20brutal%20cultuada%20pelos%3Cbr%3Eorcs%2C%20e%20a%20rumores%20sobre%20a%20aproxima%E7%E3o%20de%20uma%20Lua%20de%20Sangue%20%u2014%20um%20evento%20c%F3smico%20extremamente%20raro.%3Cbr%3EEntre%20o%20desejo%20de%20testemunhar%20algo%20t%E3o%20raro%2C%20o%20medo%20de%20perder%20mais%20uma%20vez%20algu%E9m%20pr%F3ximo%2C%20e%20o%20instinto%20de%20proteger%20a%20cidade%20que%20o%3Cbr%3Erecebeu%20quando%20ele%20n%E3o%20tinha%20mais%20nada%2C%20Alescarion%20decidiu%20se%20arriscar.%20Ele%20parte%20agora%20n%E3o%20como%20o%20estrategista%20que%20foi%20criado%20pra%20ser%2C%3Cbr%3Emas%20como%20algu%E9m%20disposto%20a%20usar%20tudo%20o%20que%20aprendeu%20%u2014%20e%20o%20arco%20que%20carrega%20%u2014%20pra%20garantir%20que%20dessa%20vez%2C%20ele%20n%E3o%20chegue%20tarde%3Cbr%3Edemais.%3C/p%3E",
+        "gmnotes": "",
+        "defaulttoken": "{\"width\":70,\"height\":70,\"imgsrc\":\"https://files.d20.io/images/504248549/Kp_4dHlJAClJPzfGb-AVwA/max.png?1792024088\",\"rotation\":270,\"name\":\"Alescarion\",\"show_tooltip\":false,\"represents\":\"-P3TCA91nPj7Vlx7QG41\",\"bar1_value\":\"33\",\"bar1_max\":\"33\",\"bar1_num_permission\":\"hidden\",\"bar1_link\":\"-P3TEDeq7n7MFUlBmbm8\",\"bar2_value\":\"40\",\"bar2_num_permission\":\"hidden\",\"bar3_value\":\"(@{armorclass})\",\"bar3_num_permission\":\"hidden\",\"bar3_link\":\"-P3x68kzPR0wcHxPUhrQ\",\"compact_bar\":\"compact\",\"statusmarkers\":\"aura\",\"showname\":true,\"showplayers_name\":true,\"showplayers_bar1\":true,\"has_bright_light_vision\":true,\"has_limit_field_of_vision\":true,\"limit_field_of_vision_center\":180,\"limit_field_of_vision_total\":165,\"has_low_light_vision\":true,\"has_night_vision\":true,\"night_vision_distance\":3,\"night_vision_tint\":\"#ff0000\",\"has_limit_field_of_night_vision\":true,\"limit_field_of_night_vision_center\":180,\"limit_field_of_night_vision_total\":165,\"emits_bright_light\":true,\"bright_light_distance\":6,\"lightColor\":\"#ffff00\",\"emits_low_light\":true,\"dim_light_opacity\":\"0.75\",\"low_light_distance\":12,\"light_ui\":6}",
+        "tags": "",
+        "controlledby": "-Ok4xesXW7Qa9Y0NFmR4",
+        "inplayerjournals": "-Ok4xesXW7Qa9Y0NFmR4",
+        "attribs": [
+            {
+                "name": "spellmode",
+                "current": "1",
+                "max": "",
+                "id": "-P3TCACogx93ko_hyBKB"
+            },
+            {
+                "name": "attackmode",
+                "current": "2",
+                "max": "",
+                "id": "-P3TCACtxeWkjzonTbC3"
+            },
+            {
+                "name": "summonsAttackmode",
+                "current": "1",
+                "max": "",
+                "id": "-P3TCACuT6fbJnxZWeMG"
+            },
+            {
+                "name": "npcAttackmode",
+                "current": "1",
+                "max": "",
+                "id": "-P3TCACvA-4PwCQAMBoM"
+            },
+            {
+                "name": "criticmode",
+                "current": "2",
+                "max": "",
+                "id": "-P3TCACw9Q_hMuPtfDBD"
+            },
+            {
+                "name": "summonsCriticmode",
+                "current": "2",
+                "max": "",
+                "id": "-P3TCACxLIPOQ43dVEwF"
+            },
+            {
+                "name": "npcCriticmode",
+                "current": "2",
+                "max": "",
+                "id": "-P3TCACyif2snJ8sfIzn"
+            },
+            {
+                "name": "damagemode",
+                "current": "1",
+                "max": "",
+                "id": "-P3TCACyif2snJ8sfIzo"
+            },
+            {
+                "name": "summonsDamagemode",
+                "current": "2",
+                "max": "",
+                "id": "-P3TCACyif2snJ8sfIzp"
+            },
+            {
+                "name": "npcDamagemode",
+                "current": "2",
+                "max": "",
+                "id": "-P3TCACzDi7klPslB-LB"
+            },
+            {
+                "name": "weightscale",
+                "current": "0.5",
+                "max": "",
+                "id": "-P3TCACzDi7klPslB-LC"
+            },
+            {
+                "name": "weightunit",
+                "current": "kg",
+                "max": "",
+                "id": "-P3TCAD-AmNr_Jix32Nk"
+            },
+            {
+                "name": "lengthscale",
+                "current": "0.3",
+                "max": "",
+                "id": "-P3TCAD-AmNr_Jix32Nl"
+            },
+            {
+                "name": "lengthunit",
+                "current": "m.",
+                "max": "",
+                "id": "-P3TCAD0s7PFLtei98HS"
+            },
+            {
+                "name": "initiativetokenmacro",
+                "current": "&{template:DnD35Initiative} {{name=@{selected|character_name} }} {{check=Initiative:}} {{checkroll= [[ 1d20 + [[ @{selected|init} ]] + ( [[ (@{selected|init}) ]] /100) &{tracker} ]] }}",
+                "max": "",
+                "id": "-P3TCMdt8D7PGVVtOdQU"
+            },
+            {
+                "name": "character_sheet",
+                "current": "D&D3.5 v2.8",
+                "max": "",
+                "id": "-P3TCMduOdnDkNFPk1Je"
+            },
+            {
+                "name": "sheetversion",
+                "current": 8,
+                "max": "",
+                "id": "-P3TCMduOdnDkNFPk1Jf"
+            },
+            {
+                "name": "str",
+                "current": 8,
+                "max": "",
+                "id": "-P3TCMdvdKUa-4XjR0eF"
+            },
+            {
+                "name": "dex",
+                "current": 20,
+                "max": "",
+                "id": "-P3TCMdwTxKILsR8bNwc"
+            },
+            {
+                "name": "con",
+                "current": 18,
+                "max": "",
+                "id": "-P3TCMdwTxKILsR8bNwd"
+            },
+            {
+                "name": "int",
+                "current": 22,
+                "max": "",
+                "id": "-P3TCMdx_o803jiHl2BL"
+            },
+            {
+                "name": "wis",
+                "current": 8,
+                "max": "",
+                "id": "-P3TCMdx_o803jiHl2BM"
+            },
+            {
+                "name": "cha",
+                "current": 8,
+                "max": "",
+                "id": "-P3TCMdy6L_2qgE8YudX"
+            },
+            {
+                "name": "npcdex-mod",
+                "current": 0,
+                "max": "",
+                "id": "-P3TCMdy6L_2qgE8YudY"
+            },
+            {
+                "name": "npcinit",
+                "current": 0,
+                "max": "",
+                "id": "-P3TCMdzTysd28Op9Dam"
+            },
+            {
+                "name": "weapon10critmult",
+                "current": "",
+                "max": "",
+                "id": "-P3TCMdzTysd28Op9Dan"
+            },
+            {
+                "name": "weapon9critmult",
+                "current": "",
+                "max": "",
+                "id": "-P3TCMe-cTH3dj3GafHo"
+            },
+            {
+                "name": "weapon8critmult",
+                "current": "",
+                "max": "",
+                "id": "-P3TCMe-cTH3dj3GafHp"
+            },
+            {
+                "name": "weapon7critmult",
+                "current": "",
+                "max": "",
+                "id": "-P3TCMe-cTH3dj3GafHq"
+            },
+            {
+                "name": "weapon6critmult",
+                "current": "",
+                "max": "",
+                "id": "-P3TCMe05_6pcotL5Q4S"
+            },
+            {
+                "name": "weapon5critmult",
+                "current": "2",
+                "max": "",
+                "id": "-P3TCMe05_6pcotL5Q4T"
+            },
+            {
+                "name": "weapon4critmult",
+                "current": "",
+                "max": "",
+                "id": "-P3TCMe05_6pcotL5Q4U"
+            },
+            {
+                "name": "weapon3critmult",
+                "current": "",
+                "max": "",
+                "id": "-P3TCMe1cvcXbYOGUr0G"
+            },
+            {
+                "name": "weapon2critmult",
+                "current": "",
+                "max": "",
+                "id": "-P3TCMe1cvcXbYOGUr0H"
+            },
+            {
+                "name": "weapon1critmult",
+                "current": "3",
+                "max": "",
+                "id": "-P3TCMe1cvcXbYOGUr0I"
+            },
+            {
+                "name": "npcattack3critmult",
+                "current": "",
+                "max": "",
+                "id": "-P3TCMfC3N8FC65ltm0Y"
+            },
+            {
+                "name": "npcattack2critmult",
+                "current": "",
+                "max": "",
+                "id": "-P3TCMfUmGhCIpTLWIoS"
+            },
+            {
+                "name": "npcattack1critmult",
+                "current": "",
+                "max": "",
+                "id": "-P3TCMfXNTWbvhNEKRCq"
+            },
+            {
+                "name": "str-action",
+                "current": 0,
+                "max": "",
+                "id": "-P3TCMfaQ6emSM-wMLwO"
+            },
+            {
+                "name": "dex-action",
+                "current": 0,
+                "max": "",
+                "id": "-P3TCMgefulDzr7eXeQv"
+            },
+            {
+                "name": "con-action",
+                "current": 0,
+                "max": "",
+                "id": "-P3TCMgknftecyr7wE1c"
+            },
+            {
+                "name": "int-action",
+                "current": 0,
+                "max": "",
+                "id": "-P3TCMgymzeCb2go1WhL"
+            },
+            {
+                "name": "wis-action",
+                "current": 0,
+                "max": "",
+                "id": "-P3TCMh-pq-VPaNY_59W"
+            },
+            {
+                "name": "cha-action",
+                "current": 0,
+                "max": "",
+                "id": "-P3TCMhs3c0y7JoH_kss"
+            },
+            {
+                "name": "str-mod",
+                "current": -1,
+                "max": "",
+                "id": "-P3TCMhtxdawzf6lxkpJ"
+            },
+            {
+                "name": "encumbrstr",
+                "current": 80,
+                "max": "",
+                "id": "-P3TCMhujFsRqqLQPT6f"
+            },
+            {
+                "name": "dex-mod",
+                "current": 5,
+                "max": "",
+                "id": "-P3TCMhujFsRqqLQPT6g"
+            },
+            {
+                "name": "con-mod",
+                "current": 4,
+                "max": "",
+                "id": "-P3TCMhvVKrEtAoWHd3H"
+            },
+            {
+                "name": "int-mod",
+                "current": 6,
+                "max": "",
+                "id": "-P3TCMhwX5m4zI8vjJxO"
+            },
+            {
+                "name": "wis-mod",
+                "current": -1,
+                "max": "",
+                "id": "-P3TCMhwX5m4zI8vjJxP"
+            },
+            {
+                "name": "cha-mod",
+                "current": -1,
+                "max": "",
+                "id": "-P3TCMhyfg6AJAktJ8Id"
+            },
+            {
+                "name": "recalc",
+                "current": 0,
+                "max": "",
+                "id": "-P3TCMhyfg6AJAktJ8Ie"
+            },
+            {
+                "name": "unspentSkillPoints",
+                "current": 51,
+                "max": "",
+                "id": "-P3TCMi2sXbxBFHpX9ZG"
+            },
+            {
+                "name": "code_version",
+                "current": 0.1,
+                "max": "",
+                "id": "-P3TCMlqdAG6y89tdCel"
+            },
+            {
+                "name": "weapon5crit",
+                "current": "(@{weapon5statdamage}[Dmg] + @{weapon5damagestat}[Weapon Dmg Ability] + @{weapon5enh}[Weapon Enh] + @{weapon5specialize}[Weapon Spec] + @{globalDamageBonus}[Global bonus] + ?{Additional Damage Bonus?|0}[Ad'l Dmg Bon])",
+                "max": "",
+                "id": "-P3TCO0G20MGNF6gaoA-"
+            },
+            {
+                "name": "character-name2",
+                "current": "Sighart",
+                "max": "",
+                "id": "-P3TCs9sEgTwCuUBZETh"
+            },
+            {
+                "name": "playername",
+                "current": "Vinny",
+                "max": "",
+                "id": "-P3TCtiQyrpJAr8vVB-J"
+            },
+            {
+                "name": "expgoal",
+                "current": "12000",
+                "max": "",
+                "id": "-P3TCxsIcIHlgN7wT0HZ"
+            },
+            {
+                "name": "expcurrent",
+                "current": "6500",
+                "max": "",
+                "id": "-P3TCyg5nhiPX_UyarLG"
+            },
+            {
+                "name": "race",
+                "current": "Elfo",
+                "max": "",
+                "id": "-P3TD9BjSpPOlNFI3i90"
+            },
+            {
+                "name": "gender",
+                "current": "M",
+                "max": "",
+                "id": "-P3TDA1N8m389iDGITb2"
+            },
+            {
+                "name": "alignment",
+                "current": "Neutro Bom",
+                "max": "",
+                "id": "-P3TDCK3uYhHjoToE6lE"
+            },
+            {
+                "name": "deity",
+                "current": "Mystra",
+                "max": "",
+                "id": "-P3TDDiQrYyJ0E4iakKA"
+            },
+            {
+                "name": "age",
+                "current": "20 anos",
+                "max": "",
+                "id": "-P3TDF8Ee3b-qS0ja8oF"
+            },
+            {
+                "name": "weight",
+                "current": "75kg",
+                "max": "",
+                "id": "-P3TDGmhwAfccyysNKFs"
+            },
+            {
+                "name": "height",
+                "current": "1.85",
+                "max": "",
+                "id": "-P3TDILMKct3bJl416S3"
+            },
+            {
+                "name": "skin",
+                "current": "White",
+                "max": "",
+                "id": "-P3TDJ7pcOJfEFoS5Xp-"
+            },
+            {
+                "name": "eyes",
+                "current": "Dark",
+                "max": "",
+                "id": "-P3TDKs7fDo8Nn37-z7y"
+            },
+            {
+                "name": "hair",
+                "current": "Dark",
+                "max": "",
+                "id": "-P3TDLWcWrmUaMQ2P3iS"
+            },
+            {
+                "name": "charclasses-show",
+                "current": "0",
+                "max": "",
+                "id": "-P3TDMqgKSws8edtqyFv"
+            },
+            {
+                "name": "class1",
+                "current": "Monk",
+                "max": "",
+                "id": "-P3TDNw77CWxrR1rmnk9"
+            },
+            {
+                "name": "level1",
+                "current": "1",
+                "max": "",
+                "id": "-P3TDOWWLqG_PTCFhrK2"
+            },
+            {
+                "name": "str-base",
+                "current": "8",
+                "max": "",
+                "id": "-P3TE4MclwMYggS5PMNx"
+            },
+            {
+                "name": "dex-base",
+                "current": "20",
+                "max": "",
+                "id": "-P3TE504m8feAiTk7k8N"
+            },
+            {
+                "name": "con-base",
+                "current": "18",
+                "max": "",
+                "id": "-P3TE5bbQEfc61BRXDQ5"
+            },
+            {
+                "name": "int-base",
+                "current": "22",
+                "max": "",
+                "id": "-P3TE69Qbrk3HBhsIqWS"
+            },
+            {
+                "name": "wis-base",
+                "current": "8",
+                "max": "",
+                "id": "-P3TE7-2IM6sNZRcawST"
+            },
+            {
+                "name": "cha-base",
+                "current": "8",
+                "max": "",
+                "id": "-P3TE7_Be_oiD76M70fC"
+            },
+            {
+                "name": "hitpoints",
+                "current": "29",
+                "max": "33",
+                "id": "-P3TEDeq7n7MFUlBmbm8"
+            },
+            {
+                "name": "hitdie1",
+                "current": "8",
+                "max": "",
+                "id": "-P3TEildpobGB9FiQNnQ"
+            },
+            {
+                "name": "totSkillPoint1",
+                "current": 80,
+                "max": "",
+                "id": "-P3TEiniPlqF5TKbaN8l"
+            },
+            {
+                "name": "totSkillPoint",
+                "current": 112,
+                "max": "",
+                "id": "-P3TEiqG6uMaSQa4woJc"
+            },
+            {
+                "name": "hitdietype1",
+                "current": "8",
+                "max": "",
+                "id": "-P3TEqZtvEflYg_9izjY"
+            },
+            {
+                "name": "hitpoint1",
+                "current": "12",
+                "max": "",
+                "id": "-P3TErm-Q5jPpDLOT8ri"
+            },
+            {
+                "name": "skillPointLiv1",
+                "current": "10",
+                "max": "",
+                "id": "-P3TEuMxyZhJMxemR6HT"
+            },
+            {
+                "name": "class2",
+                "current": "Mage",
+                "max": "",
+                "id": "-P3TF3rZuMlarY_4vABt"
+            },
+            {
+                "name": "level2",
+                "current": "3",
+                "max": "",
+                "id": "-P3TF4OJr9KlRVZxiyh8"
+            },
+            {
+                "name": "hitdie2",
+                "current": "4",
+                "max": "",
+                "id": "-P3TF4zmsBJSoEnejWBX"
+            },
+            {
+                "name": "totSkillPoint2",
+                "current": 32,
+                "max": "",
+                "id": "-P3TF50YhuG0E5xuHJJ0"
+            },
+            {
+                "name": "hitdietype2",
+                "current": "9",
+                "max": "",
+                "id": "-P3TF8ujWYsyOSyRct0v"
+            },
+            {
+                "name": "hitpoint2",
+                "current": "21",
+                "max": "",
+                "id": "-P3TF9hpdg3eqTqmH8yh"
+            },
+            {
+                "name": "skillPointLiv2",
+                "current": "8",
+                "max": "",
+                "id": "-P3TFAzi0XSVhPZiQ5JL"
+            },
+            {
+                "name": "hitpoint",
+                "current": 33,
+                "max": "",
+                "id": "-P3TFJJG17mpc0pQsVHH"
+            },
+            {
+                "name": "speed",
+                "current": "9",
+                "max": "",
+                "id": "-P3TFfvkARPdZA4IelDa"
+            },
+            {
+                "name": "tab",
+                "current": "99",
+                "max": "",
+                "id": "-P3THyDK94Xg6mLumMlG"
+            },
+            {
+                "name": "initmiscmod",
+                "current": "0",
+                "max": "",
+                "id": "-P3TIGglveoqhy-Q-MV8"
+            },
+            {
+                "name": "fortitudebase",
+                "current": "3",
+                "max": "",
+                "id": "-P3TIW0upX-khkjy1yxy"
+            },
+            {
+                "name": "reflexbase",
+                "current": "3",
+                "max": "",
+                "id": "-P3TIWKBSRex2oxO_eta"
+            },
+            {
+                "name": "willbase",
+                "current": "5",
+                "max": "",
+                "id": "-P3TIWn83v2TZZSE8VcB"
+            },
+            {
+                "name": "bab",
+                "current": "1",
+                "max": "",
+                "id": "-P3TI_sf4jMSmOw9z1Vj"
+            },
+            {
+                "name": "weapon1name",
+                "current": "Arco Longo (Masterwork))",
+                "max": "",
+                "id": "-P3TIhuEIoC5Jy0ixJgX"
+            },
+            {
+                "name": "weapon1type",
+                "current": "Ranged",
+                "max": "",
+                "id": "-P3TIih-A3BHh4gDIBFG"
+            },
+            {
+                "name": "weapon1enh",
+                "current": "0",
+                "max": "",
+                "id": "-P3TIoD-kWlNpP9XpjsU"
+            },
+            {
+                "name": "weapon1stat",
+                "current": "@{dex-mod} ",
+                "max": "",
+                "id": "-P3TIu6uPCg9YxDG95b9"
+            },
+            {
+                "name": "weapon1damagestat",
+                "current": "0",
+                "max": "",
+                "id": "-P3TIz6byfiQxJmumIX7"
+            },
+            {
+                "name": "weapon1statdamage",
+                "current": "1d8",
+                "max": "",
+                "id": "-P3TJ41sYNPaIOiI2Z6o"
+            },
+            {
+                "name": "weapon1range",
+                "current": "30m",
+                "max": "",
+                "id": "-P3TJ6H2oOSEQDptISDB"
+            },
+            {
+                "name": "weapon1crit",
+                "current": "(@{weapon1statdamage}[Dmg] + @{weapon1damagestat}[Weapon Dmg Ability] + @{weapon1enh}[Weapon Enh] + @{weapon1specialize}[Weapon Spec] + @{globalDamageBonus}[Global bonus] + ?{Additional Damage Bonus?|0}[Ad'l Dmg Bon]) + (@{weapon1statdamage}[Dmg] + @{weapon1damagestat}[Weapon Dmg Ability] + @{weapon1enh}[Weapon Enh] + @{weapon1specialize}[Weapon Spec] + @{globalDamageBonus}[Global bonus] + ?{Additional Damage Bonus?|0}[Ad'l Dmg Bon])",
+                "max": "",
+                "id": "-P3TJ936C3zT_UmxGA6e"
+            },
+            {
+                "name": "weapon1focus",
+                "current": "2",
+                "max": "",
+                "id": "-P3TKG9tUYQ2gij_DxJ2"
+            },
+            {
+                "name": "weapon1specialize",
+                "current": "0",
+                "max": "",
+                "id": "-P3TKHqUylFsc7FrcZnm"
+            },
+            {
+                "name": "abilityaccalc-show",
+                "current": "1",
+                "max": "",
+                "id": "-P3TKOFRNwcENpHmCURI"
+            },
+            {
+                "name": "repeating_equipment_-P3TKfGiVWUlgv0HMyAm_equipmenttotalweight",
+                "current": "1.500",
+                "max": "",
+                "id": "-P3TKllIW9BmtsYMDS8k"
+            },
+            {
+                "name": "repeating_equipment_-P3TKfGiVWUlgv0HMyAm_equipmenttotalcost",
+                "current": "375.00",
+                "max": "",
+                "id": "-P3TKllLcunBjPAFsVHq"
+            },
+            {
+                "name": "totalequipmentweight",
+                "current": "3.500",
+                "max": "",
+                "id": "-P3TKllNRrP4AHQg-w5f"
+            },
+            {
+                "name": "totalequipmentcost",
+                "current": "4125.00",
+                "max": "",
+                "id": "-P3TKllQ0sm1TnouA10B"
+            },
+            {
+                "name": "repeating_equipment_-P3TKfGiVWUlgv0HMyAm_equipmentname",
+                "current": "Masterwork Longbow",
+                "max": "",
+                "id": "-P3TKmO8HFbDW8111GDT"
+            },
+            {
+                "name": "repeating_equipment_-P3TKfGiVWUlgv0HMyAm_equipmenttotalweight",
+                "current": "0.000",
+                "max": "",
+                "id": "-P3TKmQEgA0tjt9vPQMA"
+            },
+            {
+                "name": "repeating_equipment_-P3TKfGiVWUlgv0HMyAm_equipmenttotalcost",
+                "current": "0.00",
+                "max": "",
+                "id": "-P3TKmQJOSRvxsMfPdwV"
+            },
+            {
+                "name": "totalequipmentweight",
+                "current": "0.000",
+                "max": "",
+                "id": "-P3TKmQOzvcRU6rgF_8x"
+            },
+            {
+                "name": "totalequipmentcost",
+                "current": "0.00",
+                "max": "",
+                "id": "-P3TKmQQZqC2jFMZquiK"
+            },
+            {
+                "name": "totalcarriedweight",
+                "current": 3.5,
+                "max": "",
+                "id": "-P3TKmUNk5FlFGKUrSUa"
+            },
+            {
+                "name": "repeating_equipment_-P3TKfGiVWUlgv0HMyAm_equipmentquantity",
+                "current": "1",
+                "max": "",
+                "id": "-P3TN0p2T56QFNvFpkd9"
+            },
+            {
+                "name": "repeating_equipment_-P3TKfGiVWUlgv0HMyAm_equipmentcost",
+                "current": "375po",
+                "max": "",
+                "id": "-P3TN4_mMoJugRh2b_R1"
+            },
+            {
+                "name": "repeating_equipment_-P3TNAqtEkKANA0aiukH_equipmentname",
+                "current": "Rod of Lesser Extend Spell",
+                "max": "",
+                "id": "-P3TNDKXhyGGyRkym1v_"
+            },
+            {
+                "name": "repeating_equipment_-P3TNAqtEkKANA0aiukH_equipmenttotalweight",
+                "current": "1.500",
+                "max": "",
+                "id": "-P3TNDN703NzPFtIijVp"
+            },
+            {
+                "name": "repeating_equipment_-P3TNAqtEkKANA0aiukH_equipmenttotalcost",
+                "current": "3000.00",
+                "max": "",
+                "id": "-P3TNDN9H57tyX50rmmP"
+            },
+            {
+                "name": "repeating_equipment_-P3TNAqtEkKANA0aiukH_equipmentquantity",
+                "current": "1",
+                "max": "",
+                "id": "-P3TNE4CsiDeaQ9WCXz5"
+            },
+            {
+                "name": "repeating_equipment_-P3TNAqtEkKANA0aiukH_equipmentcost",
+                "current": "3000po",
+                "max": "",
+                "id": "-P3TNEpcYIx1ppf-In0_"
+            },
+            {
+                "name": "repeating_equipment_-P3TNAqtEkKANA0aiukH_equipmentweight",
+                "current": "1.5",
+                "max": "",
+                "id": "-P3TNWm1v1e0h7wFfriD"
+            },
+            {
+                "name": "repeating_equipment_-P3TKfGiVWUlgv0HMyAm_equipmentweight",
+                "current": "1.5",
+                "max": "",
+                "id": "-P3TNYIRvScqf5WOxqsc"
+            },
+            {
+                "name": "repeating_equipment_-P3TNYXj4zVyh0uXV4Pb_equipmenttotalweight",
+                "current": "0.500",
+                "max": "",
+                "id": "-P3TN_PB6LpU11cGJdbz"
+            },
+            {
+                "name": "repeating_equipment_-P3TNYXj4zVyh0uXV4Pb_equipmenttotalcost",
+                "current": "750.00",
+                "max": "",
+                "id": "-P3TN_PDIKirNZe91rI9"
+            },
+            {
+                "name": "repeating_equipment_-P3TNYXj4zVyh0uXV4Pb_equipmentname",
+                "current": "Healing Belt",
+                "max": "",
+                "id": "-P3TNa0ipUiipiK-rCty"
+            },
+            {
+                "name": "repeating_equipment_-P3TNYXj4zVyh0uXV4Pb_equipmenttotalweight",
+                "current": "0.500",
+                "max": "",
+                "id": "-P3TNa48VjY7t9QPmnsD"
+            },
+            {
+                "name": "repeating_equipment_-P3TNYXj4zVyh0uXV4Pb_equipmenttotalcost",
+                "current": "750.00",
+                "max": "",
+                "id": "-P3TNa4Ac7iZrkgUp4qf"
+            },
+            {
+                "name": "repeating_equipment_-P3TNYXj4zVyh0uXV4Pb_equipmentquantity",
+                "current": "1",
+                "max": "",
+                "id": "-P3TNaGaTPLcTaFad-nx"
+            },
+            {
+                "name": "repeating_equipment_-P3TNYXj4zVyh0uXV4Pb_equipmentcost",
+                "current": "750po",
+                "max": "",
+                "id": "-P3TNaSf-PUq2b6HFMXI"
+            },
+            {
+                "name": "repeating_equipment_-P3TNYXj4zVyh0uXV4Pb_equipmentweight",
+                "current": "0.5",
+                "max": "",
+                "id": "-P3TNdXbYGen0XsnaG0i"
+            },
+            {
+                "name": "repeating_equipment_-P3TOinpWf0CTe3QJ9V5_equipmenttotalweight",
+                "current": "0.000",
+                "max": "",
+                "id": "-P3TOk3eeMc8QKHYGYXC"
+            },
+            {
+                "name": "repeating_equipment_-P3TOinpWf0CTe3QJ9V5_equipmenttotalcost",
+                "current": "0.00",
+                "max": "",
+                "id": "-P3TOk3jRSuQR5RtJhOm"
+            },
+            {
+                "name": "repeating_equipment_-P3TOinpWf0CTe3QJ9V5_equipmentname",
+                "current": "Rações",
+                "max": "",
+                "id": "-P3TOkgykVRZ7T7MXW4_"
+            },
+            {
+                "name": "repeating_equipment_-P3TOinpWf0CTe3QJ9V5_equipmenttotalweight",
+                "current": "0.000",
+                "max": "",
+                "id": "-P3TOkk4v7kPRHh3GDkJ"
+            },
+            {
+                "name": "repeating_equipment_-P3TOinpWf0CTe3QJ9V5_equipmenttotalcost",
+                "current": "0.00",
+                "max": "",
+                "id": "-P3TOkk7FyKkKIraf0ip"
+            },
+            {
+                "name": "repeating_equipment_-P3TOinpWf0CTe3QJ9V5_equipmentquantity",
+                "current": "2",
+                "max": "",
+                "id": "-P3TOlHIbbbnDsDmzmNV"
+            },
+            {
+                "name": "repeating_equipment_-P3TOinpWf0CTe3QJ9V5_equipmentcost",
+                "current": "0",
+                "max": "",
+                "id": "-P3TOqRPdq_RJysS65vu"
+            },
+            {
+                "name": "repeating_equipment_-P3TOsS9rNimaTZ-cJje_equipmenttotalweight",
+                "current": "0.000",
+                "max": "",
+                "id": "-P3TOsGRUBnpnMIEadgF"
+            },
+            {
+                "name": "repeating_equipment_-P3TOsS9rNimaTZ-cJje_equipmenttotalcost",
+                "current": "0.00",
+                "max": "",
+                "id": "-P3TOsGV4--y4Ips2tyi"
+            },
+            {
+                "name": "repeating_equipment_-P3TOsS9rNimaTZ-cJje_equipmentname",
+                "current": "Manto de Resistência +1",
+                "max": "",
+                "id": "-P3TOstn3l4ZANXPcYbJ"
+            },
+            {
+                "name": "repeating_equipment_-P3TOuZIkqYsvI0ubXEB_equipmenttotalweight",
+                "current": "0.000",
+                "max": "",
+                "id": "-P3TOuPeiz2oPcUXrZ24"
+            },
+            {
+                "name": "repeating_equipment_-P3TOuZIkqYsvI0ubXEB_equipmenttotalcost",
+                "current": "0.00",
+                "max": "",
+                "id": "-P3TOuPgEwe3a63uFzZK"
+            },
+            {
+                "name": "repeating_equipment_-P3TOuZIkqYsvI0ubXEB_equipmentname",
+                "current": "Carcás + 40 flechas",
+                "max": "",
+                "id": "-P3TOv22svwTx9eQtgwG"
+            },
+            {
+                "name": "repeating_equipment_-P3TOvRPyS77BfUBHsqd_equipmenttotalweight",
+                "current": "0.000",
+                "max": "",
+                "id": "-P3TOwY6NbYavrx4LvUb"
+            },
+            {
+                "name": "repeating_equipment_-P3TOvRPyS77BfUBHsqd_equipmenttotalcost",
+                "current": "0.00",
+                "max": "",
+                "id": "-P3TOwY7588E5ZCFL3vi"
+            },
+            {
+                "name": "repeating_equipment_-P3TOvRPyS77BfUBHsqd_equipmentname",
+                "current": "Bolsa de componentes",
+                "max": "",
+                "id": "-P3TOxAWmYdOLvYUv9Q1"
+            },
+            {
+                "name": "repeating_equipment_-P3TOxfFpKwnZ5UNR-Eo_equipmenttotalweight",
+                "current": "0.000",
+                "max": "",
+                "id": "-P3TOyXWWQxlXZCyXnJx"
+            },
+            {
+                "name": "repeating_equipment_-P3TOxfFpKwnZ5UNR-Eo_equipmenttotalcost",
+                "current": "0.00",
+                "max": "",
+                "id": "-P3TOyXYC5f6u6k-1LSx"
+            },
+            {
+                "name": "repeating_equipment_-P3TOxfFpKwnZ5UNR-Eo_equipmentname",
+                "current": "Grimório adicional",
+                "max": "",
+                "id": "-P3TOz9uDMHI5uxTWABk"
+            },
+            {
+                "name": "repeating_equipment_-P3TP-iLUTtiSt0XnZKZ_equipmenttotalweight",
+                "current": "0.000",
+                "max": "",
+                "id": "-P3TP-ZKaOVzqPSR24pd"
+            },
+            {
+                "name": "repeating_equipment_-P3TP-iLUTtiSt0XnZKZ_equipmenttotalcost",
+                "current": "0.00",
+                "max": "",
+                "id": "-P3TP-ZMFrDw_g8AyFZZ"
+            },
+            {
+                "name": "repeating_equipment_-P3TP-iLUTtiSt0XnZKZ_equipmentname",
+                "current": "Mochila/saco de dormir/cantil/corda/pederneira/5 rações/2 sunrods",
+                "max": "",
+                "id": "-P3TP0BcfZlufg-uB2pA"
+            },
+            {
+                "name": "repeating_equipment_-P3TP0aaIOG0RJKdmDdy_equipmenttotalweight",
+                "current": "0.000",
+                "max": "",
+                "id": "-P3TP2-S7pzTxmwxW4h4"
+            },
+            {
+                "name": "repeating_equipment_-P3TP0aaIOG0RJKdmDdy_equipmenttotalcost",
+                "current": "0.00",
+                "max": "",
+                "id": "-P3TP2-Wp1sUw96qxfUf"
+            },
+            {
+                "name": "repeating_equipment_-P3TP0aaIOG0RJKdmDdy_equipmentname",
+                "current": "Poção de Cure Light Wounds",
+                "max": "",
+                "id": "-P3TP2chQdt-vOVyMi_s"
+            },
+            {
+                "name": "repeating_equipment_-P3TP0aaIOG0RJKdmDdy_equipmenttotalweight",
+                "current": "0.000",
+                "max": "",
+                "id": "-P3TP2fIL7M-v1Fw3v89"
+            },
+            {
+                "name": "repeating_equipment_-P3TP0aaIOG0RJKdmDdy_equipmenttotalcost",
+                "current": "0.00",
+                "max": "",
+                "id": "-P3TP2fNOmOjyiqqdm1F"
+            },
+            {
+                "name": "repeating_equipment_-P3TP0aaIOG0RJKdmDdy_equipmentquantity",
+                "current": "2",
+                "max": "",
+                "id": "-P3TPBYoX7XbaS1TKwgQ"
+            },
+            {
+                "name": "appraiseclassskill",
+                "current": "1",
+                "max": "",
+                "id": "-P3TQb47-J1lZvoSy1ZC"
+            },
+            {
+                "name": "concentrationclassskill",
+                "current": "1",
+                "max": "",
+                "id": "-P3TQen0hPLDxVFBG5Ro"
+            },
+            {
+                "name": "spellcraftclassskill",
+                "current": "1",
+                "max": "",
+                "id": "-P3TSUPQ5TEs_8EntyxL"
+            },
+            {
+                "name": "knowarcanaclassskill",
+                "current": "1",
+                "max": "",
+                "id": "-P3TSXh6kCWy3Gko-f19"
+            },
+            {
+                "name": "knowhistoryclassskill",
+                "current": "1",
+                "max": "",
+                "id": "-P3TSY3T8QSpP6Dmudig"
+            },
+            {
+                "name": "knownobilityclassskill",
+                "current": "1",
+                "max": "",
+                "id": "-P3TSZk4Otaz4eNWNNqO"
+            },
+            {
+                "name": "decipherscriptclassskill",
+                "current": "1",
+                "max": "",
+                "id": "-P3TSeIr6y-dgpYLFqWP"
+            },
+            {
+                "name": "craft1classskill",
+                "current": "1",
+                "max": "",
+                "id": "-P3TSjIBmlYaokzrWd6N"
+            },
+            {
+                "name": "rideclassskill",
+                "current": "1",
+                "max": "",
+                "id": "-P3TTAO-qHEfvV_g1uAD"
+            },
+            {
+                "name": "searchclassskill",
+                "current": "1",
+                "max": "",
+                "id": "-P3TTjohYlzfBKtsSv5d"
+            },
+            {
+                "name": "concentrationranks",
+                "current": "7",
+                "max": "",
+                "id": "-P3TUDleKF0LggTUJ32y"
+            },
+            {
+                "name": "climbranks",
+                "current": "0",
+                "max": "",
+                "id": "-P3TUEgyxF6ll_R0meY1"
+            },
+            {
+                "name": "appraiseranks",
+                "current": "7",
+                "max": "",
+                "id": "-P3TUFt4oP488lGs_Ctg"
+            },
+            {
+                "name": "autohypnosisranks",
+                "current": "0",
+                "max": "",
+                "id": "-P3TUIomoILXyNMl1qme"
+            },
+            {
+                "name": "craft1ranks",
+                "current": "7",
+                "max": "",
+                "id": "-P3TULhvtvylXaKYPaIB"
+            },
+            {
+                "name": "decipherscriptranks",
+                "current": "7",
+                "max": "",
+                "id": "-P3TUMQT_FHKreO2ckT2"
+            },
+            {
+                "name": "diplomacyranks",
+                "current": "0",
+                "max": "",
+                "id": "-P3TUN92S4T4hveV72wn"
+            },
+            {
+                "name": "knowarcanaranks",
+                "current": "7",
+                "max": "",
+                "id": "-P3TUNthWVrH2xqNzWtd"
+            },
+            {
+                "name": "knowhistoryranks",
+                "current": "3",
+                "max": "",
+                "id": "-P3TUOgeKkXenUedfEZi"
+            },
+            {
+                "name": "knownobilityranks",
+                "current": "2",
+                "max": "",
+                "id": "-P3TUPSyrKHAEwx-B7hA"
+            },
+            {
+                "name": "rideranks",
+                "current": "7",
+                "max": "",
+                "id": "-P3TURgR18DLoz3EhJd3"
+            },
+            {
+                "name": "searchranks",
+                "current": "7",
+                "max": "",
+                "id": "-P3TUT32k4-QRe2zFq8u"
+            },
+            {
+                "name": "spellcraftranks",
+                "current": "7",
+                "max": "",
+                "id": "-P3TUWUrM1JBCBT1g2bE"
+            },
+            {
+                "name": "feats",
+                "current": "Precise Shot Nível 1 (normal) Remove a penalidade de -4 ao atirar à distância contra alvo engajado em corpo a corpo com aliado\n------------------------------------------------\nCarmendine Monk Nível 1 (talento bônus do Monge)\nUsa Inteligência em vez de Sabedoria pro bônus de CA do Monge (e outras mecânicas do Monge baseadas em  abedoria)\n------------------------------------------------\nPoint Blank Shot Nível 1 (via falha) +1 ataque e dano com ataques à distância a até 9 m\n------------------------------------------------\nExtend Spell Nível 3 (normal) Dobra a duração da magia, +1 nível de slot",
+                "max": "",
+                "id": "-P3TX71AU6EA_wb6yA-U"
+            },
+            {
+                "name": "classabilities",
+                "current": "Monge (nível 1)\nBônus de CA sem armadura: soma Int (via Carmendine Monk) à CA enquanto estiver sem armadura, sem escudo e sem sobrecarga.\nVale até contra toque e enquanto desprevenido (a menos que também esteja imobilizado).\nAtaque desarmado aprimorado: 1d6 de dano (tamanho Médio), conta como arma mágica em níveis mais altos (ainda não nesse\nnível)\nFlurry of Blows: troca o ataque normal por dois ataques desarmados com -2 cada\nProficiências: armas simples + armas de monge (kama, nunchaku, sai, shuriken, siangham)\nMago (níveis 2–4)\nConjuração preparada: escolhe as magias do dia a partir do grimório, soma Int ao número de magias bônus e à CD\nGrimório: começa com todas as magias de 0 nível + 3 magias de 1º nível + 1 magia de 1º nível extra por ponto de bônus de Int (+6 =\n6 magias extras, total 9 de 1º nível no grimório inicial), mais 2 magias de qualquer nível aprendidas em cada nível de Mago ganho\ndepois (já refletido na lista abaixo)\nNível de conjurador: 3 (só níveis de Mago contam)",
+                "max": "",
+                "id": "-P3TXI3e-aZlg8t_VF8M"
+            },
+            {
+                "name": "craft1name",
+                "current": "Alchemy",
+                "max": "",
+                "id": "-P3TXIkixz1Yt9mn7m_G"
+            },
+            {
+                "name": "autoCalcHP",
+                "current": "1",
+                "max": "",
+                "id": "-P3TYIwKThVY8zxvORIF"
+            },
+            {
+                "name": "level",
+                "current": 4,
+                "max": "",
+                "id": "-P3TYJ03EEw8XGnrfdGC"
+            },
+            {
+                "name": "hitdie",
+                "current": 12,
+                "max": "",
+                "id": "-P3TYJ06ouaFjKGZtZs3"
+            },
+            {
+                "name": "repeating_spells02_-P3TYQIiomL7mr5344g5_spellmacro02",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=casts [Mending](http://www.dandwiki.com/wiki/SRD:Mending ).}} {{check=One object within 10 feet of up to 1 lb. is repaired of small breaks or tears.}} {{checkroll=broken metallic objects such as a ring, a chain link, a medallion, or a slender dagger, are welded providing but one break exists. }} {{notes=Ceramic or wooden objects with multiple breaks can be invisibly rejoined to be as strong as new. A hole in a leather sack or a wineskin is completely healed over by mending. The spell can repair a magic item, but the item's magical abilities are not restored. The spell cannot mend broken magic rods, staffs, or wands, nor does it affect creatures (including constructs).\n[Imagem](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjlzaW1mMXhzejlvZmoxaGk3ajVvYm5vYWl2d211N3Q0ODFxbzJjMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/j7vckgz15cAYmxatzB/giphy.gif)\n}}",
+                "max": "",
+                "id": "-P3TYR4qga3jqlYIA8tW"
+            },
+            {
+                "name": "repeating_spells12_-P3TYRnEhIpZUoghwY48_spellmacro12",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Mísseis Mágicos!](https://dndtools.net/spells/players-handbook-v35--6/magic-missile--2631/) contra @{target|token_name}}} {{Escola:= Evocação (Energia)}} {{Nível:= Fet/Mag 1}} {{Cmpnts:=V,G}} {{Tempo de Execução:=1 ação padrão}} {{Alcance:= Médio ( [[ 30+3*@{casterlevel} ]] metros)}} {{Alvo:= Até cinco criaturas, todas a menos de 4,5 metros entre si }} {{Duração:= Instantâneo}} {{Teste de Resistência:= Nenhum}} {{Resistência à Magia:= Sim}} {{Teste de conjurador: = [[ 1d20+@{casterlevel}+@{spellpen} ]] contra Resistência à Magia.}} {{compcheck= Conc: [[ {1d20 + [[ @{concentration} ]] }>?{Concentração CD=15+Nível da Magia ou 10+DanoRecebido|16} ]] }} {{succeedcheck=Sucesso! @{character_name} conjura a magia!}} {{failcheck=A magia de @{character_name} falhou :( }} {{check= [[ {(d1*((@{casterlevel}-1-((@{casterlevel}-1)%2))/2)+1),d1*5}dh1} ]] projétil(éis) de energia mágica surge(m) nas pontas dos dedos de @{character_name} e atinge(m) o alvo escolhido.}} {{checkroll=Cada projétil causa [[ 1d4+1 ]] | [[ 1d4+1 ]] | [[ 1d4+1 ]] | [[ 1d4+1 ]] | [[ 1d4+1 ]] pontos de dano de força.}} {{notes= Os projéteis sempre atingem o alvo, mesmo se estiver em combate corpo a corpo, sobre qualquer cobertura ou camuflagem inferior que total. Porém partes específicas de uma criatura não podem ser atingidas. Objetos inanimados não são afetados por essa magia.\n\nSe @{character_name} conjurar vários mísseis mágicos, ele pode, então atacar uma única criatura ou várias. Um único projétil pode atingir apenas uma criatura. É preciso designar os alvos antes de testar a magia, testes de resistência ou jogadas de dano. }}",
+                "max": "",
+                "id": "-P3TYSjne6GmXKGCFgN9"
+            },
+            {
+                "name": "repeating_spells12_-P3TYRnEhIpZUoghwY48_spellname12",
+                "current": "asd",
+                "max": "",
+                "id": "-P3TYawaw6Mi2BPzgK3G"
+            },
+            {
+                "name": "casterlevel",
+                "current": "@{level2}",
+                "max": "",
+                "id": "-P3TYehzaEOHP0Jiqt9a"
+            },
+            {
+                "name": "spells1-show",
+                "current": "1",
+                "max": "",
+                "id": "-P3TYjNIDiT7PeWGCgaJ"
+            },
+            {
+                "name": "casterlevel2",
+                "current": "0",
+                "max": "",
+                "id": "-P3TYnvndLLKO6a_hKJR"
+            },
+            {
+                "name": "acother-show",
+                "current": "1",
+                "max": "",
+                "id": "-P3TaCgj0N2fmVDd-qS2"
+            },
+            {
+                "name": "dexffac",
+                "current": "1",
+                "max": "",
+                "id": "-P3TaGuhwV9lvzKDyZQJ"
+            },
+            {
+                "name": "abilityac1inuse",
+                "current": "1",
+                "max": "",
+                "id": "-P3TaOrJsPQQmeve9WDV"
+            },
+            {
+                "name": "abilityac1name",
+                "current": "Int Bonus (Carmendine Monk))",
+                "max": "",
+                "id": "-P3TaPzAlZOHlxgj-9Le"
+            },
+            {
+                "name": "dexacbonusinuse",
+                "current": "1",
+                "max": "",
+                "id": "-P3TaQ-AARQDXeFvAdwI"
+            },
+            {
+                "name": "abilityac1bonus",
+                "current": "6",
+                "max": "",
+                "id": "-P3TaWQsibYwwO1gxbH7"
+            },
+            {
+                "name": "abilityac1ffac",
+                "current": "1",
+                "max": "",
+                "id": "-P3TaWwi1s3rVgqkWIZ6"
+            },
+            {
+                "name": "abilityac2inuse",
+                "current": "1",
+                "max": "",
+                "id": "-P3TaZk7oo-YXAw6SMzV"
+            },
+            {
+                "name": "abilityac2name",
+                "current": "Mage Armor",
+                "max": "",
+                "id": "-P3TaaUkEX_HIbT5QeRf"
+            },
+            {
+                "name": "abilityac2bonus",
+                "current": "4",
+                "max": "",
+                "id": "-P3Tab-riYTTqvIJhEtz"
+            },
+            {
+                "name": "abilityac2ffac",
+                "current": "1",
+                "max": "",
+                "id": "-P3Tab1Dbe5JcBNavlPW"
+            },
+            {
+                "name": "abilityac2touchac",
+                "current": "0",
+                "max": "",
+                "id": "-P3TalW6W50LzeKCAxxO"
+            },
+            {
+                "name": "knownatureranks",
+                "current": "0",
+                "max": "",
+                "id": "-P3TbJlAXogp5CYd1FH8"
+            },
+            {
+                "name": "knowgeographyranks",
+                "current": "0",
+                "max": "",
+                "id": "-P3TbUlzCfxcyC4iqQ-f"
+            },
+            {
+                "name": "languages",
+                "current": "Elfo, Dracônico, Gnômico, Goblin, Orc, Silvestre, Comum, Subcomum ",
+                "max": "",
+                "id": "-P3TexMUh6nCbDuKHS_t"
+            },
+            {
+                "name": "racialabilities",
+                "current": "Visão no escuro (Low-Light Vision): enxerga no limiar de luz como se fosse mais claro (dobra o alcance em luz fraca), mas não é visão no escuro total (Darkvision) — ainda precisa de alguma fonte de luz.\nImunidade a sono mágico (efeitos de “sleep”) e +2 de bônus racial em testes de resistência contra magias/efeitos de Encantamento\n+2 de bônus racial em Listen, Search e Spot\nProficiência marcial automática com espada longa, rapieira, arco longo (incluindo composto) e arco curto (incluindo composto) — contam como armas simples pra elfos, não marciais\nNão dormem: entram em transe (meditação) por 4 horas em vez de dormir 8h, mas ainda são afetados por efeitos mágicos de sono (a imunidade acima é só contra o sleep comum)\nIdiomas automáticos: Comum e Élfico. Bônus (se tiver pontos de Int sobrando): Dracônico, Gnoll, Gnomo, Goblin, Orc, Silvestre\nClasse favorecida: Mago — não soma pra penalidade de multiclasse (é por isso que seu Monge 1/Mago 3 não é penalizado)\nTamanho Médio, deslocamento base 9m (30 pés)",
+                "max": "",
+                "id": "-P3TfiFbYYyFmrMN4ld_"
+            },
+            {
+                "name": "listenmiscmod",
+                "current": "2",
+                "max": "",
+                "id": "-P3TfsHvLpegXcjc6jFT"
+            },
+            {
+                "name": "listentempmod",
+                "current": "0",
+                "max": "",
+                "id": "-P3TfwOx1XyKGbsVvECt"
+            },
+            {
+                "name": "searchmiscmod",
+                "current": "2",
+                "max": "",
+                "id": "-P3TfwiSTc30A9JV1UEc"
+            },
+            {
+                "name": "searchtempmod",
+                "current": "0",
+                "max": "",
+                "id": "-P3TfyJFaZQUNJ7fDsN0"
+            },
+            {
+                "name": "spotmiscmod",
+                "current": "2",
+                "max": "",
+                "id": "-P3TfyXo67G_Lo0hfRtf"
+            },
+            {
+                "name": "spottempmod",
+                "current": "0",
+                "max": "",
+                "id": "-P3TfzhhuoayGYrUx4Nb"
+            },
+            {
+                "name": "sheet_schema_version",
+                "current": 1,
+                "max": "",
+                "id": "-P3wuK4HwUSJ0SrHo-Sh"
+            },
+            {
+                "name": "armorclass",
+                "current": "(@{armorclass})",
+                "max": "",
+                "id": "-P3x68kzPR0wcHxPUhrQ"
+            },
+            {
+                "name": "fightingDefensivelyCombatExpertise-show",
+                "current": "1",
+                "max": "",
+                "id": "-P3x6OAOJC_ys7pjsvjY"
+            },
+            {
+                "name": "fightingDefensivelyCombatExpertiseBonusEnabled",
+                "current": "1",
+                "max": "",
+                "id": "-P3x6OdtY0dRg3emjnxj"
+            },
+            {
+                "name": "fightingDefensivelyEnabled",
+                "current": "0",
+                "max": "",
+                "id": "-P3x6OsaATDHj4iwXaK3"
+            },
+            {
+                "name": "repeating_spells12_-P3x78JyO2RjWUfBvpe1_spellname12",
+                "current": "Toque Chocante",
+                "max": "",
+                "id": "-P3x7AS1QqnGUDt43Cly"
+            },
+            {
+                "name": "repeating_spells12_-P3x78JyO2RjWUfBvpe1_spelllevel12",
+                "current": "1",
+                "max": "",
+                "id": "-P3x7AihZVDukzPHUtd0"
+            },
+            {
+                "name": "repeating_spells12_-P3x78JyO2RjWUfBvpe1_spellmacro12",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Toque Chocante](http://www.d20srd.org/srd/spells/shockingGrasp.htm) contra @{target|token_name}}} {{Escola:=Evocação (Eletricidade)}} {{Nível:=Fet/Mag 1}} {{Cmpnts:=V,S}} {{Tempo de Execução:=1 ação padrão}} {{Alcance:=Toque}} {{Alvo:=Criatura ou objeto tocado}} {{Duração:=Instantâneo}} {{Teste de Resistência:=Nenhum}} {{Resistência à Magia:=Sim}} {{check=Ataque de toque corpo a corpo: [[1d20+@{meleeattackbonus}]] }} {{checkroll=Dano: [[ [[{@{casterlevel},5}kl1]]d6 ]] de eletricidade.}} {{notes=Ganha +3 de bônus no ataque de toque contra alvos usando metal como principal material de armadura ou escudo. Como é um ataque de toque corpo a corpo, normalmente usa Força no bônus de ataque, a menos que você tenha Weapon Finesse (aí usa Destreza).\n[Imagem](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmlxMXo3b256ZG42dGExNXBya2Vzd21odzRyeWJicm1xM2R5NHJqayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XqR1VyTH0lPP9cLL7v/giphy.gif)\n}}\n\n",
+                "max": "",
+                "id": "-P3x7C8o9Z7Zwe8Kep7s"
+            },
+            {
+                "name": "repeating_spells02_-P3xJv1lPB7Lo2IhNKps_spellmacro02",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Mão Mágica](http://www.d20srd.org/srd/spells/mageHand.htm) }} {{Escola:=Transmutação}} {{Nível:=Fet/Mag 0}} {{Cmpnts:=V,G}} {{Tempo de Execução:=1 ação padrão}} {{Alcance:=Curto ( [[25+5*floor(@{casterlevel}/2)]] pés)}} {{Alvo:=Um objeto não-preso de até 2,2kg}} {{Duração:=Concentração}} {{Teste de Resistência:=Nenhum}} {{Resistência à Magia:=Não}} {{check=@{character_name} move o objeto escolhido à distância usando telecinesia leve.}} {{notes=Não pode ser usado pra atacar, ativar mecanismos com força, puxar alavancas pesadas ou carregar criaturas. O objeto se move a até 4,5m por rodada enquanto durar a concentração.}}",
+                "max": "",
+                "id": "-P3xJyxiotQOzA8e_8ki"
+            },
+            {
+                "name": "repeating_spells02_-P3xJv1lPB7Lo2IhNKps_spellname02",
+                "current": "Mage Hand",
+                "max": "",
+                "id": "-P3xNLUc6njMQZtlZN5A"
+            },
+            {
+                "name": "repeating_spells12_-P3xNNnOxgn8lPXyYWrU_spellname12",
+                "current": "Magic Missile",
+                "max": "",
+                "id": "-P3xNPJl42UShFkQr3EP"
+            },
+            {
+                "name": "repeating_spells02_-P3xNTQUT59NCGxRUQDI_spellname02",
+                "current": "Detect Magic",
+                "max": "",
+                "id": "-P3xNUpMvShrwJMiw0B1"
+            },
+            {
+                "name": "repeating_spells02_-P3xNTQUT59NCGxRUQDI_spellmacro02",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Detectar Magia](http://www.d20srd.org/srd/spells/detectMagic.htm) }} {{Escola:=Adivinhação}} {{Nível:=Fet/Mag 0}} {{Cmpnts:=V,G}} {{Tempo de Execução:=1 ação padrão}} {{Alcance:=60 pés, em cone}} {{Duração:=Concentração, até 1 min/nível (D)}} {{Teste de Resistência:=Nenhum}} {{Resistência à Magia:=Não}} {{check=1ª rodada: presença ou ausência de aura mágica. 2ª rodada: número de auras e a mais forte. 3ª rodada: escola de cada aura presente.}} {{notes=Auras muito fracas podem passar despercebidas se você estiver a mais de 60 pés. Objetos/criaturas protegidas por Magic Aura ou similares podem enganar essa magia.}}",
+                "max": "",
+                "id": "-P3xNVpSaCEHJRmjvPEw"
+            },
+            {
+                "name": "repeating_spells02_-P3xNWSjSzbugqaotgFr_spellname02",
+                "current": "Read Magic",
+                "max": "",
+                "id": "-P3xNX5-nW33BxRbdkzI"
+            },
+            {
+                "name": "repeating_spells02_-P3xNWSjSzbugqaotgFr_spellmacro02",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Ler Magia](http://www.d20srd.org/srd/spells/readMagic.htm) }} {{Escola:=Adivinhação}} {{Nível:=Fet/Mag 0}} {{Cmpnts:=V,G,F}} {{Tempo de Execução:=1 ação padrão}} {{Alcance:=Pessoal}} {{Duração:=10 min/nível}} {{Teste de Resistência:=Nenhum}} {{Resistência à Magia:=Não}} {{check=@{character_name} consegue decifrar escrituras mágicas: pergaminhos, grimórios e inscrições em itens mágicos.}} {{notes=Necessário pra usar pergaminhos sem errar. O foco é uma lente de cristal ou berilo transparente.}}",
+                "max": "",
+                "id": "-P3xNXjG5M1uHDRzBdPs"
+            },
+            {
+                "name": "repeating_spells12_-P3xNZJm9x-wZApnjwIO_spellname12",
+                "current": "Shield",
+                "max": "",
+                "id": "-P3xN_5CUUONLZGpvZm8"
+            },
+            {
+                "name": "repeating_spells12_-P3xNZJm9x-wZApnjwIO_spellmacro12",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Escudo](http://www.d20srd.org/srd/spells/shield.htm) }} {{Escola:=Abjuração (Força)}} {{Nível:=Fet/Mag 1}} {{Cmpnts:=V,S}} {{Tempo de Execução:=1 ação padrão}} {{Alcance:=Pessoal}} {{Duração:=1 min/nível (D)}} {{Teste de Resistência:=Nenhum}} {{Resistência à Magia:=Não}} {{check=Um disco invisível de força aparece na frente de @{character_name}.}} {{notes=Dá +4 de bônus de escudo à CA, anula completamente Magic Missile, e bloqueia ataques frontais de corpo a corpo (não afeta ataques de toque, à distância que não sejam mísseis mágicos, ou pelas costas).\n[Imagem](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjB6NWJ5Mm83OGluc2ZpMXQ5cDEzajJ3Z2FiZ2x5NGt0OGs1NjlzaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1ngzDZxzlL7MNoOajC/giphy.gif)\n}}",
+                "max": "",
+                "id": "-P3xNd1C7uklI0_l249l"
+            },
+            {
+                "name": "repeating_spells12_-P3xNdqSq-s7Hiz9StDO_spellname12",
+                "current": "Mage Armor",
+                "max": "",
+                "id": "-P3xNe_eIRd7kT-JBoPh"
+            },
+            {
+                "name": "repeating_spells12_-P3xNdqSq-s7Hiz9StDO_spellmacro12",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Armadura Arcana](http://www.d20srd.org/srd/spells/mageArmor.htm) }} {{Escola:=Conjuração (Criação)}} {{Nível:=Fet/Mag 1}} {{Cmpnts:=V,S,F}} {{Tempo de Execução:=1 ação padrão}} {{Alcance:=Pessoal}} {{Duração:=1 hora/nível (D)}} {{Teste de Resistência:=Nenhum}} {{Resistência à Magia:=Não}} {{check=Uma força invisível envolve @{character_name} como uma armadura.}} {{notes=+4 de bônus de armadura à CA. Não afeta CA de Toque, mas conta normalmente contra CA Desprevenido. Soma com o bônus de CA sem armadura do Monge (via Carmendine Monk), porque são tipos de bônus diferentes.\n[Imagem](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2hqZGcwY3lsYnd0bGJqcTEzemUxbWYwem9od3p3NzVweXFyYWlwYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WTl5quTRtvj32/giphy.gif)\n}}",
+                "max": "",
+                "id": "-P3xNfZ2OTz2x4HP9Gxv"
+            },
+            {
+                "name": "repeating_spells12_-P3xNNnOxgn8lPXyYWrU_spellmacro12",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Mísseis Mágicos!](https://dndtools.net/spells/players-handbook-v35--6/magic-missile--2631/) contra @{target|token_name}}} {{Escola:= Evocação (Energia)}} {{Nível:= Fet/Mag 1}} {{Cmpnts:=V,G}} {{Tempo de Execução:=1 ação padrão}} {{Alcance:= Médio ( [[ 30+3*@{casterlevel} ]] metros)}} {{Alvo:= Até cinco criaturas, todas a menos de 4,5 metros entre si }} {{Duração:= Instantâneo}} {{Teste de Resistência:= Nenhum}} {{Resistência à Magia:= Sim}} {{Teste de conjurador: = [[ 1d20+@{casterlevel}+@{spellpen} ]] contra Resistência à Magia.}} {{compcheck= Conc: [[ {1d20 + [[ @{concentration} ]] }>?{Concentração CD=15+Nível da Magia ou 10+DanoRecebido|16} ]] }} {{succeedcheck=Sucesso! @{character_name} conjura a magia!}} {{failcheck=A magia de @{character_name} falhou :( }} {{check= [[ {(d1*((@{casterlevel}-1-((@{casterlevel}-1)%2))/2)+1),d1*5}dh1} ]] projétil(éis) de energia mágica surge(m) nas pontas dos dedos de @{character_name} e atinge(m) o alvo escolhido.}} {{checkroll=Cada projétil causa [[ 1d4+1 ]] | [[ 1d4+1 ]] | [[ 1d4+1 ]] | [[ 1d4+1 ]] | [[ 1d4+1 ]] pontos de dano de força.}} {{notes= Os projéteis sempre atingem o alvo, mesmo se estiver em combate corpo a corpo, sobre qualquer cobertura ou camuflagem inferior que total. Porém partes específicas de uma criatura não podem ser atingidas. Objetos inanimados não são afetados por essa magia.\n\nSe @{character_name} conjurar vários mísseis mágicos, ele pode, então atacar uma única criatura ou várias. Um único projétil pode atingir apenas uma criatura. É preciso designar os alvos antes de testar a magia, testes de resistência ou jogadas de dano.\n[Imagem](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHM1dTY2dHQzNmxrcHhxcnVjb2dqM2N5MjI4NDFwcmszNnJnOXJsNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/khnNaEXSLGU2EqHEMI/giphy.gif)\n}}",
+                "max": "",
+                "id": "-P3xNif-O1ev4UqKGVxP"
+            },
+            {
+                "name": "repeating_spells12_-P3xNj3XjZsHLaPI5uRo_spellname12",
+                "current": "Grease",
+                "max": "",
+                "id": "-P3xNjjRg-ZwPPQEBT8A"
+            },
+            {
+                "name": "repeating_spells12_-P3xNj3XjZsHLaPI5uRo_spellmacro12",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Graxa](http://www.d20srd.org/srd/spells/grease.htm) contra @{target|token_name}}} {{Escola:=Conjuração (Criação)}} {{Nível:=Fet/Mag 1}} {{Cmpnts:=V,S,M}} {{Tempo de Execução:=1 ação padrão}} {{Alcance:=Curto ( [[25+5*floor(@{casterlevel}/2)]] pés)}} {{Alvo:=Um quadrado de 3m ou um objeto}} {{Duração:=1 min/nível (D)}} {{Teste de Resistência:=Reflexos anula (veja o texto)}} {{Resistência à Magia:=Não}} {{compcheck=Conc: [[ {1d20 + [[ @{concentration} ]] }>?{Concentração CD=15+Nível da Magia ou 10+DanoRecebido|16} ]] }} {{succeedcheck=Sucesso! A área escorrega sob os pés dos alvos.}} {{failcheck=A magia de @{character_name} falhou :( }} {{check=CD de resistência: [[10+1+@{int-mod}]] }} {{checkroll=Quem estiver na área ou entrar nela deve ser bem-sucedido em Reflexos ou cai, ficando desprevenido. Um objeto segurado exige um teste de Reflexos do portador ou o item escapa da mão.}} {{notes=Quem está na área se move à metade da velocidade. Não extingue fogo nem afeta criaturas voadoras/incorpóreas.\n[Imagem](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmlheGF5dTBuZ2t1Y24weGJoMGRsNWZyZDNhMnBqamxtOHh2OTdleSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qmlX8ClsVWwsU/giphy.gif)\n}}",
+                "max": "",
+                "id": "-P3xNkeeXkcZcnuL7U1C"
+            },
+            {
+                "name": "repeating_spells12_-P3xNlBr1pQIXrkTeQAv_spellname12",
+                "current": "Feather Fall",
+                "max": "",
+                "id": "-P3xNlrrDfbAzMiei1BC"
+            },
+            {
+                "name": "repeating_spells12_-P3xNlBr1pQIXrkTeQAv_spellmacro12",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Queda de Pena](http://www.d20srd.org/srd/spells/featherFall.htm) }} {{Escola:=Transmutação}} {{Nível:=Fet/Mag 1}} {{Cmpnts:=V}} {{Tempo de Execução:=1 ação imediata}} {{Alcance:=Curto ( [[25+5*floor(@{casterlevel}/2)]] pés)}} {{Alvo:=Até 1 criatura/objeto por nível, nenhuma a mais de 6m de distância entre si}} {{Duração:=1 rodada/nível ou até o alvo pousar (D)}} {{Teste de Resistência:=Nenhum (inofensiva)}} {{Resistência à Magia:=Sim (inofensiva)}} {{check=Os alvos escolhidos caem a apenas 18m por rodada e não sofrem dano de queda.}} {{notes=Pode ser conjurada como reação, mesmo fora da sua vez, bastando estar disponível e não estar sem ação. Ótima pra salvar um aliado (ou você mesmo) de uma queda.\n[Imagem](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHI2Y2NtMWR0dWVtYXpkN2o3M3RnMHpxNmx3ZXAwbnZ1bnB6OXk1bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/B6htLP3BcQz8d422Yz/giphy.gif)\n}}",
+                "max": "",
+                "id": "-P3xNmgQIMu3NUuA8b0W"
+            },
+            {
+                "name": "repeating_spells12_-P3xNn6K72lIVaP6QIom_spellname12",
+                "current": "Identify",
+                "max": "",
+                "id": "-P3xNnlfgHhKU9tfI30e"
+            },
+            {
+                "name": "repeating_spells12_-P3xNn6K72lIVaP6QIom_spellmacro12",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Identificar](http://www.d20srd.org/srd/spells/identify.htm) }} {{Escola:=Adivinhação}} {{Nível:=Fet/Mag 1}} {{Cmpnts:=V,S,M/F,DF}} {{Tempo de Execução:=1 minuto}} {{Alcance:=Toque}} {{Alvo:=Um item mágico tocado}} {{Duração:=Instantâneo}} {{Teste de Resistência:=Nenhum}} {{Resistência à Magia:=Não}} {{check=@{character_name} descobre as propriedades mágicas do item tocado.}} {{notes=Exige pérola de 100po triturada em vinho (consumida no processo). Sem o foco, a magia ainda funciona mas a chance de revelar cada propriedade do item cai bastante. Não funciona em itens amaldiçoados sem antes removê-los da lista de possibilidades.\n[Imagem](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXJ0NmkzcXk0cTU5Mjh6bDNkNjR3bWFtY3M1NnQ3OTI3NGplbTUzZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0MYHq0IFikDrVQOc/giphy.gif)\n}}",
+                "max": "",
+                "id": "-P3xNrbDfTODjNaZhSM4"
+            },
+            {
+                "name": "repeating_spells102_-P3xOBiUQXiWZ8ak3K38_spellmacro102",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name= @{character_name} }} {{subtags=usa o [Cinto da Cura](https://dnd.arkalseif.info/items/magic-item-compendium--73/healing-belt--500/index.html) contra @{target|token_name}}} {{ **Cinto da Cura - Item Mágico**}}  {{notes= @{character_name} gasta ?{Quantas cargas?|1 carga,[[ 1 ]] carga para canalizar energia positiva e curar [[ 2d8 ]]|2 cargas,[[ 2 ]] cargas para canalizar energia positiva e curar [[ 3d8 ]]|3 cargas,[[ 3 ]] cargas para canalizar energia positiva e curar [[ 4d8 ]]} de dano contra @{target|token_name} com um toque. \n\n@{character_name} também pode usar esta habilidade para ferir mortos-vivos, causando-lhes uma quantidade equivalente de dano. \n\nO **Cinto de Cura** possui [[ 3 ]] cargas, que são renovadas diariamente ao amanhecer. \n[Imagem](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExa21yeXd1NXVidzJsb2R0M3RyeWtrbjR4Nm15eDlxOGZibHB5bnlnYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WioYmyCm5kCuj56KkW/giphy.gif)\n}}\n",
+                "max": "",
+                "id": "-P3xOCWKlslVLwfW-PAm"
+            },
+            {
+                "name": "repeating_spells102_-P3xOBiUQXiWZ8ak3K38_spellname102",
+                "current": "Cinto da Cura",
+                "max": "",
+                "id": "-P3xOEZi3LVQP2h___Jm"
+            },
+            {
+                "name": "repeating_spells12_-P3xP2l5sZ6-qiLns3b6_spellname12",
+                "current": "Burning Hands",
+                "max": "",
+                "id": "-P3xP3Sjx_Tq0eWRJDxO"
+            },
+            {
+                "name": "repeating_spells12_-P3xP2l5sZ6-qiLns3b6_spellmacro12",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Mãos Flamejantes](http://www.d20srd.org/srd/spells/burningHands.htm) }} {{Escola:=Evocação (Fogo)}} {{Nível:=Fet/Mag 1}} {{Cmpnts:=V,S}} {{Tempo de Execução:=1 ação padrão}} {{Alcance:=15 pés, em cone}} {{Duração:=Instantâneo}} {{Teste de Resistência:=Reflexos reduz à metade}} {{Resistência à Magia:=Sim}} {{compcheck=Conc: [[ {1d20 + [[ @{concentration} ]] }>?{Concentração CD=15+Nível da Magia ou 10+DanoRecebido|16} ]] }} {{succeedcheck=Sucesso! Chamas saem das mãos de @{character_name}!}} {{failcheck=A magia de @{character_name} falhou :( }} {{check=CD de resistência: [[10+1+@{int-mod}]] }} {{checkroll=Dano: [[ [[{@{casterlevel},5}kl1]]d4 ]] de fogo em todos na área (metade com sucesso no Reflexos).}} {{notes=Pode incendiar objetos inflamáveis desprotegidos e criaturas em chamas que falharem no Reflexos continuam queimando.\n[Imagem](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjliNTdhcWN4dGhzMWExcWlhc3V2dWF6b3BheXluZG1sZWNsa3hpbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/yLIaFoLfDtLq6vLXZg/giphy.gif)\n}}",
+                "max": "",
+                "id": "-P3xP40XaeXcxBcffkLb"
+            },
+            {
+                "name": "repeating_spells12_-P3xP5389eD5q5sJPDtb_spellname12",
+                "current": "Summon Monster I",
+                "max": "",
+                "id": "-P3xP5pgQd7YSgpUUvvF"
+            },
+            {
+                "name": "repeating_spells12_-P3xP5389eD5q5sJPDtb_spellmacro12",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Convocar Monstro I](http://www.d20srd.org/srd/spells/summonMonsterI.htm) }} {{Escola:=Conjuração (Convocação)}} {{Nível:=Fet/Mag 1}} {{Cmpnts:=V,S,F/DF}} {{Tempo de Execução:=1 rodada completa}} {{Alcance:=Curto ( [[25+5*floor(@{casterlevel}/2)]] pés)}} {{Efeito:=Uma criatura convocada}} {{Duração:=1 rodada/nível (D)}} {{Teste de Resistência:=Nenhum}} {{Resistência à Magia:=Não}} {{check=Uma criatura extraplanar da lista de nível 1 surge pra lutar ao lado de @{character_name}.}} {{notes=A criatura age na sua próxima iniciativa e some quando a duração acaba. Pode ser dispensada antes do tempo com uma palavra de comando.\n[Imagem](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZHY4YTgzYzEybWQzcjM1YWExdjVpMnpjbjE1bzBtY3dkcjl4OW9ldSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WvOsln2NNrcC9De7bQ/giphy.gif)\n}}",
+                "max": "",
+                "id": "-P3xP6h-dQ_-hCjwkLeC"
+            },
+            {
+                "name": "repeating_spells12_-P3xPBQPpaEnIdFE4DZI_spellname12",
+                "current": "Charm Person",
+                "max": "",
+                "id": "-P3xPEght0SYJQ4m4fzI"
+            },
+            {
+                "name": "repeating_spells12_-P3xPBQPpaEnIdFE4DZI_spellmacro12",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Encantar Pessoa](http://www.d20srd.org/srd/spells/charmPerson.htm) contra @{target|token_name}}} {{Escola:=Encantamento (Compulsão) [Mental]}} {{Nível:=Fet/Mag 1}} {{Cmpnts:=V,S}} {{Tempo de Execução:=1 ação padrão}} {{Alcance:=Curto ( [[25+5*floor(@{casterlevel}/2)]] pés)}} {{Alvo:=Um humanoide}} {{Duração:=1 hora/nível}} {{Teste de Resistência:=Vontade anula}} {{Resistência à Magia:=Sim}} {{compcheck=Conc: [[ {1d20 + [[ @{concentration} ]] }>?{Concentração CD=15+Nível da Magia ou 10+DanoRecebido|16} ]] }} {{succeedcheck=Sucesso! @{target|token_name} sente uma súbita afeição por @{character_name}.}} {{failcheck=A magia de @{character_name} falhou :( }} {{check=CD de resistência: [[10+1+@{int-mod}]] }} {{checkroll=Se falhar no Vontade, o alvo passa a considerar @{character_name} um amigo de confiança.}} {{notes=Não dá controle direto, o alvo não faz nada contra sua própria natureza ou interesses. Sofrer dano concede novo teste de resistência com +5. Só funciona em humanoides.\n[Imagem](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWZ2ZXdidHA0cTF5aG83YzFiMDhwNG0xcDlrMWc3MGI0dDl3amtodyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pPYp2AxyNUnDGH8okt/giphy.webp)\n}}",
+                "max": "",
+                "id": "-P3xPGlS4tkDZvYpFBun"
+            },
+            {
+                "name": "repeating_spells22_-P3xPHEGcQ6ROk3r7WyA_spellname22",
+                "current": "Scorching Ray",
+                "max": "",
+                "id": "-P3xPIGWKEvTKIr-b9xb"
+            },
+            {
+                "name": "repeating_spells22_-P3xPHEGcQ6ROk3r7WyA_spellmacro22",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Raio Abrasador](http://www.d20srd.org/srd/spells/scorchingRay.htm) contra @{target|token_name}}} {{Escola:=Evocação (Fogo)}} {{Nível:=Fet/Mag 2}} {{Cmpnts:=V,S}} {{Tempo de Execução:=1 ação padrão}} {{Alcance:=Curto ( [[25+5*floor(@{casterlevel}/2)]] pés)}} {{Efeito:=Até 3 raios, conforme o nível}} {{Duração:=Instantâneo}} {{Teste de Resistência:=Nenhum}} {{Resistência à Magia:=Sim}} {{check=Ataque de toque à distância: [[1d20+@{rangedattackbonus}]] }} {{checkroll=Dano por raio acertado: [[4d6]] de fogo.}} {{notes=No seu nível de conjurador atual (3), você dispara apenas 1 raio. Ganha mais um raio a cada 4 níveis além do 3º (2 raios no 7º, 3 raios no 11º, máximo). Cada raio exige seu próprio ataque de toque e pode mirar um alvo diferente, mas todos os alvos devem ser escolhidos antes de rolar os ataques.\n[Imagem](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDJmZ3dsZ2x2azY3eGYxMDQ1eGJqeGY1cHRvZ3I2Z3U5MTlsMGs1eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0ExsgrTuACbtPaqQ/giphy.gif)\n}}",
+                "max": "",
+                "id": "-P3xPIt8BH3j7tkRARD-"
+            },
+            {
+                "name": "repeating_spells22_-P3xPJ8pz3ju8bVFfQm6_spellname22",
+                "current": "Web",
+                "max": "",
+                "id": "-P3xPKrG5dShDvJeDawj"
+            },
+            {
+                "name": "repeating_spells22_-P3xPJ8pz3ju8bVFfQm6_spellmacro22",
+                "current": "&{template:DnD35StdRoll} {{spellflag=true}} {{name=@{character_name} }} {{subtags=conjura [Teia](http://www.d20srd.org/srd/spells/web.htm) }} {{Escola:=Conjuração (Criação)}} {{Nível:=Fet/Mag 2}} {{Cmpnts:=V,S,M}} {{Tempo de Execução:=1 ação padrão}} {{Alcance:=Médio ( [[100+10*@{casterlevel}]] pés)}} {{Área:=Explosão com raio de 6m}} {{Duração:=10 min/nível}} {{Teste de Resistência:=Reflexos anula (veja texto)}} {{Resistência à Magia:=Sim}} {{compcheck=Conc: [[ {1d20 + [[ @{concentration} ]] }>?{Concentração CD=15+Nível da Magia ou 10+DanoRecebido|16} ]] }} {{succeedcheck=Sucesso! Teias pegajosas preenchem a área!}} {{failcheck=A magia de @{character_name} falhou :( }} {{check=CD de resistência: [[10+2+@{int-mod}]] }} {{checkroll=Quem estava na área no momento da conjuração faz Reflexos ou fica preso. Quem entrar depois fica automaticamente preso, sem direito a teste.}} {{notes=Preso: precisa de um teste de Força ou Escapismo contra a mesma CD pra se soltar. A teia é inflamável: um round de contato com fogo a queima inteira. Não impede visão nem ataques através dela.\n\n[Imagem](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2djMWN2bWE1eGgwcjNhNDN5MGV5c29maHh5NngxdzQ4YzU3dzg4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l4pT8p6AkNEorZvSE/giphy.gif)\n}}",
+                "max": "",
+                "id": "-P3xPLS73HndniZLWGYX"
+            },
+            {
+                "name": "repeating_spells12_-P3xNdqSq-s7Hiz9StDO_spellused12",
+                "current": "1",
+                "max": "",
+                "id": "-P3xPWKSovO3Svztt4d0"
+            },
+            {
+                "name": "repeating_spells12_-P3xNdqSq-s7Hiz9StDO_spellprep12",
+                "current": "1",
+                "max": "",
+                "id": "-P3xPWXrK6kjJZbFn92O"
+            },
+            {
+                "name": "repeating_spells12_-P3xNNnOxgn8lPXyYWrU_spellused12",
+                "current": "1",
+                "max": "",
+                "id": "-P3xPZKPcS7Tmzb8IHiN"
+            },
+            {
+                "name": "repeating_spells12_-P3xNNnOxgn8lPXyYWrU_spellprep12",
+                "current": "2",
+                "max": "",
+                "id": "-P3xP_M3SxNhllKtmmcz"
+            },
+            {
+                "name": "repeating_spells12_-P3x78JyO2RjWUfBvpe1_spellused12",
+                "current": "1",
+                "max": "",
+                "id": "-P3xP_X-89dvRsAOPQqm"
+            },
+            {
+                "name": "repeating_spells12_-P3x78JyO2RjWUfBvpe1_spellprep12",
+                "current": "1",
+                "max": "",
+                "id": "-P3xP_kmqE8B0GfF7VFi"
+            },
+            {
+                "name": "repeating_spells12_-P3xNZJm9x-wZApnjwIO_spellused12",
+                "current": "",
+                "max": "",
+                "id": "-P3xPidJw8hg1PhQ2RJn"
+            },
+            {
+                "name": "repeating_spells12_-P3xNZJm9x-wZApnjwIO_spellprep12",
+                "current": "",
+                "max": "",
+                "id": "-P3xPjZHTjvprQFyvv0K"
+            },
+            {
+                "name": "repeating_spells02_-P3TYQIiomL7mr5344g5_spellprep02",
+                "current": "",
+                "max": "",
+                "id": "-P3xQP0kh536ARwcclGi"
+            },
+            {
+                "name": "repeating_spells02_-P3xJv1lPB7Lo2IhNKps_spellprep02",
+                "current": "",
+                "max": "",
+                "id": "-P3xQP7U_efs1-fCnYTS"
+            },
+            {
+                "name": "repeating_spells02_-P3xNTQUT59NCGxRUQDI_spellprep02",
+                "current": "",
+                "max": "",
+                "id": "-P3xQPFloWkZC2If7WZ8"
+            },
+            {
+                "name": "repeating_spells02_-P3xNWSjSzbugqaotgFr_spellprep02",
+                "current": "",
+                "max": "",
+                "id": "-P3xQPPo1fsL9-uRQfoa"
+            },
+            {
+                "name": "repeating_spells22_-P3xPHEGcQ6ROk3r7WyA_spellprep22",
+                "current": "1",
+                "max": "",
+                "id": "-P3xQVEHv9Tvq21KohaH"
+            },
+            {
+                "name": "repeating_spells22_-P3xPJ8pz3ju8bVFfQm6_spellprep22",
+                "current": "1",
+                "max": "",
+                "id": "-P3xQVP3IFHG2X5A97F6"
+            },
+            {
+                "name": "spells3-show",
+                "current": "0",
+                "max": "",
+                "id": "-P3xTEf5vMAYZU3SuY8m"
+            },
+            {
+                "name": "spells4-show",
+                "current": "0",
+                "max": "",
+                "id": "-P3xTF0KuaCcemOty42Y"
+            },
+            {
+                "name": "spells5-show",
+                "current": "0",
+                "max": "",
+                "id": "-P3xTFHOsTMFvRvVZscU"
+            },
+            {
+                "name": "spells6-show",
+                "current": "0",
+                "max": "",
+                "id": "-P3xTFW2hCFe2UVYKxgd"
+            },
+            {
+                "name": "spells7-show",
+                "current": "0",
+                "max": "",
+                "id": "-P3xTFn40T8KeZD9fS9U"
+            },
+            {
+                "name": "spells8-show",
+                "current": "0",
+                "max": "",
+                "id": "-P3xTG2OfR14nCu9Bixi"
+            },
+            {
+                "name": "spells9-show",
+                "current": "0",
+                "max": "",
+                "id": "-P3xTGZXHY6ullkaGWw4"
+            },
+            {
+                "name": "naturalarmorcalc-show",
+                "current": "0",
+                "max": "",
+                "id": "-P3xUnXGlymYx-8JypvX"
+            },
+            {
+                "name": "dodgecalc-show",
+                "current": "0",
+                "max": "",
+                "id": "-P3xUnvKRKPhG-1gNhLy"
+            },
+            {
+                "name": "deflectioncalc-show",
+                "current": "0",
+                "max": "",
+                "id": "-P3xUoBGqjYMdW5uWbxi"
+            },
+            {
+                "name": "miscaccalc-show",
+                "current": "0",
+                "max": "",
+                "id": "-P3xUoWc_c0QHjUTXX1C"
+            },
+            {
+                "name": "armorbonuscalc-show",
+                "current": "1",
+                "max": "",
+                "id": "-P3xUpVvI7bh0j-tC4p6"
+            },
+            {
+                "name": "repeating_spells102_-P3xVZeE0qDoXndfQehf_spellmacro102",
+                "current": "&{template:DnD35StdRoll} {{abilityflag=true}} {{name=@{character_name} }} {{subtags=usa a [Rod of Lesser Extend Spell](https://dnd.arkalseif.info/rulebooks/core-35--1/dungeon-masters-guide-v35--4/index.html) }} {{Tipo:=Item Mágico (empunhado)}} {{Ativação:=Ação livre (manipulação)}} {{Nível de Conjurador do Item:=17º}} {{Aura:=Forte}} {{check=@{character_name} segura a haste e canaliza a próxima magia através dela.}} {{checkroll=A próxima magia conjurada (3º nível ou menor) é automaticamente Estendida, dobrando sua duração, sem gastar um slot de nível mais alto.}} {{notes=Até 3 usos por dia. Não altera o nível do slot gasto na hora de conjurar (diferente do talento Extend Spell, que sobe 1 nível o slot). Só é possível usar um bastão metamágico por magia, mas dá pra combinar com talentos metamágicos que você já tenha (nesse caso, só os talentos que você possui alteram o nível do slot). Ainda conta como ação de rodada completa pra conjurar, e ainda provoca ataque de oportunidade se estiver em área ameaçada.\n[Imagem](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2U3eHBmcHg3cDh3eGx4M21ubnZxNzhwcWUwMXg4NzhlbDRsenE5ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6CovzgyTig7M4/giphy.gif)\n}}",
+                "max": "",
+                "id": "-P3xVaXxRoPfJCcblQ2v"
+            },
+            {
+                "name": "repeating_spells102_-P3xVZeE0qDoXndfQehf_spellname102",
+                "current": "Rod of Lesser Extend Spell",
+                "max": "",
+                "id": "-P3xVbJmy3HlyZ3oS3qy"
+            },
+            {
+                "name": "repeating_spells102_-P3xVZeE0qDoXndfQehf_spellprep102",
+                "current": "3",
+                "max": "",
+                "id": "-P3xW-syjJg5y_lhDPR-"
+            },
+            {
+                "name": "repeating_spells102_-P3xVZeE0qDoXndfQehf_spellused102",
+                "current": "1",
+                "max": "",
+                "id": "-P3xWBTK4gfSO30bGJMh"
+            },
+            {
+                "name": "armorbonus1name",
+                "current": "Manto de Resistência +1",
+                "max": "",
+                "id": "-P3xWxpp6SiYKz8n20wV"
+            },
+            {
+                "name": "armorbonus1notes",
+                "current": "+1 Fortitude, Reflexos e Vontade",
+                "max": "",
+                "id": "-P3xX4eI1jil5zRglEJq"
+            },
+            {
+                "name": "armorbonus1inuse",
+                "current": "1",
+                "max": "",
+                "id": "-P3xXA37CieVyU06TV32"
+            },
+            {
+                "name": "fortitudemagicmod",
+                "current": "1",
+                "max": "",
+                "id": "-P3xXHl5AnsMt498jplO"
+            },
+            {
+                "name": "reflexmagicmod",
+                "current": "1",
+                "max": "",
+                "id": "-P3xXHwS26Y19Yx02QPg"
+            },
+            {
+                "name": "willmagicmod",
+                "current": "1",
+                "max": "",
+                "id": "-P3xXI6BKEGckqa6UHJH"
+            },
+            {
+                "name": "repeating_equipment_-P3TOsS9rNimaTZ-cJje_equipmentquantity",
+                "current": "1",
+                "max": "",
+                "id": "-P3xXinw-UZMza4JJiI8"
+            },
+            {
+                "name": "repeating_equipment_-P3TOvRPyS77BfUBHsqd_equipmentquantity",
+                "current": "1",
+                "max": "",
+                "id": "-P3xXjMbKw32fQ4A34IZ"
+            },
+            {
+                "name": "repeating_equipment_-P3TOxfFpKwnZ5UNR-Eo_equipmentquantity",
+                "current": "1",
+                "max": "",
+                "id": "-P3xXlyHqEWLwWml2sVB"
+            },
+            {
+                "name": "weapon1ammunition",
+                "current": "40",
+                "max": "",
+                "id": "-P3xYXPmisoNMu3hedgr"
+            },
+            {
+                "name": "spells-show",
+                "current": "1",
+                "max": "",
+                "id": "-P3xYgr_Wgbg_7Eoncyp"
+            },
+            {
+                "name": "other",
+                "current": "Flaws:\n1. Noncombatant - You take a -2 penalty on all melee attack rolls.\n2. ",
+                "max": "",
+                "id": "-P3xdU-JnCqXO9rGWubo"
+            },
+            {
+                "name": "armorbonus2name",
+                "current": "Cinto de Cura",
+                "max": "",
+                "id": "-P54J2sxs9Ax173zS28p"
+            },
+            {
+                "name": "armorbonus2inuse",
+                "current": "1",
+                "max": "",
+                "id": "-P54J2u96zAELfbarhD7"
+            },
+            {
+                "name": "gold",
+                "current": "+105",
+                "max": "",
+                "id": "-P54L5FwATENsy2P6kta"
+            },
+            {
+                "name": "repeating_equipment_-P54ROdz7NVPnxGQ28yi_equipmentname",
+                "current": "Colar com insígnia de Escudo Mágico (Orc Sargento)",
+                "max": "",
+                "id": "-P54RQ50vKH1rt4seF5S"
+            },
+            {
+                "name": "repeating_equipment_-P54ROdz7NVPnxGQ28yi_equipmenttotalweight",
+                "current": "0.000",
+                "max": "",
+                "id": "-P54RQ7urrtwFuQtnz6p"
+            },
+            {
+                "name": "repeating_equipment_-P54ROdz7NVPnxGQ28yi_equipmenttotalcost",
+                "current": "0.00",
+                "max": "",
+                "id": "-P54RQ7xrxfXDlS8c_fv"
+            },
+            {
+                "name": "repeating_equipment_-P54ROdz7NVPnxGQ28yi_equipmentquantity",
+                "current": "1",
+                "max": "",
+                "id": "-P54RQZl7L1iydloi-Vw"
+            },
+            {
+                "name": "repeating_equipment_-P54ROdz7NVPnxGQ28yi_equipmentcost",
+                "current": "0",
+                "max": "",
+                "id": "-P54RRPEBfICXzQopY8m"
+            },
+            {
+                "name": "repeating_equipment_-P54ROdz7NVPnxGQ28yi_equipmentweight",
+                "current": "0",
+                "max": "",
+                "id": "-P54RSi7PulicW50XSCS"
+            },
+            {
+                "name": "equipmentweightcopy",
+                "current": "1",
+                "max": "",
+                "id": "-P54RT9k7W-0Em2zfbNA"
+            }
+        ],
+        "abilities": []
+    }
+}

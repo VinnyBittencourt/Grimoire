@@ -25,6 +25,8 @@ export const RESOURCES = {
   stunningfist: { class: 'monk', icon: '👊', kind: 'uses', minLevel: 1,
     total: n => n },
   // Suplementos
+  // A classe factotum ainda não existe em CLASSES: o recurso não é criado automaticamente,
+  // só funciona em linhas já existentes (vindas do v1) ligadas a uma classe por class_row_id.
   inspiration: { class: 'factotum', icon: '✨', kind: 'uses', minLevel: 1, verified: false,
     total: (n, ctx) => n + fx(ctx, 'inspiration') },
   hexbladecurse: { class: 'hexblade', icon: '🪄', kind: 'uses', minLevel: 1, verified: false,

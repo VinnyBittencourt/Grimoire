@@ -5,7 +5,7 @@ import { readFileSync, existsSync } from 'fs'
 import { join } from 'path'
 import { COLLECTIONS, characterFields } from './schemas.js'
 import { HttpError } from './repo.js'
-import { savePhotoBuffer } from './photos.js'
+import { savePhotoBuffer, parseImageDataUrl } from './photos.js'
 
 export const FORMAT = 'grimoire-character'
 export const VERSION = 2
@@ -42,9 +42,12 @@ export function exportCharacter(repo, photosDir, id) {
   return out
 }
 
-function dataUrlToBuffer(dataUrl) {
-  const m = /^data:image\/(\w+);base64,(.+)$/s.exec(dataUrl ?? '')
-  return m ? { ext: m[1] === 'jpeg' ? 'jpg' : m[1], buffer: Buffer.from(m[2], 'base64') } : null
+// Foto embutida: só jpg/png/webp/gif conferidos pelo conteúdo. Foto inválida dá 400 (não é descartada em silêncio).
+function dataUrlToBuffer(dataUrl, where) {
+  if (!dataUrl) return null
+  const img = parseImageDataUrl(dataUrl)
+  if (!img) throw new HttpError(400, 'invalid_image', `Foto inválida em ${where} (aceitas: jpg, png, webp, gif)`)
+  return img
 }
 
 const pick = (obj, allowed) => Object.fromEntries(Object.entries(obj ?? {}).filter(([k]) => allowed.has(k)))
@@ -56,7 +59,7 @@ export function importCharacter(db, repo, photosDir, payload) {
   const charAllowed = new Set(Object.keys(characterFields.shape))
   return db.transaction(() => {
     const charValues = characterFields.parse(pick(payload.character, charAllowed))
-    const img = dataUrlToBuffer(payload.character?.photo_data)
+    const img = dataUrlToBuffer(payload.character?.photo_data, 'character')
     if (img) charValues.photo = savePhotoBuffer(photosDir, img.buffer, img.ext)
     const newId = repo.insertRow('characters', charValues)
 
@@ -82,7 +85,7 @@ export function importCharacter(db, repo, photosDir, payload) {
         const parsed = def.patch.parse(values)
         const { npc_ids: npcIds, ...cols } = parsed
         if (name === 'npcs') {
-          const nimg = dataUrlToBuffer(raw.photo_data)
+          const nimg = dataUrlToBuffer(raw.photo_data, `npcs (${raw.name ?? raw.id})`)
           if (nimg) cols.photo = savePhotoBuffer(photosDir, nimg.buffer, nimg.ext)
         }
         const rowId = repo.insertRow(def.table, { ...cols, character_id: newId })

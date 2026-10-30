@@ -15,7 +15,8 @@ const { db, backupper } = await openDatabase(DATA_DIR)
 // Backup periódico, só quando houve escrita desde o último
 let dirty = false
 const app = createApp({ db, dataDir: DATA_DIR, backupper, onWrite: () => { dirty = true } })
-await backupper.backup(db, 'boot')
+// Pula o backup de boot se nada mudou desde o último (reiniciar não gasta a rotação)
+await backupper.backup(db, 'boot', { onlyIfChanged: true })
 const timer = setInterval(async () => {
   if (!dirty) return
   dirty = false

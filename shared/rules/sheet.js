@@ -62,10 +62,10 @@ export function computeSheet(ch, refFeats = new Map()) {
     bab: { total: bab, computed: computedBab, overridden: hasBabOverride, iterative: iterativeAttacks(bab) },
     attack: { ...attacks, meleeIterative: iterativeAttacks(bab, attacks.melee), rangedIterative: iterativeAttacks(bab, attacks.ranged) },
     attacks: (ch.attacks ?? []).map(a => {
-      const total = attackTotal(a, bab, abilities, ch)
-      return { id: a.id, total, iterative: iterativeAttacks(bab, total), damage: damageBonus(a, abilities) }
+      const total = attackTotal(a, bab, abilities, ch, effects)
+      return { id: a.id, total, iterative: iterativeAttacks(bab, total), damage: damageBonus(a, abilities, effects) }
     }),
-    grapple: grapple(ch, bab, abilities),
+    grapple: grapple(ch, bab, abilities, effects),
     initiative: initiative(ch, abilities, effects),
     ac: armorClass(ch, abilities, equip),
     saves: savingThrows(ch, classes, abilities, effects),
