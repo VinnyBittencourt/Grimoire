@@ -22,8 +22,20 @@
   --color-body: var(--color-text-body);
   --color-muted: var(--color-text-muted);
   --color-dim: var(--color-text-dim);
-  --color-bad: var(--color-danger);
+  --color-bad: var(--color-danger-text);
   --color-good: var(--color-success);
+  --color-bad-faint: var(--color-danger-faint);
+  --color-good-faint: var(--color-success-faint);
+  --color-warn-faint: var(--color-warning-faint);
+  --color-info-faint: var(--color-ac-faint);
+  --color-hover: var(--color-hover-faint);
+  --color-scrim: var(--color-photo-scrim);
+  --color-hp-ink: var(--color-hp-text);
+  --color-field: var(--color-field-border);
+  --text-2xs: var(--font-size-2xs);
+  --text-2xs--line-height: 1rem;
+  --text-3xl: var(--font-size-3xl);
+  --text-3xl--line-height: 1.1;
   --color-warn: var(--color-warning);
   --color-stat-hp: var(--color-hp);
   --color-stat-ac: var(--color-ac);
@@ -60,63 +72,106 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 input[type=number] { -moz-appearance: textfield; appearance: textfield; }
 
-/* ── Superfícies medievais ─────────────────────────────────────────────── */
-.panel {
-  background: linear-gradient(135deg, var(--color-wood-dark) 0%, var(--color-surface) 50%, var(--color-wood-dark) 100%);
-  border: 2px solid var(--color-wood-border);
-  box-shadow: var(--shadow-panel);
-  border-radius: var(--radius-sm);
-  position: relative;
-}
-.panel::before {
-  content: '';
-  position: absolute;
-  inset: 3px;
-  border: 1px solid rgba(201, 168, 76, 0.2);
-  border-radius: 2px;
-  pointer-events: none;
-}
+/*
+ * Classes do tema na camada "components": assim os utilitários do Tailwind (w-*, pl-*, text-*)
+ * vencem quando usados junto (fora de camada, .field { width: 100% } anulava w-12, pl-7...).
+ */
+@layer components {
+  /* ── Superfícies medievais ─────────────────────────────────────────────── */
+  .panel {
+    background: linear-gradient(135deg, var(--color-wood-dark) 0%, var(--color-surface) 50%, var(--color-wood-dark) 100%);
+    border: 2px solid var(--color-wood-border);
+    box-shadow: var(--shadow-panel);
+    border-radius: var(--radius-sm);
+    position: relative;
+  }
+  .panel::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid var(--color-gold-hairline);
+    border-radius: var(--radius-xs);
+    pointer-events: none;
+  }
 
-.section-title {
-  font-family: var(--font-heading);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-gold-primary);
-}
+  .section-title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gold-primary);
+  }
 
-.divider-gold {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-gold-dark), transparent);
-}
+  .divider-gold {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-gold-dark), transparent);
+  }
 
-/* ── Campos ────────────────────────────────────────────────────────────── */
-.field {
-  background: var(--color-surface-sunken);
-  border: 1px solid var(--color-wood-border);
-  color: var(--color-text-light);
-  padding: 6px 10px;
-  width: 100%;
-  font-family: var(--font-body);
-  font-size: var(--font-size-sm);
-  border-radius: 2px;
-  outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
-}
-.field:focus { border-color: var(--color-gold-primary); box-shadow: 0 0 8px var(--color-gold-faint); }
-.field::placeholder { color: var(--color-text-dim); }
-.field:disabled { opacity: 0.5; cursor: not-allowed; }
-.field[aria-invalid=true] { border-color: var(--color-danger); }
-select.field option { background: var(--color-wood-darkest); color: var(--color-text-light); }
-.field-sm { padding: 3px 6px; font-size: var(--font-size-xs); }
+  /* ── Campos ────────────────────────────────────────────────────────────── */
+  .field {
+    background: var(--color-surface-sunken);
+    border: 1px solid var(--color-field-border);
+    color: var(--color-text-light);
+    padding: 6px 10px;
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    border-radius: var(--radius-xs);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .field:hover:not(:disabled) { border-color: var(--color-gold-dark); }
+  .field:focus { border-color: var(--color-gold-primary); box-shadow: var(--focus-ring); }
+  .field::placeholder { color: var(--color-text-disabled); }
+  .field:disabled { opacity: 0.5; cursor: not-allowed; }
+  .field[aria-invalid=true] { border-color: var(--color-danger-text); }
+  select.field option { background: var(--color-wood-darkest); color: var(--color-text-light); }
+  .field-sm { padding: 3px 6px; font-size: var(--font-size-xs); }
+  /* Campo "em linha": parece texto até hover/foco, mas com sublinhado pontilhado para mostrar que é editável */
+  .field-inline {
+    background: transparent;
+    border-color: transparent;
+    border-bottom: 1px dashed var(--color-field-border);
+    border-radius: 0;
+  }
+  .field-inline:hover:not(:disabled) { border-color: var(--color-field-border); border-style: solid; border-radius: var(--radius-xs); }
+  .field-inline:focus { background: var(--color-surface-sunken); border-style: solid; border-radius: var(--radius-xs); }
 
-.label {
-  font-family: var(--font-heading);
-  font-size: 10px;
-  color: var(--color-gold-primary);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  .label {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-2xs);
+    color: var(--color-gold-primary);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+  }
+
+  /* ── Papéis tipográficos (use o papel, não o tamanho) ──────────────────── */
+  .col-head {
+    font-size: var(--font-size-2xs);
+    font-weight: 500;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+  .caption { font-size: var(--font-size-xs); color: var(--color-text-muted); line-height: 1.35; }
+  .num-part { font-variant-numeric: tabular-nums; color: var(--color-text-body); }
+  .num-total { font-family: var(--font-heading); font-weight: 700; font-size: var(--font-size-lg); color: var(--color-text-light); font-variant-numeric: tabular-nums; }
+  .num-hero { font-family: var(--font-heading); font-weight: 700; font-size: var(--font-size-3xl); line-height: 1.1; color: var(--color-text-light); font-variant-numeric: tabular-nums; }
+  .kbd { font-size: var(--font-size-2xs); border: 1px solid var(--color-wood-border); border-radius: var(--radius-xs); padding: 0 4px; color: var(--color-text-muted); }
+
+  /* Linha de lista selecionável */
+  .row-hover:hover { background: var(--color-hover-faint); }
+
+  /* Valor com composição: botão com sublinhado pontilhado */
+  .explain {
+    cursor: help;
+    text-decoration: underline dotted var(--color-gold-dark);
+    text-underline-offset: 3px;
+  }
+  .explain:hover { text-decoration-color: var(--color-gold-primary); }
+
+
 }
 
 /* ── Editor de notas (TipTap) ──────────────────────────────────────────── */

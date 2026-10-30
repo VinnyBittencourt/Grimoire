@@ -1,10 +1,12 @@
 import { SIZES } from '../constants/sizes.js'
 import { SAVES, SAVE_ABILITY } from '../constants/abilities.js'
 import { baseSaves } from './progression.js'
+import { EQUIPMENT_SLOTS } from '../constants/equipment.js'
 
 const n = v => Number(v) || 0
 
-export const isEquipped = item => item.location && item.location !== 'backpack'
+// Só slot conhecido conta como equipado (dado antigo com local desconhecido fica como mochila)
+export const isEquipped = item => EQUIPMENT_SLOTS.includes(item.location)
 
 export const AC_TYPES = ['armor', 'shield', 'natural', 'deflection', 'dodge', 'misc']
 
@@ -85,14 +87,22 @@ export function armorClass(c, abilities, equip) {
   }
 }
 
+// Graça Divina (SRD, Paladin, "Divine Grace (Su)"): a partir do 2º nível de paladino, bônus igual ao bônus de
+// Carisma (se houver) em todos os testes de resistência. Multiclasse: conta o nível somado das linhas de paladino.
+export function divineGrace(classes, abilities) {
+  const level = classes.filter(r => r.class_id === 'paladin').reduce((a, r) => a + n(r.level), 0)
+  return level >= 2 ? Math.max(0, abilities.cha.mod) : 0
+}
+
 export function savingThrows(c, classes, abilities, effects) {
   const base = baseSaves(classes)
+  const grace = divineGrace(classes, abilities)
   const out = {}
   for (const s of SAVES) {
     const ability = abilities[SAVE_ABILITY[s]].mod
     const magic = n(c[`${s}_magic`])
     const misc = n(c[`${s}_misc`]) + n(c[`${s}_temp`]) + (effects?.saves?.[s] ?? 0)
-    out[s] = { base: base[s], ability, magic, misc, total: base[s] + ability + magic + misc }
+    out[s] = { base: base[s], ability, magic, misc, grace, total: base[s] + ability + magic + misc + grace }
   }
   return out
 }

@@ -1,11 +1,12 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { TextStyle, Color } from '@tiptap/extension-text-style'
 import DOMPurify from 'dompurify'
 import { useLang } from '../i18n'
+import { NOTE_COLORS } from '../styles/noteColors'
+import { Icon } from './Icon'
 
-const COLORS = ['#f0e6c8', '#c9a84c', '#e74c3c', '#e67e22', '#27ae60', '#5a9ad9', '#a07ad9', '#9b8a6a']
 const AUTOSAVE_MS = 1500
 // DOMPurify só funciona com DOM (no Node, ex. testes de renderização, `sanitize` não existe)
 const clean = html => (typeof DOMPurify.sanitize === 'function' ? DOMPurify.sanitize(html ?? '') : html ?? '')
@@ -17,6 +18,7 @@ const clean = html => (typeof DOMPurify.sanitize === 'function' ? DOMPurify.sani
  * `docKey` troca o documento editado (ex.: ao selecionar outra nota).
  * Só salva se houve edição: o getHTML() do TipTap normaliza o HTML, e sem essa checagem um
  * simples foco/blur regravaria notas antigas (v1) com outro markup.
+ * onSave pode devolver uma Promise (truthy = salvo): a barra mostra Não salvo / Salvando / Salvo / Erro.
  */
 export function RichText({ value, onSave, docKey, placeholder, className = '' }) {
   const { t } = useLang()
@@ -27,6 +29,7 @@ export function RichText({ value, onSave, docKey, placeholder, className = '' })
   const dirty = useRef(false)
   // onSave do documento que foi editado: ao trocar de nota, a edição pendente vai para a nota certa
   const saveTarget = useRef(null)
+  const [status, setStatus] = useState('idle') // idle | dirty | saving | saved | error
 
   const flush = editor => {
     clearTimeout(timer.current)
@@ -35,7 +38,11 @@ export function RichText({ value, onSave, docKey, placeholder, className = '' })
     const html = editor.isEmpty ? '' : editor.getHTML()
     if (html !== last.current) {
       last.current = html
-      saveTarget.current?.(html || null)
+      const result = saveTarget.current?.(html || null)
+      setStatus('saving')
+      Promise.resolve(result).then(ok => setStatus(ok === undefined ? 'error' : 'saved'))
+    } else {
+      setStatus('idle')
     }
   }
 
@@ -57,6 +64,7 @@ export function RichText({ value, onSave, docKey, placeholder, className = '' })
     },
     onUpdate: ({ editor: ed }) => {
       dirty.current = true
+      setStatus('dirty')
       saveTarget.current = onSaveRef.current
       clearTimeout(timer.current)
       timer.current = setTimeout(() => flush(ed), AUTOSAVE_MS)
@@ -80,7 +88,7 @@ export function RichText({ value, onSave, docKey, placeholder, className = '' })
   if (!editor) return null
   const btn = (label, active, run, glyph) => (
     <button type="button" title={label} aria-label={label} aria-pressed={active} onMouseDown={e => e.preventDefault()} onClick={run}
-      className={`min-w-7 h-7 px-1.5 rounded-sm text-xs cursor-pointer ${active ? 'bg-gold-faint text-gold' : 'text-muted hover:text-parchment'}`}>{glyph}</button>
+      className={`inline-flex items-center justify-center min-w-7 h-7 px-1.5 rounded-sm text-xs cursor-pointer ${active ? 'bg-gold-faint text-gold' : 'text-muted hover:text-parchment hover:bg-hover'}`}>{glyph}</button>
   )
   const chain = () => editor.chain().focus()
 
@@ -96,22 +104,44 @@ export function RichText({ value, onSave, docKey, placeholder, className = '' })
         {btn(t('editor.h3'), editor.isActive('heading', { level: 3 }), () => chain().toggleHeading({ level: 3 }).run(), 'H3')}
         {btn(t('editor.bullet'), editor.isActive('bulletList'), () => chain().toggleBulletList().run(), '•')}
         {btn(t('editor.ordered'), editor.isActive('orderedList'), () => chain().toggleOrderedList().run(), '1.')}
-        {btn(t('editor.quote'), editor.isActive('blockquote'), () => chain().toggleBlockquote().run(), '❝')}
-        {btn(t('editor.hr'), false, () => chain().setHorizontalRule().run(), '―')}
+        {btn(t('editor.quote'), editor.isActive('blockquote'), () => chain().toggleBlockquote().run(), <Icon name="quote" size={15} />)}
+        {btn(t('editor.hr'), false, () => chain().setHorizontalRule().run(), <Icon name="divider" size={15} />)}
         <span className="w-px h-4 bg-[var(--color-border-subtle)] mx-1" />
-        {COLORS.map(c => (
-          <button key={c} type="button" title={`${t('editor.color')} ${c}`} aria-label={`${t('editor.color')} ${c}`}
-            onMouseDown={e => e.preventDefault()} onClick={() => chain().setColor(c).run()}
-            className="w-4 h-4 rounded-full border border-subtle cursor-pointer mx-0.5" style={{ background: c }} />
-        ))}
-        {btn(t('editor.clear'), false, () => chain().unsetAllMarks().clearNodes().run(), '⌫')}
+        {NOTE_COLORS.map(c => {
+          const label = `${t('editor.color')}: ${t(`editor.colors.${c.id}`)}`
+          return (
+            <button key={c.id} type="button" title={label} aria-label={label}
+              onMouseDown={e => e.preventDefault()} onClick={() => chain().setColor(c.value).run()}
+              className="inline-flex items-center justify-center w-6 h-6 rounded-sm cursor-pointer hover:bg-hover">
+              <span className="w-4 h-4 rounded-full border border-subtle" style={{ background: c.value }} />
+            </button>
+          )
+        })}
+        {btn(t('editor.clear'), false, () => chain().unsetAllMarks().clearNodes().run(), <Icon name="eraser" size={15} />)}
         <span className="flex-1" />
-        <span className="text-dim text-[10px]">{t('editor.saveHint')}</span>
+        <SaveStatus status={status} />
       </div>
       <div className="prose-grimoire flex-1 min-h-0 overflow-y-auto relative">
         {editor.isEmpty && placeholder && <span className="absolute top-0 left-1 text-dim pointer-events-none">{placeholder}</span>}
         <EditorContent editor={editor} />
       </div>
     </div>
+  )
+}
+
+// Estado do salvamento automático, com a dica de atalho
+function SaveStatus({ status }) {
+  const { t } = useLang()
+  const map = {
+    idle: { text: t('editor.saveHint'), cls: 'text-muted' },
+    dirty: { text: t('editor.unsaved'), cls: 'text-muted', icon: 'pencil' },
+    saving: { text: t('common.saving'), cls: 'text-gold', icon: 'hourglass' },
+    saved: { text: t('common.saved'), cls: 'text-[var(--color-save)]', icon: 'check' },
+    error: { text: t('editor.saveError'), cls: 'text-bad', icon: 'warning' },
+  }[status]
+  return (
+    <span className={`inline-flex items-center gap-1 text-xs ${map.cls}`} aria-live="polite">
+      {map.icon && <Icon name={map.icon} size={13} />}{map.text}
+    </span>
   )
 }

@@ -29,3 +29,33 @@ export function loadStatus(weight, limits) {
   if (weight <= limits.heavy) return 'heavy'
   return 'over'
 }
+
+/**
+ * Efeitos da carga (SRD, "Carrying Loads"): média = Des máx. +3 e penalidade −3; pesada = +1 e −6.
+ * Acima da pesada (até o dobro, "Lifting and Dragging"): perde o bônus de Des na CA (Des máx. 0) e anda 5 ft.
+ * Com armadura, vale o pior de cada um (não somam): a combinação é feita em computeSheet.
+ */
+export const LOAD_EFFECTS = {
+  light: null,
+  medium: { maxDex: 3, acp: 3 },
+  heavy: { maxDex: 1, acp: 6 },
+  over: { maxDex: 0, acp: 6 },
+}
+
+// Tabela "Reduced Speed" do SRD (20→15, 30→20, 40→30, 50→35, 60→40 … 100→70): ⅔ arredondado para cima em 5 ft
+export function reducedSpeed(base) {
+  const b = Number(base) || 0
+  return Math.ceil((b * 2) / 3 / 5) * 5
+}
+
+/**
+ * Deslocamento com a carga. ignoresLoad: o anão anda no deslocamento base com carga média/pesada
+ * (SRD, Races: Dwarves). Acima da pesada, 5 ft para qualquer um.
+ */
+export function speedWithLoad(base, status, { ignoresLoad = false } = {}) {
+  const b = Number(base) || 0
+  if (status === 'over') return Math.min(b, 5)
+  if ((status === 'medium' || status === 'heavy') && !ignoresLoad) return reducedSpeed(b)
+  return b
+}
+

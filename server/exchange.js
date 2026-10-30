@@ -5,6 +5,7 @@ import { readFileSync, existsSync } from 'fs'
 import { join } from 'path'
 import { COLLECTIONS, characterFields } from './schemas.js'
 import { HttpError } from './repo.js'
+import { EQUIPMENT_SLOTS } from '../shared/constants/equipment.js'
 import { savePhotoBuffer, parseImageDataUrl } from './photos.js'
 
 export const FORMAT = 'grimoire-character'
@@ -72,6 +73,11 @@ export function importCharacter(db, repo, photosDir, payload) {
       for (const raw of payload[name] ?? []) {
         const values = pick(raw, allowed)
         for (const k of STRIP) delete values[k]
+        // Arquivo antigo com local de item desconhecido: vai para a mochila e o local fica anotado (sem perder dado)
+        if (name === 'items' && values.location != null && values.location !== 'backpack' && !EQUIPMENT_SLOTS.includes(values.location)) {
+          values.notes = [values.notes, `[${values.location}]`].filter(Boolean).join(' ')
+          values.location = 'backpack'
+        }
         if ('class_row_id' in values) values.class_row_id = remap(maps.classes, raw.class_row_id)
         if (name === 'classes') values.advances_id = null // ligado na segunda passada
         if (name === 'prepared') {

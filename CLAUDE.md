@@ -11,7 +11,7 @@ App local, de uso próprio, de ficha de personagem **D&D 3.5**. Visual medieval,
 1. **CLAUDE.md sempre atualizado:** toda alteração no projeto (arquitetura, pasta, arquivo importante, script, dependência, endpoint, tabela/coluna, regra de jogo, convenção) deve atualizar este CLAUDE.md **na mesma tarefa**, antes de encerrá-la. Ele precisa sempre descrever o estado atual do código.
 2. **learnings.md:** sempre que descobrir algo não óbvio, ou quando algo não funcionar de primeira (erro, abordagem errada, comando que falhou, suposição incorreta), adicione uma entrada em `learnings.md` no formato descrito no próprio arquivo.
 
-Histórico da reescrita v2 e decisões: `docs/PLANO_V2.md`.
+Histórico da reescrita v2 e decisões: `docs/PLANO_V2.md`. Refinamento de UI/UX em fases (UX-0…UX-14, cada uma com aprovação própria): `docs/ux/PLANO_UX.md`.
 
 ## Regras de trabalho
 
@@ -109,7 +109,7 @@ server/
   app.js              ← createApp({ db, dataDir, backupper }) — localOnly (Host/Origin), todas as rotas + tratamento de erro
   db.js               ← openDatabase(dataDir | null=memória): pragmas, migrate, seed
   migrate.js          ← executor de migrações (PRAGMA user_version)
-  migrations/         ← 001_schema_v2.js (schema), 002_from_v1.js (converte dados v1), 003_ref_sources.js (coluna `fonte` nas ref_*)
+  migrations/         ← 001_schema_v2.js (schema), 002_from_v1.js (converte dados v1), 003_ref_sources.js (coluna `fonte` nas ref_*), 004_resource_period.js (`class_resources.period`), 005_skill_points_adjust.js (`characters.skill_points_adjust`)
   schemas.js          ← zod: characterFields, COLLECTIONS (whitelist de colunas por coleção)
   repo.js             ← acesso a dados (getSheet, getJournal, CRUD genérico, rest, slots, usos)
   defaults.js         ← ensureSkillRows, syncResources
@@ -121,14 +121,19 @@ server/
 shared/
   constants/          ← abilities, sizes, classes (mecânica das classes: fonte única de DV/BBA/saves; suplementos com verified: false), skills (ids = Roll20), spellTables, equipment
   rules/              ← abilities, progression (BAB/saves), combat (CA, ataques), skills, spellcasting,
-                        resources, encumbrance, hp, effects (talentos), sheet.js (computeSheet)
+                        resources, encumbrance, hp (+ applyDamage/applyHealing), effects (talentos),
+                        breakdown (composição de cada valor → sheet.breakdown), sheet.js (computeSheet)
 src/
   main.jsx, App.jsx   ← providers (Query, Lang, Toast) e rotas
   api/client.js       ← fetch + ApiError, downloadJson, resizeImage (webp ~640px)
   queries/characters.js ← hooks TanStack: useCharacter, useJournal, useRefData, useSheetActions (mutações otimistas)
+  queries/undo.js     ← UNDO_FIELDS/snapshotFor: campos recriáveis no "Desfazer exclusão" (teste confere com schemas.js)
   hooks/useSheet.js   ← { ch, sheet: computeSheet(ch), actions, refFeats }
   i18n/               ← index.jsx (LangProvider, useLang: t, unidades, rótulos) + translations.js (pt/en)
-  ui/                 ← Button, IconButton, ConfirmButton, Modal, Toast, fields (Text/Number/Select/Checkbox), Tabs, layout, RichText
+  ui/                 ← Button (Button, IconButton, Hint), ConfirmButton, Modal (Modal, ConfirmDialog), Toast, fields, Tabs,
+                        layout (Section, StatBox, Badge, EmptyState…), RichText, Icon + iconPaths.js (ícones SVG),
+                        Popover (Popover, Breakdown, Explain, Notice), controls (Menu, SegmentedControl, QuickAdd,
+                        QuickAmount, TokenTrack)
   features/
     characters/       ← CharacterListPage, NewCharacterPage (assistente)
     shell/            ← AppHeader, ExchangeModal (import/export/backup)
@@ -138,9 +143,11 @@ src/
   db/                 ← referenceData.js (raças, classes só com texto, criaturas) + featsData.json (fonte do seed) + publications.js (catálogo de livros, sourceFor)
   assets/icons/       ← equipmentIcons, escolaIcons, escolaColors
   styles/tokens.css   ← tokens (mesmos nomes do grimoire-design-system) · index.css ← Tailwind + tema
-tests/                ← rules/, api/, roll20/, migration/ (com fixture v1Schema.js), i18n/, ui/ (render smoke SSR + interaction.test.jsx com `// @vitest-environment jsdom`)
+  styles/noteColors.js ← paleta do editor de notas (hex GRAVADOS no HTML das notas: não mudar)
+tests/                ← rules/, api/, roll20/, migration/ (com fixture v1Schema.js), i18n/, ui/ (render smoke SSR +
+                        interaction.test.jsx e components.test.jsx com `// @vitest-environment jsdom`)
 data/                 ← FORA do git: grimoire.db, photos/, backups/ (pre-v2.db = snapshot antes da v2)
-docs/                 ← PLANO_V2.md, CLAUDE_MASTER_INSTRUCTIONS.md, COBERTURA_CONTEUDO.md (gerado); livros/ (PDFs PHB/MM, fora do git)
+docs/                 ← PLANO_V2.md, CLAUDE_MASTER_INSTRUCTIONS.md, COBERTURA_CONTEUDO.md (gerado); ux/ (PLANO_UX.md + 2 auditorias de UI/UX); testes/ (RELATORIO_FICHAS_COMUNIDADE.md: 5 fichas da comunidade lançadas, lacunas e bugs priorizados); livros/ (PDFs PHB/MM, fora do git)
 scripts/              ← content-coverage.js (npm run coverage:content)
 ```
 
@@ -154,12 +161,12 @@ scripts/              ← content-coverage.js (npm run coverage:content)
   - CA `ac_{armor,shield,natural,deflection,dodge,misc,temp}` + `ac_override`.
   - Saves `<fort|ref|will>_{magic,misc,temp}`.
   - Combate `init_misc, grapple_misc, melee_misc, ranged_misc, bab_override`, `sr`, `dr`.
-  - Moedas `cp, sp, gp, pp`; `xp`; `photo` (arquivo em `data/photos`); `background`; `roll20_extra` (atributos Roll20 sem equivalente, para round-trip).
+  - Moedas `cp, sp, gp, pp`; `xp`; `skill_points_adjust` (ajuste manual dos pontos de perícia); `photo` (arquivo em `data/photos`); `background`; `roll20_extra` (atributos Roll20 sem equivalente, para round-trip).
 - **Tabelas filhas:**
   - `character_classes`: `class_id`, `level`, overrides `hd/bab_prog/<save>_prog`, `caster_ability`, `domains`, `advances_id/advance_levels` (classe de prestígio que avança outra).
   - `skills`: uma linha por perícia PHB, criada automaticamente; `ranks` REAL, `class_skill` (null = padrão da classe), `misc`, `custom_name`.
-  - `attacks`, `items` (`location` = `backpack` ou slot de `EQUIPMENT_SLOTS`; `ac_type/ac_bonus/max_dex/acp/spell_failure`), `feats` (`ref_id` → `ref_talentos`/`ref_falhas`, `kind` feat|flaw|trait|feature).
-  - `class_resources` (`key` = fórmula em `shared/rules/resources.js`, ou null = recurso personalizado com `total_override`) + `resource_uses` (idx, used, note).
+  - `attacks`, `items` (`location` = `backpack` ou slot de `EQUIPMENT_SLOTS`, validado por enum na API; só slot conhecido conta como equipado, e o import Grimoire manda local desconhecido para a mochila anotando o local nas notas; `ac_type/ac_bonus/max_dex/acp/spell_failure`), `feats` (`ref_id` → `ref_talentos`/`ref_falhas`, `kind` feat|flaw|trait|feature).
+  - `class_resources` (`key` = fórmula em `shared/rules/resources.js`, ou null = recurso personalizado com `total_override`; `period` = `day` | `week` | `charges`, padrão `day`) + `resource_uses` (idx, used, note).
   - `spells` (grimório/conhecidas por `class_row_id`), `spells_prepared` (uma linha por slot preparado, `used`, `is_domain`), `spell_slots` (por classe e nível: `bonus` manual e `used` para espontâneos).
   - `summons` (`data` = JSON do bloco de estatísticas).
   - Diário: `players`, `npcs`, `places`, `quests` + `quest_npcs`, `notes` (HTML, `session_date` ISO).
@@ -182,7 +189,7 @@ scripts/              ← content-coverage.js (npm run coverage:content)
 | `PUT .../prepared` | substitui a preparação de uma classe `{ class_row_id, slots }` |
 | `PUT .../spell-slots/:classRowId/:level` | `{ bonus?, used? }` |
 | `PUT .../resources/:id/uses/:idx` · `POST .../resources/:id/reset` | fichas de uso |
-| `POST .../rest` | Novo Dia `{ heal }`: restaura magias/slots/recursos; cura natural = nível |
+| `POST .../rest` | Novo Dia `{ heal }`: restaura magias/slots e só os recursos com `period = 'day'` (semanais e cargas ficam, com as anotações); cura natural = nível |
 | `PUT/DELETE .../photo` · `PUT .../npcs/:id/photo` | upload binário; a extensão vem do conteúdo (jpg/png/webp/gif), não do Content-Type → `GET /photos/:arquivo` (só essas extensões, com `nosniff` e CSP `sandbox`) |
 | `GET .../export` · `POST /api/import` | formato Grimoire (remapeia todos os ids; `photo_data` inválido dá 400) |
 | `GET .../export/roll20` · `POST /api/import/roll20` | formato VTTES (Roll20) |
@@ -198,24 +205,31 @@ Exceções conhecidas (pendentes de reforço):
 ## Front-end
 
 - **Estado:** a ficha fica em `['character', id]` e o diário em `['journal', id]` (TanStack Query). Nada de contexto global de dados.
-- **Escrever:** use as funções de `useSheetActions(id)`: `patchCharacter`, `create/update/remove(collection, …)`, `setSlot`, `setUse`, `resetResource`, `replacePrepared`, `rest`, `uploadPhoto`. Elas são otimistas, fazem rollback, mostram toast de erro e ressincronizam. **Nunca rejeitam:** resolvem com a resposta (ou `true` se não houver corpo) no sucesso e com `undefined` na falha. Feche modal, limpe formulário ou mostre "sucesso" só depois de conferir: `if (await actions.x(...))`.
-- **Valores derivados** (CA, saves, perícias, slots…): use sempre `sheet` (de `computeSheet`). Nunca recalcule no componente.
+- **Escrever:** use as funções de `useSheetActions(id)`: `patchCharacter`, `create/update/remove(collection, …)`, `removeUndoable(collection, row, mensagem)` (exclui e oferece "Desfazer" no toast; só coleções de `UNDO_FIELDS`), `setSlot`, `setUse`, `resetResource`, `replacePrepared`, `rest`, `uploadPhoto`, `removePhoto`. Elas são otimistas, fazem rollback, mostram toast de erro e ressincronizam. **Nunca rejeitam:** resolvem com a resposta (ou `true` se não houver corpo) no sucesso e com `undefined` na falha. Feche modal, limpe formulário ou mostre "sucesso" só depois de conferir: `if (await actions.x(...))`.
+- **Valores derivados** (CA, saves, perícias, slots…): use sempre `sheet` (de `computeSheet`). Nunca recalcule no componente. A composição de cada total ("de onde vem esse número") está em `sheet.breakdown` (`[{ key, value, ref }]`); a UI só traduz com `labelParts` (`features/sheet/breakdownLabels.js`) e mostra com `<Breakdown>`/`<Explain>` ou `<Equation>` (aba Principal).
 - **Campos** (`src/ui/fields.jsx`) salvam no blur ou Enter e cancelam com Esc. Não use save por tecla. `null`/`''` contam como o mesmo vazio (sem PATCH à toa) e o campo mostra o valor normalizado (ex.: limitado por `max`). Inputs soltos (ex.: data) também salvam no blur, comparando com o valor atual.
-- **Exclusões** usam `ConfirmButton` (dois cliques).
-- **Modais** usam `src/ui/Modal`: Esc fecha e o foco fica preso. Clicar fora só fecha com `closeOnBackdrop`; não use isso em modal com edição não salva. Para o foco inicial use `data-autofocus`, não `autoFocus`.
+- **Criação:** a linha nasce do que o usuário digitou (`QuickAdd`, formulário inline ou o texto da busca). **Nunca** derive o nome do rótulo do botão (`t('x.add').replace(...)`): isso gravava texto de interface no banco.
+- **Exclusões** usam `ConfirmButton` (dois cliques; `icon` = lixeira compacta). Sem dependentes, prefira `removeUndoable`. Com cascata ou irreversível (classe, personagem), `ConfirmDialog` com a consequência por escrito.
+- **Modais** usam `src/ui/Modal`: Esc fecha e o foco fica preso. Clicar fora só fecha com `closeOnBackdrop`; não use isso em modal com edição não salva. Com rascunho, passe `confirmClose={dirty}` (Esc/× pedem "Descartar?"). Para o foco inicial use `data-autofocus`, não `autoFocus`. Nunca use callback ref inline com `focus()` (roda a cada render e rouba o foco): foque num efeito.
+- **Leitura × edição:** seções de regra (Atributos, Defesa, Combate) abrem em leitura com `Section editing/onToggleEdit` (botão Editar por seção, decisão do usuário). A barra lateral é só leitura, exceto PV.
+- **Dano/cura:** `applyDamage`/`applyHealing` (`shared/rules/hp.js`); o HpTracker oferece "Desfazer" e recusa se os PV mudaram depois.
+- **Diário:** sub-aba e item selecionado ficam na URL (`?sub=&sel=`), o que permite links NPC/Local ↔ Missão.
 - **i18n:** `const { t, signed, className, skillName, spellName, distance, weight } = useLang()`; `t('secao.chave', { n })`. Toda chave existe em pt **e** en (teste `tests/i18n`). Os dados guardam **ids estáveis** (`cleric`, `lg`, `medium`); só a UI traduz. As escolas de magia são exceção: o id é o nome em pt ('Conjuração'…).
 - **Unidades:** os dados ficam em pés e libras. Em pt a UI mostra metros (×0,3) e kg (÷2).
-- **Estilo:** use tokens de `src/styles/tokens.css` via `var(--…)` ou os utilitários do `@theme` em `index.css` (`bg-app`, `text-gold`, `border-wood`, `text-muted`, `bg-sunken`…). Classes de tema: `.panel`, `.section-title`, `.field`, `.label`, `.divider-gold`, `.prose-grimoire`. **Não use cor hex em componente.**
+- **Estilo:** use tokens de `src/styles/tokens.css` via `var(--…)` ou os utilitários do `@theme` em `index.css` (`bg-app`, `text-gold`, `border-wood`, `text-muted`, `bg-sunken`, `bg-hover`, `bg-bad-faint`, `text-hp-ink`, `border-field`, `text-2xs`…). Classes de tema (em `@layer components`, então utilitários do Tailwind vencem): `.panel`, `.section-title`, `.field`/`.field-inline`, `.label`, `.col-head`, `.caption`, `.num-part`/`.num-total`/`.num-hero`, `.row-hover`, `.explain`, `.divider-gold`, `.prose-grimoire`. **Não use cor hex nem `rgba()` em componente** (exceções: ilustrações de `assets/icons` e a paleta gravada de `noteColors.js`).
+- **Tipografia:** informação ≥ 12 px (`text-xs`/`.caption`); `text-2xs` (11 px) só para rótulo em caixa alta. Nada de `text-[Npx]`. `text-dim` foi clareado para contraste AA; `--color-text-disabled` é só para desabilitado/placeholder.
+- **Ícones:** `<Icon name>` (SVG, `currentColor`). Sem emoji nem glifos (↺ ⚙ ✕ ★…) na interface; o emoji escolhido pelo usuário num item é dado, não UI. Botão só com ícone = `IconButton` com `label` (vira `aria-label` e dica visível no hover/foco).
 
 ## Regras D&D 3.5 (`shared/rules`)
 
 - **Atributos:** mod = ⌊(valor−10)/2⌋, com valor = base+enh+misc+temp−dano−dreno.
 - **BAB e saves base:** soma por classe (good = n, avg = ⌊3n/4⌋, poor = ⌊n/2⌋; save good = 2+⌊n/2⌋, poor = ⌊n/3⌋). Ataques iterativos de −5.
+- **Graça Divina** (SRD, Paladin): paladino de nível 2+ (níveis de paladino somados) ganha o bônus de Car, se positivo, em todos os saves (`divineGrace` em `combat.js`; parcela `divineGrace` na composição).
 - **CA:** componentes manuais + itens equipados; Des limitada pelo menor `max_dex`. Toque e surpresa calculados. `ac_override` substitui só o total.
   - **Empilhamento** (regra oficial): bônus do mesmo tipo não se somam, vale o maior; esquiva e "outros" (sem tipo, + temporário) somam; penalidades sempre se aplicam.
   - **Mapeamento dos campos** (interpretação do Grimoire): em armadura, escudo e deflexão, o campo manual e cada item são fontes do mesmo tipo (vale o maior). Em natural, o campo manual é a armadura natural base (racial) e soma com o maior item (melhorias como amuleto e casca de árvore não somam entre si).
   - `sheet.ac.ignored` lista o que não entrou; o DefensePanel mostra um aviso.
-- **Perícias:** graduação máxima n+3 (de classe) ou (n+3)/2. Penalidade de armadura (Natação ×2), sinergias incondicionais da tabela 4-5 (as situacionais, como Usar Cordas → Escalar, ficam fora), tamanho em Esconder-se, efeitos de talentos. Pontos ×4 no 1º nível; humano +1 por nível.
+- **Perícias:** graduação máxima n+3 (de classe) ou (n+3)/2. Penalidade de armadura (Natação ×2), sinergias incondicionais da tabela 4-5 (as situacionais, como Usar Cordas → Escalar, ficam fora), tamanho em Esconder-se, efeitos de talentos. Pontos ×4 no 1º nível; humano +1 por nível. **Sem retroativo** (PHB, "Changing Ability Scores"; o SRD não traz esse texto): a conta usa o mod do **Int base** desde o 1º nível (melhoria, temporário, dano e dreno não entram) + `skill_points_adjust` manual para aumentos posteriores (interpretação do Grimoire, já que a ficha não guarda o histórico).
 - **Conjuração** por classe, usando o nível **da própria classe** (+ avanço de prestígio):
   - tabelas PHB (`null` = sem acesso, `0` = só bônus); Clérigo/Druida usam `full`, o Mago usa `wizard` (tabela 3-18, máx. 4 por nível). O slot extra do especialista ainda é bônus manual (`spell_slots.bonus`);
   - magias bônus por atributo;
@@ -234,7 +248,9 @@ Exceções conhecidas (pendentes de reforço):
   - forma selvagem pela tabela;
   - ataque atordoante = n;
   - fórmulas de suplemento estão marcadas `verified: false`.
-- **Carga:** tabela 9-1 × tamanho; moedas contam (50 = 1 lb).
+- **Carga:** tabela 9-1 × tamanho; moedas contam (50 = 1 lb). **Efeitos** (SRD, Carrying Loads): média = Des máx. +3 e penalidade −3; pesada = +1 e −6; com armadura vale o pior de cada um (não somam), aplicado na CA e nas perícias. Deslocamento pela tabela Reduced Speed (`reducedSpeed`: ⅔ arredondado para cima em 5 ft); o anão (`race_id = 'anao'`) não perde deslocamento. Acima da pesada ("Lifting and Dragging"): Des máx. 0 e 5 ft. `sheet.speed = { base, current, reduced }`.
+- **PV:** dano letal consome primeiro os PV temporários; dano não letal soma em `nonlethal`; cura não passa do máximo e remove a mesma quantidade de não letal (`applyDamage`/`applyHealing`).
+- **Composição** (`breakdown.js`): parcelas de CA, saves, iniciativa, agarrar, ataques, BBA por classe e perícias, separando talentos/outros/temporário. Só exibição; teste garante soma = total.
 - **Talentos:** efeitos em `featsData.json` são agregados sem empilhar repetidos (exceto `REPEATABLE_FEATS`). `bonus_attack`/`bonus_damage` só entram com alvo `melee` ou `ranged` (no total geral e em cada arma do tipo); outros alvos (`ranged_close`, `thrown`, `aoo`) viram nota. `bonus_grapple` soma no agarrar (Agarrar Aprimorado +4). Alvos situacionais (com parênteses) viram nota, assim como `bonus_resource` sem fórmula em `RESOURCES` (ex.: Sopro Dracônico). Teste garante que todo `bonus_skill` está mapeado em `SKILL_FROM_PT` ou é situacional.
 - **Convocar Monstro N:** criaturas de `ref_criaturas` com `nivel_sm ≤ N`. PV = média dos DV + Con. Convocação Aprimorada: +4 For/Con.
   - Lista e níveis conferidos com a tabela de Summon Monster do SRD 3.5 (`tests/rules/content.test.js`), incluindo DV, CA, atributos e ataques. Elemental Pequeno = III, Médio = V, Grande = VI, Enorme = VII, Maior = VIII, Ancião = IX.

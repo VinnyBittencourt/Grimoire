@@ -29,3 +29,29 @@ export function hpStatus(c) {
   if (nonlethal >= hp) return nonlethal === hp ? 'staggered' : 'unconscious'
   return 'ok'
 }
+
+/**
+ * Dano letal: consome primeiro os PV temporários (PHB p. 146, como já citado no HpTracker).
+ * Dano não letal soma em `nonlethal`. Devolve { patch, absorbed }: `patch` tem só os campos do
+ * personagem que mudam (vai direto para o PATCH), `absorbed` é quanto os temporários seguraram.
+ */
+export function applyDamage(c, amount, { nonlethal = false } = {}) {
+  const dmg = Math.max(0, Math.trunc(Number(amount) || 0))
+  if (!dmg) return { patch: {}, absorbed: 0 }
+  if (nonlethal) return { patch: { nonlethal: (Number(c.nonlethal) || 0) + dmg }, absorbed: 0 }
+  const temp = Number(c.hp_temp) || 0
+  const absorbed = Math.min(temp, dmg)
+  return { patch: { hp_temp: temp - absorbed, hp_current: (Number(c.hp_current) || 0) - (dmg - absorbed) }, absorbed }
+}
+
+/**
+ * Cura: não passa do máximo (nem reduz quem já está acima dele) e remove a mesma quantidade
+ * de dano não letal (regra de dano não letal do PHB). Devolve só os campos que mudam.
+ */
+export function applyHealing(c, amount) {
+  const heal = Math.max(0, Math.trunc(Number(amount) || 0))
+  if (!heal) return {}
+  const max = Number(c.hp_max) || 0
+  const current = Number(c.hp_current) || 0
+  return { hp_current: Math.max(current, Math.min(max, current + heal)), nonlethal: Math.max(0, (Number(c.nonlethal) || 0) - heal) }
+}

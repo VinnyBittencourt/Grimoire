@@ -226,7 +226,8 @@ export function createRepo(db) {
   }
 
   /**
-   * Novo dia / descanso: restaura magias preparadas, slots espontâneos e recursos.
+   * Novo dia / descanso: restaura magias preparadas, slots espontâneos e recursos DIÁRIOS
+   * (period = 'day'). Recursos por semana e cargas ficam como estão, com as anotações.
    * heal: cura natural de 8 h (PHB p. 146) = nível de personagem em PV e em dano não letal.
    */
   function rest(characterId, { heal }) {
@@ -234,8 +235,8 @@ export function createRepo(db) {
     db.transaction(() => {
       q('UPDATE spells_prepared SET used = 0 WHERE character_id = ?').run(characterId)
       q('UPDATE spell_slots SET used = 0 WHERE character_id = ?').run(characterId)
-      q('DELETE FROM resource_uses WHERE resource_id IN (SELECT id FROM class_resources WHERE character_id = ?)').run(characterId)
-      q('UPDATE class_resources SET pool_used = 0 WHERE character_id = ?').run(characterId)
+      q("DELETE FROM resource_uses WHERE resource_id IN (SELECT id FROM class_resources WHERE character_id = ? AND period = 'day')").run(characterId)
+      q("UPDATE class_resources SET pool_used = 0 WHERE character_id = ? AND period = 'day'").run(characterId)
       if (heal) {
         const level = q('SELECT COALESCE(SUM(level), 0) l FROM character_classes WHERE character_id = ?').get(characterId).l || 1
         q('UPDATE characters SET hp_current = MIN(hp_max, hp_current + ?), nonlethal = MAX(0, nonlethal - ?) WHERE id = ?')

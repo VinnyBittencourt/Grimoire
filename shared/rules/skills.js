@@ -21,7 +21,8 @@ export function defaultClassSkills(classes) {
  */
 export function skillTotal(row, ctx) {
   const def = SKILL_BY_ID[row.skill_id] ?? { ability: row.ability ?? 'int' }
-  const ability = ctx.abilities[row.ability ?? def.ability]?.mod ?? 0
+  const abilityId = row.ability ?? def.ability
+  const ability = ctx.abilities[abilityId]?.mod ?? 0
   const ranks = n(row.ranks)
   const acp = def.acp ? def.acp * ctx.acp : 0
   const size = def.size ? (SIZES[ctx.size ?? 'medium']?.hide ?? 0) : 0
@@ -34,6 +35,7 @@ export function skillTotal(row, ctx) {
     total,
     ranks,
     ability,
+    abilityId,
     misc: n(row.misc) + feat,
     synergy,
     acp,
@@ -43,6 +45,10 @@ export function skillTotal(row, ctx) {
 }
 
 /**
+ * intMod: use o modificador do Int BASE (sem melhoria, temporário, dano ou dreno). Pelo PHB ("Changing Ability
+ * Scores"), aumentar a Int não dá pontos retroativos para os níveis anteriores; como a ficha não guarda o histórico,
+ * o Grimoire assume o Int base desde o 1º nível e deixa um ajuste manual (characters.skill_points_adjust) para os
+ * aumentos posteriores (interpretação do Grimoire).
  * Pontos de perícia disponíveis (PHB p. 62): por nível de classe (sp + mod. Int, mín. 1),
  * ×4 no 1º nível de personagem (primeira classe da lista); humanos +1 por nível e +4 no 1º.
  */

@@ -3,19 +3,22 @@ import { useLang } from '../../i18n'
 import { Section, Badge } from '../../ui/layout'
 import { Button } from '../../ui/Button'
 import { NumberField } from '../../ui/fields'
+import { TokenTrack } from '../../ui/controls'
+import { Notice } from '../../ui/Popover'
+import { Icon } from '../../ui/Icon'
 import { EscolaIcon } from '../../assets/icons/escolaIcons'
 import { ESCOLA_CORES } from '../../assets/icons/escolaColors'
 import { PrepareModal } from './PrepareModal'
 import { summonLevel } from '../summons/summonRules'
 
 /**
- * Uma classe conjuradora: tabela de slots por nível (por dia, domínio, CD, usados),
- * magias preparadas (clique conjura) ou fichas de slot (espontâneo).
+ * Uma classe conjuradora: espaços por nível (por dia, domínio, CD, restantes),
+ * magias preparadas (botão Conjurar / Desfazer) ou fichas de espaço (espontâneo).
  */
 export function CasterBlock({ ch, cast, actions, onSummon }) {
   const { t, className, signed, spellName } = useLang()
   const [prepOpen, setPrepOpen] = useState(false)
-  const [editBonus, setEditBonus] = useState(false)
+  const [editBonus, setEditBonus] = useState(cast.manual)
   const row = ch.classes.find(c => c.id === cast.rowId)
   const spells = new Map(ch.spells.map(s => [s.id, s]))
   const prepared = ch.prepared.filter(p => p.class_row_id === cast.rowId)
@@ -29,16 +32,17 @@ export function CasterBlock({ ch, cast, actions, onSummon }) {
   return (
     <Section
       title={`${className(row)} ${row.level}`}
+      subtitle={`${t('spells.casterLevel', { n: cast.casterLevel })} · ${t(`abilities.${cast.ability}`)} ${cast.score} (${signed(cast.mod)})`}
       actions={<>
-        <span className="text-muted text-[11px] mr-2">
-          {t('spells.casterLevel', { n: cast.casterLevel })} · {t(`abilities.${cast.ability}`)} {cast.score} ({signed(cast.mod)})
-        </span>
-        <Button size="sm" variant="subtle" onClick={() => setEditBonus(!editBonus)} aria-pressed={editBonus}>{t('spells.bonusSlots')}</Button>
-        {cast.type === 'prepared' && <Button size="sm" variant="gold" onClick={() => setPrepOpen(true)}>{t('spells.prepare')}</Button>}
+        <Button size="sm" variant={editBonus ? 'ghost' : 'subtle'} onClick={() => setEditBonus(!editBonus)} aria-pressed={editBonus}>
+          <Icon name="settings" size={14} />{t('spells.bonusSlotsShort')}
+        </Button>
+        {cast.type === 'prepared' && <Button size="sm" variant="gold" onClick={() => setPrepOpen(true)}><Icon name="book" size={14} />{t('spells.prepare')}</Button>}
       </>}
     >
-      {cast.type === 'spontaneous' && <p className="text-dim text-[11px] mt-0 mb-2">{t('spells.spontaneous')}</p>}
-      {cast.manual && <p className="text-warn text-[11px] mt-0 mb-2">{t('spells.manualTable')}</p>}
+      {cast.type === 'spontaneous' && <p className="caption mt-0 mb-2">{t('spells.spontaneous')}</p>}
+      {cast.manual && <Notice tone="warn" compact className="mb-2">{t('spells.manualTable')}</Notice>}
+      {editBonus && <p className="caption mt-0 mb-2">{t('spells.bonusHint')}</p>}
 
       <div className="flex flex-col gap-2">
         {levels.map(L => {
@@ -48,50 +52,74 @@ export function CasterBlock({ ch, cast, actions, onSummon }) {
           const preparedHere = prepared.filter(p => p.level === L).sort((a, b) => a.is_domain - b.is_domain || a.position - b.position)
           const used = cast.type === 'spontaneous' ? cast.used[L] : preparedHere.filter(p => p.used).length
           const total = perDay + domain
+          const leftN = Math.max(0, total - used)
           return (
-            <div key={L} className={`rounded-sm border px-3 py-2 ${blocked ? 'border-subtle opacity-60' : 'border-[var(--color-magic-border)] bg-[var(--color-magic-bg)]'}`}>
-              <div className="flex items-center gap-3">
+            <div key={L} className={`rounded-sm border px-3 py-2.5 ${blocked ? 'border-subtle bg-sunken' : 'border-[var(--color-magic-border)] bg-[var(--color-magic-bg)]'}`}>
+              <div className="flex items-center gap-x-4 gap-y-1 flex-wrap">
                 <span className="font-display text-gold text-sm w-16 shrink-0">{L === 0 ? t('spells.level0') : t('spells.levelN', { n: L })}</span>
-                <span className="text-muted text-[11px]">{t('spells.dc')} <span className="text-parchment font-display">{cast.dc[L]}</span></span>
-                <span className="text-muted text-[11px]">{t('spells.perDay')} <span className="text-parchment font-display">{perDay}{domain ? '+1' : ''}</span></span>
-                {cast.known?.[L] != null && <span className="text-muted text-[11px]">{t('spells.known')} <span className="text-parchment font-display">{cast.known[L]}</span></span>}
+                <span className="text-xs text-muted">{t('spells.dc')} <b className="text-parchment font-display text-sm">{cast.dc[L]}</b></span>
+                <span className="text-xs text-muted">{t('spells.perDay')} <b className="text-parchment font-display text-sm">{perDay}{domain ? ` + ${domain}` : ''}</b></span>
+                {cast.known?.[L] != null && <span className="text-xs text-muted">{t('spells.known')} <b className="text-parchment font-display text-sm">{cast.known[L]}</b></span>}
                 <span className="flex-1" />
-                {blocked && <span className="text-warn text-[10px]">{t('spells.cannotCast', { min: 10 + L })}</span>}
-                {!blocked && total > 0 && <span className="text-[11px] text-body">{t('spells.slotsLeft', { n: Math.max(0, total - used) })}</span>}
+                {blocked && <span className="inline-flex items-center gap-1 text-xs text-warn"><Icon name="lock" size={13} />{t('spells.cannotCast', { min: 10 + L })}</span>}
+                {!blocked && total > 0 && (
+                  <span className="inline-flex items-center gap-2">
+                    {cast.type === 'prepared' && <TokenTrack variant="diamond" size={16} total={total} isUsed={i => i < used} label={t('spells.levelN', { n: L })} />}
+                    <span className={`text-xs ${leftN ? 'text-parchment' : 'text-muted'}`}>{t('spells.slotsLeftOf', { n: leftN, total })}</span>
+                  </span>
+                )}
                 {editBonus && (
-                  <NumberField compact value={slotRow(L)?.bonus ?? 0} min={-20} max={20} aria-label={`${t('spells.bonusSlots')} ${L}`}
-                    onCommit={v => actions.setSlot(cast.rowId, L, { bonus: v })} />
+                  <NumberField compact value={slotRow(L)?.bonus ?? 0} min={-20} max={20} aria-label={`${t('spells.bonusSlots')} — ${t('spells.levelN', { n: L })}`}
+                    onCommit={v => actions.setSlot(cast.rowId, L, { bonus: v })} stepper />
                 )}
               </div>
 
               {cast.type === 'spontaneous' ? (
-                <div className="flex flex-wrap gap-1.5 mt-2">
-                  {Array.from({ length: total }, (_, i) => (
-                    <button key={i} type="button" aria-pressed={i < used} title={i < used ? t('spells.castAgain') : t('spells.cast')}
-                      onClick={() => actions.setSlot(cast.rowId, L, { used: i < used ? used - 1 : used + 1 })}
-                      className={`w-6 h-6 rounded-sm border-2 rotate-45 cursor-pointer transition-colors ${i < used ? 'border-subtle bg-[var(--color-wood-medium)] opacity-40' : 'border-[var(--color-magic)] bg-[radial-gradient(circle,rgba(160,122,217,0.35),transparent_70%)]'}`} />
-                  ))}
-                </div>
+                total > 0 && (
+                  <div className="mt-2 flex items-center gap-3">
+                    <TokenTrack variant="diamond" total={total} label={t('spells.levelN', { n: L })} isUsed={i => i < used}
+                      onToggle={i => actions.setSlot(cast.rowId, L, { used: i < used ? used - 1 : used + 1 })} />
+                    <span className="caption">{t('spells.spendHint')}</span>
+                  </div>
+                )
               ) : (
                 preparedHere.length > 0 && (
-                  <div className="grid gap-1.5 mt-2 grid-cols-[repeat(auto-fill,minmax(170px,1fr))]">
+                  <div className="grid gap-1.5 mt-2 grid-cols-[repeat(auto-fill,minmax(200px,1fr))]">
                     {preparedHere.map(p => {
                       const sp = spells.get(p.spell_id)
                       const sm = summonLevel(sp?.name)
+                      const name = spellName(sp?.name ?? '?')
                       return (
-                        <div key={p.id} className={`group flex items-center gap-2 rounded-sm border px-2 py-1 transition-opacity ${p.used ? 'opacity-35 border-subtle' : 'border-[var(--color-magic-border)] bg-sunken'}`}
-                          style={{ borderLeftColor: ESCOLA_CORES[sp?.school] ?? undefined, borderLeftWidth: 3 }} title={sp?.description ?? ''}>
-                          <EscolaIcon escola={sp?.school ?? 'Universal'} size={20} />
-                          <button type="button" className="flex-1 min-w-0 text-left cursor-pointer" aria-pressed={Boolean(p.used)}
-                            onClick={() => actions.update('prepared', p.id, { used: !p.used })}>
-                            <span className={`block text-xs truncate ${p.used ? 'line-through text-dim' : 'text-parchment'}`}>{spellName(sp?.name ?? '?')}</span>
-                            {p.is_domain ? <span className="block text-[9px] text-gold">{t('spells.domain')}</span> : null}
-                          </button>
-                          {sm && !p.used && (
-                            <button type="button" className="text-[10px] text-gold hover:text-gold-hi cursor-pointer" onClick={() => onSummon({ level: sm, preparedId: p.id })}>
-                              {t('spells.summon')}
+                        <div key={p.id} className={`flex flex-col gap-1.5 rounded-sm border px-2.5 py-2 transition-opacity ${p.used ? 'opacity-60 border-subtle bg-sunken' : 'border-[var(--color-magic-border)] bg-sunken'}`}
+                          style={{ borderLeftColor: ESCOLA_CORES[sp?.school] ?? undefined, borderLeftWidth: 3 }}>
+                          <div className="flex items-start gap-2 min-w-0">
+                            <EscolaIcon escola={sp?.school ?? 'Universal'} size={22} />
+                            <span className={`flex-1 min-w-0 text-sm leading-snug line-clamp-2 ${p.used ? 'line-through text-muted' : 'text-parchment'}`} title={sp?.description || undefined}>{name}</span>
+                          </div>
+                          <div className="flex items-center justify-end gap-1.5">
+                            {p.is_domain ? <span className="mr-auto text-2xs uppercase tracking-[var(--tracking-label)] text-gold">{t('spells.domain')}</span> : null}
+                          {p.used ? (
+                            <button type="button" aria-pressed="true" aria-label={`${t('spells.castAgain')}: ${name}`}
+                              onClick={() => actions.update('prepared', p.id, { used: false })}
+                              className="inline-flex items-center gap-1 min-h-6 px-1.5 rounded-sm text-xs text-muted hover:text-gold hover:bg-gold-faint cursor-pointer">
+                              <Icon name="undo" size={13} />{t('spells.castDone')}
                             </button>
+                          ) : (
+                            <>
+                              {sm && (
+                                <button type="button" onClick={() => onSummon({ level: sm, preparedId: p.id })}
+                                  className="inline-flex items-center gap-1 min-h-6 px-1.5 rounded-sm text-xs text-gold hover:bg-gold-faint cursor-pointer">
+                                  <Icon name="paw" size={13} />{t('spells.summon')}
+                                </button>
+                              )}
+                              <button type="button" aria-pressed="false" aria-label={`${t('spells.cast')}: ${name}`}
+                                onClick={() => actions.update('prepared', p.id, { used: true })}
+                                className="inline-flex items-center gap-1 min-h-6 px-2 rounded-sm border border-[var(--color-magic)]/50 text-xs text-stat-magic hover:bg-[var(--color-magic-bg)] hover:border-[var(--color-magic)] cursor-pointer">
+                                <Icon name="wand" size={13} />{t('spells.cast')}
+                              </button>
+                            </>
                           )}
+                          </div>
                         </div>
                       )
                     })}
@@ -103,7 +131,14 @@ export function CasterBlock({ ch, cast, actions, onSummon }) {
         })}
       </div>
       {cast.type === 'prepared' && prepared.length === 0 && (
-        <p className="text-dim text-xs mt-3 mb-0">{t('spells.noPrepared')} — <Badge>{t('spells.prepare')}</Badge></p>
+        <div className="mt-3 flex items-center gap-3 rounded-sm border border-dashed border-wood px-3 py-3">
+          <Icon name="book" className="text-gold-lo" />
+          <span className="text-sm text-muted flex-1">{t('spells.noPreparedToday')}</span>
+          <Button size="sm" variant="gold" onClick={() => setPrepOpen(true)}>{t('spells.prepare')}</Button>
+        </div>
+      )}
+      {prepared.some(p => p.used) && cast.type === 'prepared' && (
+        <p className="caption mt-2 mb-0 flex items-center gap-1"><Badge tone="magic">{prepared.filter(p => p.used).length}</Badge>{t('spells.castToday')}</p>
       )}
       {prepOpen && <PrepareModal open onClose={() => setPrepOpen(false)} ch={ch} cast={cast} actions={actions} />}
     </Section>

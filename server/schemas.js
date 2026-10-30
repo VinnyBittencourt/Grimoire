@@ -4,6 +4,7 @@ import { z } from 'zod'
 import { ABILITIES, ALIGNMENTS, GENDERS } from '../shared/constants/abilities.js'
 import { SIZE_IDS } from '../shared/constants/sizes.js'
 import { CLASS_IDS } from '../shared/constants/classes.js'
+import { EQUIPMENT_SLOTS } from '../shared/constants/equipment.js'
 
 const int = z.number().int()
 const intN = int.nullable()
@@ -35,7 +36,7 @@ export const characterFields = z.object({
   ac_override: intN,
   ...saveFields,
   init_misc: int, grapple_misc: int, melee_misc: int, ranged_misc: int, bab_override: intN,
-  sr: int.min(0), dr: text(200),
+  sr: int.min(0), dr: text(200), skill_points_adjust: int.min(-999).max(999),
 }).partial().strict()
 
 const classFields = {
@@ -66,7 +67,8 @@ export const COLLECTIONS = {
     damage_misc: int, crit_range: int.min(2).max(20), crit_mult: int.min(1).max(6), range_ft: intN,
     damage_type: text(60), ammo: intN, notes: text(5000) } },
   items: { table: 'items', fields: {
-    location: z.string().max(40), icon: text(16), name: z.string().max(200), qty: num.min(0), weight_lb: num.min(0),
+    // Só mochila ou slot conhecido: um texto livre sumia da tela e ainda contava como equipado
+    location: z.enum(['backpack', ...EQUIPMENT_SLOTS]), icon: text(16), name: z.string().max(200), qty: num.min(0), weight_lb: num.min(0),
     cost_gp: num.min(0).nullable(), notes: text(5000),
     ac_type: z.enum(['armor', 'shield', 'natural', 'deflection', 'dodge', 'misc']).nullable(),
     ac_bonus: intN, max_dex: intN, acp: intN, spell_failure: intN } },
@@ -75,7 +77,7 @@ export const COLLECTIONS = {
     description: text(10000) } },
   resources: { table: 'class_resources', owned: { class_row_id: 'character_classes' }, fields: {
     key: text(60), class_row_id: intN, name: text(200), icon: text(16), kind: z.enum(['uses', 'pool']),
-    total_override: intN, pool_used: int.min(0), notes: text(5000) } },
+    total_override: intN, pool_used: int.min(0), notes: text(5000), period: z.enum(['day', 'week', 'charges']) } },
   spells: { table: 'spells', owned: { class_row_id: 'character_classes' }, fields: {
     class_row_id: intN, level: int.min(0).max(9), name: z.string().max(200), school: text(60),
     description: text(10000), builtin_key: text(200), is_domain: bool01 } },

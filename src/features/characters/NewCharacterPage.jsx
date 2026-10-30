@@ -5,6 +5,8 @@ import { useCreateCharacter, useRefData } from '../../queries/characters'
 import { AppHeader } from '../shell/AppHeader'
 import { Button, IconButton } from '../../ui/Button'
 import { Section, StatBox } from '../../ui/layout'
+import { NumberField } from '../../ui/fields'
+import { Icon } from '../../ui/Icon'
 import { useToast } from '../../ui/Toast'
 import { ABILITIES, ALIGNMENTS, GENDERS } from '../../../shared/constants/abilities.js'
 import { SIZE_FROM_V1 } from '../../../shared/constants/sizes.js'
@@ -23,6 +25,8 @@ export default function NewCharacterPage() {
   const create = useCreateCharacter()
   const races = useRefData('ref_racas')
   const [step, setStep] = useState(0)
+  const [visited, setVisited] = useState(0) // maior passo já alcançado: passos visitados ficam clicáveis
+  const [showErrors, setShowErrors] = useState(false)
   const [form, setForm] = useState({
     name: '', race_id: 'humano', race_name: '', alignment: 'n', gender: null, deity: '', age: '',
     classes: [{ class_id: 'fighter', level: 1 }],
@@ -49,6 +53,13 @@ export default function NewCharacterPage() {
     classes: form.classes.length === 0 ? t('wizard.classRequired') : null,
   }
   const current = STEPS[step]
+  function next() {
+    if (errors[current]) { setShowErrors(true); document.getElementById(`wizard-${current}-first`)?.focus(); return }
+    setShowErrors(false)
+    setStep(step + 1)
+    setVisited(v => Math.max(v, step + 1))
+  }
+  const classOptions = CLASS_IDS.map(id => ({ value: id, label: `${t(`classes.${id}`)}${CLASSES[id].prestige ? ` (${t('core.prestige')})` : ''}` }))
 
   async function submit() {
     const body = {
@@ -75,28 +86,41 @@ export default function NewCharacterPage() {
       <AppHeader><h1 className="font-display text-gold text-sm tracking-widest uppercase m-0">{t('wizard.title')}</h1></AppHeader>
       <main className="flex-1 w-full max-w-3xl mx-auto px-6 py-8 flex flex-col gap-5">
         <ol className="flex gap-2 list-none p-0 m-0" aria-label={t('wizard.title')}>
-          {STEPS.map((s, i) => (
-            <li key={s} className={`flex-1 text-center font-display text-[11px] tracking-widest uppercase pb-2 border-b-2 ${i === step ? 'text-gold border-gold' : i < step ? 'text-body border-gold-lo' : 'text-dim border-subtle'}`}
-              aria-current={i === step ? 'step' : undefined}>{i + 1}. {t(`wizard.${s}`)}</li>
-          ))}
+          {STEPS.map((s, i) => {
+            const reachable = i <= visited && !(i > step && errors[current])
+            return (
+              <li key={s} className="flex-1">
+                <button type="button" disabled={!reachable} onClick={() => setStep(i)} aria-current={i === step ? 'step' : undefined}
+                  className={`w-full flex items-center justify-center gap-2 font-display text-xs tracking-widest uppercase pb-2 border-b-2 cursor-pointer disabled:cursor-default ${i === step ? 'text-gold border-gold' : i <= visited ? 'text-body border-gold-lo hover:text-gold' : 'text-muted border-subtle'}`}>
+                  <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full border text-2xs ${i < step ? 'border-gold-lo bg-gold-faint' : 'border-current'}`}>
+                    {i < step ? <Icon name="check" size={11} /> : i + 1}
+                  </span>
+                  {t(`wizard.${s}`)}
+                </button>
+              </li>
+            )
+          })}
         </ol>
 
         {current === 'identity' && (
           <Section title={t('wizard.identity')} bodyClassName="grid grid-cols-2 gap-4">
             <label className="col-span-2"><span className="label block mb-1">{t('core.fields.name')}</span>
-              <input autoFocus className="field" value={form.name} onChange={e => set({ name: e.target.value })} aria-invalid={Boolean(errors.identity)} />
+              <input id="wizard-identity-first" autoFocus className="field font-display text-base" value={form.name} placeholder={t('wizard.namePlaceholder')}
+                onChange={e => set({ name: e.target.value })} aria-invalid={showErrors && Boolean(errors.identity)} aria-describedby="wizard-name-error"
+                onKeyDown={e => { if (e.key === 'Enter') next() }} />
+              {showErrors && errors.identity && <span id="wizard-name-error" className="block mt-1 text-xs text-bad">{errors.identity}</span>}
             </label>
             <label><span className="label block mb-1">{t('wizard.race')}</span>
               <select className="field" value={form.race_id} onChange={e => set({ race_id: e.target.value })}>
                 {races.data?.map(r => <option key={r.id} value={r.id}>{r.nome}</option>)}
                 <option value="__custom">{t('wizard.customRace')}</option>
               </select>
-              {racialMods && <span className="text-dim text-[11px] mt-1 block">{t('wizard.racialHint', { mods: racialMods })}</span>}
+              {racialMods && <span className="caption mt-1 block">{t('wizard.racialHint', { mods: racialMods })}</span>}
             </label>
             {form.race_id === '__custom'
               ? <label><span className="label block mb-1">{t('wizard.customRace')}</span>
                   <input className="field" value={form.race_name} onChange={e => set({ race_name: e.target.value })} /></label>
-              : <div className="text-dim text-[11px] self-end pb-2">{race?.descricao}</div>}
+              : <div className="caption self-end pb-2">{race?.descricao}</div>}
             <label><span className="label block mb-1">{t('core.fields.alignment')}</span>
               <select className="field" value={form.alignment} onChange={e => set({ alignment: e.target.value })}>
                 {ALIGNMENTS.map(a => <option key={a} value={a}>{t(`alignments.${a}`)}</option>)}
@@ -117,13 +141,13 @@ export default function NewCharacterPage() {
 
         {current === 'classes' && (
           <Section title={t('wizard.classes')} actions={
-            <Button size="sm" onClick={() => set({ classes: [...form.classes, { class_id: 'fighter', level: 1 }] })}>{t('wizard.addClass')}</Button>
+            <Button size="sm" onClick={() => set({ classes: [...form.classes, { class_id: 'fighter', level: 1 }] })}><Icon name="plus" size={14} />{t('wizard.addClassShort')}</Button>
           } bodyClassName="flex flex-col gap-2">
             {form.classes.map((c, i) => (
               <div key={i} className="flex items-end gap-3">
                 <label className="flex-1"><span className="label block mb-1">{t('core.classFields.class')}</span>
-                  <select className="field" value={c.class_id} onChange={e => set({ classes: form.classes.map((x, j) => j === i ? { ...x, class_id: e.target.value } : x) })}>
-                    {CLASS_IDS.map(id => <option key={id} value={id}>{t(`classes.${id}`)}{CLASSES[id].prestige ? ' ★' : ''}</option>)}
+                  <select id={i === 0 ? 'wizard-classes-first' : undefined} className="field" value={c.class_id} onChange={e => set({ classes: form.classes.map((x, j) => j === i ? { ...x, class_id: e.target.value } : x) })}>
+                    {classOptions.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
                   </select>
                 </label>
                 {c.class_id === 'custom' && (
@@ -131,30 +155,35 @@ export default function NewCharacterPage() {
                     <input className="field" value={c.custom_name ?? ''} onChange={e => set({ classes: form.classes.map((x, j) => j === i ? { ...x, custom_name: e.target.value } : x) })} />
                   </label>
                 )}
-                <label className="w-24"><span className="label block mb-1">{t('core.classFields.level')}</span>
-                  <input className="field text-center" type="number" min={1} max={40} value={c.level}
-                    onChange={e => set({ classes: form.classes.map((x, j) => j === i ? { ...x, level: Math.max(1, Math.min(40, Number(e.target.value) || 1)) } : x) })} />
-                </label>
-                <IconButton label={t('common.delete')} disabled={form.classes.length === 1}
-                  onClick={() => set({ classes: form.classes.filter((_, j) => j !== i) })}>✕</IconButton>
+                <NumberField className="w-32" label={t('core.classFields.level')} value={c.level} min={1} max={40} stepper inputClassName="text-center"
+                  onCommit={v => set({ classes: form.classes.map((x, j) => j === i ? { ...x, level: v } : x) })} />
+                <IconButton label={t('common.delete')} tone="danger" disabled={form.classes.length === 1}
+                  onClick={() => set({ classes: form.classes.filter((_, j) => j !== i) })}><Icon name="trash" size={15} /></IconButton>
               </div>
             ))}
-            <p className="text-dim text-[11px] mt-2 mb-0">{t('core.totalLevel', { n: preview.level })}</p>
+            <p className="caption mt-2 mb-0">{t('core.totalLevel', { n: preview.level })}</p>
           </Section>
         )}
 
         {current === 'abilities' && (
           <Section title={t('wizard.abilities')}>
-            <p className="text-dim text-[11px] mt-0 mb-3">{t('wizard.pointBuyHint')}{racialMods ? ` ${t('wizard.racialHint', { mods: racialMods })}` : ''}</p>
-            <div className="grid grid-cols-6 gap-3">
-              {ABILITIES.map(ab => (
-                <label key={ab} className="flex flex-col items-center gap-1">
-                  <span className="label" title={t(`abilityNames.${ab}`)}>{t(`abilities.${ab}`)}</span>
-                  <input type="number" min={1} max={50} className="field text-center text-lg font-display" value={form.scores[ab]}
-                    onChange={e => set({ scores: { ...form.scores, [ab]: Math.max(1, Math.min(50, Number(e.target.value) || 1)) } })} />
-                  <span className="text-gold font-display text-sm">{signed(abilityMod(form.scores[ab]))}</span>
-                </label>
-              ))}
+            <p className="caption mt-0 mb-1">{t('wizard.pointBuyHint')}</p>
+            {racialMods && <p className="caption mt-0 mb-3 text-gold">{t('wizard.racialHint', { mods: racialMods })}</p>}
+            <div className="grid grid-cols-3 gap-3">
+              {ABILITIES.map(ab => {
+                const mod = abilityMod(form.scores[ab])
+                return (
+                  <div key={ab} className="flex items-center gap-3 rounded-sm border border-subtle bg-sunken px-3 py-2">
+                    <div className="flex-1 min-w-0">
+                      <p className="m-0 font-display text-gold text-sm">{t(`abilities.${ab}`)}</p>
+                      <p className="caption m-0">{t(`abilityNames.${ab}`)}</p>
+                    </div>
+                    <NumberField value={form.scores[ab]} min={1} max={50} stepper compact inputClassName="!w-12 text-lg font-display"
+                      aria-label={t(`abilityNames.${ab}`)} onCommit={v => set({ scores: { ...form.scores, [ab]: v } })} />
+                    <span className={`w-8 text-right font-display text-sm ${mod < 0 ? 'text-hp-ink' : 'text-gold'}`}>{signed(mod)}</span>
+                  </div>
+                )
+              })}
             </div>
           </Section>
         )}
@@ -163,7 +192,8 @@ export default function NewCharacterPage() {
           <Section title={t('wizard.review')} bodyClassName="flex flex-col gap-4">
             <div>
               <p className="font-display text-parchment text-lg m-0">{form.name}</p>
-              <p className="text-gold text-xs m-0">{form.classes.map(c => `${className(c)} ${c.level}`).join(' / ')}</p>
+              <p className="text-gold text-sm m-0">{form.classes.map(c => `${className(c)} ${c.level}`).join(' / ')}</p>
+              <p className="caption m-0 mt-0.5">{[form.race_id === '__custom' ? form.race_name : race?.nome, t(`alignments.${form.alignment}`), t('core.totalLevel', { n: preview.level })].filter(Boolean).join(' · ')}</p>
             </div>
             <div className="grid grid-cols-6 gap-2">
               <StatBox tone="ac" label={t('vitals.ac')} value={preview.ac.total} />
@@ -173,20 +203,21 @@ export default function NewCharacterPage() {
               <StatBox tone="save" label={t('saves.ref')} value={signed(preview.saves.ref.total)} />
               <StatBox tone="save" label={t('saves.will')} value={signed(preview.saves.will.total)} />
             </div>
-            <label className="w-48"><span className="label block mb-1">{t('vitals.hpMax')} ({t('vitals.hp')})</span>
-              <input type="number" min={1} className="field" value={form.hp_max ?? preview.hp.suggestedMax}
-                onChange={e => set({ hp_max: Math.max(1, Number(e.target.value) || 1) })} />
-              <span className="text-dim text-[11px] block mt-1">{t('wizard.hpSuggestion', { n: preview.hp.suggestedMax })}</span>
-            </label>
+            <div className="flex items-end gap-6">
+              <NumberField className="w-44" label={t('wizard.hpMaxLabel')} value={form.hp_max ?? preview.hp.suggestedMax} min={1} stepper
+                onCommit={v => set({ hp_max: v })} hint={t('wizard.hpSuggestion', { n: preview.hp.suggestedMax })} />
+              <p className="caption m-0 pb-5">{t('wizard.skillPoints', { n: preview.skillPoints.available })}</p>
+            </div>
+            <p className="caption m-0">{t('wizard.reviewHint')}</p>
           </Section>
         )}
 
         <div className="flex items-center justify-between">
           <Button variant="subtle" onClick={() => (step === 0 ? navigate('/') : setStep(step - 1))}>{step === 0 ? t('common.cancel') : t('wizard.prev')}</Button>
-          <span className="text-bad text-xs">{errors[current]}</span>
+          <span className="text-bad text-xs" role="alert">{showErrors ? errors[current] : ''}</span>
           {step < STEPS.length - 1
-            ? <Button variant="gold" disabled={Boolean(errors[current])} onClick={() => setStep(step + 1)}>{t('wizard.next')}</Button>
-            : <Button variant="gold" disabled={create.isPending || Boolean(errors.identity)} onClick={submit}>{t('wizard.create')}</Button>}
+            ? <Button variant="gold" onClick={next}>{t('wizard.next')}<Icon name="chevronRight" size={15} /></Button>
+            : <Button variant="gold" disabled={create.isPending || Boolean(errors.identity)} onClick={submit}><Icon name="check" size={15} />{t('wizard.create')}</Button>}
         </div>
       </main>
     </div>

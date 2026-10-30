@@ -11,7 +11,7 @@ export default function SpellsTab(props) {
   const { t } = useLang()
   const [summon, setSummon] = useState(null) // { level, preparedId? }
 
-  if (!sheet.casting.length) return <EmptyState title={t('spells.noCaster')} className="panel py-16" />
+  if (!sheet.casting.length) return <EmptyState icon="wand" title={t('spells.noCaster')} hint={t('spells.noCasterHint')} className="panel py-16" />
 
   const firstCaster = ch.classes.find(c => classDef(c).caster)
 
@@ -23,7 +23,7 @@ export default function SpellsTab(props) {
           <SpellbookPanel {...props} cast={cast} isFirst={cast.rowId === firstCaster?.id} />
         </div>
       ))}
-      <SummonModal open={Boolean(summon)} level={summon?.level} onClose={() => setSummon(null)} {...props}
+      <SummonModal open={Boolean(summon)} level={summon?.level} maxLevel={summon?.level} onClose={() => setSummon(null)} {...props}
         onSummoned={() => { if (summon?.preparedId) props.actions.update('prepared', summon.preparedId, { used: true }) }} />
     </div>
   )

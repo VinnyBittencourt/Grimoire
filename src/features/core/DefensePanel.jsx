@@ -1,94 +1,107 @@
+import { useState } from 'react'
 import { useLang } from '../../i18n'
-import { Section, StatBox } from '../../ui/layout'
+import { Section } from '../../ui/layout'
 import { NumberField, TextField } from '../../ui/fields'
-import { IconButton } from '../../ui/Button'
+import { Button } from '../../ui/Button'
+import { Notice } from '../../ui/Popover'
+import { Icon } from '../../ui/Icon'
 import { SAVES } from '../../../shared/constants/abilities.js'
+import { labelParts } from '../sheet/breakdownLabels'
+import { Equation } from './Equation'
 
 const AC_MANUAL = ['armor', 'shield', 'natural', 'deflection', 'dodge', 'misc']
 
 // CA decomposta (com contribuição dos itens equipados) + testes de resistência + RM/RD
 export function DefensePanel({ ch, sheet, actions }) {
-  const { t, signed } = useLang()
+  const { t, signed, className } = useLang()
+  const [editing, setEditing] = useState(false)
   const { ac, equipment } = sheet
   const patch = actions.patchCharacter
+  const lp = parts => labelParts(parts, { t, className, ch })
+  const bd = sheet.breakdown
 
   return (
-    <Section title={t('core.ac')}>
-      <div className="flex gap-3 items-stretch">
-        <div className="grid grid-cols-1 gap-1.5 w-24 shrink-0">
-          <StatBox tone="ac" label={t('vitals.ac')} value={ac.total} className="py-2" />
-          <StatBox tone="ac" label={t('vitals.touch')} value={ac.touch} />
-          <StatBox tone="ac" label={t('vitals.flatFooted')} value={ac.flatFooted} />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="grid grid-cols-8 gap-1 text-center text-[10px] text-dim uppercase tracking-wide">
-            <span>10</span>
-            {['armor', 'shield', 'dex', 'size', 'natural', 'deflection', 'dodge'].map(p => <span key={p} className="truncate" title={t(`core.acParts.${p}`)}>{t(`core.acParts.${p}`)}</span>)}
-          </div>
-          <div className="grid grid-cols-8 gap-1 text-center font-display text-parchment mt-0.5">
-            <span>10</span>
-            {['armor', 'shield', 'dex', 'size', 'natural', 'deflection', 'dodge'].map(p => <span key={p}>{signed(ac.parts[p])}</span>)}
-          </div>
-          <p className="text-dim text-[10px] mt-2 mb-1">{t('core.acFromItems')}{equipment.maxDex != null ? ` · ${t('core.maxDex', { n: equipment.maxDex })}` : ''}</p>
-          {ac.ignored.length > 0 && (
-            <p className="text-warn text-[10px] mt-0 mb-1">
-              {t('core.acIgnored', { list: ac.ignored.map(x => `${t(`core.acParts.${x.type}`)} ${signed(x.value)} (${x.name ?? t('core.acManualSource')})`).join(' · ') })}
-            </p>
-          )}
-          <div className="grid grid-cols-6 gap-1.5">
+    <Section title={t('core.defenseTitle')} editing={editing} onToggleEdit={() => setEditing(e => !e)}>
+      <Equation label={t('vitals.ac')} total={ac.computed} tone="text-[var(--color-ac)]" parts={lp(bd.ac)} />
+      <Equation label={t('vitals.touch')} total={ac.touch} parts={[]} extra={<span className="caption">{t('core.touchHint')}</span>} />
+      <Equation label={t('vitals.flatFooted')} total={ac.flatFooted} parts={[]}
+        extra={<span className="caption">{t('core.flatHint')}{equipment.maxDex != null ? ` · ${t('core.maxDex', { n: equipment.maxDex })}` : ''}</span>} />
+      {sheet.load.effects && (
+        <Notice tone="warn" compact className="mt-2" title={t('core.loadTitle', { load: t(`inventory.${sheet.load.status}`) })}>
+          {t('core.loadEffects', { dex: sheet.load.effects.maxDex, acp: sheet.load.effects.acp })}
+        </Notice>
+      )}
+      {ac.ignored.length > 0 && (
+        <Notice tone="warn" compact className="mt-2" title={t('core.acNotStackingTitle')}>
+          {ac.ignored.map(x => `${t(`core.acParts.${x.type}`)} ${signed(x.value)} (${x.name ?? t('core.acManualSource')})`).join(' · ')}
+        </Notice>
+      )}
+      {ac.overridden && (
+        <Notice tone="warn" compact className="mt-2" title={t('core.acOverrideTitle', { n: ac.total })}
+          action={<Button size="sm" variant="ghost" onClick={() => patch({ ac_override: null })}><Icon name="reset" size={14} />{t('common.clearOverride')}</Button>}>
+          {t('common.computed', { n: ac.computed })}
+        </Notice>
+      )}
+
+      {editing && (
+        <div className="mt-3 rounded-sm border border-subtle bg-sunken p-3 flex flex-col gap-3">
+          <p className="caption m-0">{t('core.acFromItems')}</p>
+          <div className="grid grid-cols-3 gap-2">
             {AC_MANUAL.map(p => (
-              <NumberField key={p} label={t(`core.acParts.${p}`)} compact inputClassName="!w-full" value={ch[`ac_${p}`]}
-                onCommit={v => patch({ [`ac_${p}`]: v })} />
+              <NumberField key={p} label={t(`core.acManual.${p}`)} value={ch[`ac_${p}`]} onCommit={v => patch({ [`ac_${p}`]: v })} />
             ))}
-          </div>
-          <div className="flex items-end gap-2 mt-2">
-            <NumberField label={t('common.temp')} compact value={ch.ac_temp} onCommit={v => patch({ ac_temp: v })} />
-            <NumberField label={t('common.override')} compact nullable value={ch.ac_override} onCommit={v => patch({ ac_override: v })}
-              title={t('common.computed', { n: ac.computed })} />
-            {ac.overridden && <IconButton label={t('common.clearOverride')} onClick={() => patch({ ac_override: null })}>↺</IconButton>}
-            {ac.overridden && <span className="text-warn text-[10px] pb-1">{t('common.computed', { n: ac.computed })}</span>}
+            <NumberField label={t('core.acTemp')} value={ch.ac_temp} onCommit={v => patch({ ac_temp: v })} />
+            <NumberField label={t('core.acOverrideField')} nullable value={ch.ac_override} onCommit={v => patch({ ac_override: v })}
+              hint={t('common.computed', { n: ac.computed })} />
           </div>
         </div>
-      </div>
+      )}
 
       <div className="divider-gold my-4" />
-      <h4 className="section-title mt-0 mb-2">{t('core.saves')}</h4>
-      <table className="w-full text-xs border-collapse">
-        <thead>
-          <tr className="text-dim text-[10px] uppercase tracking-wider">
-            <th />
-            <th className="font-normal">{t('common.total')}</th>
-            <th className="font-normal">{t('core.saveBase')}</th>
-            <th className="font-normal">{t('core.saveAbility')}</th>
-            <th className="font-normal">{t('core.saveMagic')}</th>
-            <th className="font-normal">{t('common.misc')}</th>
-            <th className="font-normal">{t('common.temp')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {SAVES.map(s => {
-            const sv = sheet.saves[s]
-            const fromFeats = sheet.effects.saves[s]
-            return (
+      <h4 className="section-title mt-0 mb-1">{t('core.saves')}</h4>
+      {SAVES.map(s => (
+        <Equation key={s} label={t(`saves.${s}`)} total={signed(sheet.saves[s].total)} tone="text-[var(--color-save)]" parts={lp(bd.saves[s])} />
+      ))}
+      {editing && (
+        <table className="w-full text-xs border-collapse mt-3">
+          <thead>
+            <tr>
+              <th className="text-left"><span className="sr-only">{t('core.saves')}</span></th>
+              <th className="col-head font-medium pb-1">{t('core.saveMagic')}</th>
+              <th className="col-head font-medium pb-1">{t('common.misc')}</th>
+              <th className="col-head font-medium pb-1">{t('common.temp')}</th>
+              <th className="col-head font-medium pb-1">{t('breakdown.parts.feats')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {SAVES.map(s => (
               <tr key={s} className="border-t border-subtle">
                 <th scope="row" className="text-left py-1.5 font-display text-gold font-normal">{t(`saves.${s}`)}</th>
-                <td className="text-center"><span className="font-display font-bold text-base text-[var(--color-save)]">{signed(sv.total)}</span></td>
-                <td className="text-center text-body">{signed(sv.base)}</td>
-                <td className="text-center text-body">{signed(sv.ability)}</td>
-                <td className="text-center"><NumberField compact value={ch[`${s}_magic`]} onCommit={v => patch({ [`${s}_magic`]: v })} aria-label={`${t(`saves.${s}`)} ${t('core.saveMagic')}`} /></td>
-                <td className="text-center" title={fromFeats ? t('core.fromFeats', { n: signed(fromFeats) }) : undefined}>
-                  <NumberField compact value={ch[`${s}_misc`]} onCommit={v => patch({ [`${s}_misc`]: v })} aria-label={`${t(`saves.${s}`)} ${t('common.misc')}`} />
-                  {fromFeats !== 0 && <span className="text-[9px] text-magic block">{t('core.fromFeats', { n: signed(fromFeats) })}</span>}
-                </td>
-                <td className="text-center"><NumberField compact value={ch[`${s}_temp`]} onCommit={v => patch({ [`${s}_temp`]: v })} aria-label={`${t(`saves.${s}`)} ${t('common.temp')}`} /></td>
+                {['magic', 'misc', 'temp'].map(k => (
+                  <td key={k} className="text-center">
+                    <NumberField compact value={ch[`${s}_${k}`]} onCommit={v => patch({ [`${s}_${k}`]: v })}
+                      aria-label={`${t(`saves.${s}`)} — ${k === 'magic' ? t('core.saveMagic') : k === 'misc' ? t('common.misc') : t('common.temp')}`} />
+                  </td>
+                ))}
+                <td className="text-center text-stat-magic text-sm font-display">{signed(sheet.effects.saves[s] ?? 0)}</td>
               </tr>
-            )
-          })}
-        </tbody>
-      </table>
-      <div className="grid grid-cols-2 gap-3 mt-3">
-        <NumberField label={t('vitals.sr')} value={ch.sr} min={0} onCommit={v => patch({ sr: v })} />
-        <TextField label={t('vitals.dr')} value={ch.dr} placeholder="5/mágica" onCommit={v => patch({ dr: v })} />
+            ))}
+          </tbody>
+        </table>
+      )}
+
+      <div className="grid grid-cols-2 gap-3 mt-4">
+        {editing ? (
+          <>
+            <NumberField label={t('vitals.srLong')} value={ch.sr} min={0} onCommit={v => patch({ sr: v })} />
+            <TextField label={t('vitals.drLong')} value={ch.dr} placeholder={t('core.drPlaceholder')} onCommit={v => patch({ dr: v })} />
+          </>
+        ) : (
+          <>
+            <p className="m-0 text-xs text-muted">{t('vitals.srLong')} <b className="text-parchment font-display text-sm">{ch.sr > 0 ? ch.sr : '—'}</b></p>
+            <p className="m-0 text-xs text-muted">{t('vitals.drLong')} <b className="text-parchment font-display text-sm">{ch.dr || '—'}</b></p>
+          </>
+        )}
       </div>
     </Section>
   )

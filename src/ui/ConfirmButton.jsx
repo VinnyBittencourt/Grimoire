@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 import { useLang } from '../i18n'
+import { Icon } from './Icon'
 
 /**
- * Ação destrutiva em dois cliques: o primeiro arma (mostra "Confirmar"), o segundo executa.
+ * Ação destrutiva em dois cliques: o primeiro arma (mostra "Confirmar?"), o segundo executa.
  * Desarma sozinho depois de 3 s ou ao perder o foco. Substitui o window.confirm do v1.
+ * icon: variante compacta com lixeira (alvo de 24 px); para exclusão com consequências, use ConfirmDialog.
  */
-export function ConfirmButton({ onConfirm, children, confirmLabel, className = '', armedClassName = '', label, ...props }) {
+export function ConfirmButton({ onConfirm, children, confirmLabel, className = '', armedClassName = '', label, icon = false, ...props }) {
   const { t } = useLang()
   const [armed, setArmed] = useState(false)
   const timer = useRef(null)
@@ -24,17 +26,21 @@ export function ConfirmButton({ onConfirm, children, confirmLabel, className = '
     timer.current = setTimeout(() => setArmed(false), 3000)
   }
 
+  const armedText = confirmLabel ?? t('common.confirmShort')
+  const base = icon
+    ? `min-w-6 h-6 px-1 text-xs ${armed ? 'px-2' : 'text-muted hover:text-bad hover:bg-bad-faint'}`
+    : 'text-xs px-2 py-1 text-muted hover:text-bad'
   return (
     <button
       type="button"
-      aria-label={armed ? confirmLabel ?? t('common.confirm') : label}
-      title={armed ? confirmLabel ?? t('common.confirm') : label}
+      aria-label={armed ? armedText : label}
+      title={armed ? undefined : label}
       onClick={click}
       onBlur={() => setArmed(false)}
-      className={`inline-flex items-center justify-center gap-1 rounded-sm transition-colors cursor-pointer ${armed ? `text-bad bg-[rgba(192,57,43,0.15)] ${armedClassName}` : ''} ${className}`}
+      className={`inline-flex items-center justify-center gap-1 rounded-sm whitespace-nowrap transition-colors cursor-pointer ${base} ${armed ? `text-bad bg-bad-faint font-semibold ${armedClassName}` : ''} ${className}`}
       {...props}
     >
-      {armed ? confirmLabel ?? t('common.confirm') : children}
+      {armed ? armedText : (icon ? <Icon name="trash" size={14} /> : children)}
     </button>
   )
 }

@@ -143,6 +143,29 @@ describe('magias, recursos e descanso', () => {
     expect(rested.hp_current).toBe(15)
     expect(rested.nonlethal).toBe(0)
   })
+
+  it('Novo Dia só renova recursos diários: semanais e cargas mantêm usos e anotações', async () => {
+    const { body: ch } = await newCleric()
+    const base = `/api/characters/${ch.id}/resources`
+    const daily = (await api.post(base).send({ name: 'Diário', kind: 'uses', total_override: 2 })).body
+    const weekly = (await api.post(base).send({ name: 'Remover Doença', kind: 'uses', total_override: 1, period: 'week' })).body
+    const wand = (await api.post(base).send({ name: 'Varinha', kind: 'pool', total_override: 50, period: 'charges' })).body
+    expect(daily.period).toBe('day') // padrão da coluna
+    await api.put(`${base}/${daily.id}/uses/0`).send({ used: 1, note: 'hoje' })
+    await api.put(`${base}/${weekly.id}/uses/0`).send({ used: 1, note: 'curou o aldeão' })
+    await api.patch(`${base}/${wand.id}`).send({ pool_used: 13 })
+
+    const rested = (await api.post(`/api/characters/${ch.id}/rest`).send({ heal: false })).body
+    const byId = id => rested.resources.find(r => r.id === id)
+    expect(byId(daily.id).uses).toEqual([])
+    expect(byId(weekly.id).uses).toMatchObject([{ idx: 0, used: 1, note: 'curou o aldeão' }])
+    expect(byId(wand.id).pool_used).toBe(13)
+
+    // "Restaurar" do próprio recurso continua renovando qualquer período
+    const reset = (await api.post(`${base}/${weekly.id}/reset`)).body
+    expect(reset.uses).toEqual([])
+    expect((await api.patch(`${base}/${wand.id}`).send({ period: 'month' })).status).toBe(400)
+  })
 })
 
 describe('fotos', () => {
@@ -189,6 +212,26 @@ describe('export/import Grimoire', () => {
 
   it('rejeita arquivo de outro formato', async () => {
     expect((await api.post('/api/import').send({ foo: 1 })).status).toBe(400)
+  })
+
+  it('arquivo antigo com local de item desconhecido: item vai para a mochila com o local anotado', async () => {
+    const { body: ch } = await newCleric()
+    const exported = (await api.get(`/api/characters/${ch.id}/export`)).body
+    exported.items = [{ id: 1, name: 'Ferramentas', location: 'pouch', notes: 'obra-prima', qty: 1, weight_lb: 2 }]
+    const copy = (await api.post('/api/import').send(exported)).body
+    expect(copy.items[0]).toMatchObject({ name: 'Ferramentas', location: 'backpack', notes: 'obra-prima [pouch]' })
+  })
+})
+
+describe('local dos itens', () => {
+  it('só aceita mochila ou slot conhecido (texto livre sumia da tela e contava como equipado)', async () => {
+    const { body: ch } = await newCleric()
+    const url = `/api/characters/${ch.id}/items`
+    expect((await api.post(url).send({ name: 'X', location: 'pouch' })).status).toBe(400)
+    const ok = await api.post(url).send({ name: 'Anel', location: 'ring1' })
+    expect(ok.status).toBe(201)
+    expect((await api.patch(`${url}/${ok.body.id}`).send({ location: 'nowhere' })).status).toBe(400)
+    expect((await api.patch(`${url}/${ok.body.id}`).send({ location: 'backpack' })).status).toBe(200)
   })
 })
 

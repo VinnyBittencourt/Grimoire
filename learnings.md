@@ -239,3 +239,42 @@ Seja breve. Se uma entrada ficar obsoleta, corrija ou remova.
   - O Modal do DS fecha ao clicar fora, não prende o foco e não tem `aria-modal`.
   - O Button não repassa props (`aria-label`, `title`).
 - **Regra/solução:** o Grimoire usa `src/ui` com os mesmos nomes de token. Para adotar o DS, corrigir isso no repo do DS primeiro (export do CSS, `...props` nos componentes, modal acessível) e então migrar os componentes genéricos.
+
+### 2026-10-29 — Auditoria de UI/UX: padrões que geram bug
+- **Contexto:** duas auditorias de UX somente leitura (`docs/ux/`).
+- **Problema/descoberta:**
+  - Derivar o nome de uma linha nova do rótulo do botão (`t('x.add').replace('+ ', '')`) grava texto de interface no banco, no idioma do momento.
+  - O `create` otimista faz append; listas que o servidor ordena (notas por data) ficam na ordem errada até o refetch.
+  - `isLoading || !data` como condição de carregamento prende a tela em "Carregando…" quando a query falha.
+  - `--color-text-dim` (#6b5a3a) tem contraste de 2,5–3,0:1 nos fundos do tema: não serve para texto informativo.
+  - Um rótulo com unidade fixa ("(ft)") ao lado de um valor exibido convertido (metros) induz o usuário a gravar o dado errado.
+- **Regra/solução:** linha nova nasce do texto digitado (ou vazia, com foco no campo); ordene na exibição listas que o servidor ordena; trate `error` separado de `isLoading`; texto informativo usa `text-muted`; campo de unidade usa `toDisplay*`/`fromDisplay*` e o sufixo do i18n.
+
+### 2026-10-30 — Refinamento de UI: CSS fora de camada, foco e screenshots
+- **Contexto:** execução do plano `docs/ux/PLANO_UX.md`.
+- **Problema/descoberta:**
+  - As classes do tema (`.field`, `.panel`…) estavam fora de qualquer `@layer`. CSS sem camada vence as camadas do Tailwind 4, então `w-12`, `pl-7` e afins eram ignorados em `.field` (por isso o código antigo usava `!w-full`). Só apareceu no screenshot: ícone de busca por cima do texto e campo de nível esticado.
+  - Callback ref inline com `focus()` (`ref={el => el?.focus()}`) roda a cada render e rouba o foco de quem está digitando em outro campo.
+  - O `eslint-plugin-react-hooks` atual acusa `setState` síncrono dentro de `useEffect` e ref lida durante o render (inclusive passada a uma função de render).
+  - Screenshot headless: o Edge só gerou o primeiro arquivo (processo/perfil preso); o Chrome funciona com `--user-data-dir` novo por captura. No Bash, `"$D\$n.png"` não expande `$n`: monte o caminho com uma variável que já termina em `\`.
+- **Regra/solução:**
+  - Classes de tema ficam em `@layer components`.
+  - Foco programático vai num efeito (`useEffect(() => { if (open) ref.current?.focus() }, [open])`).
+  - Estado derivado de eventos externos (ex.: "Salvo" no cabeçalho) vem de uma assinatura (`getMutationCache().subscribe`) com `setState` no callback.
+  - Para conferir visual sem tocar em `data/`: API com `GRIMOIRE_DATA_DIR` numa pasta vazia do scratchpad (porta 3015), Vite na 3013, dados fictícios criados pela API e Chrome headless (`--screenshot`, `--virtual-time-budget=8000`).
+
+### 2026-10-30 — Agentes "jogadores" e limite de uso
+- **Contexto:** 5 agentes criaram personagens de fichas da comunidade numa instância de teste (`docs/testes/RELATORIO_FICHAS_COMUNIDADE.md`).
+- **Problema/descoberta:** os 5 pararam juntos no limite de uso da conta (HTTP 429), e a instância de teste (processos em segundo plano) caiu junto com a sessão. O banco de teste no scratchpad sobreviveu.
+- **Regra/solução:** retome cada agente com SendMessage (ele continua do ponto em que parou), suba de novo a API/Vite apontando para a **mesma** pasta de teste e guarde cada relatório recebido num arquivo antes de seguir. Os jogadores acharam bugs que os testes não pegavam (Novo Dia apagando recursos semanais/cargas, `location` livre); vale repetir o exercício depois de mudanças grandes.
+
+### 2026-10-30 — Período dos recursos e ensaio de migração pelo scratchpad
+- **Contexto:** item B1 do relatório das fichas (Novo Dia apagava cargas e usos semanais).
+- **Problema/descoberta:** um script `.mjs` no scratchpad não resolve `better-sqlite3` (ERR_MODULE_NOT_FOUND): a resolução parte da pasta do script, não do projeto.
+- **Regra/solução:** nos scripts de ensaio, carregue com `createRequire('C:/projects/Grimoire/package.json')('better-sqlite3')`. Recursos têm `period` (`day`/`week`/`charges`); só `day` renova no `rest`. Ensaio modelo: `scratchpad/rehearse004.mjs` (copia o backup mais recente com `db.backup` em modo readonly, roda `openDatabase` na cópia e compara contagens e `resource_uses`).
+
+### 2026-10-30 — Conferir regra: SRD primeiro, PHB local quando o SRD não tem
+- **Contexto:** regras R1–R3 do relatório das fichas (Graça Divina, carga, pontos de perícia).
+- **Problema/descoberta:** um agente atribuiu ao SRD o "sem pontos de perícia retroativos", mas o texto não está no SRD (procurei nas páginas do `olimot/srd-v3.5`). Está no PHB, em "Changing Ability Scores" (exemplo da Mialee).
+- **Regra/solução:** não aceite a citação de fonte de um agente sem conferir. Para checar o PHB local sem copiar texto: `pdftotext -layout docs/livros/PlayersHandbookI.pdf <scratchpad>/phb.txt` e `grep -i`. Antes de mudar regra que altera números, rode o impacto numa cópia (`scratchpad/impact_r123.mjs`, que também ensaia a migração pendente).
+

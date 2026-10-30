@@ -44,7 +44,7 @@ describe('armorClass com empilhamento', () => {
   })
 
   it('natural: armadura natural racial (manual) + maior melhoria de item', () => {
-    const r = ac({ ac_natural: 2 }, [item('Amuleto de Armadura Natural', 'natural', 1), item('Casca de Árvore', 'natural', 3, { location: 'other' })])
+    const r = ac({ ac_natural: 2 }, [item('Amuleto de Armadura Natural', 'natural', 1), item('Casca de Árvore', 'natural', 3, { location: 'body' })])
     expect(r.parts.natural).toBe(5)
     expect(r.ignored).toEqual([{ type: 'natural', name: 'Amuleto de Armadura Natural', value: 1 }])
   })
@@ -106,3 +106,15 @@ describe('efeitos de talentos em ataque e agarrar', () => {
     expect(s.grapple).toBe(1 + 4)
   })
 })
+
+describe('itens equipados', () => {
+  it('só slot conhecido conta como equipado; local desconhecido (dado antigo) não entra na CA', async () => {
+    const { isEquipped } = await import('../../shared/rules/combat.js')
+    expect(isEquipped({ location: 'armor' })).toBe(true)
+    expect(isEquipped({ location: 'backpack' })).toBe(false)
+    expect(isEquipped({ location: 'pouch' })).toBe(false)
+    expect(isEquipped({ location: null })).toBe(false)
+    expect(ac({}, [{ location: 'pouch', ac_type: 'armor', ac_bonus: 5 }]).total).toBe(10)
+  })
+})
+

@@ -1,30 +1,43 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useIsMutating } from '@tanstack/react-query'
+import { useIsMutating, useQueryClient } from '@tanstack/react-query'
 import { useLang } from '../../i18n'
+import { SegmentedControl } from '../../ui/controls'
+import { Icon } from '../../ui/Icon'
 import logo from '../../assets/LogoWhite.svg'
 
-// Barra superior: logo (volta à lista), conteúdo do meio, indicador de salvamento e idioma
+// Barra superior: logo (volta à lista), conteúdo do meio, estado de salvamento e idioma
 export function AppHeader({ children, actions }) {
   const { t, lang, setLang } = useLang()
   const saving = useIsMutating() > 0
+  const [justSaved, setJustSaved] = useState(false)
+  const qc = useQueryClient()
+
+  // "Salvo" aparece por 2 s depois de uma gravação bem-sucedida (erros já viram toast)
+  useEffect(() => {
+    let timer
+    const unsubscribe = qc.getMutationCache().subscribe(event => {
+      if (event.type !== 'updated' || event.mutation.state.status !== 'success') return
+      setJustSaved(true)
+      clearTimeout(timer)
+      timer = setTimeout(() => setJustSaved(false), 2000)
+    })
+    return () => { unsubscribe(); clearTimeout(timer) }
+  }, [qc])
+
   return (
     <header className="h-[var(--header-height)] shrink-0 flex items-center gap-4 px-4 border-b border-wood bg-[linear-gradient(180deg,var(--color-wood-dark),var(--color-wood-darkest))]">
-      <Link to="/" className="flex items-center gap-2 shrink-0" title={t('list.title')}>
+      <Link to="/" className="flex items-center gap-2 shrink-0" aria-label={t('list.title')}>
         <img src={logo} alt={t('app.title')} className="h-7 w-auto" />
       </Link>
       <div className="flex-1 min-w-0 flex items-center gap-3">{children}</div>
-      <span className={`text-[11px] tracking-wide transition-opacity ${saving ? 'text-gold opacity-100' : 'opacity-0'}`} aria-live="polite">
-        {saving ? t('common.saving') : ''}
+      <span className="inline-flex items-center gap-1.5 text-xs min-w-20 justify-end" aria-live="polite">
+        {saving && <><Icon name="hourglass" size={14} className="text-gold animate-pulse" /><span className="text-gold">{t('common.saving')}</span></>}
+        {!saving && justSaved && <><Icon name="check" size={14} className="text-[var(--color-save)]" /><span className="text-muted">{t('common.saved')}</span></>}
       </span>
       {actions}
-      <div className="flex rounded-sm border border-wood overflow-hidden" role="group" aria-label={t('app.language')}>
-        {['pt', 'en'].map(code => (
-          <button key={code} type="button" onClick={() => setLang(code)} aria-pressed={lang === code} title={t(`app.${code}`)}
-            className={`px-2 py-1 text-[10px] font-display tracking-wider uppercase cursor-pointer ${lang === code ? 'bg-gold-faint text-gold' : 'text-muted hover:text-parchment'}`}>
-            {code}
-          </button>
-        ))}
-      </div>
+      <SegmentedControl label={t('app.language')} value={lang} onChange={setLang}
+        options={[{ value: 'pt', label: 'PT' }, { value: 'en', label: 'EN' }]} />
     </header>
   )
 }

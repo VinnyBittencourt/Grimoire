@@ -5,6 +5,7 @@ import { useMemo } from 'react'
 import { api, resizeImage } from '../api/client'
 import { useToast } from '../ui/Toast'
 import { useLang } from '../i18n'
+import { snapshotFor } from './undo'
 
 export const keys = {
   list: ['characters'],
@@ -114,7 +115,7 @@ export function useSheetActions(id) {
 
   const replaceIn = (list, row) => list.map(r => (r.id === row.id ? row : r))
 
-  return {
+  const actions = {
     patchCharacter: values => run({
       run: () => api.patch(`/api/characters/${id}`, values),
       optimistic: s => ({ ...s, ...values }),
@@ -213,9 +214,21 @@ export function useSheetActions(id) {
       })
     },
 
+    /**
+     * Exclui e oferece "Desfazer" no toast, recriando a linha com os mesmos campos (id novo).
+     * Só para coleções sem dependentes (UNDO_FIELDS). Resolve como remove().
+     */
+    removeUndoable: async (collection, row, message) => {
+      const snap = snapshotFor(collection, row)
+      const ok = await actions.remove(collection, row.id)
+      if (ok && snap) toast.info(message, { undo: () => actions.create(collection, snap) })
+      return ok
+    },
+
     removePhoto: () => run({
       run: () => api.del(`/api/characters/${id}/photo`),
       optimistic: s => ({ ...s, photo: null }),
     }),
   }
+  return actions
 }

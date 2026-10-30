@@ -73,6 +73,17 @@ function labelHelpers(lang, t) {
     },
     // Magias da lista padrão estão em pt; em inglês usamos o mapa de nomes quando existe
     spellName: name => (lang === 'en' ? spellNamesEn[name] ?? name : name),
+    // "2026-10-29 21:04:00" (datetime('now') do SQLite, em UTC) → "há 2 dias" / "2 days ago"
+    relativeTime: sqlDate => {
+      const d = new Date(`${String(sqlDate ?? '').replace(' ', 'T')}Z`)
+      if (Number.isNaN(d.getTime())) return ''
+      const rtf = new Intl.RelativeTimeFormat(lang === 'en' ? 'en' : 'pt-BR', { numeric: 'auto' })
+      const sec = (d.getTime() - Date.now()) / 1000
+      for (const [unit, size] of [['year', 31536000], ['month', 2592000], ['week', 604800], ['day', 86400], ['hour', 3600], ['minute', 60]]) {
+        if (Math.abs(sec) >= size) return rtf.format(Math.round(sec / size), unit)
+      }
+      return rtf.format(0, 'minute')
+    },
     schoolName: school => {
       if (!school) return ''
       const label = t(`spells.schools.${school}`)

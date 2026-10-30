@@ -5,8 +5,10 @@ import { equipmentStats, armorClass, savingThrows, initiative, grapple, attackBo
 import { skillTotal, maxRanks, defaultClassSkills, skillPointsAvailable, skillPointsSpent } from './skills.js'
 import { castingFor, effectiveCasterLevels } from './spellcasting.js'
 import { resourceTotal } from './resources.js'
-import { loadLimits, carriedWeight, loadStatus } from './encumbrance.js'
+import { loadLimits, carriedWeight, loadStatus, LOAD_EFFECTS, speedWithLoad } from './encumbrance.js'
+import { abilityMod } from './abilities.js'
 import { suggestedMaxHp, hpStatus } from './hp.js'
+import { sheetBreakdown } from './breakdown.js'
 
 /**
  * Calcula todos os valores derivados da ficha a partir do agregado do personagem
@@ -19,7 +21,17 @@ export function computeSheet(ch, refFeats = new Map()) {
   const abilities = computeAbilities(ch)
   const scores = Object.fromEntries(Object.entries(abilities).map(([k, v]) => [k, v.score]))
   const effects = aggregateEffects(ch.feats ?? [], refFeats, level)
-  const equip = equipmentStats(ch.items ?? [])
+  const equipItems = equipmentStats(ch.items ?? [])
+
+  // Carga: com armadura, vale o pior de Des máx. e penalidade (SRD, Carrying Loads: não somam)
+  const limits = loadLimits(abilities.str.score, ch.size ?? 'medium')
+  const weight = carriedWeight(ch.items ?? [], ch)
+  const status = loadStatus(weight, limits)
+  const loadFx = LOAD_EFFECTS[status]
+  const equip = loadFx
+    ? { ...equipItems, maxDex: Math.min(equipItems.maxDex ?? Infinity, loadFx.maxDex), acp: Math.max(equipItems.acp, loadFx.acp) }
+    : equipItems
+  const speed = speedWithLoad(ch.speed_ft, status, { ignoresLoad: ch.race_id === 'anao' })
 
   const computedBab = baseAttackBonus(classes)
   const hasBabOverride = ch.bab_override != null && ch.bab_override !== ''
@@ -51,8 +63,8 @@ export function computeSheet(ch, refFeats = new Map()) {
   const resourceCtx = { abilities, effects }
   const resources = (ch.resources ?? []).map(r => ({ id: r.id, total: resourceTotal(r, classes, resourceCtx) }))
 
-  const limits = loadLimits(abilities.str.score, ch.size ?? 'medium')
-  const weight = carriedWeight(ch.items ?? [], ch)
+  const ac = armorClass(ch, abilities, equip)
+  const saves = savingThrows(ch, classes, abilities, effects)
 
   return {
     level,
@@ -67,20 +79,23 @@ export function computeSheet(ch, refFeats = new Map()) {
     }),
     grapple: grapple(ch, bab, abilities, effects),
     initiative: initiative(ch, abilities, effects),
-    ac: armorClass(ch, abilities, equip),
-    saves: savingThrows(ch, classes, abilities, effects),
+    ac,
+    saves,
+    breakdown: sheetBreakdown(ch, { classes, abilities, effects, bab, babOverridden: hasBabOverride, ac, saves, skills }),
     hp: {
       max: Number(ch.hp_max) || 0,
       suggestedMax: suggestedMaxHp(classes, abilities.con.mod, effects.hp),
       status: hpStatus(ch),
     },
     skills,
-    skillPoints: {
-      available: skillPointsAvailable(classes, abilities.int.mod, ch.race_id === 'humano'),
-      spent: skillPointsSpent(ch.skills ?? [], classSkillSet),
-    },
+    skillPoints: (() => {
+      const fromLevels = skillPointsAvailable(classes, abilityMod(Number(ch.int_base ?? 10)), ch.race_id === 'humano')
+      const adjust = Number(ch.skill_points_adjust) || 0
+      return { available: fromLevels + adjust, fromLevels, adjust, spent: skillPointsSpent(ch.skills ?? [], classSkillSet) }
+    })(),
     casting,
     resources,
-    load: { ...limits, weight, status: loadStatus(weight, limits) },
+    load: { ...limits, weight, status, effects: loadFx },
+    speed: { base: Number(ch.speed_ft) || 0, current: speed, reduced: speed < (Number(ch.speed_ft) || 0) },
   }
 }
